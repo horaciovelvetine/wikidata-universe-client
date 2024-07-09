@@ -1,2 +1,2 @@
-export { calculateDrawingDimensions } from './_calculateDrawingDimension';
-export { buildApiUrl } from './_buildApiUrl';
+export { calculateDrawingDimensions } from './_CalculateDrawingDimension';
+export { buildApiUrl } from './_BuildApiUrl';

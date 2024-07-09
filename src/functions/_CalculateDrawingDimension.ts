@@ -8,10 +8,7 @@ import { IDimensions } from "../interfaces";
  * @returns The calculated dimensions for drawing.
  */
 export function calculateDrawingDimensions(window: Window): IDimensions {
-  const { width, height } = { width: window.innerWidth, height: window.innerHeight };
-
-  const calculatedHeight = width * 6 / 8; // 4:3 aspect ratio(-ish)
-  const calculatedWidth = height * 13 / 16;
-
+  const calculatedHeight = window.innerWidth * 6 / 8; // 4:3 aspect ratio(-ish)
+  const calculatedWidth = window.innerHeight * 13 / 16;
   return { width: calculatedWidth, height: calculatedHeight };
 }
