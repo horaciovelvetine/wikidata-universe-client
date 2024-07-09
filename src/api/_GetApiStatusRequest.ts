@@ -1,13 +1,13 @@
 import axios from 'axios';
-import { LocalAPI } from './util/UrlBuilders';
+import { buildApiUrl } from '../functions';
 
-export interface get_status_response {
+export interface IGetAPIStatusResponse {
   status?: string;
 }
 
-export async function getAPIStatusRequest(): Promise<get_status_response> {
+export async function getApiStatusRequest(): Promise<IGetAPIStatusResponse> {
   return await axios
-    .get(LocalAPI("status"))
+    .get(buildApiUrl("status"))
     .then((response) => {
       console.log("API Status Response: ", response.data.status);
       return response.data;
