@@ -2,18 +2,20 @@ import axios from 'axios';
 import { buildApiUrl } from '../functions';
 
 export interface IGetAPIStatusResponse {
-  status?: string;
+  message: string;
+  status: number;
 }
 
 export async function getApiStatusRequest(): Promise<IGetAPIStatusResponse> {
   return await axios
     .get(buildApiUrl("status"))
     .then((response) => {
-      console.log("API Status Response: ", response.data.status);
-      return response.data;
+      return {
+        status: response.status,
+        message: response.data.message
+      };
     }).catch(error => {
-      console.error("API Status Error: ", error);
-      return { status: "API Currently Unavailable. Please try again later." }
-    })
-
+      console.log("Error getApiStatusRequest():", error.message)
+      return { status: 500, message: "API Unavailable." }
+    });
 }
