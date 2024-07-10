@@ -9,6 +9,6 @@ import { IDimensions } from "../interfaces";
  */
 export function calculateDrawingDimensions(window: Window): IDimensions {
   const calculatedHeight = window.innerWidth * 6 / 8; // 4:3 aspect ratio(-ish)
-  const calculatedWidth = window.innerHeight * 13 / 16;
+  const calculatedWidth = (window.innerHeight) * 13 / 16;
   return { width: calculatedWidth, height: calculatedHeight };
 }
