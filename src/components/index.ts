@@ -1,4 +1,6 @@
-export { P5SketchMain } from "./_p5SketchMain";
+export { P5SketchMain } from "./_P5SketchMain";
+export { RelatedLinksInfobox } from "./_RelatedLinksInfobox";
+export { InitialQueryInput } from "./_InitialQueryInput";
 
 
 

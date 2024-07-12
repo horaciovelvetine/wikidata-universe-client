@@ -1,10 +1,10 @@
 import { IGetAPIStatusResponse } from "../interfaces";
 
-export interface IRelatedLinksInfoboxProps {
+interface IRelatedLinksInfoboxProps {
   apiStatus: IGetAPIStatusResponse;
 }
 
-export function RelatedLinksInfobox({ apiStatus }: IRelatedLinksInfoboxProps) {
+export const RelatedLinksInfobox: React.FC<IRelatedLinksInfoboxProps> = ({ apiStatus }) => {
   const githubUrl = "https://github.com/horaciovelvetine";
   const frontendUrl = "https://github.com/horaciovelvetine";
   const backendUrl = "https://github.com/horaciovelvetine";

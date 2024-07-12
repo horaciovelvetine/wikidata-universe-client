@@ -6,7 +6,11 @@ export interface IInitialQueryParams {
 }
 
 export interface IInitialQueryResponse {
-  status?: string;
+  data: {
+    graphset: any;
+    originalQuery: string;
+    graphSize: any;
+  }
 }
 
 export async function getInitialQueryRequest({ query }: IInitialQueryParams): Promise<IInitialQueryResponse> {

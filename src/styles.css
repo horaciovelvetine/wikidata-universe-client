@@ -1,14 +1,11 @@
 * {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   box-sizing: border-box;
-  padding: 0;
-  margin: 0;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  --font-size: 18px;
   --font-color: #f5f5f5;
   --gray-100: #F8F9FA;
   --gray-200: #E9ECEF;
@@ -19,36 +16,51 @@
   --gray-700: #495057;
   --gray-800: #343A40;
   --gray-900: #212529;
-  --gray-bg: #01010e;
+  --sketch-bg: #01010e;
   --primary: #274c77;
   --hyperlink: #105488;
   --accent: #ff6700;
   --danger: #e5383b;
-  
   color-scheme: light dark;
 }
 
 body {
-  margin: 0;
+  height: 100vh;
+  height: 100vh;
+  overflow-y: clip;
+  width: 100vw;
+  overflow-x: clip;
+}
+
+a {
+  color: var(--hyperlink);
+  text-decoration: none;
+  background-color: transparent;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+#app-layout-container {
   display: flex;
-  font-size: var(--font-size);
-  place-items: center;
-  min-height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 862px;
 }
 
-#root {
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
-
-.react-p5-wrapper {
+#sketch-layout-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   box-shadow: 0rem 0rem 2rem 1rem rgba(0, 0, 0, 0.2);
 }
 
 canvas {
   /* forces close 4px discrepency on bottom of canvas */
-  outline: 4px solid rgb(1,1,14); 
+  outline: 4px solid rgb(1, 1, 14);
 }
 
 #related-links-container {
@@ -64,10 +76,19 @@ canvas {
   list-style: none;
   display: flex;
   background-color: transparent;
+  font-size: 1.2rem;
 }
 
-#related-link {
-  background-color: transparent;
+#related-link a:hover {
+  transition: font-size 235ms, text-decoration 235ms;
+  font-size: 1.3rem;
+  text-decoration: underline;
+}
+
+#related-link a:not(:hover) {
+  transition: font-size 235ms, text-decoration 235ms;
+  font-size: 1.2rem;
+  text-decoration: none;
 }
 
 @media (max-width: 865px) {
@@ -75,6 +96,7 @@ canvas {
     gap: 1rem;
   }
 }
+
 @media (min-width: 866px) and (max-width: 1024px) {
   #related-links-list {
     gap: 2rem;
@@ -86,6 +108,7 @@ canvas {
     gap: 3rem;
   }
 }
+
 @media (min-width: 1226px) and (max-width: 1450px) {
   #related-links-list {
     gap: 5rem;
@@ -98,40 +121,44 @@ canvas {
   }
 }
 
-a {
-  color: var(--hyperlink);
-  text-decoration: none;
-  background-color: transparent;
+.show-init-query {
+  opacity: 1;
 }
 
-a:hover {
-  transition: font-size 200ms, text-decoration 200ms;
-  font-size: 110%;
-  text-decoration: underline;
+.hide-init-query {
+  opacity: 0;
 }
 
-#initial-query-input-container {
+#initial-query-container {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  height: 100vh;
+  width: 100vw;
   z-index: 9999;
   backdrop-filter: blur(5px);
-  background-color: transparent;
-  width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  }
-
-#init-query-icon {
-  height: 1.5rem;
-  color: var(--gray-500);
+  transition: opacity 1s ease-in-out;
 }
 
-#init-query-input {
+#initial-query-form-container {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#initial-query-form {
+  display: flex;
+  width: 100%;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+}
+
+#initial-query-input {
+  width: 100%;
   font-size: 1.5rem;
   padding: 0.75rem;
   border: 1px solid var(--gray-500);
@@ -140,7 +167,8 @@ a:hover {
   color: var(--font-color);
 }
 
-#init-query-submit {
+#initial-query-submit {
+  margin-left: 0.5rem;
   font-size: 1.5rem;
   padding: 0.75rem;
   border: 1px solid var(--gray-500);
@@ -148,7 +176,12 @@ a:hover {
   background-color: transparent;
   color: var(--gray-800);
   cursor: pointer;
-  margin-top: 1rem;
+}
+
+#init-query-icon {
+  height: 1.5rem;
+  transform: translateY(0.15rem);
+  color: var(--gray-500);
 }
 
 #init-query-input::placeholder {
@@ -161,10 +194,24 @@ a:hover {
 }
 
 #init-query-infobox {
+  display: flex;
+  padding: 0.5rem;
   position: relative;
-  top: 6rem;
-  font-size: 1.3rem;
-  color: var(--gray-500);
+  font-size: 1.5rem;
+  align-self: flex-start;
 }
 
+#init-query-infobox:hover {
+  transition: font-size 235ms, text-decoration 200ms;
+  font-size: 1.6rem
+}
 
+#settings-components-container {
+  position: absolute;
+  /* display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1.25rem;
+  background-color: transparent; */
+}
