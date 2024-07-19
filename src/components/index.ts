@@ -1,6 +1,7 @@
 export { P5SketchMain } from "./_P5SketchMain";
 export { RelatedLinksInfobox } from "./_RelatedLinksInfobox";
-export { InitialQueryInput } from "./_InitialQueryInput";
+export { MainQueryInput } from "./_MainQueryInput";
+export { WikidataUniverseAppMain } from "./_WikidataUniverseAppMain";
 
 
 
