@@ -4,8 +4,7 @@ import { useDebounce } from '../hooks';
 import { IDimensions } from '../interfaces';
 import { ReactP5Wrapper, P5CanvasInstance, Sketch } from '@p5-wrapper/react';
 
-
-export function P5SketchMain() {
+export const P5SketchMain: React.FC = () => {
   const [drawingSize, setDrawingSize] = useState<IDimensions>(calculateDrawingDimensions(window));
 
   const handleResizeDebounces = useDebounce(() => {
@@ -32,8 +31,7 @@ export function P5SketchMain() {
     }
   }
 
-  return (
-    <ReactP5Wrapper sketch={sketch} />
-  )
-
+  return <ReactP5Wrapper sketch={sketch} />
 }
+
+
