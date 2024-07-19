@@ -13,7 +13,7 @@ export async function getApiStatusRequest(): Promise<IApiStatusResponse> {
       console.log("getApiStatusRequest()::", response);
       return {
         status: response.status,
-        message: response.data.message
+        message: response.data
       };
     }).catch(error => {
       console.log("Error getApiStatusRequest():", error.message)
