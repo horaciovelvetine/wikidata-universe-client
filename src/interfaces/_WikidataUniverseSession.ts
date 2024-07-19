@@ -2,9 +2,9 @@ import { IApiStatusResponse } from ".";
 import { IDimensions } from ".";
 
 export interface IWikidataUniverseSession {
-  originalQuery: string;
-  Dimesnions: IDimensions;
+  originQuery: string;
+  dimensions: IDimensions;
   apiStatus: IApiStatusResponse;
   wikidataApiStatus: string;
-  Graphset: any;
+  graphset: any;
 }
