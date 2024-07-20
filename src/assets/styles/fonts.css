@@ -1,0 +1,27 @@
+/* CHARIS SIL: Suggested font by % use...  */
+@import url('https://fonts.googleapis.com/css2?family=Charis+SIL:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+
+.charis-sil-regular {
+  font-family: "Charis SIL", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.charis-sil-bold {
+  font-family: "Charis SIL", serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.charis-sil-regular-italic {
+  font-family: "Charis SIL", serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.charis-sil-bold-italic {
+  font-family: "Charis SIL", serif;
+  font-weight: 700;
+  font-style: italic;
+}
