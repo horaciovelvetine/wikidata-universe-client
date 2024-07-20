@@ -4,16 +4,14 @@ import { calculateDrawingDimensions } from '../functions';
 
 interface IUseSessionStateProps {
   apiStatus: IApiStatusResponse;
-  wikidataApiStatus: string;
 }
 
 
-export const useSessionState = ({ apiStatus, wikidataApiStatus }: IUseSessionStateProps): [IWikidataUniverseSession, (key: keyof IWikidataUniverseSession, value: any) => void] => {
+export const useSessionState = ({ apiStatus }: IUseSessionStateProps): [IWikidataUniverseSession, (key: keyof IWikidataUniverseSession, value: any) => void] => {
   const [sessionState, setSessionState] = useState<IWikidataUniverseSession>({
     originQuery: '',
     dimensions: calculateDrawingDimensions(window), // Assuming an initial value for dimensions
     apiStatus: apiStatus, // Assuming an initial value for apiStatus
-    wikidataApiStatus: wikidataApiStatus,
     graphset: null, // Assuming null as an initial value for graphset
   });
 
