@@ -5,6 +5,5 @@ export interface IWikidataUniverseSession {
   originQuery: string;
   dimensions: IDimensions;
   apiStatus: IApiStatusResponse;
-  wikidataApiStatus: string;
   graphset: any;
 }
