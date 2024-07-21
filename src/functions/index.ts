@@ -1,4 +1,5 @@
 export { calculateDrawingDimensions } from './_CalculateDrawingDimension';
 export { buildApiUrl } from './_BuildApiUrl';
-//MAPS
-export { DynamicDisplayStateMap } from './_DynamicDisplayStateMap';
+export { fadeInElement } from './_AnimFadeInElement';
+export { shakeElement } from './_AnimHorizontalShakeElement';
+export { fadeOutElement } from './_AnimFadeOutElement';
