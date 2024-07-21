@@ -1,7 +1,8 @@
-import { IGetAPIStatusResponse } from "../interfaces";
+import '../assets/styles/components/RelatedLinksInfobox.css';
+import { IApiStatusResponse } from "../interfaces";
 
 interface IRelatedLinksInfoboxProps {
-  apiStatus: IGetAPIStatusResponse;
+  apiStatus: IApiStatusResponse;
 }
 
 export const RelatedLinksInfobox: React.FC<IRelatedLinksInfoboxProps> = ({ apiStatus }) => {
