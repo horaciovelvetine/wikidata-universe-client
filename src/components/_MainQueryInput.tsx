@@ -11,6 +11,9 @@ interface IMainQueryInputProps {
 }
 
 enum INPUT_STATES { INVALID, VALID, PLACEHOLDER }
+const inputIsValid = (state: INPUT_STATES) => {
+  return state === INPUT_STATES.VALID;
+};
 
 export const MainQueryInput: React.FC<IMainQueryInputProps> = ({ handleQuerySubmit }) => {
   const [input, setInput] = useState<string>('Search...');
@@ -25,19 +28,18 @@ export const MainQueryInput: React.FC<IMainQueryInputProps> = ({ handleQuerySubm
     }, 1);
   }, []);
 
-  const formSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+  const formSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (inputState === INPUT_STATES.INVALID || inputState === INPUT_STATES.PLACEHOLDER) {
+    if (!inputIsValid(inputState)) {
       shakeElement(inputRef.current!);
       shakeElement(submitButtonRef.current!);
       return;
     }
-
-    fadeOutElement(containerRef.current!);
     handleQuerySubmit(input);
+    fadeOutElement(containerRef.current!);
   };
 
-  const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const inputChangeValidSetter = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
     if (e.target.value === 'Search...') {
       setInputState(INPUT_STATES.PLACEHOLDER);
@@ -55,15 +57,14 @@ export const MainQueryInput: React.FC<IMainQueryInputProps> = ({ handleQuerySubm
           <div id='main-query-glogo-container'>
             <img id='main-query-glogo' src={GlobeLogo} />
           </div>
-          <p id='main-query-title'>wikiverse</p>
+          <p id='main-query-title'>wiki-verse</p>
           <p id='main-query-subtitle'>Explore <a href='https://www.wikidata.org/wiki/Wikidata:Main_Page' target='_blank'>Wikidata</a> Graphically</p>
         </div>
         <div id='main-query-form-container'>
           <form id='main-query-form' onSubmit={formSubmitHandler}>
-            <input id='main-query-input' ref={inputRef} type="text" placeholder={input} onChange={inputChangeHandler} />
+            <input id='main-query-input' ref={inputRef} type="text" placeholder={input} onChange={inputChangeValidSetter} />
             <button id='main-query-submit' ref={submitButtonRef} type='submit'><img id='main-query-icon' src={searchIcon} /></button>
           </form>
-          <div id='main-query-infobox'><a>F.A.Q.</a></div>
         </div>
       </div>
     </>
