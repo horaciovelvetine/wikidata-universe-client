@@ -17,18 +17,18 @@ export const WikidataUniverseAppMain: React.FC<WikidataUniverseAppMainProps> = (
   const [sessionState, updateSessionState] = useSessionState({ apiStatus });
 
   const handleQuerySubmit = async (query: string) => {
-    console.log(await getInitSessionRequest({ query, dimensions: sessionState.dimensions }));
-    updateSessionState('originQuery', query);
+    console.log("QueryResponse::", await getInitSessionRequest({ query, dimensions: sessionState.dimensions }));
   };
 
   return (
     <>
       <div id='app-layout-container'>
-        <MainQueryInput handleQuerySubmit={handleQuerySubmit} />
+        {/* <MainQueryInput handleQuerySubmit={handleQuerySubmit} /> */}
         <div id='sketch-layout-container'>
           <MemoizedSketch />
         </div>
         <RelatedLinksInfobox apiStatus={apiStatus} />
+
       </div>
     </>
   );
