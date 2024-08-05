@@ -1,5 +1,5 @@
-import './assets/styles/Global.css'
-import './assets/styles/Fonts.css'
+import './styles/Global.css'
+import './styles/Fonts.css'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { RootLayout } from './layouts/_RootLayout'

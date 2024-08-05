@@ -90,7 +90,7 @@
 
 
 #main-query-glogo {
-  width: 68%;
+  position: absolute;
   height: 68%;
   z-index: -1;
   opacity: 0.08;
@@ -98,7 +98,6 @@
   animation-duration: 280s;
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
-  position: absolute;
 }
 
 #main-query-glogo:hover {

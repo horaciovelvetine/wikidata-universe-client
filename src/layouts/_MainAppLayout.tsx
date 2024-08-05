@@ -1,12 +1,12 @@
 import React, { memo, useEffect, useState } from 'react';
 import { getInitSessionRequest } from '../api';
-import { IApiStatusResponse, IVertex, IProperty, IEdge, IDimensions, IFetchQueue, IWikidataUniverseSession } from '../interfaces';
+import { IApiStatus, IVertex, IProperty, IEdge, IDimensions, IFetchQueue, IWikidataUniverseSession } from '../interfaces';
 import { P5SketchMain, MainQueryInput, RelatedLinksInfobox } from '../components';
 import { calculateDrawingDimensions } from '../functions';
 import { useDebounce } from '../hooks';
 
 interface MainAppLayoutProps {
-  apiStatus: IApiStatusResponse;
+  apiStatus: IApiStatus;
 }
 
 
@@ -36,6 +36,7 @@ export const MainAppLayout: React.FC<MainAppLayoutProps> = ({ apiStatus }: MainA
       window.removeEventListener('resize', handleResizeDebounces);
     };
   }, [handleResizeDebounces]);
+
 
   const handleQuerySubmit = async (queryVal: string) => {
     const { vertices, edges, properties, fetchQueue } = await getInitSessionRequest({ queryVal, dimensions });

@@ -1,4 +1,4 @@
-import '../assets/styles/animations/HorizontalShake.css'
+import '../styles/animations/HorizontalShake.css'
 
 export function shakeElement(ele: HTMLElement) {
   ele.style.animation = "horizontal-shake 0.82s cubic-bezier(.36,.07,.19,.97) both";

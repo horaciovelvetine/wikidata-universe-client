@@ -1,4 +1,4 @@
-import '../assets/styles/components/P5SketchMain.css';
+import '../styles/components/P5SketchMain.css';
 import { ReactP5Wrapper, P5CanvasInstance, Sketch } from '@p5-wrapper/react';
 import { IWikidataUniverseSession } from '../interfaces';
 

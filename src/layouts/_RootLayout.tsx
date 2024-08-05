@@ -1,21 +1,17 @@
-import '../assets/styles/MainAppLayout.css';
+import '../styles/MainAppLayout.css';
 import React from 'react';
-import { IApiStatusResponse } from '../interfaces';
+import { IApiStatus } from '../interfaces';
 import { MainAppLayout } from './_MainAppLayout';
-import ApiUnavailableLayout from './_ApiUnavailableLayout';
+import { ApiUnavailableLayout } from './_ApiUnavailableLayout';
 
 interface RootLayoutProps {
-  apiStatus: IApiStatusResponse;
+  apiStatus: IApiStatus;
 }
 
 export const RootLayout: React.FC<RootLayoutProps> = ({ apiStatus }) => {
   return (
     <>
-      {apiStatus.status != 500 ?
-        <MainAppLayout apiStatus={apiStatus} />
-        :
-        <ApiUnavailableLayout />
-      }
+      {apiStatus.status != 500 ? <MainAppLayout apiStatus={apiStatus} /> : <ApiUnavailableLayout apiStatus={apiStatus} />}
     </>
   );
 };

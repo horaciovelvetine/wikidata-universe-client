@@ -1,5 +1,5 @@
-import '../assets/styles/components/MainQueryInput.css';
-import '../assets/styles/animations/SlowGlobeRotation.css';
+import '../styles/components/MainQueryInput.css';
+import '../styles/animations/SlowGlobeRotation.css';
 import searchIcon from '../assets/img/mi-search-icon.svg';
 import GlobeLogo from '../assets/img/globe-outline-no-bg-white.svg';
 
@@ -55,7 +55,7 @@ export const MainQueryInput: React.FC<IMainQueryInputProps> = ({ handleQuerySubm
       <div id='main-query-container' ref={containerRef}>
         <div>
           <div id='main-query-glogo-container'>
-            <img id='main-query-glogo' src={GlobeLogo} />
+            <img id='main-query-glogo' src={GlobeLogo} alt="Wikipedia's globe logo" />
           </div>
           <p id='main-query-title'>wiki-verse</p>
           <p id='main-query-subtitle'>Explore <a href='https://www.wikidata.org/wiki/Wikidata:Main_Page' target='_blank'>Wikidata</a> Graphically</p>

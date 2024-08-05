@@ -1,11 +1,11 @@
 import '../styles/components/RelatedLinksInfobox.css';
 import { IApiStatus } from "../interfaces";
 
-interface IRelatedLinksInfoboxProps {
+interface FooterProps {
   apiStatus: IApiStatus;
 }
 
-export const RelatedLinksInfobox: React.FC<IRelatedLinksInfoboxProps> = ({ apiStatus }) => {
+export const Footer: React.FC<FooterProps> = ({ apiStatus }) => {
   const githubUrl = "https://github.com/horaciovelvetine";
   const frontendUrl = "https://github.com/horaciovelvetine";
   const backendUrl = "https://github.com/horaciovelvetine";
