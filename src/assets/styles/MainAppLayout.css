@@ -1,4 +1,4 @@
-@import url('../Palette.css');
+@import url('./Palette.css');
 
 body {
   height: 100vh;
@@ -8,9 +8,6 @@ body {
 }
 
 #root {
-  height: 100vh;
-  width: 100vw;
-  overflow: clip;
   height: 100vh;
   width: 100vw;
   display: flex;
