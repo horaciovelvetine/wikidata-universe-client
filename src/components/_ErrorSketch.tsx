@@ -15,7 +15,7 @@ export const ErrorSketch: React.FC<ErrorSketchProps> = ({ dimensions }) => {
 
   const sketch: Sketch = (p5: P5CanvasInstance) => {
     p5.setup = () => {
-      p5.createCanvas(dimensions.height, dimensions.width);
+      p5.createCanvas(dimensions.width, dimensions.height);
       for (let n = 0; n < dimensions.width / 10; n++) {
         const particle = new Particle(dimensions, p5);
         particles.push(particle);
@@ -50,8 +50,8 @@ class Particle {
   constructor(dimensions: IDimensions, p5: P5CanvasInstance) {
     this.p5 = p5;
     this.dimensions = dimensions;
-    this.x = p5.random(0, dimensions.height); //clearly this is backwards...
-    this.y = p5.random(0, dimensions.width);
+    this.x = p5.random(0, dimensions.width);
+    this.y = p5.random(0, dimensions.height);
     this.r = p5.random(2, 10);
     this.xSpeed = p5.random(-1, 1);
     this.ySpeed = p5.random(-1, 1);
@@ -74,9 +74,9 @@ class Particle {
   }
 
   move() {
-    if (this.x < 0 || this.x > this.dimensions.height)
+    if (this.x < 0 || this.x > this.dimensions.width)
       this.xSpeed *= -1;
-    if (this.y < 0 || this.y > this.dimensions.width)
+    if (this.y < 0 || this.y > this.dimensions.height)
       this.ySpeed *= -1;
     this.x += this.xSpeed;
     this.y += this.ySpeed;
