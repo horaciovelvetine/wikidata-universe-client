@@ -1,31 +1,15 @@
 import '../assets/styles/components/P5SketchMain.css';
-
-import { useState, useEffect } from 'react';
 import { ReactP5Wrapper, P5CanvasInstance, Sketch } from '@p5-wrapper/react';
+import { IWikidataUniverseSession } from '../interfaces';
 
-import { calculateDrawingDimensions } from '../functions';
-import { useDebounce } from '../hooks';
-import { IDimensions } from '../interfaces';
+interface P5SketchMainProps {
+  session: IWikidataUniverseSession;
+}
 
-export const P5SketchMain: React.FC = () => {
-  const [drawingSize, setDrawingSize] = useState<IDimensions>(calculateDrawingDimensions(window));
-
-  const handleResizeDebounces = useDebounce(() => {
-    setDrawingSize(calculateDrawingDimensions(window));
-  }, 300);
-
-  useEffect(() => {
-    window.addEventListener('resize', handleResizeDebounces);
-
-    return () => {
-      window.removeEventListener('resize', handleResizeDebounces);
-    };
-  }, [handleResizeDebounces]);
-
+export const P5SketchMain: React.FC<P5SketchMainProps> = ({ session }) => {
   const sketch: Sketch = (p5: P5CanvasInstance) => {
     p5.setup = () => {
-      console.log('P5SketchMain.tsx: setup() drawingSize:', drawingSize.width, drawingSize.height)
-      p5.createCanvas(drawingSize.height, drawingSize.width);
+      p5.createCanvas(session.dimensions.height, session.dimensions.width);
     }
     p5.draw = () => {
       p5.background(1, 1, 14);
