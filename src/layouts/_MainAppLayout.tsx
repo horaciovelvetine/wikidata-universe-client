@@ -1,16 +1,11 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { getInitSessionRequest } from '../api';
-import { IApiStatus, IVertex, IProperty, IEdge, IDimensions, IFetchQueue, IWikidataUniverseSession } from '../interfaces';
-import { P5SketchMain, MainQueryInput, Footer } from '../components';
-import { calculateDrawingDimensions } from '../functions';
-import { useDebounce } from '../hooks';
+import { IVertex, IProperty, IEdge, IFetchQueue, IWikidataUniverseSession } from '../interfaces';
+import { QuerySketch, StandbySketch, MainQueryInput, Footer } from '../components';
 import { LayoutsProps } from '../interfaces/_LayoutsProps';
 
-const MemoizedSketch = memo(P5SketchMain);
-
-export const MainAppLayout: React.FC<LayoutsProps> = ({ apiStatus }: LayoutsProps) => {
-  const [dimensions, setDimensions] = useState<IDimensions>(calculateDrawingDimensions(window));
-  // GRAPHSET
+export const MainAppLayout: React.FC<LayoutsProps> = ({ dimensions, apiStatus }: LayoutsProps) => {
+  // DATA
   const [query, setQuery] = useState<string | undefined>(undefined);
   const [vertices, setVertices] = useState<IVertex[] | undefined>(undefined);
   const [edges, setEdges] = useState<IEdge[] | undefined>(undefined);
@@ -21,18 +16,9 @@ export const MainAppLayout: React.FC<LayoutsProps> = ({ apiStatus }: LayoutsProp
     return { query, dimensions, apiStatus, vertices, edges, properties, fetchQueue }
   }
 
-  const handleResizeDebounces = useDebounce(() => {
-    setDimensions(calculateDrawingDimensions(window));
-  }, 300);
-
-  useEffect(() => {
-    window.addEventListener('resize', handleResizeDebounces);
-
-    return () => {
-      window.removeEventListener('resize', handleResizeDebounces);
-    };
-  }, [handleResizeDebounces]);
-
+  const displaySketch = () => {
+    return query == undefined ? <StandbySketch dimensions={dimensions} /> : <QuerySketch session={session()} />
+  }
 
   const handleQuerySubmit = async (queryVal: string) => {
     const { vertices, edges, properties, fetchQueue } = await getInitSessionRequest({ queryVal, dimensions });
@@ -48,7 +34,7 @@ export const MainAppLayout: React.FC<LayoutsProps> = ({ apiStatus }: LayoutsProp
     <>
       <MainQueryInput handleQuerySubmit={handleQuerySubmit} />
       <div id='sketch-layout-container'>
-        <MemoizedSketch session={session()} />
+        {displaySketch()}
       </div>
       <Footer apiStatus={apiStatus} />
     </>

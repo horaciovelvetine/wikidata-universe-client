@@ -8,7 +8,7 @@ interface ErrorSketchProps {
   dimensions: IDimensions
 }
 
-export const ErrorSketch: React.FC<ErrorSketchProps> = ({ dimensions }) => {
+export const StandbySketch: React.FC<ErrorSketchProps> = ({ dimensions }) => {
   let particles: Particle[] = [];
 
   console.log('p5DIM::', dimensions);
@@ -53,8 +53,8 @@ class Particle {
     this.x = p5.random(0, dimensions.width);
     this.y = p5.random(0, dimensions.height);
     this.r = p5.random(2, 10);
-    this.xSpeed = p5.random(-1, 1);
-    this.ySpeed = p5.random(-1, 1);
+    this.xSpeed = p5.random(-0.7, 0.7);
+    this.ySpeed = p5.random(-0.7, 0.7);
   }
 
   drawParticle() {

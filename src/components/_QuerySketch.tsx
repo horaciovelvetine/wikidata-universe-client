@@ -2,19 +2,17 @@ import '../styles/components/P5SketchMain.css';
 import { ReactP5Wrapper, P5CanvasInstance, Sketch } from '@p5-wrapper/react';
 import { IWikidataUniverseSession } from '../interfaces';
 
-interface P5SketchMainProps {
+interface QuerySketchProps {
   session: IWikidataUniverseSession;
 }
 
-export const P5SketchMain: React.FC<P5SketchMainProps> = ({ session }) => {
+export const QuerySketch: React.FC<QuerySketchProps> = ({ session }) => {
   const sketch: Sketch = (p5: P5CanvasInstance) => {
     p5.setup = () => {
-      p5.createCanvas(session.dimensions.height, session.dimensions.width);
+      p5.createCanvas(session.dimensions.width, session.dimensions.height);
     }
     p5.draw = () => {
       p5.background(1, 1, 14);
-      p5.fill(255);
-      // p5.ellipse(p5.mouseX, p5.mouseY, 50, 50);
     }
   }
 

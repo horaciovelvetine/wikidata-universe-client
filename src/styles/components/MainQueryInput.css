@@ -8,7 +8,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  z-index: 9999;
+  z-index: 3;
   backdrop-filter: blur(3px);
   backdrop-filter: brightness(0.7);
   opacity: 0;
@@ -80,9 +80,8 @@
 
 #main-query-glogo-container {
   position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  top: 53%;
+  left: 53%;
   width: 100vw;
   height: 100vh;
   z-index: -1;
@@ -91,7 +90,7 @@
 
 #main-query-glogo {
   position: absolute;
-  height: 68%;
+  height: 66%;
   z-index: -1;
   opacity: 0.08;
   animation-name: slow-globe-rotation;
@@ -111,7 +110,7 @@
   font-style: normal !important;
   font-size: 3.5rem;
   text-shadow: var(--gray-900) 0.1rem 0.1rem 0.1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.2rem;
 }
 
 #main-query-subtitle {

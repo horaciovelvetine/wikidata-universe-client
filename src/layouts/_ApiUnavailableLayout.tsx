@@ -1,7 +1,7 @@
 import '../styles/ApiUnavailableLayout.css'
 import '../styles/animations/SlowGlobeRotation.css'
 
-import { ErrorSketch, Footer } from '../components';
+import { StandbySketch, Footer } from '../components';
 import React, { memo, useEffect } from 'react';
 import { fadeInElement } from '../functions';
 import GlobeLogo from '../assets/img/globe-outline-no-bg-white.svg';
@@ -10,7 +10,7 @@ import ExclaimIcon from '../assets/img/mi-exclaim-icon.svg'
 import { LayoutsProps } from '../interfaces';
 
 
-const MemoizedSketch = memo(ErrorSketch);
+const MemoizedSketch = memo(StandbySketch);
 
 export const ApiUnavailableLayout: React.FC<LayoutsProps> = ({ apiStatus, dimensions }) => {
 
