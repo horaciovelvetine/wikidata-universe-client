@@ -1,21 +1,84 @@
 import '../styles/components/P5SketchMain.css';
-import { ReactP5Wrapper, P5CanvasInstance, Sketch } from '@p5-wrapper/react';
-import { calculateDrawingDimensions } from '../functions';
-import { useState } from 'react';
 
-export const ErrorSketch: React.FC = () => {
+import { useState } from 'react';
+import { IDimensions } from '../interfaces';
+import { ReactP5Wrapper, P5CanvasInstance, Sketch } from '@p5-wrapper/react';
+
+interface ErrorSketchProps {
+  dimensions: IDimensions
+}
+
+export const ErrorSketch: React.FC<ErrorSketchProps> = ({ dimensions }) => {
+  let particles: Particle[] = [];
+
+  console.log('p5DIM::', dimensions);
+
   const sketch: Sketch = (p5: P5CanvasInstance) => {
-    const dim = calculateDrawingDimensions(window);
     p5.setup = () => {
-      p5.createCanvas(dim.height, dim.width);
+      p5.createCanvas(dimensions.height, dimensions.width);
+      for (let n = 0; n < dimensions.width / 10; n++) {
+        const particle = new Particle(dimensions, p5);
+        particles.push(particle);
+      }
     }
     p5.draw = () => {
-      p5.background(1, 1, 14);
-      p5.fill(255);
-      p5.ellipse(p5.mouseX, p5.mouseY, 50, 50);
+      p5.background('#01010e');
+      for (let i = 0; i < particles.length; i++) {
+        particles[i].drawParticle();
+        particles[i].move();
+        particles[i].joinNearby(particles.slice(i))
+      }
+      // p5.fill(255);
+      // p5.ellipse(p5.mouseX, p5.mouseY, 50, 50);
     }
   }
 
   return <ReactP5Wrapper sketch={sketch} />
 }
 
+// Credit for this sketch goes to @ Sagar Arora
+// Which you can find here: https://archive.p5js.org/examples/simulate-particles.html
+class Particle {
+  p5: P5CanvasInstance
+  dimensions: IDimensions
+  x: number;
+  y: number;
+  r: number;
+  xSpeed: number;
+  ySpeed: number;
+
+  constructor(dimensions: IDimensions, p5: P5CanvasInstance) {
+    this.p5 = p5;
+    this.dimensions = dimensions;
+    this.x = p5.random(0, dimensions.height); //clearly this is backwards...
+    this.y = p5.random(0, dimensions.width);
+    this.r = p5.random(2, 10);
+    this.xSpeed = p5.random(-1, 1);
+    this.ySpeed = p5.random(-1, 1);
+  }
+
+  drawParticle() {
+    this.p5.noStroke();
+    this.p5.fill('rgba(173, 181, 189, 0.2)');
+    this.p5.circle(this.x, this.y, this.r);
+  }
+
+  joinNearby(particlesArr: Particle[]) {
+    particlesArr.forEach(particle => {
+      let distance = this.p5.dist(this.x, this.y, particle.x, particle.y)
+      if (distance < 100) {
+        this.p5.stroke('rgba(16, 84, 136, 0.3)');
+        this.p5.line(this.x, this.y, particle.x, particle.y);
+      }
+    })
+  }
+
+  move() {
+    if (this.x < 0 || this.x > this.dimensions.height)
+      this.xSpeed *= -1;
+    if (this.y < 0 || this.y > this.dimensions.width)
+      this.ySpeed *= -1;
+    this.x += this.xSpeed;
+    this.y += this.ySpeed;
+  }
+}

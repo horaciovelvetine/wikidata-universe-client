@@ -14,12 +14,27 @@
   opacity: 0;
 }
 
+#error-message-container>* {
+  pointer-events: none;
+}
+
+#unavailable-glogo-container {
+  position: absolute;
+  top: 52%;
+  left: 52%;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+}
+
 #unavailable-glogo {
   position: absolute;
   height: 66%;
-  z-index: -1;
   opacity: 0.08;
-  transform: translate(-2rem)
+  animation-name: slow-globe-rotation;
+  animation-duration: 280s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
 }
 
 #question-mark-icon {
@@ -39,7 +54,7 @@
 }
 
 #error-text-container {
-  text-shadow: 1px 1px 1px black;
+  text-shadow: 1px 1px 2px black;
 }
 
 #error-title {

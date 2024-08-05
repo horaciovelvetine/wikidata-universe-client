@@ -96,7 +96,7 @@
   opacity: 0.08;
   animation-name: slow-globe-rotation;
   animation-duration: 280s;
-  animation-timing-function: ease-in-out;
+  animation-timing-function: linear;
   animation-iteration-count: infinite;
 }
 

@@ -4,15 +4,11 @@ import { IApiStatus, IVertex, IProperty, IEdge, IDimensions, IFetchQueue, IWikid
 import { P5SketchMain, MainQueryInput, Footer } from '../components';
 import { calculateDrawingDimensions } from '../functions';
 import { useDebounce } from '../hooks';
-
-interface MainAppLayoutProps {
-  apiStatus: IApiStatus;
-}
-
+import { LayoutsProps } from '../interfaces/_LayoutsProps';
 
 const MemoizedSketch = memo(P5SketchMain);
 
-export const MainAppLayout: React.FC<MainAppLayoutProps> = ({ apiStatus }: MainAppLayoutProps) => {
+export const MainAppLayout: React.FC<LayoutsProps> = ({ apiStatus }: LayoutsProps) => {
   const [dimensions, setDimensions] = useState<IDimensions>(calculateDrawingDimensions(window));
   // GRAPHSET
   const [query, setQuery] = useState<string | undefined>(undefined);
