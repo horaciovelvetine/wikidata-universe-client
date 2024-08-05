@@ -1,10 +1,18 @@
+@import url('../Palette.css');
+
 body {
   height: 100vh;
   width: 100vw;
   overflow: clip;
+  background-color: var(--body-bg);
 }
 
-#app-layout-container {
+#root {
+  height: 100vh;
+  width: 100vw;
+  overflow: clip;
+  height: 100vh;
+  width: 100vw;
   display: flex;
   flex-direction: column;
   align-items: center;
