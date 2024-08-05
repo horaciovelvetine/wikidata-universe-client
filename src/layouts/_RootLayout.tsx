@@ -1,7 +1,8 @@
-import '../assets/styles/components/WikidataUniverseAppMain.css';
+import '../assets/styles/MainAppLayout.css';
 import React from 'react';
 import { IApiStatusResponse } from '../interfaces';
 import { MainAppLayout } from './_MainAppLayout';
+import ApiUnavailableLayout from './_ApiUnavailableLayout';
 
 interface RootLayoutProps {
   apiStatus: IApiStatusResponse;
@@ -13,7 +14,7 @@ export const RootLayout: React.FC<RootLayoutProps> = ({ apiStatus }) => {
       {apiStatus.status != 500 ?
         <MainAppLayout apiStatus={apiStatus} />
         :
-        <p>here I am</p>
+        <ApiUnavailableLayout />
       }
     </>
   );
