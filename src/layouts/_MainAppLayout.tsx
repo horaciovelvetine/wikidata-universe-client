@@ -1,19 +1,18 @@
-import '../assets/styles/components/WikidataUniverseAppMain.css';
-
 import React, { memo, useEffect, useState } from 'react';
 import { getInitSessionRequest } from '../api';
 import { IApiStatusResponse, IVertex, IProperty, IEdge, IDimensions, IFetchQueue, IWikidataUniverseSession } from '../interfaces';
-import { MainQueryInput, P5SketchMain, RelatedLinksInfobox } from '.';
+import { P5SketchMain, MainQueryInput, RelatedLinksInfobox } from '../components';
 import { calculateDrawingDimensions } from '../functions';
 import { useDebounce } from '../hooks';
 
-interface WikidataUniverseAppMainProps {
+interface MainAppLayoutProps {
   apiStatus: IApiStatusResponse;
 }
 
-const MemoizedSketch = memo(P5SketchMain); // memoized sketch prevents re-rendering of sketch when unrelated state changes
 
-export const WikidataUniverseAppMain: React.FC<WikidataUniverseAppMainProps> = ({ apiStatus }) => {
+const MemoizedSketch = memo(P5SketchMain);
+
+export const MainAppLayout: React.FC<MainAppLayoutProps> = ({ apiStatus }: MainAppLayoutProps) => {
   const [dimensions, setDimensions] = useState<IDimensions>(calculateDrawingDimensions(window));
   // GRAPHSET
   const [query, setQuery] = useState<string | undefined>(undefined);
@@ -38,8 +37,6 @@ export const WikidataUniverseAppMain: React.FC<WikidataUniverseAppMainProps> = (
     };
   }, [handleResizeDebounces]);
 
-  console.log(apiStatus);
-
   const handleQuerySubmit = async (queryVal: string) => {
     const { vertices, edges, properties, fetchQueue } = await getInitSessionRequest({ queryVal, dimensions });
     setQuery(queryVal);
@@ -52,16 +49,11 @@ export const WikidataUniverseAppMain: React.FC<WikidataUniverseAppMainProps> = (
 
   return (
     <>
-      {apiStatus.status != 500 ?
-        <>
-          <MainQueryInput handleQuerySubmit={handleQuerySubmit} />
-          <div id='sketch-layout-container'>
-            <MemoizedSketch session={session()} />
-          </div>
-          <RelatedLinksInfobox apiStatus={apiStatus} /></>
-        :
-        <p>here I am</p>
-      }
+      <MainQueryInput handleQuerySubmit={handleQuerySubmit} />
+      <div id='sketch-layout-container'>
+        <MemoizedSketch session={session()} />
+      </div>
+      <RelatedLinksInfobox apiStatus={apiStatus} />
     </>
   );
 };
