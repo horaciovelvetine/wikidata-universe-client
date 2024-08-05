@@ -1,9 +1,12 @@
-import { IApiStatusResponse } from ".";
+import { IApiStatusResponse, IVertex, IEdge, IProperty, IFetchQueue } from ".";
 import { IDimensions } from ".";
 
 export interface IWikidataUniverseSession {
-  originQuery: string;
+  query: string;
   dimensions: IDimensions;
   apiStatus: IApiStatusResponse;
-  graphset: any;
+  vertices: IVertex[];
+  edges: IEdge[];
+  properties: IProperty[];
+  fetchQueue: IFetchQueue;
 }
