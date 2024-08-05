@@ -1,6 +1,6 @@
 import '../styles/ApiUnavailableLayout.css'
 
-import { ErrorSketch } from '../components';
+import { ErrorSketch, Footer } from '../components';
 import React, { memo, useEffect } from 'react';
 import { fadeInElement } from '../functions';
 import GlobeLogo from '../assets/img/globe-outline-no-bg-white.svg';
@@ -37,6 +37,7 @@ export const ApiUnavailableLayout: React.FC<ApiUnavailableLayoutProps> = ({ apiS
       <div id='sketch-layout-container'>
         <MemoizedSketch />
       </div>
+      <Footer apiStatus={apiStatus} />
     </>
   );
 };

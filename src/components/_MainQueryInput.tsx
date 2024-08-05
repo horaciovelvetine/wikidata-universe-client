@@ -57,7 +57,7 @@ export const MainQueryInput: React.FC<IMainQueryInputProps> = ({ handleQuerySubm
           <div id='main-query-glogo-container'>
             <img id='main-query-glogo' src={GlobeLogo} alt="Wikipedia's globe logo" />
           </div>
-          <p id='main-query-title'>wiki-verse</p>
+          <p id='main-query-title'>wikiverse</p>
           <p id='main-query-subtitle'>Explore <a href='https://www.wikidata.org/wiki/Wikidata:Main_Page' target='_blank'>Wikidata</a> Graphically</p>
         </div>
         <div id='main-query-form-container'>

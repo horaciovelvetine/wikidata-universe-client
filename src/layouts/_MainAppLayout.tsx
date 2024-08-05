@@ -1,7 +1,7 @@
 import React, { memo, useEffect, useState } from 'react';
 import { getInitSessionRequest } from '../api';
 import { IApiStatus, IVertex, IProperty, IEdge, IDimensions, IFetchQueue, IWikidataUniverseSession } from '../interfaces';
-import { P5SketchMain, MainQueryInput, RelatedLinksInfobox } from '../components';
+import { P5SketchMain, MainQueryInput, Footer } from '../components';
 import { calculateDrawingDimensions } from '../functions';
 import { useDebounce } from '../hooks';
 
@@ -54,7 +54,7 @@ export const MainAppLayout: React.FC<MainAppLayoutProps> = ({ apiStatus }: MainA
       <div id='sketch-layout-container'>
         <MemoizedSketch session={session()} />
       </div>
-      <RelatedLinksInfobox apiStatus={apiStatus} />
+      <Footer apiStatus={apiStatus} />
     </>
   );
 };

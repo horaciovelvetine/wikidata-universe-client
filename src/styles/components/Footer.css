@@ -1,10 +1,13 @@
+@import url('../Palette.css');
+
 #related-links-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 1.25rem;
+  margin-top: 1rem;
   background-color: transparent;
+  color: var(--font)
 }
 
 #related-links-list {
@@ -40,18 +43,18 @@
 
 @media (min-width: 1025px) and (max-width: 1225px) {
   #related-links-list {
-    gap: 3rem;
+    gap: 7rem;
   }
 }
 
 @media (min-width: 1226px) and (max-width: 1450px) {
   #related-links-list {
-    gap: 5rem;
+    gap: 15rem;
   }
 }
 
 @media (min-width: 1451px) {
   #related-links-list {
-    gap: 7rem;
+    gap: 17rem;
   }
 }

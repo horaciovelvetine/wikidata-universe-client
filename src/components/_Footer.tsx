@@ -1,4 +1,4 @@
-import '../styles/components/RelatedLinksInfobox.css';
+import '../styles/components/Footer.css';
 import { IApiStatus } from "../interfaces";
 
 interface FooterProps {
@@ -7,8 +7,9 @@ interface FooterProps {
 
 export const Footer: React.FC<FooterProps> = ({ apiStatus }) => {
   const githubUrl = "https://github.com/horaciovelvetine";
-  const frontendUrl = "https://github.com/horaciovelvetine";
-  const backendUrl = "https://github.com/horaciovelvetine";
+  const frontendUrl = githubUrl + "/wikidata-universe-client";
+  const backendUrl = githubUrl + "/wikidata-universe-api";
+  const learnMoreUrl = githubUrl + "/ForceDrawnGraphs"
 
   return (
     <>
@@ -16,7 +17,7 @@ export const Footer: React.FC<FooterProps> = ({ apiStatus }) => {
         <ul id="related-links-list">
           <li id="related-link">Github: <a href={frontendUrl}>Frontend</a> | <a href={backendUrl}>Backend</a></li>
           <li id="related-link">©2024 by <a href={githubUrl}>@horaciovelvetine</a></li>
-          <li id="status-link">API Status: <i>{apiStatus.status}</i> {apiStatus.message}</li>
+          <li id="related-link">About <a href={learnMoreUrl}>Wikiverse</a></li>
         </ul>
       </div>
     </>
