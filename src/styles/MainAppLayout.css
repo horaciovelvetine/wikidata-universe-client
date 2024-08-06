@@ -16,13 +16,25 @@ body {
   min-width: 862px;
 }
 
-#site-title-bg {
-  position: absolute;
-  left: -19%;
-  top: 36%;
+#site-title-text-main {
+  position: fixed;
+  left: 0;
+  top: 50%;
+  transform: translateX(-41%) translateY(-50%) rotate(-90deg);
+  white-space: nowrap;
   z-index: -10;
-  font-size: 12rem;
-  transform: rotate(-90deg);
-  color: rgb(var(--font), 0.9);
+  font-size: calc(0.19*100vh);
+  color: rgb(var(--font));
+  text-shadow: 3px 3px 3px black;
+}
+
+#site-title-stack {
+  position: fixed;
+  display: flex;
+  top: -1%;
+  /* right: 10%; */
+  z-index: -10;
+  font-size: calc(0.095*100vh);
+  color: rgb(var(--font));
   text-shadow: 3px 3px 3px black;
 }

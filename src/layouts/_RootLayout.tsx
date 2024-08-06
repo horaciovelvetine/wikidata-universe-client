@@ -30,7 +30,15 @@ export const RootLayout: React.FC<RootLayoutProps> = ({ apiStatus }) => {
   console.log(apiStatus);
   return (
     <>
-      <h1 id='site-title-bg'>wikiverse</h1>
+      <h1 id='site-title-text-main'>wikiverse</h1>
+      <div id='site-title-stack'>
+        <h4 id='site-title-stack-1'>wikiverse</h4>
+        <h4 id='site-title-stack-2'>wikiverse</h4>
+        <h4 id='site-title-stack-3'>wikiverse</h4>
+        <h4 id='site-title-stack-4'>wikiverse</h4>
+        <h4 id='site-title-stack-5'>wikiverse</h4>
+        <h4 id='site-title-stack-6'>wikiverse</h4>
+      </div>
       {apiStatus.code != 500 ? <MainAppLayout {...props()} /> : <ApiUnavailableLayout {...props()} />}
     </>
   );
