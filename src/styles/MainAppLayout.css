@@ -4,7 +4,6 @@ body {
   height: 100vh;
   width: 100vw;
   overflow: clip;
-  background-color: rgb(var(--body-bg));
 }
 
 #root {
@@ -15,4 +14,15 @@ body {
   align-items: center;
   justify-content: center;
   min-width: 862px;
+}
+
+#site-title-bg {
+  position: absolute;
+  left: -19%;
+  top: 36%;
+  z-index: -10;
+  font-size: 12rem;
+  transform: rotate(-90deg);
+  color: rgb(var(--font), 0.9);
+  text-shadow: 3px 3px 3px black;
 }

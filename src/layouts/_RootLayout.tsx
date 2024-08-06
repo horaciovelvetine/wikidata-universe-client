@@ -27,10 +27,11 @@ export const RootLayout: React.FC<RootLayoutProps> = ({ apiStatus }) => {
   }, [handleResizeDebounces]);
 
   const props = (): LayoutsProps => ({ apiStatus, dimensions });
-
+  console.log(apiStatus);
   return (
     <>
-      {apiStatus.status != 500 ? <MainAppLayout {...props()} /> : <ApiUnavailableLayout {...props()} />}
+      <h1 id='site-title-bg'>wikiverse</h1>
+      {apiStatus.code != 500 ? <MainAppLayout {...props()} /> : <ApiUnavailableLayout {...props()} />}
     </>
   );
 };

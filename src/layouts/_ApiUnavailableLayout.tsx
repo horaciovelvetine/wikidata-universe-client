@@ -26,7 +26,7 @@ export const ApiUnavailableLayout: React.FC<LayoutsProps> = ({ apiStatus, dimens
     <>
       <div id='error-message-container' ref={containerRef}>
         <div id='error-text-container'>
-          <h1 id='error-title'>{apiStatus.status} API Unavailable</h1>
+          <h1 id='error-title'>{apiStatus.code} API Unavailable</h1>
           <p id='error-message'>Sorry, the API is currently unavailable. Please try again later.</p>
         </div>
         <div id='unavailable-glogo-container'>

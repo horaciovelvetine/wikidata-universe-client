@@ -6,12 +6,12 @@ export async function getApiStatusRequest(): Promise<IApiStatus> {
   return await axios
     .get(buildApiUrl("status"))
     .then((response) => {
-      return { status: response.status, message: response.data };
+      return { code: response.status, message: response.data };
     }).catch(error => {
       if (error.code === "ERR_NETWORK") {
-        return { message: "The WikiData Universe API is currently offline. Try again later.", status: 500 };
+        return { message: "The WikiData Universe API is currently offline. Try again later.", code: 500 };
       }
       debugger;
-      return { message: "Unknown Error Encountered.", status: 404 };
+      return { message: "Unknown Error Encountered.", code: 404 };
     });
 }
