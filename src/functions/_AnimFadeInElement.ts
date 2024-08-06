@@ -1,7 +1,8 @@
-export function fadeInElement(ele: HTMLElement) {
-  ele.style.transition = "opacity 0.75s ease-in-out";
+export function fadeInElement(ele: HTMLElement, duration: string = "0.75s"): void {
+  ele.style.transition = "opacity " + duration + " ease-in-out";
   ele.style.opacity = "1";
+  const timeout = parseFloat(duration) * 1000;
   setTimeout(() => {
     ele.style.transition = "";
-  }, 500);
+  }, timeout);
 }
