@@ -5,6 +5,7 @@
   width: 100%;
   display: flex;
   opacity: 0;
+  color: rgba(var(--gray-800), 0.4);
 }
 
 #active-query-control {
@@ -13,6 +14,7 @@
   width: 100%;
   bottom: 1.5rem;
   left: 1rem;
+  overflow: hidden;
   background-color: transparent;
 }
 
@@ -40,13 +42,45 @@
   border: 1px solid rgba(var(--gray-500), 0.4);
   border-radius: 0.5rem;
   background-color: transparent;
-  color: rgba(var(--gray-800), 0.4);
   cursor: pointer;
 }
 
 #active-query-control-icon {
   height: 1.3rem;
   transform: translateY(0.15rem);
-  color: rgb(var(--gray-800));
   opacity: 40%;
+}
+
+#active-query-control-options-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#active-query-control-options-toggle {
+  background-color: transparent;
+  outline: none;
+  border: none;
+}
+
+#active-query-control-options-icon {
+  opacity: 40%;
+  width: 75%;
+  transform: rotate(90deg) translateX(0.2rem);
+}
+
+#active-query-menu-options-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#active-query-menu-options-list {
+  margin-left: 0.5rem;
+  display: flex;
+  gap: 3rem;
+  list-style: none;
+  transform: translateY(1.75rem);
+  color: rgba(var(--font), 0.4)
 }

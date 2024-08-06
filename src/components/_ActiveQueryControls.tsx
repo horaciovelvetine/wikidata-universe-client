@@ -1,7 +1,8 @@
 import '../styles/components/ActiveQueryControls.css'
-import React, { useEffect, useState } from 'react';
-import { fadeInElement, shakeElement } from '../functions';
+import React, { MouseEventHandler, useEffect, useState } from 'react';
+import { fadeInElement, shakeElement, rotateMenuIcon, toggleMenuOptionVisibility } from '../functions';
 import SearchIcon from '../assets/img/mi-search-icon.svg'
+import ChevMenuIcon from '../assets/img/mi-chev-right-icon.svg'
 import { INPUT_STATES } from './_MainQueryInput';
 
 
@@ -12,9 +13,13 @@ interface ActiveQueryControlsProps {
 export const ActiveQueryControls: React.FC<ActiveQueryControlsProps> = ({ currentQuery }) => {
   const [query, setQuery] = useState(currentQuery)
   const [queryState, setQueryState] = useState<INPUT_STATES>(INPUT_STATES.VALID);
+  const [menuIsOpen, setMenuIsOpen] = useState(false);
   const containerRef = React.createRef<HTMLDivElement>();
   const inputRef = React.createRef<HTMLInputElement>();
   const submitRef = React.createRef<HTMLButtonElement>();
+  const toggleRef = React.createRef<HTMLButtonElement>();
+  const optionsRef = React.createRef<HTMLUListElement>();
+
 
   useEffect(() => {
     setTimeout(() => {
@@ -42,13 +47,32 @@ export const ActiveQueryControls: React.FC<ActiveQueryControlsProps> = ({ curren
     }
   }
 
+  const toggleMenuOpenHandler: MouseEventHandler<HTMLButtonElement> = (e) => {
+    setMenuIsOpen(!menuIsOpen);
+    rotateMenuIcon(toggleRef.current!, menuIsOpen);
+    toggleMenuOptionVisibility(optionsRef.current!, menuIsOpen)
+
+  }
+
   return (
     <div id='active-query-control-container' ref={containerRef}>
       <div id='active-query-control'>
         <form id='active-query-control-form' onSubmit={submitNewQueryHandler}>
           <input id='active-query-control-input' ref={inputRef} type='text' value={query} onChange={inputChangeValidHandler}></input>
-          <button id='active-query-control-submit' ref={submitRef} type='submit'><img id='active-query-control-icon' src={SearchIcon} /></button>
+          <button id='active-query-control-submit' ref={submitRef} type='submit'><img id='active-query-control-icon' src={SearchIcon} alt='small magnifying glass icon' /></button>
         </form>
+        <div id='active-query-control-options-container' >
+          <button id='active-query-control-options-toggle' ref={toggleRef} onClick={toggleMenuOpenHandler}>
+            <img id='active-query-control-options-icon' src={ChevMenuIcon} alt='small chevron facing the bottom of the screen' />
+          </button>
+          <div id='active-query-menu-options-container'>
+            <ul id='active-query-menu-options-list' ref={optionsRef}>
+              <li>ELEMENT</li>
+              <li>ELEMENT</li>
+              <li>ELEMENT</li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   );
