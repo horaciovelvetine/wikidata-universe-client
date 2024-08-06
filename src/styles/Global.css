@@ -11,7 +11,7 @@
 }
 
 a {
-  color: var(--hyperlink);
+  color: rgb(var(--hyperlink));
   text-decoration: none;
   background-color: transparent;
 }

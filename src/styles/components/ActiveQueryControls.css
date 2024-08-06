@@ -1,0 +1,35 @@
+@import url('../Palette.css');
+
+#active-query-control-container {
+  position: relative;
+  width: 100%;
+  opacity: 0;
+}
+
+#active-query-control {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  background-color: transparent;
+}
+
+#active-query-control-form {
+  display: flex;
+  flex-wrap: nowrap;
+  width: 20%;
+}
+
+#active-query-control-input {
+  font-size: 1.2rem;
+  padding: 0.75rem;
+  background-color: transparent;
+  border: none;
+  /* outline: none; */
+  color: var(--font);
+  border-bottom: 1px solid rgba(var(--gray-500), 0.7);
+}
+
+#main-query-input:focus {
+  outline: none;
+  border: 1px solid rgb(var(--primary));
+}

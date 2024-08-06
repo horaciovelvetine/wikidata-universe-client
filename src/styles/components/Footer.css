@@ -7,7 +7,7 @@
   justify-content: center;
   margin-top: 1rem;
   background-color: transparent;
-  color: var(--font)
+  color: rgb(var(--font))
 }
 
 #related-links-list {
