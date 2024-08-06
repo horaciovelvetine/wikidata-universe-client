@@ -1,16 +1,16 @@
 import '../styles/components/MainQueryInput.css';
 import '../styles/animations/SlowGlobeRotation.css';
-import searchIcon from '../assets/img/mi-search-icon.svg';
+import SearchIcon from '../assets/img/mi-search-icon.svg';
 import GlobeLogo from '../assets/img/globe-outline-no-bg-white.svg';
 
 import React, { useState, useEffect } from 'react';
-import { fadeInElement, fadeOutElement, shakeElement } from '../functions';
+import { fadeInElement, shakeElement } from '../functions';
 
 interface IMainQueryInputProps {
-  handleQuerySubmit: (queryInput: string) => void;
+  handleQuerySubmit: (queryInput: string, queryInputEle: React.RefObject<HTMLDivElement>) => void;
 }
 
-enum INPUT_STATES { INVALID, VALID, PLACEHOLDER }
+export enum INPUT_STATES { INVALID, VALID, PLACEHOLDER }
 const inputIsValid = (state: INPUT_STATES) => {
   return state === INPUT_STATES.VALID;
 };
@@ -24,7 +24,7 @@ export const MainQueryInput: React.FC<IMainQueryInputProps> = ({ handleQuerySubm
 
   useEffect(() => {
     setTimeout(() => {
-      fadeInElement(containerRef.current!);
+      fadeInElement(containerRef.current!, "0.3s");
     }, 1);
   }, []);
 
@@ -32,11 +32,11 @@ export const MainQueryInput: React.FC<IMainQueryInputProps> = ({ handleQuerySubm
     e.preventDefault();
     if (!inputIsValid(inputState)) {
       shakeElement(inputRef.current!);
+      // shakeElement(iconRef.current!);a
       shakeElement(submitButtonRef.current!);
       return;
     }
-    handleQuerySubmit(input);
-    fadeOutElement(containerRef.current!);
+    handleQuerySubmit(input, containerRef);
   };
 
   const inputChangeValidSetter = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -63,7 +63,7 @@ export const MainQueryInput: React.FC<IMainQueryInputProps> = ({ handleQuerySubm
         <div id='main-query-form-container'>
           <form id='main-query-form' onSubmit={formSubmitHandler}>
             <input id='main-query-input' ref={inputRef} type="text" placeholder={input} onChange={inputChangeValidSetter} />
-            <button id='main-query-submit' ref={submitButtonRef} type='submit'><img id='main-query-icon' src={searchIcon} /></button>
+            <button id='main-query-submit' ref={submitButtonRef} type='submit'><img id='main-query-icon' src={SearchIcon} /></button>
           </form>
         </div>
       </div>

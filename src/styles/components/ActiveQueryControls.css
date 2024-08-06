@@ -3,33 +3,50 @@
 #active-query-control-container {
   position: relative;
   width: 100%;
+  display: flex;
   opacity: 0;
 }
 
 #active-query-control {
   position: absolute;
+  display: flex;
+  width: 100%;
   bottom: 1.5rem;
-  left: 1.5rem;
+  left: 1rem;
   background-color: transparent;
 }
 
 #active-query-control-form {
   display: flex;
+  width: 25%;
   flex-wrap: nowrap;
-  width: 20%;
 }
 
 #active-query-control-input {
-  font-size: 1.2rem;
+  display: flex;
+  width: 100%;
+  font-size: 1.1rem;
   padding: 0.75rem;
   background-color: transparent;
   border: none;
-  /* outline: none; */
-  color: var(--font);
-  border-bottom: 1px solid rgba(var(--gray-500), 0.7);
+  outline: none;
+  color: rgba(var(--font), 0.5);
+  border-bottom: 1px solid rgba(var(--gray-500), 0.4);
 }
 
-#main-query-input:focus {
-  outline: none;
-  border: 1px solid rgb(var(--primary));
+#active-query-control-submit {
+  margin-left: 0.5rem;
+  padding-inline: 0.6rem;
+  border: 1px solid rgba(var(--gray-500), 0.4);
+  border-radius: 0.5rem;
+  background-color: transparent;
+  color: rgba(var(--gray-800), 0.4);
+  cursor: pointer;
+}
+
+#active-query-control-icon {
+  height: 1.3rem;
+  transform: translateY(0.15rem);
+  color: rgb(var(--gray-800));
+  opacity: 40%;
 }
