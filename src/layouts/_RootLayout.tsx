@@ -27,7 +27,6 @@ export const RootLayout: React.FC<RootLayoutProps> = ({ apiStatus }) => {
   }, [handleResizeDebounces]);
 
   const props = (): LayoutsProps => ({ apiStatus, dimensions });
-  console.log(apiStatus);
   return (
     <>
       <h1 id='site-title-text-main'>wikiverse</h1>
