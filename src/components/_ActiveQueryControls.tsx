@@ -67,9 +67,7 @@ export const ActiveQueryControls: React.FC<ActiveQueryControlsProps> = ({ curren
           </button>
           <div id='active-query-menu-options-container'>
             <ul id='active-query-menu-options-list' ref={optionsRef}>
-              <li>ELEMENT</li>
-              <li>ELEMENT</li>
-              <li>ELEMENT</li>
+              <li>Test Element</li>
             </ul>
           </div>
         </div>

@@ -17,7 +17,7 @@ export const Footer: React.FC<FooterProps> = ({ apiStatus }) => {
         <ul id="related-links-list">
           <li id="related-link">github: <a href={frontendUrl}>frontend</a> | <a href={backendUrl}>backend</a></li>
           <li id="related-link">©2024 by <a href={githubUrl}>@horaciovelvetine</a></li>
-          <li id="related-link">about <a href={learnMoreUrl}>Wikiverse</a></li>
+          <li id="related-link">about <a href={learnMoreUrl}>wikiverse.</a></li>
         </ul>
       </div>
     </>

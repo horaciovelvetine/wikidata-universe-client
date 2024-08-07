@@ -10,9 +10,6 @@ interface ErrorSketchProps {
 
 export const StandbySketch: React.FC<ErrorSketchProps> = ({ dimensions }) => {
   let particles: Particle[] = [];
-
-  console.log('p5DIM::', dimensions);
-
   const sketch: Sketch = (p5: P5CanvasInstance) => {
     p5.setup = () => {
       p5.createCanvas(dimensions.width, dimensions.height);
