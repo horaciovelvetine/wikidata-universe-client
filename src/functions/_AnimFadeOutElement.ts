@@ -4,6 +4,5 @@ export function fadeOutElement(ele: HTMLElement, duration: string = "1s"): void 
   const timeout = parseFloat(duration) * 1000;
   setTimeout(() => {
     ele.style.transition = "";
-    ele.style.display = "none";
   }, timeout);
 }
