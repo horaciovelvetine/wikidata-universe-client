@@ -1,9 +1,9 @@
 import '../styles/components/P5SketchMain.css';
 import { ReactP5Wrapper, P5CanvasInstance, Sketch } from '@p5-wrapper/react';
-import { IWikidataUniverseSession } from '../interfaces';
+import { ISessionData } from '../interfaces';
 
 interface QuerySketchProps {
-  session: IWikidataUniverseSession;
+  session: ISessionData;
 }
 
 export const QuerySketch: React.FC<QuerySketchProps> = ({ session }) => {

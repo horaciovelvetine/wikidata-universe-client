@@ -1,6 +1,6 @@
 import axios from "axios";
 import { buildApiUrl } from "../functions";
-import { IApiStatus, IWikidataUniverseSession } from "../interfaces";
+import { IApiStatus, ISessionData } from "../interfaces";
 
 interface GetInitQueryDataRequestProps {
   queryVal: string;
@@ -8,7 +8,7 @@ interface GetInitQueryDataRequestProps {
 
 interface GetInitQueryDataResponse {
   status: IApiStatus;
-  data: IWikidataUniverseSession;
+  data: ISessionData;
 }
 
 
@@ -22,7 +22,7 @@ export async function getInitQueryDataRequest({ queryVal }: GetInitQueryDataRequ
   }).catch(err => {
     console.error(err);
     return {
-      status: { code: 500, message: "Internal Server Error" }, data: {} as IWikidataUniverseSession
+      status: { code: 500, message: "Internal Server Error" }, data: {} as ISessionData
     }
   });
 }

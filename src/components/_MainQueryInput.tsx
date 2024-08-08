@@ -9,10 +9,10 @@ import React, { useState, useEffect, memo } from 'react';
 import { fadeInElement, fadeOutElement, shakeElement } from '../functions';
 import { getInitQueryDataRequest } from '../api';
 import { AnimFadeOutAndRemoveDisplay } from '../functions/_AnimFadeOutAndRemoveDisplay';
-import { IWikidataUniverseSession } from '../interfaces';
+import { ISessionData } from '../interfaces';
 
 interface IMainQueryInputProps {
-  handleFetchSuccess: (queryInput: string, responseData: IWikidataUniverseSession) => void;
+  handleFetchSuccess: (queryInput: string, responseData: ISessionData) => void;
 }
 
 export enum INPUT_STATES { INVALID, VALID, PLACEHOLDER }

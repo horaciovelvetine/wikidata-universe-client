@@ -1,7 +1,7 @@
 import { IApiStatus, IVertex, IEdge, IProperty, IFetchQueue } from ".";
 import { IDimensions } from ".";
 
-export interface IWikidataUniverseSession {
+export interface ISessionData {
   query: string | undefined;
   dimensions: IDimensions;
   apiStatus: IApiStatus;

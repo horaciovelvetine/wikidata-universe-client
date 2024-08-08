@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { IVertex, IProperty, IEdge, IFetchQueue, IWikidataUniverseSession, LayoutsProps } from '../interfaces';
+import { IVertex, IProperty, IEdge, IFetchQueue, ISessionData, LayoutsProps } from '../interfaces';
 import { QuerySketch, StandbySketch, MainQueryInput, Footer, ActiveQueryControls } from '../components';
 
 
@@ -11,7 +11,7 @@ export const MainAppLayout: React.FC<LayoutsProps> = ({ dimensions, apiStatus }:
   const [properties, setProperties] = useState<IProperty[] | undefined>(undefined);
   const [queue, setFetchQueue] = useState<IFetchQueue | undefined>(undefined);
 
-  const session = (): IWikidataUniverseSession => {
+  const session = (): ISessionData => {
     return { query, dimensions, apiStatus, vertices, edges, properties, queue }
   }
 
@@ -22,13 +22,15 @@ export const MainAppLayout: React.FC<LayoutsProps> = ({ dimensions, apiStatus }:
     return query != undefined ? <ActiveQueryControls currentQuery={query} /> : <></>;
   }
 
-  const handleFetchSuccess = async (queryVal: string, initResponseData: IWikidataUniverseSession) => {
+  const handleFetchSuccess = async (queryVal: string, initResponseData: ISessionData) => {
     const { vertices, edges, properties, queue } = initResponseData;
     setVertices(vertices);
     setEdges(edges);
     setProperties(properties);
     setFetchQueue(queue)
     setQuery(queryVal);
+    // next should send out that next query - in tandem with displaying 
+    console.log(initResponseData);
   };
 
   return (
