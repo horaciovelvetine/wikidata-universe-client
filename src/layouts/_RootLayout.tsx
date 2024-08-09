@@ -6,6 +6,7 @@ import { ApiUnavailableLayout } from './_ApiUnavailableLayout';
 import { calculateDrawingDimensions } from '../functions';
 import { useDebounce } from '../hooks';
 import { LayoutsProps } from '../interfaces/_LayoutsProps';
+import { StuckSketchLayout } from './_StuckSketchLayout';
 
 interface RootLayoutProps {
   apiStatus: IApiStatus;
@@ -38,7 +39,8 @@ export const RootLayout: React.FC<RootLayoutProps> = ({ apiStatus }) => {
         <h4 id='site-title-stack-5'>wikiverse</h4>
         <h4 id='site-title-stack-6'>wikiverse</h4>
       </div>
-      {apiStatus.code != 500 ? <MainAppLayout {...props()} /> : <ApiUnavailableLayout {...props()} />}
+      <StuckSketchLayout {...props()} />
+      {/* {apiStatus.code != 500 ? <MainAppLayout {...props()} /> : <ApiUnavailableLayout {...props()} />} */}
     </>
   );
 };
