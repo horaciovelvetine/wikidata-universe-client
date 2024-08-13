@@ -13,7 +13,11 @@ export function drawCamPosGiz(p5: P5CanvasInstance, cam: Camera, radius: number 
 
   p5.noStroke();
   p5.normalMaterial();
-  p5.sphere(radius);
+  p5.box(radius);
+  p5.translate(0, 0, radius);
+  p5.rotateX(p5.HALF_PI);
+  p5.translate(0, -1.5*(radius), 0);
+  p5.cone(radius * .35, radius * .7);
 
   p5.pop();
 }
