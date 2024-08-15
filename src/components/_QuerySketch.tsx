@@ -3,8 +3,8 @@ import { ReactP5Wrapper, Sketch } from '@p5-wrapper/react';
 import { ISessionData } from '../interfaces';
 import DemoTestSessionBody from '../assets/data/session-body-r1-1.json'
 import { Camera } from 'p5';
-import { Vertex } from '../_p5';
-import { drawUIConstants, drawUIToggleable } from '../_p5/UI';
+import { Vertex } from './_p5';
+import { drawUIConstants, drawUIToggleable } from './_p5/UI';
 import { traceRay } from '../functions';
 
 interface QuerySketchProps {

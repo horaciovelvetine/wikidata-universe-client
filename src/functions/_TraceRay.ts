@@ -1,7 +1,7 @@
 import { multiply, inv } from "mathjs";
 import { P5CanvasInstance, SketchProps } from "@p5-wrapper/react";
 import { Camera } from "p5";
-import { Vertex } from "../_p5";
+import { Vertex } from "../components/_p5";
 
 // Credit to @camelCaseSensitive on {github} & @morejpeg on {youtube}
 // For the original code, npm package, and tutorial on so many things p5.js

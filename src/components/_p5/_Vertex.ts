@@ -1,5 +1,5 @@
 import { P5CanvasInstance } from "@p5-wrapper/react";
-import { IPoint3D } from "../interfaces";
+import { IPoint3D } from "../../interfaces";
 
 export const VERTEX_RADIUS = 10;
 
