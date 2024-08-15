@@ -1,12 +1,12 @@
 import '../styles/MainAppLayout.css';
 import React, { useEffect, useState } from 'react';
 import { IApiStatus, IDimensions } from '../interfaces';
-import { MainAppLayout } from './_MainAppLayout';
-import { ApiUnavailableLayout } from './_ApiUnavailableLayout';
+import { MainAppLayout } from './MainAppLayout';
+import { ApiUnavailableLayout } from './ApiUnavailableLayout';
 import { calculateDrawingDimensions } from '../functions';
 import { useDebounce } from '../hooks';
 import { LayoutsProps } from '../interfaces/_LayoutsProps';
-import { StuckSketchLayout } from './_StuckSketchLayout';
+import { StuckSketchLayout } from './StuckSketchLayout';
 
 interface RootLayoutProps {
   apiStatus: IApiStatus;
