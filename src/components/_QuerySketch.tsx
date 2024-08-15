@@ -4,7 +4,7 @@ import { ISessionData } from '../interfaces';
 import DemoTestSessionBody from '../assets/data/session-body-r1-1.json'
 import { Camera } from 'p5';
 import { Vertex } from '../_p5';
-import { drawAxisGiz, drawBoundBoxGiz, drawConstants, drawToggleable } from '../_p5/UI';
+import { drawUIConstants, drawUIToggleable } from '../_p5/UI';
 import { traceRay } from '../functions';
 
 interface QuerySketchProps {
@@ -15,13 +15,13 @@ let cam: Camera;
 let obsCam: Camera
 
 let params = {
-  displayAxis: true,
+  displayAxis: false,
   displayBoundingBox: true,
   useObsCam: false,
-  drawObsCamGiz: true,
+  drawObsCamGiz: false,
   drawCamGiz: true,
   drawCamFocalGiz: true,
-  drawObsCamFocalGiz: true,
+  drawObsCamFocalGiz: false,
 }
 
 export const QuerySketch: React.FC<QuerySketchProps> = ({ session }) => {
@@ -30,7 +30,7 @@ export const QuerySketch: React.FC<QuerySketchProps> = ({ session }) => {
     p5.setup = () => {
       p5.createCanvas(session.dimensions.width, session.dimensions.height, p5.WEBGL);
       obsCam = p5.createCamera();
-      obsCam.setPosition(25, 0, 100);
+      obsCam.setPosition(0, 0, 150);
       obsCam.lookAt(0, 0, 100);
       cam = p5.createCamera();
       cam.setPosition(0, 0, 100);
@@ -38,20 +38,14 @@ export const QuerySketch: React.FC<QuerySketchProps> = ({ session }) => {
     }
     // DRAWING
     p5.draw = () => {
-      // Moves near plane closer
-      const aspRatio = p5.width / p5.height
-      const defFov = (2 * p5.atan(p5.height / 2 / 800));
-      p5.perspective(defFov, aspRatio, 1)
       // UI & Optional UI
-      drawConstants(p5)
-      drawToggleable(p5, params, obsCam, cam)
+      drawUIConstants(p5)
+      drawUIToggleable(p5, params, obsCam, cam)
       // Data
       DemoTestSessionBody.vertices.forEach(v => {
         new Vertex(v.label, v.description, v.coords).draw(p5);
       })
-
     }
-
     //HANDLING
     p5.keyPressed = (e: KeyboardEvent) => {
       // print info to console

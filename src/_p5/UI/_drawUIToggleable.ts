@@ -2,7 +2,7 @@ import { P5CanvasInstance, SketchProps } from "@p5-wrapper/react";
 import { drawAxisGiz, drawBoundBoxGiz, drawCamPosGiz, drawFocalLineGiz } from ".";
 import { Camera } from "p5";
 
-export function drawToggleable(p5: P5CanvasInstance<SketchProps>, params: any, obsCam: Camera, cam: Camera) {
+export function drawUIToggleable(p5: P5CanvasInstance<SketchProps>, params: any, obsCam: Camera, cam: Camera) {
   // TOGGLES
   if (params.displayBoundingBox) {
     drawBoundBoxGiz(p5);
@@ -11,12 +11,20 @@ export function drawToggleable(p5: P5CanvasInstance<SketchProps>, params: any, o
     drawAxisGiz(p5);
   }
 
+  if (params.useObsCam) {
+    obsCam.lookAt(cam.eyeX, cam.eyeY, cam.eyeZ)
+  }
+
   if (params.drawObsCamGiz) {
-    drawCamPosGiz(p5, obsCam, 1);
+    if (!params.useObsCam) {
+      drawCamPosGiz(p5, obsCam, 1);
+    }
   }
 
   if (params.drawCamGiz) {
-    drawCamPosGiz(p5, cam, 1);
+    if (params.useObsCam) {
+      drawCamPosGiz(p5, cam, 2);
+    }
   }
 
   if (params.drawCamFocalGiz) {
