@@ -1,5 +1,3 @@
-import '../styles/components/P5SketchMain.css';
-
 import { IDimensions } from '../interfaces';
 import { ReactP5Wrapper, P5CanvasInstance, Sketch } from '@p5-wrapper/react';
 
