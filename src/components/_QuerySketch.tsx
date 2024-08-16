@@ -16,6 +16,7 @@ interface QuerySketchProps {
 }
 
 let cam: Camera;
+let animCam: Camera;
 let hoveredVert: Vertex | undefined;
 let font: Font;
 
@@ -34,6 +35,7 @@ export const QuerySketch: React.FC<QuerySketchProps> = ({ session }) => {
 
       p5.createCanvas(session.dimensions.width, session.dimensions.height, p5.WEBGL);
       cam = setupPrimaryCam(cam, p5);
+      animCam = p5.createCamera();
       p5.setCamera(cam);
     }
     // DRAWING
@@ -70,10 +72,11 @@ export const QuerySketch: React.FC<QuerySketchProps> = ({ session }) => {
         const isVertexClick = traceRay(p5, cam, vert)
 
         if (isVertexClick) {
-          console.log(vert.label + " clicked.")
           // focus camera on clicked vert
-          cam.lookAt(vertex.coords.x, vertex.coords.y, vertex.coords.z);
-          // updating on screen material || updating on sketch material
+          animCam.setPosition(cam.eyeX, cam.centerY, cam.eyeZ);
+          animCam.lookAt(vert.coordinates.x, vert.coordinates.y, vert.coordinates.z)
+          cam.slerp(cam, animCam, 1);
+          // pin vert details on screen...
         }
       })
     }
