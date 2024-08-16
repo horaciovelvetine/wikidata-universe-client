@@ -1,9 +1,13 @@
 import '../styles/components/ActiveQueryControls.css'
-import React, { MouseEventHandler, useEffect, useState } from 'react';
-import { fadeInElement, shakeElement, rotateMenuIcon, toggleMenuOptionVisibility } from '../functions';
+import '../styles/animations/FetchButtonRotation.css'
 import SearchIcon from '../assets/img/mi-search-icon.svg'
 import ChevMenuIcon from '../assets/img/mi-chev-right-icon.svg'
+import LoadingIcon from '../assets/img/mi-sync-arrows-icon.svg'
+
+import React, { MouseEventHandler, useEffect, useState } from 'react';
+import { fadeInElement, shakeElement, rotateMenuIcon, toggleMenuOptionVisibility } from '../functions';
 import { INPUT_STATES } from './_MainQueryInput';
+import { getInitQueryDataRequest } from '../api';
 
 
 interface ActiveQueryControlsProps {
@@ -12,8 +16,9 @@ interface ActiveQueryControlsProps {
 
 export const ActiveQueryControls: React.FC<ActiveQueryControlsProps> = ({ currentQuery }) => {
   const [query, setQuery] = useState(currentQuery)
-  const [queryState, setQueryState] = useState<INPUT_STATES>(INPUT_STATES.VALID);
+  const [queryState, setQueryState] = useState<INPUT_STATES>(INPUT_STATES.PLACEHOLDER);
   const [menuIsOpen, setMenuIsOpen] = useState(false);
+  const [isFetching, setIsFetching] = useState(false);
   const containerRef = React.createRef<HTMLDivElement>();
   const inputRef = React.createRef<HTMLInputElement>();
   const submitRef = React.createRef<HTMLButtonElement>();
@@ -29,13 +34,20 @@ export const ActiveQueryControls: React.FC<ActiveQueryControlsProps> = ({ curren
 
   const submitNewQueryHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    const inputTR = inputRef.current!
+    const submitTR = submitRef.current!
+    const toggleTR = toggleRef.current!
+    const optionsTR = optionsRef.current!
+
     if (queryState == INPUT_STATES.INVALID) {
-      shakeElement(inputRef.current!);
-      shakeElement(submitRef.current!)
+      shakeElement(inputTR);
+      shakeElement(submitTR)
       return;
     }
-    // TODO:
-    console.log('NewQuery():', query);
+
+    setIsFetching(true);
+    const response = await getInitQueryDataRequest({ queryVal: query })
   }
 
   const inputChangeValidHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -47,23 +59,40 @@ export const ActiveQueryControls: React.FC<ActiveQueryControlsProps> = ({ curren
     }
   }
 
-  const toggleMenuOpenHandler: MouseEventHandler<HTMLButtonElement> = (e) => {
+  const toggleMenuOpenHandler: MouseEventHandler<HTMLButtonElement> = () => {
     setMenuIsOpen(!menuIsOpen);
     rotateMenuIcon(toggleRef.current!, menuIsOpen);
     toggleMenuOptionVisibility(optionsRef.current!, menuIsOpen)
+  }
 
+  const searchButton = () => {
+    return (
+      <><button id='aqc-submit' ref={submitRef} type='submit'>
+        <div id='icon-adjustment-layer'>
+          < img id='aqc-icon' src={SearchIcon} />
+        </div >
+      </button></>);
+  }
+
+  const fetchingButton = () => {
+    return (
+      <><button id='aqc-fetch-submit' ref={submitRef} type='button'>
+        <div id='icon-adjustment-layer'>
+          < img id='aqc-fetch-icon' src={LoadingIcon} />
+        </div>
+      </button></>);
   }
 
   return (
-    <div id='active-query-control-container' ref={containerRef}>
-      <div id='active-query-control'>
-        <form id='active-query-control-form' onSubmit={submitNewQueryHandler}>
-          <input id='active-query-control-input' ref={inputRef} type='text' value={query} onChange={inputChangeValidHandler}></input>
-          <button id='active-query-control-submit' ref={submitRef} type='submit'><img id='active-query-control-icon' src={SearchIcon} alt='small magnifying glass icon' /></button>
+    <div id='aqc-container' ref={containerRef}>
+      <div id='aqc'>
+        <form id='aqc-form' onSubmit={submitNewQueryHandler}>
+          <input id='aqc-input' ref={inputRef} type='text' value={query} onChange={inputChangeValidHandler}></input>
+          <button id='aqc-submit' ref={submitRef} type='submit'><img id='aqc-icon' src={SearchIcon} alt='small magnifying glass icon' /></button>
         </form>
-        <div id='active-query-control-options-container' >
-          <button id='active-query-control-options-toggle' ref={toggleRef} onClick={toggleMenuOpenHandler}>
-            <img id='active-query-control-options-icon' src={ChevMenuIcon} alt='small chevron facing the bottom of the screen' />
+        <div id='aqc-options-container' >
+          <button id='aqc-options-toggle' ref={toggleRef} onClick={toggleMenuOpenHandler}>
+            <img id='aqc-options-icon' src={ChevMenuIcon} alt='small chevron facing the bottom of the screen' />
           </button>
           <div id='active-query-menu-options-container'>
             <ul id='active-query-menu-options-list' ref={optionsRef}>

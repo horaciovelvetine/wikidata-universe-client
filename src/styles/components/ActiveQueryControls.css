@@ -1,6 +1,6 @@
 @import url('../Palette.css');
 
-#active-query-control-container {
+#aqc-container {
   position: relative;
   width: 100%;
   display: flex;
@@ -8,7 +8,7 @@
   color: rgba(var(--gray-800), 0.6);
 }
 
-#active-query-control {
+#aqc {
   position: absolute;
   display: flex;
   width: 100%;
@@ -18,13 +18,13 @@
   background-color: transparent;
 }
 
-#active-query-control-form {
+#aqc-form {
   display: flex;
   width: 25%;
   flex-wrap: nowrap;
 }
 
-#active-query-control-input {
+#aqc-input {
   display: flex;
   width: 100%;
   font-size: 1.1rem;
@@ -36,7 +36,7 @@
   border-bottom: 1px solid rgba(var(--gray-500), 0.4);
 }
 
-#active-query-control-submit {
+#aqc-submit {
   margin-left: 0.5rem;
   padding-inline: 0.6rem;
   border: 1px solid rgba(var(--gray-500), 0.4);
@@ -45,25 +45,25 @@
   cursor: pointer;
 }
 
-#active-query-control-icon {
+#aqc-icon {
   height: 1.3rem;
   transform: translateY(0.15rem);
   opacity: 40%;
 }
 
-#active-query-control-options-container {
+#aqc-options-container {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-#active-query-control-options-toggle {
+#aqc-options-toggle {
   background-color: transparent;
   outline: none;
   border: none;
 }
 
-#active-query-control-options-icon {
+#aqc-options-icon {
   opacity: 40%;
   width: 75%;
   transform: rotate(90deg) translateX(0.2rem);
