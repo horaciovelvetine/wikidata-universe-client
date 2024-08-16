@@ -85,6 +85,7 @@ export const QuerySketch: React.FC<QuerySketchProps> = ({ session }) => {
       TestData.vertices?.forEach(vertex => {
         const vert = new Vertex(vertex.label, vertex.description, vertex.coords);
         if (vert == hoveredVert) return;
+        
         const isHoveredVertex = traceRay(p5, cam, vert);
         if (isHoveredVertex) {
           hoveredVert = vert

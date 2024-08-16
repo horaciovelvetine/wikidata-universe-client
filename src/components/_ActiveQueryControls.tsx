@@ -38,13 +38,17 @@ export const ActiveQueryControls: React.FC<ActiveQueryControlsProps> = ({ curren
     const inputTR = inputRef.current!
     const submitTR = submitRef.current!
 
-    if (queryState == INPUT_STATES.INVALID) {
+    if (queryState == (INPUT_STATES.INVALID || INPUT_STATES.PLACEHOLDER) || query.length == 0) {
       shakeElement(inputTR);
       shakeElement(submitTR)
+      setQuery(currentQuery);
       return;
     }
 
     setIsFetching(true);
+    setTimeout(() => {
+      setIsFetching(false);
+    }, 500)
     // const response = await getInitQueryDataRequest({ queryVal: query })
     // if (response.status.code != 200) {
     //TODO: uh bad response
@@ -56,8 +60,6 @@ export const ActiveQueryControls: React.FC<ActiveQueryControlsProps> = ({ curren
     setQuery(e.target.value);
     if (e.target.value.length > 0) {
       setQueryState(INPUT_STATES.VALID);
-    } else {
-      setQueryState(INPUT_STATES.INVALID);
     }
   }
 
