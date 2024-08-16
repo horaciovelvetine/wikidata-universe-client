@@ -45,9 +45,27 @@
   cursor: pointer;
 }
 
+#aqc-fetch-submit {
+  margin-left: 0.5rem;
+  padding-inline: 0.6rem;
+  border: 1px solid rgba(var(--gray-500), 0.4);
+  border-radius: 0.5rem;
+  background-color: transparent;
+  cursor: pointer;
+}
+
 #aqc-icon {
   height: 1.3rem;
-  transform: translateY(0.15rem);
+  transform: translateY(-0.07rem);
+  opacity: 40%;
+}
+
+#aqc-fetch-icon {
+  height: 1.3rem;
+  animation-name: fetch-button-rotation;
+  animation-duration: 3s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
   opacity: 40%;
 }
 
