@@ -6,3 +6,4 @@ export { shakeElement } from './_AnimHorizontalShakeElement';
 export { fadeOutElement } from './_AnimFadeOutElement';
 export { rotateMenuIcon } from './_AnimRotateMenuIcon';
 export { toggleMenuOptionVisibility } from './_AnimToggleMenuOptionVisibility';
+export { animFadeOutAndRemoveDisplay } from './_AnimFadeOutAndRemoveDisplay';

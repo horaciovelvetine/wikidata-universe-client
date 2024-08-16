@@ -1,4 +1,4 @@
-export function AnimFadeOutAndRemoveDisplay(ele: HTMLElement, duration: string = "1s"): void {
+export function animFadeOutAndRemoveDisplay(ele: HTMLElement, duration: string = "1s"): void {
     ele.style.transition = "opacity " + duration + " ease-in-out";
     ele.style.opacity = "0";
     const timeout = parseFloat(duration) * 1000;
