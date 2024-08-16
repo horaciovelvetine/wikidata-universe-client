@@ -20,7 +20,7 @@ export function drawVertexLabelOnHover(p5: P5CanvasInstance<SketchProps>, hovere
     p5.rotateZ(p5.PI);
 
     p5.textSize(4.5);
-    p5.fill('rgba(245, 245, 245, 0.75)');
+    p5.fill('rgba(245, 245, 245, 0.65)');
     p5.textFont(font);
     p5.textAlign(p5.CENTER, p5.CENTER);
     const verticalOffset = -(hoveredVert.label.length);
