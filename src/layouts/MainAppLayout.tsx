@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { IVertex, IProperty, IEdge, IFetchQueue, ISessionData, LayoutsProps } from '../interfaces';
 import { QuerySketch, StandbySketch, MainQueryInput, Footer, ActiveQueryControls } from '../components';
 
-
 export const MainAppLayout: React.FC<LayoutsProps> = ({ dimensions, apiStatus }: LayoutsProps) => {
   // DATA
   const [query, setQuery] = useState<string | undefined>(undefined);
