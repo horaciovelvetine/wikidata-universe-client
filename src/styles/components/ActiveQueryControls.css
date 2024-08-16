@@ -16,30 +16,36 @@
   left: 1rem;
   overflow: hidden;
   background-color: transparent;
+  opacity: 50%;
+  transition: all 0.25s;
+}
+
+#aqc:focus-within {
+  opacity: 100%;
 }
 
 #aqc-form {
   display: flex;
-  width: 25%;
+  width: 33%;
   flex-wrap: nowrap;
 }
 
 #aqc-input {
   display: flex;
   width: 100%;
-  font-size: 1.1rem;
+  font-size: 1.25rem;
   padding: 0.75rem;
   background-color: transparent;
   border: none;
   outline: none;
   color: rgba(var(--font), 0.5);
-  border-bottom: 1px solid rgba(var(--gray-500), 0.4);
+  border-bottom: 1px solid rgb(var(--gray-500));
 }
 
 #aqc-submit {
   margin-left: 0.5rem;
   padding-inline: 0.6rem;
-  border: 1px solid rgba(var(--gray-500), 0.4);
+  border: 1px solid rgb(var(--gray-500));
   border-radius: 0.5rem;
   background-color: transparent;
   cursor: pointer;
@@ -48,25 +54,24 @@
 #aqc-fetch-submit {
   margin-left: 0.5rem;
   padding-inline: 0.6rem;
-  border: 1px solid rgba(var(--gray-500), 0.4);
+  border: 1px solid rgb(var(--gray-500));
   border-radius: 0.5rem;
   background-color: transparent;
   cursor: pointer;
 }
 
 #aqc-icon {
-  height: 1.3rem;
+  height: 1.5rem;
   transform: translateY(-0.07rem);
-  opacity: 40%;
 }
 
 #aqc-fetch-icon {
-  height: 1.3rem;
+  height: 1.5rem;
   animation-name: fetch-button-rotation;
   animation-duration: 3s;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
-  opacity: 40%;
+  opacity: 75%;
 }
 
 #aqc-options-container {
@@ -82,7 +87,7 @@
 }
 
 #aqc-options-icon {
-  opacity: 40%;
+  opacity: 75%;
   width: 75%;
   transform: rotate(90deg) translateX(0.2rem);
 }
@@ -99,6 +104,6 @@
   display: flex;
   gap: 3rem;
   list-style: none;
-  transform: translateY(1.75rem);
-  color: rgba(var(--font), 0.4)
+  transform: translateY(5rem);
+  color: rgb(var(--font))
 }
