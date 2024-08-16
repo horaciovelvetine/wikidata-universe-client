@@ -37,8 +37,6 @@ export const ActiveQueryControls: React.FC<ActiveQueryControlsProps> = ({ curren
 
     const inputTR = inputRef.current!
     const submitTR = submitRef.current!
-    const toggleTR = toggleRef.current!
-    const optionsTR = optionsRef.current!
 
     if (queryState == INPUT_STATES.INVALID) {
       shakeElement(inputTR);
@@ -47,7 +45,11 @@ export const ActiveQueryControls: React.FC<ActiveQueryControlsProps> = ({ curren
     }
 
     setIsFetching(true);
-    const response = await getInitQueryDataRequest({ queryVal: query })
+    // const response = await getInitQueryDataRequest({ queryVal: query })
+    // if (response.status.code != 200) {
+    //TODO: uh bad response
+    // }
+    //TODO: yay good response
   }
 
   const inputChangeValidHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -88,7 +90,7 @@ export const ActiveQueryControls: React.FC<ActiveQueryControlsProps> = ({ curren
       <div id='aqc'>
         <form id='aqc-form' onSubmit={submitNewQueryHandler}>
           <input id='aqc-input' ref={inputRef} type='text' value={query} onChange={inputChangeValidHandler}></input>
-          <button id='aqc-submit' ref={submitRef} type='submit'><img id='aqc-icon' src={SearchIcon} alt='small magnifying glass icon' /></button>
+          {isFetching ? fetchingButton() : searchButton()}
         </form>
         <div id='aqc-options-container' >
           <button id='aqc-options-toggle' ref={toggleRef} onClick={toggleMenuOpenHandler}>
