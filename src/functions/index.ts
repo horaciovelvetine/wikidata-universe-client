@@ -6,4 +6,3 @@ export { shakeElement } from './_AnimHorizontalShakeElement';
 export { fadeOutElement } from './_AnimFadeOutElement';
 export { rotateMenuIcon } from './_AnimRotateMenuIcon';
 export { toggleMenuOptionVisibility } from './_AnimToggleMenuOptionVisibility';
-export { traceRay } from './_TraceRay';
