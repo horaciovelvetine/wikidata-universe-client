@@ -1,7 +1,7 @@
 import { multiply, inv } from "mathjs";
 import { P5CanvasInstance, SketchProps } from "@p5-wrapper/react";
 import { Camera } from "p5";
-import { Vertex } from "../components/_p5";
+import { Vertex } from "../_Vertex";
 
 // Credit to @camelCaseSensitive on {github} & @morejpeg on {youtube}
 // For the original code, npm package, and tutorial on so many things p5.js
@@ -14,8 +14,8 @@ export function traceRay(p5: P5CanvasInstance<SketchProps>, cam: Camera, vert: V
 
   // Dig into the p5.js instance to get the projection matrix && copy it to a new mat4
   // not an a value intended to be accessed in/by p5.js API - a needed workaround here. 
-  let p5RenDERworkaround = p5 as any;
-  const p5ProjMat = p5RenDERworkaround._renderer.uPMatrix.mat4;
+  const camRenderer = cam as any;
+  const p5ProjMat = camRenderer._renderer.uPMatrix.mat4;
   const projMat = [
     [p5ProjMat[0], p5ProjMat[1], p5ProjMat[2], p5ProjMat[3]],
     [p5ProjMat[4], p5ProjMat[5], p5ProjMat[6], p5ProjMat[7]],
@@ -25,7 +25,7 @@ export function traceRay(p5: P5CanvasInstance<SketchProps>, cam: Camera, vert: V
   const camVec = multiply(ndcVect, inv(projMat));
 
   // same workaround as above for access to renderer...
-  const p5ModMat = p5RenDERworkaround._renderer.uMVMatrix.mat4;
+  const p5ModMat = camRenderer._renderer.uMVMatrix.mat4;
   const modMat = [
     [p5ModMat[0], p5ModMat[1], p5ModMat[2], p5ModMat[3]],
     [p5ModMat[4], p5ModMat[5], p5ModMat[6], p5ModMat[7]],
@@ -43,9 +43,6 @@ export function traceRay(p5: P5CanvasInstance<SketchProps>, cam: Camera, vert: V
   const yVec = cam.eyeY + rayLength * p5.sin(phi);
   const zVec = cam.eyeZ + rayLength * p5.cos(phi) * p5.sin(theta);
   const distFromVert = p5.dist(vert.coordinates.x, vert.coordinates.y, vert.coordinates.z, xVec, yVec, zVec);
-
-  console.log({ xVec, yVec, zVec, distFromVert })
-
   if (distFromVert < vert.radius) {
     return [xVec, yVec, zVec];
   }
