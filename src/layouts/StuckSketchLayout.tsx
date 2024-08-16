@@ -15,27 +15,8 @@ export const StuckSketchLayout: React.FC<LayoutsProps> = ({ dimensions, apiStatu
     return { query, dimensions, apiStatus, vertices, edges, properties, queue }
   }
 
-  const displaySketch = () => {
-    return query == undefined ? <StandbySketch dimensions={dimensions} /> : <QuerySketch session={session()} />
-  }
-  const displayActiveQueryControl = () => {
-    return query != undefined ? <ActiveQueryControls currentQuery={query} /> : <></>;
-  }
-
-  const handleFetchSuccess = async (queryVal: string, initResponseData: ISessionData) => {
-    const { vertices, edges, properties, queue } = initResponseData;
-    setVertices(vertices);
-    setEdges(edges);
-    setProperties(properties);
-    setFetchQueue(queue)
-    setQuery(queryVal);
-    // next should send out that next query - in tandem with displaying 
-    console.log(initResponseData);
-  };
-
   return (
     <>
-      {/* <MainQueryInput handleFetchSuccess={handleFetchSuccess} /> */}
       <div id='sketch-layout-container'>
         <QuerySketch session={session()} />
         <ActiveQueryControls currentQuery='testing' />

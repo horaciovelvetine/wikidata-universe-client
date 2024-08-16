@@ -1,50 +1,58 @@
 import '../styles/components/P5SketchMain.css';
 import { ReactP5Wrapper, Sketch } from '@p5-wrapper/react';
 import { ISessionData } from '../interfaces';
-import { Camera } from 'p5';
+import { Camera, Font } from 'p5';
 import { Vertex } from './_p5';
-import { drawUIConstants, drawUIToggleable } from './_p5/UI';
-import { traceRay } from '../functions';
-import { setupObserverCam, setupPrimaryCam } from './_p5/util';
+import { drawUIConstants, drawUIToggleable, drawVertexLabelOnHover } from './_p5/UI';
+import { setupPrimaryCam } from './_p5/util';
+import { traceRay } from './_p5/func';
+import CharisBold from '../assets/font/CharisSIL-Bold.ttf'
+
+//TEST DATA 
+import TestData from '../assets/data/session-body-r1-1.json'
 
 interface QuerySketchProps {
   session: ISessionData;
 }
 
 let cam: Camera;
-let obsCam: Camera
+let hoveredVert: Vertex | undefined;
+let font: Font;
 
 let params = {
   displayAxis: false,
   displayBoundingBox: true,
-  useObsCam: false,
-  drawObsCamGiz: false,
-  drawCamGiz: true,
-  drawCamFocalGiz: true,
-  drawObsCamFocalGiz: false,
 }
 
 export const QuerySketch: React.FC<QuerySketchProps> = ({ session }) => {
   const sketch: Sketch = (p5) => {
+    p5.preload = () => {
+      font = p5.loadFont(CharisBold)
+    }
     //SETUP
     p5.setup = () => {
+
       p5.createCanvas(session.dimensions.width, session.dimensions.height, p5.WEBGL);
-      setupPrimaryCam(cam, p5);
-      setupObserverCam(cam, p5, obsCam);
+      cam = setupPrimaryCam(cam, p5);
       p5.setCamera(cam);
     }
     // DRAWING
     p5.draw = () => {
       // UI & Optional UI
       drawUIConstants(p5)
-      drawUIToggleable(p5, params, obsCam, cam)
+      drawUIToggleable(p5, params)
+      drawVertexLabelOnHover(p5, hoveredVert, cam, font);
       // Data
+      TestData.vertices?.forEach(v => {
+        const vert = new Vertex(v.label, v.description, v.coords);
+        vert.draw(p5);
+      })
     }
     //HANDLING
     p5.keyPressed = (e: KeyboardEvent) => {
       // print info to console
       if (e.key == "i") {
-        console.log({ cam })
+        console.log(params, p5, cam)
       }
 
       if (e.key == "a") {
@@ -54,29 +62,35 @@ export const QuerySketch: React.FC<QuerySketchProps> = ({ session }) => {
       if (e.key == "b") {
         params.displayBoundingBox = !params.displayBoundingBox
       }
-
-      if (e.key == "c") {
-        if (!params.useObsCam) {
-          p5.setCamera(obsCam);
-        } else {
-          p5.setCamera(cam);
-        }
-        params.useObsCam = !params.useObsCam
-      }
     }
 
     p5.mouseClicked = () => {
-      // DemoTestSessionBody.vertices.forEach(vertData => {
-      //   const v = new Vertex(vertData.label, vertData.description, vertData.coords)
-      //   const isVertSelection = traceRay(p5, cam, v);
-      //   if (isVertSelection) {
-      //     console.log(v.label + " clicked.")
-      //   } else {
-      //     console.log("no target clicked.")
-      //   }
-      // })
+      TestData.vertices?.forEach(vertex => {
+        const vert = new Vertex(vertex.label, vertex.description, vertex.coords);
+        const isVertexClick = traceRay(p5, cam, vert)
+
+        if (isVertexClick) {
+          console.log(vert.label + " clicked.")
+          // focus camera on clicked vert
+          cam.lookAt(vertex.coords.x, vertex.coords.y, vertex.coords.z);
+          // updating on screen material || updating on sketch material
+        }
+      })
+    }
+
+    p5.mouseMoved = () => {
+      TestData.vertices?.forEach(vertex => {
+        const vert = new Vertex(vertex.label, vertex.description, vertex.coords);
+        if (vert == hoveredVert) return;
+        const isHoveredVertex = traceRay(p5, cam, vert);
+        if (isHoveredVertex) {
+          hoveredVert = vert
+        } else {
+          hoveredVert = undefined;
+        }
+      })
+
     }
   }
-
   return <ReactP5Wrapper sketch={sketch} />
 }

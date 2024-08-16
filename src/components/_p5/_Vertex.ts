@@ -18,9 +18,9 @@ export class Vertex {
   draw(p5: P5CanvasInstance) {
     p5.push();
     p5.translate(this.coordinates.x, this.coordinates.y, this.coordinates.z);
-    p5.strokeWeight(1.5);
+    p5.strokeWeight(1.2);
     p5.stroke(1, 1, 14);
-    p5.fill(245, 245, 245, 150)
+    p5.fill("rgba(245, 245, 245, 0.85)");
     p5.box(this.radius);
     p5.stroke(0);
     p5.pop();

@@ -5,4 +5,5 @@ export { drawCamPerspLinesGiz } from "./_drawCamPerspLinesGiz";
 export { drawFocalLineGiz } from "./_drawFocalLineGiz";
 export { drawUIConstants } from "./_drawUIConstants";
 export { drawUIToggleable } from "./_drawUIToggleable";
+export { drawVertexLabelOnHover } from "./_drawVertexLabelOnHover";
 

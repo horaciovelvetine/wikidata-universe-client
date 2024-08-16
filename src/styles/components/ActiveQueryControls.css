@@ -5,7 +5,7 @@
   width: 100%;
   display: flex;
   opacity: 0;
-  color: rgba(var(--gray-800), 0.4);
+  color: rgba(var(--gray-800), 0.6);
 }
 
 #active-query-control {
