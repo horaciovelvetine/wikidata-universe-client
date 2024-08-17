@@ -12,7 +12,7 @@ export function drawVertexLabelOnHover(p5: P5CanvasInstance<SketchProps>, hovere
     const tilt = p5.atan2(cam.eyeY - cam.centerY, p5.dist(cam.eyeX, cam.eyeZ, cam.centerX, cam.centerZ));
 
     p5.push();
-    p5.translate(hoveredVert.coordinates.x, hoveredVert.coordinates.y, hoveredVert.coordinates.z);
+    p5.translate(hoveredVert.coords.x, hoveredVert.coords.y, hoveredVert.coords.z);
     
     p5.rotateY(-pan);
     p5.rotateZ(tilt + p5.PI);
