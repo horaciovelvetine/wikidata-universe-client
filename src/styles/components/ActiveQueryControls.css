@@ -16,18 +16,19 @@
   left: 1rem;
   overflow: hidden;
   background-color: transparent;
-  opacity: 50%;
-  transition: all 0.25s;
 }
 
-#aqc:focus-within {
-  opacity: 100%;
-}
 
 #aqc-form {
   display: flex;
   width: 33%;
   flex-wrap: nowrap;
+  opacity: 50%;
+  transition: all 0.25s;
+}
+
+#aqc-form:focus-within {
+  opacity: 100%;
 }
 
 #aqc-input {
@@ -74,36 +75,38 @@
   opacity: 75%;
 }
 
-#aqc-options-container {
+#aqc-cur-sel-container {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-#aqc-options-toggle {
+#aqc-cur-sel-toggle {
   background-color: transparent;
   outline: none;
   border: none;
 }
 
-#aqc-options-icon {
+#aqc-cur-sel-icon {
   opacity: 75%;
   width: 75%;
   transform: rotate(90deg) translateX(0.2rem);
 }
 
-#active-query-menu-options-container {
+#aqm-cur-sel-container {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-#active-query-menu-options-list {
+#aqm-cur-sel-list {
   margin-left: 0.5rem;
   display: flex;
-  gap: 3rem;
+  gap: 1rem;
   list-style: none;
   transform: translateY(5rem);
-  color: rgb(var(--font))
+  color: rgb(var(--font));
+  font-size: 1.2rem;
+  
 }
