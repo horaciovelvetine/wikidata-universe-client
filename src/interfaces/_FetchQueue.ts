@@ -1,6 +1,7 @@
 export interface IFetchQueue {
   queued: {
-    key: number, value: string[]
-  }[];
-  invalid: String[];
+    //TODO? - this may need to be evaluated diff on the backend
+    "1": string[];
+  };
+  invalid: never[];
 }

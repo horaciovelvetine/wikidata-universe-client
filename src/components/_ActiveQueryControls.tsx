@@ -4,37 +4,45 @@ import SearchIcon from '../assets/img/mi-search-icon.svg'
 import ChevMenuIcon from '../assets/img/mi-chev-right-icon.svg'
 import LoadingIcon from '../assets/img/mi-sync-arrows-icon.svg'
 
-import React, { MouseEventHandler, useEffect, useState } from 'react';
-import { fadeInElement, shakeElement, rotateMenuIcon, toggleMenuOptionVisibility } from '../functions';
+import React, { useEffect, useState } from 'react';
+import { fadeInElement, shakeElement, rotateChevIcon, toggleCurSelVertexInfoDisplay } from '../functions';
 import { INPUT_STATES } from './_MainQueryInput';
 import { getInitQueryDataRequest } from '../api';
+import { Vertex } from './_p5'
 
 
 interface ActiveQueryControlsProps {
   currentQuery: string;
+  curSelVertex: Vertex | undefined;
 }
 
-export const ActiveQueryControls: React.FC<ActiveQueryControlsProps> = ({ currentQuery }) => {
+export const ActiveQueryControls: React.FC<ActiveQueryControlsProps> = ({ currentQuery, curSelVertex }) => {
   const [query, setQuery] = useState(currentQuery)
   const [queryState, setQueryState] = useState<INPUT_STATES>(INPUT_STATES.PLACEHOLDER);
-  const [menuIsOpen, setMenuIsOpen] = useState(false);
   const [isFetching, setIsFetching] = useState(false);
+  const [infoDisOpen, setInfoDisOpen] = useState(curSelVertex ? true : false);
+
   const containerRef = React.createRef<HTMLDivElement>();
   const inputRef = React.createRef<HTMLInputElement>();
   const submitRef = React.createRef<HTMLButtonElement>();
   const toggleRef = React.createRef<HTMLButtonElement>();
-  const optionsRef = React.createRef<HTMLUListElement>();
+  const curSelVertDispRef = React.createRef<HTMLUListElement>();
 
-
+  //==> Animate Query Input FadeIn
   useEffect(() => {
     setTimeout(() => {
       fadeInElement(containerRef.current!);
     }, 100)
   }, [])
 
+  useEffect(() => {
+    console.log('curSeleVertex() AQC: ', curSelVertex)
+  }, [curSelVertex])
+
+  // 
+  // HANDLERS ==>
   const submitNewQueryHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     const inputTR = inputRef.current!
     const submitTR = submitRef.current!
 
@@ -44,16 +52,6 @@ export const ActiveQueryControls: React.FC<ActiveQueryControlsProps> = ({ curren
       setQuery(currentQuery);
       return;
     }
-
-    setIsFetching(true);
-    setTimeout(() => {
-      setIsFetching(false);
-    }, 500)
-    // const response = await getInitQueryDataRequest({ queryVal: query })
-    // if (response.status.code != 200) {
-    //TODO: uh bad response
-    // }
-    //TODO: yay good response
   }
 
   const inputChangeValidHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -63,10 +61,10 @@ export const ActiveQueryControls: React.FC<ActiveQueryControlsProps> = ({ curren
     }
   }
 
-  const toggleMenuOpenHandler: MouseEventHandler<HTMLButtonElement> = () => {
-    setMenuIsOpen(!menuIsOpen);
-    rotateMenuIcon(toggleRef.current!, menuIsOpen);
-    toggleMenuOptionVisibility(optionsRef.current!, menuIsOpen)
+  const handleCurSelToggleClick = () => {
+    setInfoDisOpen(!infoDisOpen);
+    rotateChevIcon(toggleRef.current!, infoDisOpen);
+    toggleCurSelVertexInfoDisplay(curSelVertDispRef.current!, infoDisOpen)
   }
 
   const searchButton = () => {
@@ -89,22 +87,29 @@ export const ActiveQueryControls: React.FC<ActiveQueryControlsProps> = ({ curren
 
   return (
     <div id='aqc-container' ref={containerRef}>
+
       <div id='aqc'>
         <form id='aqc-form' onSubmit={submitNewQueryHandler}>
           <input id='aqc-input' ref={inputRef} type='text' value={query} onChange={inputChangeValidHandler}></input>
           {isFetching ? fetchingButton() : searchButton()}
         </form>
-        <div id='aqc-options-container' >
-          <button id='aqc-options-toggle' ref={toggleRef} onClick={toggleMenuOpenHandler}>
-            <img id='aqc-options-icon' src={ChevMenuIcon} alt='small chevron facing the bottom of the screen' />
+
+        <div id='aqc-cur-sel-container' >
+          <button id='aqc-cur-sel-toggle' ref={toggleRef} onClick={handleCurSelToggleClick}>
+            <img id='aqc-cur-sel-icon' src={ChevMenuIcon} alt='small chevron facing the bottom of the screen' />
           </button>
-          <div id='active-query-menu-options-container'>
-            <ul id='active-query-menu-options-list' ref={optionsRef}>
-              <li>Test Element</li>
+
+          <div id='aqm-cur-sel-container'>
+            <ul id='aqm-cur-sel-list' ref={curSelVertDispRef}>
+              <li><a href={'https://en.wikipedia.org/wiki/' + curSelVertex?.label.replace(" ", "_")} target='_blank'>{curSelVertex?.label}</a></li>
+              <li>{curSelVertex?.description}</li>
             </ul>
           </div>
+
         </div>
+
       </div>
+
     </div>
   );
 };
