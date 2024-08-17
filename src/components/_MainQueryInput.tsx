@@ -5,10 +5,9 @@ import SearchIcon from '../assets/img/mi-search-icon.svg';
 import GlobeLogo from '../assets/img/globe-outline-no-bg-white.svg';
 import LoadingIcon from '../assets/img/mi-sync-arrows-icon.svg'
 
-import React, { useState, useEffect, memo } from 'react';
-import { fadeInElement, fadeOutElement, shakeElement } from '../functions';
+import React, { useState, useEffect } from 'react';
+import { fadeInElement, fadeOutElement, shakeElement, animFadeOutAndRemoveDisplay } from '../functions';
 import { getInitQueryDataRequest } from '../api';
-import { AnimFadeOutAndRemoveDisplay } from '../functions/_AnimFadeOutAndRemoveDisplay';
 import { ISessionData } from '../interfaces';
 
 interface IMainQueryInputProps {
@@ -16,6 +15,7 @@ interface IMainQueryInputProps {
 }
 
 export enum INPUT_STATES { INVALID, VALID, PLACEHOLDER }
+
 const inputIsValid = (state: INPUT_STATES) => {
   return state === INPUT_STATES.VALID;
 };
@@ -26,12 +26,12 @@ export const MainQueryInput: React.FC<IMainQueryInputProps> = ({ handleFetchSucc
   const [isFetching, setIsFetching] = useState(false);
   const containerRef = React.createRef<HTMLDivElement>();
   const inputRef = React.createRef<HTMLInputElement>();
-  const submitButtonRef = React.createRef<HTMLButtonElement>();
+  const submitRef = React.createRef<HTMLButtonElement>();
   const errNoticeRef = React.createRef<HTMLDivElement>();
 
   useEffect(() => {
     setTimeout(() => {
-      fadeInElement(containerRef.current!, "0.3s");
+      fadeInElement(containerRef.current!, "0.25s");
     }, 1);
   }, []);
 
@@ -39,7 +39,7 @@ export const MainQueryInput: React.FC<IMainQueryInputProps> = ({ handleFetchSucc
     e.preventDefault();
 
     const inputTR = inputRef.current!
-    const submitTR = submitButtonRef.current!
+    const submitTR = submitRef.current!
     const contTR = containerRef.current!
     const errTR = errNoticeRef.current!;
 
@@ -49,24 +49,23 @@ export const MainQueryInput: React.FC<IMainQueryInputProps> = ({ handleFetchSucc
       return;
     }
     setIsFetching(true);
-    const initResponse = await getInitQueryDataRequest({ queryVal: input })
-    if (initResponse.status.code != 200) {
-      fadeInElement(errTR, "0.25s")
+    const response = await getInitQueryDataRequest({ queryVal: input })
+
+    if (response.status.code != 200) {
+      fadeInElement(errTR, "0.15s")
       setTimeout(() => {
         fadeOutElement(errTR);
       }, 2000)
-      // setInputState(INPUT_STATES.INVALID);
       shakeElement(inputTR)
       shakeElement(submitTR)
       setIsFetching(false);
       setInputState(INPUT_STATES.INVALID);
       return;
     }
-    setTimeout(() => {
-      setIsFetching(false);
-    }, 1000)
-    AnimFadeOutAndRemoveDisplay(contTR, "0.5s")
-    handleFetchSuccess(input, initResponse.data);
+
+    setIsFetching(false);
+    handleFetchSuccess(input, response.data);
+    animFadeOutAndRemoveDisplay(contTR, "0.75s")
   };
 
   const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -85,39 +84,39 @@ export const MainQueryInput: React.FC<IMainQueryInputProps> = ({ handleFetchSucc
 
   const searchButton = () => {
     return (
-      <><button id='main-query-submit' ref={submitButtonRef} type='submit'>
+      <><button id='mq-submit' ref={submitRef} type='submit'>
         <div id='icon-adjustment-layer'>
-          < img id='main-query-icon' src={SearchIcon} />
+          < img id='mq-icon' src={SearchIcon} />
         </div >
       </button></>);
   }
 
   const fetchingButton = () => {
     return (
-      <><button id='main-fetch-submit' ref={submitButtonRef} type='button'>
+      <><button id='mq-fetch-submit' ref={submitRef} type='button'>
         <div id='icon-adjustment-layer'>
-          < img id='main-fetch-icon' src={LoadingIcon} />
+          < img id='mq-fetch-icon' src={LoadingIcon} />
         </div>
       </button></>);
   }
 
   return (
     <>
-      <div id='main-query-container' ref={containerRef}>
-        <div id='main-query-invalid-container' ref={errNoticeRef}>
-          <p id='main-query-invalid-message'>
+      <div id='mq-container' ref={containerRef}>
+        <div id='mq-invalid-container' ref={errNoticeRef}>
+          <p id='mq-invalid-message'>
             Unable to find any results for: "{input}".
           </p>
         </div>
         <div>
-          <div id='main-query-glogo-container'>
-            <img id='main-query-glogo' src={GlobeLogo} alt="Wikipedia's globe logo" />
+          <div id='mq-glogo-container'>
+            <img id='mq-glogo' src={GlobeLogo} alt="Wikipedia's globe logo" />
           </div>
-          <p id='main-query-subtitle'>explore <a id='wikidata-homepage-link' href='https://www.wikidata.org/wiki/Wikidata:Main_Page' target='_blank'>Wikidata</a> graphically</p>
+          <p id='mq-subtitle'>explore <a id='wikidata-homepage-link' href='https://www.wikidata.org/wiki/Wikidata:Main_Page' target='_blank'>Wikidata</a> graphically</p>
         </div>
-        <div id='main-query-form-container'>
-          <form id='main-query-form' onSubmit={formSubmitHandler}>
-            <input id='main-query-input' ref={inputRef} type="text" placeholder={input} onChange={inputChangeHandler} />
+        <div id='mq-form-container'>
+          <form id='mq-form' onSubmit={formSubmitHandler}>
+            <input id='mq-input' ref={inputRef} type="text" placeholder={input} onChange={inputChangeHandler} />
             {isFetching ? fetchingButton() : searchButton()}
           </form>
         </div>

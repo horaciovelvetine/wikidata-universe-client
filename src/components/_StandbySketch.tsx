@@ -1,6 +1,3 @@
-import '../styles/components/P5SketchMain.css';
-
-import { useState } from 'react';
 import { IDimensions } from '../interfaces';
 import { ReactP5Wrapper, P5CanvasInstance, Sketch } from '@p5-wrapper/react';
 
@@ -25,8 +22,6 @@ export const StandbySketch: React.FC<ErrorSketchProps> = ({ dimensions }) => {
         particles[i].move();
         particles[i].joinNearby(particles.slice(i))
       }
-      // p5.fill(255);
-      // p5.ellipse(p5.mouseX, p5.mouseY, 50, 50);
     }
   }
 

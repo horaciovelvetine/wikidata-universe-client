@@ -1,7 +1,7 @@
 export interface IEdge {
   srcId: string;
-  tgtId: string;
+  tgtId: string | null;
   propertyId: string;
-  label: string;
+  label: string | null;
   type: string;
 }
