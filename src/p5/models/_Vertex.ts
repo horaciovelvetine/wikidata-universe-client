@@ -6,6 +6,7 @@ export class Vertex implements iVertex {
   label: string;
   description: string;
   coords: Point3D;
+  constructor(vertex: iVertex);
   constructor(vertex: Vertex) {
     this.id = vertex.id;
     this.label = vertex.label;

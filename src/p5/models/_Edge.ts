@@ -6,6 +6,7 @@ export class Edge implements iEdge {
   propertyId: string;
   label: string | null;
   type: string;
+  constructor(edge: iEdge);
   constructor(edge: Edge) {
     this.srcId = edge.srcId;
     this.tgtId = edge.tgtId;
