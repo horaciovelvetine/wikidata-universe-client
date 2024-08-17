@@ -1,0 +1,261 @@
+{
+  "err" : null,
+  "vertices" : [ {
+    "id" : "Q3454165",
+    "label" : "Kevin Bacon",
+    "description" : "American actor (born 1958)",
+    "coords" : {
+      "x" : 0.0,
+      "y" : 0.0,
+      "z" : 0.0
+    }
+  } ],
+  "edges" : [ {
+    "srcId" : "Q3454165",
+    "tgtId" : "Q7163738",
+    "propertyId" : "P69",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q3454165",
+    "tgtId" : "Q186472",
+    "propertyId" : "P136",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q3454165",
+    "tgtId" : "Q8455196",
+    "propertyId" : "P7084",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q3454165",
+    "tgtId" : "Q1860",
+    "propertyId" : "P103",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q3454165",
+    "tgtId" : "Q7066",
+    "propertyId" : "P140",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q3454165",
+    "tgtId" : "Q1345",
+    "propertyId" : "P19",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q3454165",
+    "tgtId" : "Q33999",
+    "propertyId" : "P106",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q3454165",
+    "tgtId" : "Q6951606",
+    "propertyId" : "P734",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q3454165",
+    "tgtId" : "Q3491343",
+    "propertyId" : "P40",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q3454165",
+    "tgtId" : null,
+    "propertyId" : "P569",
+    "label" : "July 8, 1958",
+    "type" : "DateTime"
+  }, {
+    "srcId" : "Q3454165",
+    "tgtId" : "Q3519857",
+    "propertyId" : "P463",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q3454165",
+    "tgtId" : "Q2259451",
+    "propertyId" : "P106",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q3454165",
+    "tgtId" : "Q10798782",
+    "propertyId" : "P106",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q3454165",
+    "tgtId" : "Q18600734",
+    "propertyId" : "P166",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q3454165",
+    "tgtId" : "Q948329",
+    "propertyId" : "P106",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q3454165",
+    "tgtId" : "Q30",
+    "propertyId" : "P27",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q3454165",
+    "tgtId" : "Q605834",
+    "propertyId" : "P735",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q3454165",
+    "tgtId" : "Q2526255",
+    "propertyId" : "P106",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q3454165",
+    "tgtId" : null,
+    "propertyId" : "P2031",
+    "label" : "November 30, 1977",
+    "type" : "DateTime"
+  }, {
+    "srcId" : "Q3454165",
+    "tgtId" : "Q2405480",
+    "propertyId" : "P106",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q3454165",
+    "tgtId" : "Q1285964",
+    "propertyId" : "P22",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q3454165",
+    "tgtId" : "Q1275727",
+    "propertyId" : "P166",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q3454165",
+    "tgtId" : "Q96089569",
+    "propertyId" : "P25",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q3454165",
+    "tgtId" : "Q10800557",
+    "propertyId" : "P106",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q3454165",
+    "tgtId" : "Q13235160",
+    "propertyId" : "P106",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q3454165",
+    "tgtId" : "Q5",
+    "propertyId" : "P31",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q3454165",
+    "tgtId" : "Q1860",
+    "propertyId" : "P6886",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q3454165",
+    "tgtId" : "Q17085462",
+    "propertyId" : "P1283",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q3454165",
+    "tgtId" : "Q639669",
+    "propertyId" : "P106",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q3454165",
+    "tgtId" : "Q229572",
+    "propertyId" : "P26",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q3454165",
+    "tgtId" : "Q17985761",
+    "propertyId" : "P166",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q3454165",
+    "tgtId" : "Q15229841",
+    "propertyId" : "P69",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q3454165",
+    "tgtId" : "Q1860",
+    "propertyId" : "P1412",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q3454165",
+    "tgtId" : "Q3308009",
+    "propertyId" : "P3373",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q3454165",
+    "tgtId" : "Q251542",
+    "propertyId" : "P166",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q3454165",
+    "tgtId" : "Q5121453",
+    "propertyId" : "P69",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q3454165",
+    "tgtId" : "Q3282637",
+    "propertyId" : "P106",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q3454165",
+    "tgtId" : "Q4564494",
+    "propertyId" : "P69",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q3454165",
+    "tgtId" : "Q32710290",
+    "propertyId" : "P910",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q3454165",
+    "tgtId" : "Q3455803",
+    "propertyId" : "P106",
+    "label" : null,
+    "type" : "EntityId"
+  } ],
+  "properties" : [ ],
+  "queue" : {
+    "queued" : {
+      "1" : [ "P103", "P106", "Q3308009", "P463", "Q5", "Q15229841", "Q639669", "P6886", "Q7163738", "P22", "P2031", "P69", "P25", "P27", "P26", "Q33999", "P136", "Q2405480", "Q7066", "July 8, 1958", "P1412", "P735", "P734", "P31", "Q605834", "Q3455803", "P140", "Q10800557", "Q2526255", "Q3491343", "Q948329", "Q3519857", "P166", "November 30, 1977", "Q10798782", "P569", "P40", "Q229572", "Q13235160", "P1283", "Q17085462", "Q6951606", "Q251542", "Q17985761", "Q8455196", "P7084", "Q18600734", "Q96089569", "Q3282637", "P910", "Q1275727", "Q30", "P3373", "Q186472", "Q2259451", "Q5121453", "Q1345", "Q1285964", "P19", "Q4564494", "Q32710290", "Q1860" ]
+    },
+    "invalid" : [ ]
+  }
+}
