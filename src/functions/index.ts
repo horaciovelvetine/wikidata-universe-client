@@ -4,6 +4,6 @@ export { formatWindowSizeString } from './_FormatWindowSizeString';
 export { fadeInElement } from './_AnimFadeInElement';
 export { shakeElement } from './_AnimHorizontalShakeElement';
 export { fadeOutElement } from './_AnimFadeOutElement';
-export { rotateMenuIcon } from './_AnimRotateMenuIcon';
-export { toggleMenuOptionVisibility } from './_AnimToggleMenuOptionVisibility';
+export { rotateChevIcon } from './_AnimRotateChevIcon';
+export { toggleCurSelVertexInfoDisplay } from './_AnimToggleCurSelVertexInfoDisplay';
 export { animFadeOutAndRemoveDisplay } from './_AnimFadeOutAndRemoveDisplay';

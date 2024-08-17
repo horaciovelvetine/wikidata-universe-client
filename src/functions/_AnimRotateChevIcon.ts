@@ -1,4 +1,4 @@
-export function rotateMenuIcon(icon: HTMLElement, isOpen: boolean) {
+export function rotateChevIcon(icon: HTMLElement, isOpen: boolean) {
   if (isOpen) {
     icon.style.transformOrigin = 'center';
     icon.style.transition = 'transform 0.25s linear';
