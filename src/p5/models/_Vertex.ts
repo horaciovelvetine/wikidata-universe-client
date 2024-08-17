@@ -1,12 +1,13 @@
 import { P5CanvasInstance } from "@p5-wrapper/react";
-import { Point3D } from "../../interfaces";
+import { Point3D, iVertex } from "../../interfaces";
 
-export class Vertex {
+export class Vertex implements iVertex {
+  id: string;
   label: string;
   description: string;
   coords: Point3D;
-  rad: number = 10; // Default value for radius...
   constructor(vertex: Vertex) {
+    this.id = vertex.id;
     this.label = vertex.label;
     this.description = vertex.description;
     this.coords = vertex.coords;
@@ -18,7 +19,7 @@ export class Vertex {
     p5.strokeWeight(1.2);
     p5.stroke(1, 1, 14);
     p5.fill("rgba(245, 245, 245, 0.85)");
-    p5.box(this.rad);
+    p5.box(10);
     p5.stroke(0);
     p5.pop();
   }
