@@ -36,13 +36,13 @@ export function traceRay(p5: P5CanvasInstance<SketchProps>, cam: Camera, vert: V
   const worldMat = multiply(camVec, inv(modMat));
   const perspDiv = camVec[3];
   const worldVec = [worldMat[0] / perspDiv, worldMat[1] / perspDiv, worldMat[2] / perspDiv];
-  const rayLength = p5.dist(cam.eyeX, cam.eyeY, cam.eyeZ, vert.coordinates.x, vert.coordinates.y, vert.coordinates.z);
+  const rayLength = p5.dist(cam.eyeX, cam.eyeY, cam.eyeZ, vert.coords.x, vert.coords.y, vert.coords.z);
   const phi = p5.atan2(worldVec[1] - cam.eyeY, p5.dist(worldVec[0], worldVec[2], cam.eyeX, cam.eyeZ));
   const theta = -p5.atan2(worldVec[0] - cam.eyeX, worldVec[2] - cam.eyeZ) + p5.PI / 2;
   const xVec = cam.eyeX + rayLength * p5.cos(phi) * p5.cos(theta);
   const yVec = cam.eyeY + rayLength * p5.sin(phi);
   const zVec = cam.eyeZ + rayLength * p5.cos(phi) * p5.sin(theta);
-  const distFromVert = p5.dist(vert.coordinates.x, vert.coordinates.y, vert.coordinates.z, xVec, yVec, zVec);
+  const distFromVert = p5.dist(vert.coords.x, vert.coords.y, vert.coords.z, xVec, yVec, zVec);
   if (distFromVert < vert.radius) {
     return [xVec, yVec, zVec];
   }

@@ -39,8 +39,7 @@ export const RootLayout: React.FC<RootLayoutProps> = ({ apiStatus }) => {
         <h4 id='site-title-stack-5'>wikiverse</h4>
         <h4 id='site-title-stack-6'>wikiverse</h4>
       </div>
-      {<StuckSketchLayout {...props()} />}
-      {/* {apiStatus.code != 500 ? <MainAppLayout {...props()} /> : <ApiUnavailableLayout {...props()} />} */}
+      {apiStatus.code != 500 ? <MainAppLayout {...props()} /> : <StuckSketchLayout {...props()} />}
     </>
   );
 };
