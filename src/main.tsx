@@ -7,7 +7,5 @@ import { getApiStatusRequest } from './api' // status check needed API's
 
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <RootLayout apiStatus={await getApiStatusRequest()} />
-  </React.StrictMode>,
+  <RootLayout apiStatus={await getApiStatusRequest()} />
 )
