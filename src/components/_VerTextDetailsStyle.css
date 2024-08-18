@@ -8,36 +8,34 @@
 #vertext-info {
   display: flex;
   justify-self: flex-end;
+  margin-right: 1rem;
 }
 
-#vertext-attr-list {
+#attr-list {
   display: flex;
   align-items: center;
   list-style: none;
+  transform: translateY(-5rem);
 }
 
-#vertext-attr {
+#attr {
   font-size: 1.4rem;
   color: rgb(var(--font), 75%);
   font-family: 'CharisSIL-Regular', sans-serif;
   /* Offset to match point to center of text */
-  margin-bottom: 3px;
+  margin-bottom: 7.5px;
 }
 
-#vertext-icon-container {
+#icon-container {
   display: flex;
   justify-self: flex-end;
 }
 
-#vertext-icon-btn {
+#icon-btn {
   background-color: transparent;
   border: none;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-#vertext-icon {
-  /* padding: 0.5rem; */
 }
