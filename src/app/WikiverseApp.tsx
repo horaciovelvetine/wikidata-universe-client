@@ -1,7 +1,7 @@
 import './WikiverseAppStyle.css';
 import React, { useEffect, useState } from 'react';
 import { ApiStatus, SessionData } from '../interfaces';
-import { VerticalSiteTitle, Footer, VerTextDetails, HorizonSiteTitle } from '../components';
+import { VerticalSiteTitle, Footer, VerTextDetails, HorizonSiteTitle, ActiveQueryControls } from '../components';
 import { Vertex } from '../p5/models';
 import { WikiverseSketch } from '../p5/WikiverseSketch';
 
@@ -37,6 +37,7 @@ export const WikiverseApp: React.FC<WikiverseAppProps> = ({ apiStatusRes }) => {
       <div id='sketch-container' style={{ width: sessionData.dimensions.width, height: sessionData.dimensions.height }}>
         <WikiverseMemo session={sessionData} setCurSelection={setVertexSelected} />
         <div id='sketch-overlay-bot'>
+          <ActiveQueryControls curQuery={sessionData.query} />
           <VerTextDetails vertex={vertexSelected} />
         </div>
       </div>
