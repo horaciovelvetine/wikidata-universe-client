@@ -1,0 +1,43 @@
+@import url('../assets/Palette.css');
+
+@font-face {
+  font-family: 'CharisSIL-Regular';
+  src: url('../assets/font/CharisSIL-Regular.ttf') format('truetype');
+}
+
+#vertext-info {
+  display: flex;
+  justify-self: flex-end;
+}
+
+#vertext-attr-list {
+  display: flex;
+  align-items: center;
+  list-style: none;
+}
+
+#vertext-attr {
+  font-size: 1.4rem;
+  color: rgb(var(--font), 75%);
+  font-family: 'CharisSIL-Regular', sans-serif;
+  /* Offset to match point to center of text */
+  margin-bottom: 3px;
+}
+
+#vertext-icon-container {
+  display: flex;
+  justify-self: flex-end;
+}
+
+#vertext-icon-btn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#vertext-icon {
+  /* padding: 0.5rem; */
+}

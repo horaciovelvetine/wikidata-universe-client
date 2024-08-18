@@ -1,20 +1,23 @@
 
 import { P5CanvasInstance, ReactP5Wrapper, Sketch } from "@p5-wrapper/react";
-import { calcSafeDimensions, setupCameraView } from "./functions";
+import { calcSafeDimensions, setupCameraView, traceRay } from "./functions";
 import { SessionData } from "../interfaces";
-import { drawSketchConsts } from "./UI";
+import { drawSketchConsts, drawVertexLabel } from "./UI";
 import { Camera, Font } from "p5";
 import { Vertex } from "./models";
 import CharisBold from "../assets/font/CharisSIL-Bold.ttf";
 
 interface WikiverseSketchProps {
   session: SessionData;
+  setCurSelection: React.Dispatch<React.SetStateAction<Vertex | null>>;
 }
 
-export const WikiverseSketch: React.FC<WikiverseSketchProps> = ({ session }) => {
+export const WikiverseSketch: React.FC<WikiverseSketchProps> = ({ session, setCurSelection }) => {
   let cam: Camera;
-  let hoveredVertex: Vertex | undefined;
+  let lastVertex: Vertex | null = null;
+  let hoveredVertex: Vertex | null = null;
   let font: Font;
+  console.log(calcSafeDimensions());
 
   const WikiverseSketch: Sketch = (p5: P5CanvasInstance) => {
     p5.preload = () => { font = p5.loadFont(CharisBold); };
@@ -25,19 +28,59 @@ export const WikiverseSketch: React.FC<WikiverseSketchProps> = ({ session }) => 
       cam = setupCameraView(p5, cam);
     };
 
+    //* ==> DRAW <== *//
+
     p5.draw = () => {
       drawSketchConsts(p5);
+      drawVertexLabel(p5, hoveredVertex, cam, font);
       session.vertices.forEach((vertex) => {
         new Vertex(vertex).draw(p5);
       });
 
     };
 
-    p5.mouseClicked = () => { };
+    //* ==> CLICK <== *//
 
-    p5.mouseMoved = () => { };
+    p5.mouseClicked = () => {
+      session.vertices.forEach((vertex) => {
+        const vert = new Vertex(vertex);
+        const vertexClicked = traceRay(p5, cam, vert);
+        if (!vertexClicked) return;
 
-    //* Resize canvas when window is resized (w/ calc'd safe dimensions)
+        if (vertexClicked && lastVertex == null) {
+          lastVertex = vert;
+          setCurSelection(vert);
+        } else if (vertexClicked && lastVertex != null) {
+          if (lastVertex.id === vert.id) {
+            setCurSelection(null);
+            lastVertex = null;
+          } else {
+            lastVertex = vert;
+            setCurSelection(vert);
+          }
+        }
+
+      })
+    };
+
+    //* ==> HOVER <== *//
+
+    p5.mouseMoved = () => {
+      session.vertices.forEach((vertex) => {
+        const vert = new Vertex(vertex);
+        if (vert == hoveredVertex) return;
+
+        const vertexHovered = traceRay(p5, cam, vert);
+        if (vertexHovered) {
+          hoveredVertex = vert;
+        } else {
+          hoveredVertex = null;
+        }
+      });
+    };
+
+    //* ==> RESIZE <== *//
+
     p5.windowResized = () => {
       const { width, height } = calcSafeDimensions();
       p5.resizeCanvas(width, height);
