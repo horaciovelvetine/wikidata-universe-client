@@ -1,3 +1,5 @@
+@import url('../assets/Palette.css');
+
 * {
   box-sizing: border-box;
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -23,10 +25,28 @@ body {
 }
 
 #root {
+  height: 100vh;
+  width: 100vw;
+}
+
+#wikiverse-container {
   height: 100%;
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  display: block;
+}
+
+#sketch-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  overflow: clip;
+  box-shadow: 0rem 0rem 2rem 1rem rgba(0, 0, 0, 0.22);
+}
+
+#sketch-overlay-bot {
+  position: absolute;
+  display: grid;
+  bottom: 0%;
+  width: 100%;
 }
