@@ -17,7 +17,6 @@ export const WikiverseSketch: React.FC<WikiverseSketchProps> = ({ session, setCu
   let lastVertex: Vertex | null = null;
   let hoveredVertex: Vertex | null = null;
   let font: Font;
-  console.log(calcSafeDimensions());
 
   const WikiverseSketch: Sketch = (p5: P5CanvasInstance) => {
     p5.preload = () => { font = p5.loadFont(CharisBold); };
