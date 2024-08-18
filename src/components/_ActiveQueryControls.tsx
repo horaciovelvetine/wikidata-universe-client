@@ -1,8 +1,10 @@
 import './_ActiveQueryControlsStyle.css';
+import './animations/_HorizontalShake.css';
 import React, { createRef, useEffect, useState } from 'react';
 import { eInputState } from '../interfaces';
 import Search from '../assets/icons/mi-search-icon.svg';
 import Fetch from '../assets/icons/mi-sync-arrows-icon.svg';
+import { horizontalShake } from './animations';
 
 interface ActiveQueryControlsProps {
   curQuery: string | undefined;
@@ -24,6 +26,7 @@ export const ActiveQueryControls: React.FC<ActiveQueryControlsProps> = ({ curQue
     const prev = query;
     const val = e.target.value;
     setQuery(val);
+
     if (val == prev) {
       return;
     } else if (val.length == 0) {
@@ -44,15 +47,13 @@ export const ActiveQueryControls: React.FC<ActiveQueryControlsProps> = ({ curQue
         //locally validate if query matches another vertex, then fetch
         break;
       case eInputState.DEFAULT:
-        //same as component first render
+        //same as component first render ==> lookat??
         break;
       case eInputState.INVALID:
       case eInputState.EMPTY:
       case eInputState.PLACEHOLDER:
-        //invalid shake & danger inputs
-        break;
-
       default:
+        horizontalShake(contRef.current as HTMLElement);
         break;
     }
   }

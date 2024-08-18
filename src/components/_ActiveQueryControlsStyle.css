@@ -24,7 +24,12 @@
   display: flex;
   min-width: 66%;
   align-items: center;
-  border-bottom: 1px solid rgb(var(--font));
+  border-radius: 0.1rem;
+  border: 1px solid rgb(var(--font));
+}
+
+#aqc-query-form:focus-within {
+  border: 1px solid rgb(var(--primary));
 }
 
 #aqc-query-input {
@@ -33,6 +38,7 @@
   background-color: transparent;
   border: none;
   outline: none;
+  padding-left: 0.5rem;
 }
 
 #aqc-query-submit {
@@ -43,4 +49,7 @@
 
 #aqc-query-submit-icon {
   height: 2rem;
+  padding-inline: 0.5rem;
+  margin-top: 0.2rem;
+  margin-bottom: 0.2rem;
 }
