@@ -25,4 +25,8 @@ export class Vertex implements iVertex {
     p5.stroke(0);
     p5.pop();
   }
+
+  url() {
+    return `https://en.wikipedia.org/wiki/${this.label.replace(" ", "_")}`;
+  }
 }
