@@ -9,8 +9,8 @@ export async function getQueryData(query: string): Promise<RequestResponse> {
     })
     .catch(err => {
       if (err.code === 'ERR_NETWORK') {
-        return { status: 500, data: 'The WikiData Universe API is currently offline. Try again later.' as unknown as SessionData };
+        return { status: 500, data: 'The WikiData Universe API is currently offline. Try again later.' };
       }
-      return { status: 404, data: 'Unknown Error Encountered.' as unknown as SessionData };
+      return { status: 404, data: 'Unknown Error Encountered.' };
     });
 }
