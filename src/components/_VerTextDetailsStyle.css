@@ -28,8 +28,8 @@
 #no-cur-sel-msg {
   position: absolute;
   display: flex;
-  right: 30%;
-  bottom: 30%;
+  right: 50%;
+  bottom: 33.25%;
   text-wrap: nowrap;
   font-size: 1.1rem;
   color: rgb(var(--danger));

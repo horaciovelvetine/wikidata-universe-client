@@ -36,6 +36,7 @@ export const ActiveQueryControls: React.FC<ActiveQueryControlsProps> = ({ curQue
       setFetching(true);
       submitQueryHandler(query!);
       setFetching(false);
+      return;
     }
     shakeInvalidElement(contRef.current!);
     shakeInvalidElement(inputRef.current!);
