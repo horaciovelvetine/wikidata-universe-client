@@ -16,6 +16,7 @@ interface WikiverseAppProps {
 const session = (): SessionData => {
   return {
     query: 'Kevin Bacon',
+    dimensions: undefined,
     vertices: SessionDataMock.vertices,
     edges: SessionDataMock.edges,
     properties: SessionDataMock.properties,
@@ -38,19 +39,25 @@ export const WikiverseApp: React.FC<WikiverseAppProps> = ({ apiStatusRes }) => {
     return () => window.removeEventListener('resize', () => setDimensions(calcSafeDimensions()));
   }, [])
 
-  const cameraFocusHandler = (target: string) => {
+  const cameraFocusHandler = (target: string): boolean => {
+    let tgtInExistingSet = false;
     sessionData.vertices.forEach((vertex) => {
       const vert = new Vertex(vertex);
       if (vert.label === target) {
         setVertexSelected(vert);
         cam?.lookAt(vert.coords.x, vert.coords.y, vert.coords.z);
-        return true
+        tgtInExistingSet = true;
       }
     });
-    return false;
+    return tgtInExistingSet;
   };
 
-  const submitNewQueryHandler = (query: string) => { };
+  const submitNewQueryHandler = (query: string) => {
+    setTimeout(() => {
+      setSessionData(session());
+      console.log(`Query Complete: ${query}`);
+    }, 1000);
+  };
 
   return (
     <div id='wikiverse-container'>
