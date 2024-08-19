@@ -16,7 +16,6 @@ interface WikiverseAppProps {
 const session = (): SessionData => {
   return {
     query: 'Kevin Bacon',
-    dimensions: calcSafeDimensions(),
     vertices: SessionDataMock.vertices,
     edges: SessionDataMock.edges,
     properties: SessionDataMock.properties,
@@ -30,8 +29,14 @@ const WikiverseMemo = React.memo(WikiverseSketch, (prev, next) => {
 
 export const WikiverseApp: React.FC<WikiverseAppProps> = ({ apiStatusRes }) => {
   const [sessionData, setSessionData] = useState(session());
+  const [dimensions, setDimensions] = useState(calcSafeDimensions());
   const [vertexSelected, setVertexSelected] = useState<Vertex | null>(null);
   const [cam, setCam] = useState<Camera>();
+
+  useEffect(() => {
+    window.addEventListener('resize', () => setDimensions(calcSafeDimensions()));
+    return () => window.removeEventListener('resize', () => setDimensions(calcSafeDimensions()));
+  }, [])
 
   const cameraFocusHandler = (target: string) => {
     sessionData.vertices.forEach((vertex) => {
@@ -45,13 +50,15 @@ export const WikiverseApp: React.FC<WikiverseAppProps> = ({ apiStatusRes }) => {
     return false;
   };
 
+  const submitNewQueryHandler = (query: string) => { };
+
   return (
     <div id='wikiverse-container'>
       <VerticalSiteTitle />
-      <div id='sketch-container' style={{ width: sessionData.dimensions.width, height: sessionData.dimensions.height }}>
+      <div id='sketch-container' style={{ width: dimensions.width, height: dimensions.height }}>
         <WikiverseMemo session={sessionData} setCurSelection={setVertexSelected} setCam={setCam} />
         <div id='sketch-overlay-bot'>
-          <ActiveQueryControls curQuery={sessionData.query} camFocusHandler={cameraFocusHandler} />
+          <ActiveQueryControls curQuery={sessionData.query} camFocusHandler={cameraFocusHandler} submitQueryHandler={submitNewQueryHandler} />
           <VerTextDetails vertex={vertexSelected} />
         </div>
       </div>
