@@ -51,10 +51,9 @@ export const VerTextDetails: React.FC<VerTextDetailsProps> = ({ vertex }) => {
           <ul id='attr-list' ref={attrListRef}>
             <li id='attr'>{vertex != null ? <><span id='attr-lbl'>label_ </span>{vertex.label}</> : ''}</li>
             <li id='attr'>{vertex != null ? <><span id='attr-lbl'>desc_ </span> {vertex.description}</> : ''}</li>
-            <li id='attr'>
-              <a id='attr-link' href={vertex != null ? vertex.url() : ''} target='_blank' rel='noreferrer'>
-                <img src={LinkIcon} id='attr-link-icon' alt='Wikipedia link icon' />
-              </a>
+            <li id='attr'>{vertex != null ? <a id='attr-link' href={vertex != null ? vertex.url() : ''} target='_blank' rel='noreferrer'>
+              <img src={LinkIcon} id='attr-link-icon' alt='Wikipedia link icon' />
+            </a> : ''}
             </li>
           </ul>
           <p id='no-cur-sel-msg' ref={noCurSelRef}>no vertex selected</p>
