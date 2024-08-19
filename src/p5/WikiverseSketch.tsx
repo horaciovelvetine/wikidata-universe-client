@@ -10,9 +10,10 @@ import CharisBold from "../assets/font/CharisSIL-Bold.ttf";
 interface WikiverseSketchProps {
   session: SessionData;
   setCurSelection: React.Dispatch<React.SetStateAction<Vertex | null>>;
+  setCam: React.Dispatch<React.SetStateAction<Camera | undefined>>;
 }
 
-export const WikiverseSketch: React.FC<WikiverseSketchProps> = ({ session, setCurSelection }) => {
+export const WikiverseSketch: React.FC<WikiverseSketchProps> = ({ session, setCurSelection, setCam }) => {
   let cam: Camera;
   let lastVertex: Vertex | null = null;
   let hoveredVertex: Vertex | null = null;
@@ -25,17 +26,19 @@ export const WikiverseSketch: React.FC<WikiverseSketchProps> = ({ session, setCu
       p5.createCanvas(width, height, p5.WEBGL);
       p5.textFont(font);
       cam = setupCameraView(p5, cam);
+      setCam(cam);
     };
 
     //* ==> DRAW <== *//
 
     p5.draw = () => {
       drawSketchConsts(p5);
-      drawVertexLabel(p5, hoveredVertex, cam, font);
       session.vertices.forEach((vertex) => {
         new Vertex(vertex).draw(p5);
       });
-
+      // hovered && lastSelectedVertex
+      drawVertexLabel(p5, hoveredVertex, cam, font);
+      drawVertexLabel(p5, lastVertex, cam, font);
     };
 
     //* ==> CLICK <== *//
@@ -46,10 +49,10 @@ export const WikiverseSketch: React.FC<WikiverseSketchProps> = ({ session, setCu
         const vertexClicked = traceRay(p5, cam, vert);
         if (!vertexClicked) return;
 
-        if (vertexClicked && lastVertex == null) {
+        if (lastVertex == null) {
           lastVertex = vert;
           setCurSelection(vert);
-        } else if (vertexClicked && lastVertex != null) {
+        } else {
           if (lastVertex.id === vert.id) {
             setCurSelection(null);
             lastVertex = null;
