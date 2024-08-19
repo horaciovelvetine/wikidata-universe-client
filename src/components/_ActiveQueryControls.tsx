@@ -7,9 +7,10 @@ import { flashOverlayElement, shakeInvalidElement } from './animations';
 
 interface ActiveQueryControlsProps {
   curQuery: string | undefined;
+  camFocusHandler: (target: string) => boolean;
 }
 
-export const ActiveQueryControls: React.FC<ActiveQueryControlsProps> = ({ curQuery }) => {
+export const ActiveQueryControls: React.FC<ActiveQueryControlsProps> = ({ curQuery, camFocusHandler }) => {
   const [query, setQuery] = useState(curQuery);
   const [input, setInput] = useState<eInputState>(eInputState.DEFAULT);
   const [fetching, setFetching] = useState(false);
@@ -20,20 +21,19 @@ export const ActiveQueryControls: React.FC<ActiveQueryControlsProps> = ({ curQue
   const iconRef = createRef<HTMLImageElement>();
   const iconDngrRef = createRef<HTMLImageElement>();
 
-  useEffect(() => { }, []);
+  useEffect(() => {
+    console.log('ActiveQueryControls inputState:', eInputState[input]);
+  }, [input]);
 
   function handleInputChanges(e: React.ChangeEvent<HTMLInputElement>) {
     const prev = query;
     setQuery(e.target.value);
-
-    if (query == prev) {
-      return;
-    } else if (query!.length == 0) {
+    if (e.target.value === '' || e.target.value === ' ') {
       setInput(eInputState.EMPTY);
-    } else if (query!.length > 0) {
+    } else if (e.target.value === curQuery) {
+      setInput(eInputState.DEFAULT);
+    } else if (e.target.value.length > 0) {
       setInput(eInputState.VALID);
-    } else if (query == "Search...") {
-      setInput(eInputState.PLACEHOLDER);
     } else {
       setInput(eInputState.INVALID);
     }
@@ -43,10 +43,13 @@ export const ActiveQueryControls: React.FC<ActiveQueryControlsProps> = ({ curQue
     e.preventDefault();
     switch (input) {
       case eInputState.VALID:
-        console.log('searched for query', query)
+        const tgtInExistingSet = camFocusHandler(query!);
+        if (!tgtInExistingSet) {
+          console.log('Query not found in existing set, fetching...');
+        }
         break;
       case eInputState.DEFAULT:
-        console.log('searched for origin.')
+        camFocusHandler(query!);
         break;
       case eInputState.INVALID:
       case eInputState.EMPTY:
