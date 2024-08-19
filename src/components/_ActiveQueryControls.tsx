@@ -4,13 +4,15 @@ import React, { createRef, useEffect, useState } from 'react';
 import { eInputState } from '../interfaces';
 import { Search, SearchDngr, Fetch } from '../assets/icons';
 import { flashOverlayElement, shakeInvalidElement } from './animations';
+import { inputStateFromValue, inputValueIsEmpty } from './util';
 
 interface ActiveQueryControlsProps {
   curQuery: string | undefined;
   camFocusHandler: (target: string) => boolean;
+  submitQueryHandler: (query: string) => void;
 }
 
-export const ActiveQueryControls: React.FC<ActiveQueryControlsProps> = ({ curQuery, camFocusHandler }) => {
+export const ActiveQueryControls: React.FC<ActiveQueryControlsProps> = ({ curQuery, camFocusHandler, submitQueryHandler }) => {
   const [query, setQuery] = useState(curQuery);
   const [input, setInput] = useState<eInputState>(eInputState.DEFAULT);
   const [fetching, setFetching] = useState(false);
@@ -21,46 +23,24 @@ export const ActiveQueryControls: React.FC<ActiveQueryControlsProps> = ({ curQue
   const iconRef = createRef<HTMLImageElement>();
   const iconDngrRef = createRef<HTMLImageElement>();
 
-  useEffect(() => {
-    console.log('ActiveQueryControls inputState:', eInputState[input]);
-  }, [input]);
-
   function handleInputChanges(e: React.ChangeEvent<HTMLInputElement>) {
-    const prev = query;
     setQuery(e.target.value);
-    if (e.target.value === '' || e.target.value === ' ') {
-      setInput(eInputState.EMPTY);
-    } else if (e.target.value === curQuery) {
-      setInput(eInputState.DEFAULT);
-    } else if (e.target.value.length > 0) {
-      setInput(eInputState.VALID);
-    } else {
-      setInput(eInputState.INVALID);
-    }
+    setInput(inputStateFromValue(e.target.value));
   }
 
   function handleQuerySubmit(e: React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
-    switch (input) {
-      case eInputState.VALID:
-        const tgtInExistingSet = camFocusHandler(query!);
-        if (!tgtInExistingSet) {
-          console.log('Query not found in existing set, fetching...');
-        }
-        break;
-      case eInputState.DEFAULT:
-        camFocusHandler(query!);
-        break;
-      case eInputState.INVALID:
-      case eInputState.EMPTY:
-      case eInputState.PLACEHOLDER:
-      default:
-        shakeInvalidElement(contRef.current!);
-        shakeInvalidElement(inputRef.current!);
-        flashOverlayElement(iconDngrRef.current!, iconRef.current!, 820);
-        shakeInvalidElement(submitRef.current!);
-        break;
+    if (input == eInputState.VALID || input == eInputState.DEFAULT) {
+      const tgtInExistingSet = camFocusHandler(query!);
+      if (tgtInExistingSet) return;
+      setFetching(true);
+      submitQueryHandler(query!);
+      setFetching(false);
     }
+    shakeInvalidElement(contRef.current!);
+    shakeInvalidElement(inputRef.current!);
+    flashOverlayElement(iconDngrRef.current!, iconRef.current!, 820);
+    shakeInvalidElement(submitRef.current!);
   }
 
   return curQuery == undefined ? <></> : (
