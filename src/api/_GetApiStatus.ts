@@ -11,7 +11,6 @@ export async function getApiStatus(): Promise<ApiStatus> {
       if (err.code === "ERR_NETWORK") {
         return { message: "The WikiData Universe API is currently offline. Try again later.", code: 500 };
       }
-      debugger;
       return { message: "Unknown Error Encountered.", code: 404 };
     });
 }
