@@ -2,9 +2,8 @@ import './_ActiveQueryControlsStyle.css';
 import './animations/_HorizontalShake.css';
 import React, { createRef, useEffect, useState } from 'react';
 import { eInputState } from '../interfaces';
-import Search from '../assets/icons/mi-search-icon.svg';
-import Fetch from '../assets/icons/mi-sync-arrows-icon.svg';
-import { horizontalShake } from './animations';
+import { Search, SearchDngr, Fetch } from '../assets/icons';
+import { flashOverlayElement, shakeInvalidElement } from './animations';
 
 interface ActiveQueryControlsProps {
   curQuery: string | undefined;
@@ -19,21 +18,21 @@ export const ActiveQueryControls: React.FC<ActiveQueryControlsProps> = ({ curQue
   const inputRef = createRef<HTMLInputElement>();
   const submitRef = createRef<HTMLButtonElement>();
   const iconRef = createRef<HTMLImageElement>();
+  const iconDngrRef = createRef<HTMLImageElement>();
 
   useEffect(() => { }, []);
 
   function handleInputChanges(e: React.ChangeEvent<HTMLInputElement>) {
     const prev = query;
-    const val = e.target.value;
-    setQuery(val);
+    setQuery(e.target.value);
 
-    if (val == prev) {
+    if (query == prev) {
       return;
-    } else if (val.length == 0) {
+    } else if (query!.length == 0) {
       setInput(eInputState.EMPTY);
-    } else if (val.length > 0) {
+    } else if (query!.length > 0) {
       setInput(eInputState.VALID);
-    } else if (val == "Search...") {
+    } else if (query == "Search...") {
       setInput(eInputState.PLACEHOLDER);
     } else {
       setInput(eInputState.INVALID);
@@ -44,16 +43,19 @@ export const ActiveQueryControls: React.FC<ActiveQueryControlsProps> = ({ curQue
     e.preventDefault();
     switch (input) {
       case eInputState.VALID:
-        //locally validate if query matches another vertex, then fetch
+        console.log('searched for query', query)
         break;
       case eInputState.DEFAULT:
-        //same as component first render ==> lookat??
+        console.log('searched for origin.')
         break;
       case eInputState.INVALID:
       case eInputState.EMPTY:
       case eInputState.PLACEHOLDER:
       default:
-        horizontalShake(contRef.current as HTMLElement);
+        shakeInvalidElement(contRef.current!);
+        shakeInvalidElement(inputRef.current!);
+        flashOverlayElement(iconDngrRef.current!, iconRef.current!, 820);
+        shakeInvalidElement(submitRef.current!);
         break;
     }
   }
@@ -64,6 +66,7 @@ export const ActiveQueryControls: React.FC<ActiveQueryControlsProps> = ({ curQue
         <input id='aqc-query-input' type='text' value={query} onChange={handleInputChanges} ref={inputRef} />
         <button id='aqc-query-submit' type='submit' onClick={handleQuerySubmit} ref={submitRef}>
           <img id='aqc-query-submit-icon' src={fetching ? Fetch : Search} alt='magnifying glass search' ref={iconRef} />
+          <img id='aqc-invalid-query-icon' src={fetching ? Fetch : SearchDngr} alt='magnifying glass search' ref={iconDngrRef} />
         </button>
       </form>
     </div>

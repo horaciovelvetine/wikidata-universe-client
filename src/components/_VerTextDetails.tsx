@@ -38,7 +38,7 @@ export const VerTextDetails: React.FC<VerTextDetailsProps> = ({ vertex }) => {
   function handleVerTextToggleClick() {
     if (vertex == null) {
       flashNoneSelectedMsg(noCurSelRef.current!, 1000);
-      flashOverlayElement(chevDangRef.current!, 1000);
+      flashOverlayElement(chevDangRef.current!, chevIconRef.current!, 1000);
       return
     }; // no vertex to display
     setIsOpen(!isOpen);
