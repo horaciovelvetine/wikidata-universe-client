@@ -43,7 +43,7 @@ export const WikiverseSketch: React.FC<WikiverseSketchProps> = ({ session, setCu
     //* ==> DRAW <== *//
     //* ==>      <== *//
     p5.draw = () => {
-      drawSketchConsts(p5);
+      drawSketchConsts(p5, session);
       session.vertices.forEach((vertex) => {
         const v = new Vertex(vertex);
         v.draw(p5);

@@ -1,12 +1,12 @@
 import './WikiverseAppStyle.css';
 import React, { useEffect, useState } from 'react';
 import { ApiStatus, SessionData } from '../interfaces';
-import { VerticalSiteTitle, Footer, VerTextDetails, HorizonSiteTitle, ActiveQueryControls } from '../components';
+import { VerticalSiteTitle, Footer, VerTextDetails, ActiveQueryControls } from '../components';
 import { Vertex } from '../p5/models';
 import { WikiverseSketch } from '../p5/WikiverseSketch';
 
 import CharlesSessionDataR2 from '../assets/data/charles-data-r1-2.json';
-import { calcMeanCenterOfSet, calcSafeDimensions, minMaxValuesInSet } from '../p5/functions';
+import { calcSafeDimensions } from '../p5/functions';
 import { Camera } from 'p5';
 import { postRelatedDataQueue } from '../api';
 
