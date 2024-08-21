@@ -5,9 +5,11 @@ import { VerticalSiteTitle, Footer, VerTextDetails, HorizonSiteTitle, ActiveQuer
 import { Vertex } from '../p5/models';
 import { WikiverseSketch } from '../p5/WikiverseSketch';
 
-import SessionDataMock from '../assets/data/session-body-r1-1.json';
-import { calcSafeDimensions } from '../p5/functions';
+import CharlesSessionDataR2 from '../assets/data/charles-data-r1-2.json';
+import { calcMeanCenterOfSet, calcSafeDimensions, minMaxValuesInSet } from '../p5/functions';
 import { Camera } from 'p5';
+import { postRelatedDataQueue } from '../api';
+
 
 interface WikiverseAppProps {
   apiStatusRes: ApiStatus;
@@ -15,20 +17,20 @@ interface WikiverseAppProps {
 
 const session = (): SessionData => {
   return {
-    query: 'Kevin Bacon',
-    dimensions: undefined,
-    vertices: SessionDataMock.vertices,
-    edges: SessionDataMock.edges,
-    properties: SessionDataMock.properties,
-    queue: SessionDataMock.queue,
+    err: null,
+    query: CharlesSessionDataR2.query,
+    vertices: CharlesSessionDataR2.vertices,
+    edges: CharlesSessionDataR2.edges,
+    properties: CharlesSessionDataR2.properties,
+    queue: CharlesSessionDataR2.queue,
   }
 }
 
 const WikiverseMemo = React.memo(WikiverseSketch, (prev, next) => {
-  return prev.session === next.session;
+  return prev.session == next.session;
 });
 
-export const WikiverseApp: React.FC<WikiverseAppProps> = ({ apiStatusRes }) => {
+export const WikiverseApp: React.FC<WikiverseAppProps> = () => {
   const [sessionData, setSessionData] = useState(session());
   const [dimensions, setDimensions] = useState(calcSafeDimensions());
   const [vertexSelected, setVertexSelected] = useState<Vertex | null>(null);
@@ -38,6 +40,9 @@ export const WikiverseApp: React.FC<WikiverseAppProps> = ({ apiStatusRes }) => {
     window.addEventListener('resize', () => setDimensions(calcSafeDimensions()));
     return () => window.removeEventListener('resize', () => setDimensions(calcSafeDimensions()));
   }, [])
+
+  useEffect(() => { console.log("AppVertexSelected(): ", vertexSelected) }, [vertexSelected]);
+  useEffect(() => { console.log("AppSessionData(): ", sessionData) }, [sessionData]);
 
   const cameraFocusHandler = (target: string): boolean => {
     let tgtInExistingSet = false;
@@ -52,11 +57,11 @@ export const WikiverseApp: React.FC<WikiverseAppProps> = ({ apiStatusRes }) => {
     return tgtInExistingSet;
   };
 
-  const submitNewQueryHandler = (query: string) => {
-    setTimeout(() => {
-      setSessionData(session());
-      console.log(`Query Complete: ${query}`);
-    }, 1000);
+  const newQueryHandler = async (data: SessionData) => {
+    const vert = new Vertex(data.vertices[0]);
+    setSessionData(data);
+    setVertexSelected(vert);
+    console.log(await postRelatedDataQueue(data));
   };
 
   return (
@@ -65,7 +70,7 @@ export const WikiverseApp: React.FC<WikiverseAppProps> = ({ apiStatusRes }) => {
       <div id='sketch-container' style={{ width: dimensions.width, height: dimensions.height }}>
         <WikiverseMemo session={sessionData} setCurSelection={setVertexSelected} setCam={setCam} />
         <div id='sketch-overlay-bot'>
-          <ActiveQueryControls curQuery={sessionData.query} camFocusHandler={cameraFocusHandler} submitQueryHandler={submitNewQueryHandler} />
+          <ActiveQueryControls curQuery={sessionData.query} camFocusHandler={cameraFocusHandler} newQueryHandler={newQueryHandler} />
           <VerTextDetails vertex={vertexSelected} />
         </div>
       </div>
