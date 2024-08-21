@@ -1,6 +1,6 @@
-import { iVertex, Point3D } from "../../interfaces";
+import { iVertex, iPoint3D } from "../../interfaces";
 
-export function calcMeanCenterOfSet(vertices: iVertex[]): Point3D {
+export function calcVertexSetMean(vertices: iVertex[]): iPoint3D {
   let x = 0, y = 0, z = 0;
   vertices.forEach((vertex) => {
     x += vertex.coords.x;
