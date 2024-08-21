@@ -15,7 +15,16 @@ export function traceRay(p5: P5CanvasInstance<SketchProps>, cam: Camera, vert: V
   // Dig into the p5.js instance to get the projection matrix && copy it to a new mat4
   // not an a value intended to be accessed in/by p5.js API - a needed workaround here. 
   const camRenderer = cam as any;
-  const p5ProjMat = camRenderer._renderer.uPMatrix.mat4;
+  const p5Renderer = p5 as any;
+  let p5ProjMat;
+  if (!camRenderer._renderer && !p5Renderer._renderer) {
+    console.error("No renderer found in p5 or camera instance)");
+    return false;
+  } else if (!camRenderer._renderer) {
+    p5ProjMat = p5Renderer._renderer.uPMatrix.mat4;
+  }
+  p5ProjMat = camRenderer._renderer.uPMatrix.mat4;
+
   const projMat = [
     [p5ProjMat[0], p5ProjMat[1], p5ProjMat[2], p5ProjMat[3]],
     [p5ProjMat[4], p5ProjMat[5], p5ProjMat[6], p5ProjMat[7]],
@@ -25,14 +34,17 @@ export function traceRay(p5: P5CanvasInstance<SketchProps>, cam: Camera, vert: V
   const camVec = multiply(ndcVect, inv(projMat));
 
   // same workaround as above for access to renderer...
-  const p5ModMat = camRenderer._renderer.uMVMatrix.mat4;
+  let p5ModMat;
+  if (!camRenderer.renderer) {
+    p5ModMat = p5Renderer._renderer.uMVMatrix.mat4;
+  }
+  p5ModMat = camRenderer._renderer.uMVMatrix.mat4;
   const modMat = [
     [p5ModMat[0], p5ModMat[1], p5ModMat[2], p5ModMat[3]],
     [p5ModMat[4], p5ModMat[5], p5ModMat[6], p5ModMat[7]],
     [p5ModMat[8], p5ModMat[9], p5ModMat[10], p5ModMat[11]],
     [p5ModMat[12], p5ModMat[13], p5ModMat[14], p5ModMat[15]]
   ];
-
   const worldMat = multiply(camVec, inv(modMat));
   const perspDiv = camVec[3];
   const worldVec = [worldMat[0] / perspDiv, worldMat[1] / perspDiv, worldMat[2] / perspDiv];
