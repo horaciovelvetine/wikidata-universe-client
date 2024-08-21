@@ -7,12 +7,5 @@ export function drawSketchConsts(p5: P5CanvasInstance) {
   // move near plane closer to camer, otherwise default
   const aspectRatio = p5.width / p5.height;
   const defaultFoc = (2 * p5.atan(p5.height / 2 / 800));
-  p5.perspective(defaultFoc, aspectRatio, 1);
-
-  //display bounds
-  p5.stroke('rgba(245,245,245, 0.25)');
-  p5.strokeWeight(1);
-  p5.noFill();
-  p5.box(p5.width, p5.height, p5.max(p5.width, p5.height));
-
+  p5.perspective(defaultFoc, aspectRatio, 1, 80000);
 }
