@@ -23,8 +23,7 @@ export function drawVertexLabel(p5: P5CanvasInstance<SketchProps>, hoveredVert: 
     p5.fill('rgba(245, 245, 245, 0.75)');
     p5.textFont(font);
     p5.textAlign(p5.CENTER, p5.CENTER);
-    const verticalOffset = -1.1 * (hoveredVert.label.length);
-    p5.translate(0, verticalOffset, 0); // adjusts for position on 'screen'
+    p5.translate(0, (hoveredVert.radius * -1.15), 0); // adjusts for position on 'screen'
     p5.text(hoveredVert.label, 0, 0)
     p5.pop();
   }
