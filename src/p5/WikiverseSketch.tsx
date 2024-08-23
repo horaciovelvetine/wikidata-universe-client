@@ -106,16 +106,6 @@ export const WikiverseSketch: React.FC<WikiverseSketchProps> = ({ session, click
       }
     };
 
-    //* ==>      <== *//
-    //* ==> KEYS <== *//
-    //* ==>      <== *//
-    p5.keyReleased = () => {
-      if (p5.key === 'i') {
-        console.log(session);
-        console.log(cam)
-      }
-    };
-
     //* ==>        <== *//
     //* ==> RESIZE <== *//
     //* ==>        <== *//
