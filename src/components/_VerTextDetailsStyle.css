@@ -41,6 +41,7 @@
 #attr {
   font-size: 1.3rem;
   color: rgb(var(--font));
+  text-shadow: 0px 1px 2px black;
   /* Offset to match point to center of text */
   margin-bottom: 7px;
 }

@@ -32,7 +32,7 @@ export const VerTextDetails: React.FC<VerTextDetailsProps> = ({ vertex }) => {
     rotateChevIcon(chevIconRef.current!, isOpen, '0.35s');
     rotateChevIcon(chevDangRef.current!, isOpen, '0.35s');
     showHideAttrList(attrListRef.current!, isOpen, '0.35s');
-    changeFocusOpacity(vertextInfoRef.current!, isOpen, '0.35s', '0.80', '0.45');
+    changeFocusOpacity(vertextInfoRef.current!, isOpen, '0.35s', '1', '0.45');
   }, [isOpen]);
 
   function handleVerTextToggleClick() {
