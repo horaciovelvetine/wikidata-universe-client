@@ -41,7 +41,7 @@ export class Vertex implements iVertex {
     const cenY = cam.centerY;
     const cenZ = cam.centerZ;
 
-    const labelStr = `${this.label} [X: ${(Math.round(x))}, Y: ${Math.round(y)}, Z: ${Math.round(z)}]`;
+    const labelStr = `${this.label} [x_${(Math.round(x))}, y_${Math.round(y)}, z_${Math.round(z)}]`;
 
     const pan = p5.atan2(camZ - cenZ, camX - cenX);
     const tilt = p5.atan2(camY - cenY, p5.dist(camX, camZ, cenX, cenZ));
