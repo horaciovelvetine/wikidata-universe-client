@@ -8,11 +8,11 @@ import CharisBold from "../assets/font/CharisSIL-Bold.ttf";
 
 interface WikiverseSketchProps {
   session: SessionData;
-  setCurSelection: React.Dispatch<React.SetStateAction<Vertex | null>>;
+  clickHandler: (vert: Vertex | null) => Promise<void>;
   setCam: React.Dispatch<React.SetStateAction<Camera | undefined>>;
 }
 
-export const WikiverseSketch: React.FC<WikiverseSketchProps> = ({ session, setCurSelection, setCam }) => {
+export const WikiverseSketch: React.FC<WikiverseSketchProps> = ({ session, clickHandler, setCam }) => {
   let curHoveredVert: Vertex | null;
   let curSelectedVert: Vertex | null;
   let lookAt: LookAtChange = new LookAtChange(null);
@@ -72,11 +72,11 @@ export const WikiverseSketch: React.FC<WikiverseSketchProps> = ({ session, setCu
 
         if (curSelectedVert != null && curSelectedVert.id == vert.id) {
           curSelectedVert = null
-          setCurSelection(null);
+          clickHandler(null);
         } else {
           lookAt.setTarget(vert.coords);
           curSelectedVert = vert;
-          setCurSelection(vert);
+          clickHandler(vert);
         }
       })
     };
