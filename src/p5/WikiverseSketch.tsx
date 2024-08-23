@@ -3,7 +3,7 @@ import { P5CanvasInstance, ReactP5Wrapper, Sketch } from "@p5-wrapper/react";
 import { calcSafeDimensions, setupCameraView, traceRay, drawSketchUI } from "./functions";
 import { SessionData } from "../interfaces";
 import { Camera, Font } from "p5";
-import { Vertex, Point3D, LookAtChange } from "./models";
+import { Vertex, LookAtChange } from "./models";
 import CharisBold from "../assets/font/CharisSIL-Bold.ttf";
 
 interface WikiverseSketchProps {

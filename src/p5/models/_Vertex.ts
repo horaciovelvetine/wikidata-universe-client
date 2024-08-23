@@ -2,7 +2,6 @@ import { P5CanvasInstance, SketchProps } from "@p5-wrapper/react";
 import { iEdge, iVertex, SessionData } from "../../interfaces";
 import { Camera, Font } from "p5";
 import { Point3D } from "./_Point3D";
-import { get } from "http";
 
 export class Vertex implements iVertex {
   id: string;
