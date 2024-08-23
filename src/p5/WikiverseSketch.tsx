@@ -1,8 +1,7 @@
 
 import { P5CanvasInstance, ReactP5Wrapper, Sketch } from "@p5-wrapper/react";
-import { calcSafeDimensions, setupCameraView, traceRay } from "./functions";
+import { calcSafeDimensions, setupCameraView, traceRay, drawSketchUI } from "./functions";
 import { SessionData } from "../interfaces";
-import { drawSketchConsts } from "./UI";
 import { Camera, Font } from "p5";
 import { Vertex, Point3D } from "./models";
 import CharisBold from "../assets/font/CharisSIL-Bold.ttf";
@@ -16,7 +15,7 @@ interface WikiverseSketchProps {
 export const WikiverseSketch: React.FC<WikiverseSketchProps> = ({ session, setCurSelection, setCam }) => {
   let curHoveredVert: Vertex | null;
   let cam: Camera;
-  let lastVertex: Vertex | null;
+  let curSelectedVert: Vertex | null;
   let font: Font;
   let lookAtTarget: Point3D | null = null;
   let lookAtKeyFrame = 0;
@@ -43,17 +42,28 @@ export const WikiverseSketch: React.FC<WikiverseSketchProps> = ({ session, setCu
     //* ==> DRAW <== *//
     //* ==>      <== *//
     p5.draw = () => {
-      drawSketchConsts(p5, session);
-      session.vertices.forEach((vertex) => {
-        const v = new Vertex(vertex);
-        v.draw(p5);
-        if (v.label == curHoveredVert?.label || v.label == lastVertex?.label) {
-          v.drawLabel(p5, cam, font);
+      drawSketchUI(p5, session);
+      if (!!curSelectedVert) {
+        curSelectedVert.drawLabel(p5, cam, font);
+        curSelectedVert.drawRelatedEdges(p5, session);
+      }
+
+      if (!!curHoveredVert) {
+        curHoveredVert.drawLabel(p5, cam, font);
+        curHoveredVert.drawRelatedEdges(p5, session, true);
+      }
+
+      session.vertices.forEach((vDat) => {
+        const vert = new Vertex(vDat);
+        vert.draw(p5);
+
+        if (vert.id == curHoveredVert?.id) {
+          vert.drawLabel(p5, cam, font);
         }
       });
       // Animate: lookAt() => { onClick() }
       if (lookAtTarget && lookAtKeyFrame < animKeyframeDur) {
-        const kFMult = lookAtKeyFrame * 1.001 / animKeyframeDur
+        const kFMult = lookAtKeyFrame * 1.00001 / animKeyframeDur
         const lookAtChngVec = p5.createVector(
           p5.lerp(cam.centerX, lookAtTarget.x, kFMult),
           p5.lerp(cam.centerY, lookAtTarget.y, kFMult),
@@ -75,16 +85,17 @@ export const WikiverseSketch: React.FC<WikiverseSketchProps> = ({ session, setCu
         const vert = new Vertex(vertex);
         const vertexClicked = traceRay(p5, cam, vert);
         if (!vertexClicked) return;
-        if (lastVertex != null && lastVertex.id == vert.id) {
-          lastVertex = null
+        if (curSelectedVert != null && curSelectedVert.id == vert.id) {
+          curSelectedVert = null
           setCurSelection(null);
         } else {
           lookAtTarget = new Point3D(vert.coords.x, vert.coords.y, vert.coords.z)
-          lastVertex = vert;
+          curSelectedVert = vert;
           setCurSelection(vert);
         }
       })
     };
+
     //* ==>       <== *//
     //* ==> HOVER <== *//
     //* ==>       <== *//
@@ -96,6 +107,7 @@ export const WikiverseSketch: React.FC<WikiverseSketchProps> = ({ session, setCu
       let foundHoveredVert = false;
       session.vertices.forEach(vert => {
         const checkVert = new Vertex(vert);
+        if (curSelectedVert?.id == checkVert.id) return;
         const newVertIsHovered = traceRay(p5, cam, checkVert);
         if (newVertIsHovered) {
           curHoveredVert = checkVert;
