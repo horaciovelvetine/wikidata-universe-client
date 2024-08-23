@@ -56,7 +56,7 @@ export class Vertex implements iVertex {
     p5.rotateZ(p5.PI);
 
     p5.textSize(8);
-    p5.fill('rgba(245, 245, 245, 0.75)');
+    p5.fill('rgb(245, 245, 245)');
     p5.textFont(font);
     p5.textAlign(p5.CENTER, p5.CENTER);
     p5.translate(0, (this.radius * -1.25), 0); // adjusts for position on 'screen'
