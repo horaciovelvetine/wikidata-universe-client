@@ -94,8 +94,8 @@ export class Vertex implements iVertex {
 
   private setEdgeStrokeColor(p5: P5CanvasInstance, edge: iEdge, isHov: boolean, isParallel: boolean) {
     const opacity = isHov ? 0.4 : 1;
-    const incomingColor = `rgba(100,120,255,${opacity})`;
-    const outgoingColor = `rgba(255,80,100,${opacity})`;
+    const incomingColor = `rgba(80,100,255,${opacity})`;
+    const outgoingColor = `rgba(255,50,80,${opacity})`;
     const bothColor = `rgba(135,20,255,${opacity})`;
     if (isParallel) {
       p5.stroke(bothColor);
