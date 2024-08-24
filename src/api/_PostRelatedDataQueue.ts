@@ -9,6 +9,7 @@ export async function postRelatedDataQueue(payload: SessionData): Promise<Reques
       return { status: res.status, data: res.data };
     })
     .catch(err => {
+      console.log(err);
       if (err.code === 'ERR_NETWORK') {
         return { status: 500, data: 'The WikiData Universe API is currently offline. Try again later.' };
       }
