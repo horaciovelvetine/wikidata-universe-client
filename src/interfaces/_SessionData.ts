@@ -1,4 +1,4 @@
-import { iEdge, iVertex } from "../interfaces";
+import { Dimensions, iEdge, iVertex } from "../interfaces";
 
 export interface SessionData {
   err: any | null;
@@ -7,4 +7,5 @@ export interface SessionData {
   edges: iEdge[];
   properties: any;
   queue: any;
+  dimensions: Dimensions | null;
 }
