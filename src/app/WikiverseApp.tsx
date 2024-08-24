@@ -8,8 +8,7 @@ import { WikiverseSketch } from '../p5/WikiverseSketch';
 import CharlesSessionDataR2 from '../assets/data/charles-data-r1-2.json';
 import { calcSafeDimensions } from '../p5/functions';
 import { Camera } from 'p5';
-import { postRelatedDataQueue } from '../api';
-
+import { postRelatedDataQueue, postRelatedDataClick } from '../api';
 
 interface WikiverseAppProps {
   apiStatusRes: ApiStatus;
@@ -23,6 +22,7 @@ const session = (): SessionData => {
     edges: CharlesSessionDataR2.edges,
     properties: CharlesSessionDataR2.properties,
     queue: CharlesSessionDataR2.queue,
+    dimensions: calcSafeDimensions()
   }
 }
 
@@ -41,8 +41,14 @@ export const WikiverseApp: React.FC<WikiverseAppProps> = () => {
     return () => window.removeEventListener('resize', () => setDimensions(calcSafeDimensions()));
   }, [])
 
-  useEffect(() => { console.log("AppVertexSelected(): ", vertexSelected) }, [vertexSelected]);
-  useEffect(() => { console.log("AppSessionData(): ", sessionData) }, [sessionData]);
+  useEffect(() => {
+    console.log('SessionData()', sessionData)
+  }, [sessionData])
+
+  useEffect(() => {
+    console.log('VertexSelected()', vertexSelected)
+  }, [vertexSelected])
+
 
   const cameraFocusHandler = (target: string): boolean => {
     let tgtInExistingSet = false;
@@ -57,20 +63,32 @@ export const WikiverseApp: React.FC<WikiverseAppProps> = () => {
     return tgtInExistingSet;
   };
 
-  const newQueryHandler = async (data: SessionData) => {
+  const newQuerySubmitHandler = async (data: SessionData) => {
     const vert = new Vertex(data.vertices[0]);
     setSessionData(data);
     setVertexSelected(vert);
     console.log(await postRelatedDataQueue(data));
   };
 
+  const newClickWhoDis = async (vert: Vertex | null) => {
+    setVertexSelected(vert);
+    if (vert == null) return;
+    const originalQuery = sessionData.query; // preserve original value
+    const payload = { ...sessionData, query: vert?.label }
+    const res = await postRelatedDataClick(payload);
+    if (res.status == 200) {
+      let newSessionData: SessionData = { ...res.data as SessionData, query: originalQuery! };
+      setSessionData(newSessionData)
+    }
+  }
+
   return (
     <div id='wikiverse-container'>
       <VerticalSiteTitle />
       <div id='sketch-container' style={{ width: dimensions.width, height: dimensions.height }}>
-        <WikiverseMemo session={sessionData} setCurSelection={setVertexSelected} setCam={setCam} />
+        <WikiverseMemo session={sessionData} clickHandler={newClickWhoDis} setCam={setCam} />
         <div id='sketch-overlay-bot'>
-          <ActiveQueryControls curQuery={sessionData.query} camFocusHandler={cameraFocusHandler} newQueryHandler={newQueryHandler} />
+          <ActiveQueryControls curQuery={sessionData.query} camFocusHandler={cameraFocusHandler} newQueryHandler={newQuerySubmitHandler} />
           <VerTextDetails vertex={vertexSelected} />
         </div>
       </div>

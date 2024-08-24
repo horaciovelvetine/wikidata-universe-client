@@ -20,18 +20,18 @@ export function drawSketchUI(p5: P5CanvasInstance, session: SessionData) {
   const yLen = yDiff / 2;
   const zLen = zDiff / 2;
 
-  // p5.push();
-  // p5.translate(meanPoint.x, meanPoint.y, meanPoint.z);
-  // p5.strokeWeight(5);
-  // p5.noFill();
-  // p5.stroke('rgba(255, 255, 255, 0.5)');
-  // p5.box(xDiff, yDiff, zDiff);
-  // p5.stroke(255, 0, 0);
-  // p5.line(-xLen, 0, 0, xLen, 0, 0);
-  // p5.stroke(0, 255, 0);
-  // p5.line(0, -yLen, 0, 0, yLen, 0);
-  // p5.stroke(0, 0, 255);
-  // p5.line(0, 0, -zLen, 0, 0, zLen);
-  // p5.pop();
+  p5.push();
+  p5.translate(meanPoint.x, meanPoint.y, meanPoint.z);
+  p5.strokeWeight(5);
+  p5.noFill();
+  p5.stroke('rgba(255, 255, 255, 0.5)');
+  p5.box(xDiff, yDiff, zDiff);
+  p5.stroke(255, 0, 0);
+  p5.line(-xLen, 0, 0, xLen, 0, 0);
+  p5.stroke(0, 255, 0);
+  p5.line(0, -yLen, 0, 0, yLen, 0);
+  p5.stroke(0, 0, 255);
+  p5.line(0, 0, -zLen, 0, 0, zLen);
+  p5.pop();
 
 }
