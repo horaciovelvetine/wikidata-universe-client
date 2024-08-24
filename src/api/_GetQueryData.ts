@@ -1,12 +1,9 @@
 import axios from "axios";
 import { API_URL } from "./_ApiUrl";
 import { RequestResponse } from "../interfaces";
-import { calcSafeDimensions } from "../p5/functions";
 
 export async function getQueryData(query: string): Promise<RequestResponse> {
-  const safeDimensions = calcSafeDimensions();
-  const strDimensions = `${safeDimensions.width}x${safeDimensions.height}`;
-  return await axios.get(API_URL('query-data'), { params: { query, dimensions: strDimensions } })
+  return await axios.get(API_URL('query-data'), { params: { query } })
     .then(res => {
       return { status: res.status, data: res.data };
     })
