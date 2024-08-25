@@ -38,6 +38,10 @@
   gap: 0.35rem;
 }
 
-#parallel-icon {
+#edge-icon {
+  height: 1.2rem;
+}
+
+#vertex-icon {
   height: 1.2rem;
 }

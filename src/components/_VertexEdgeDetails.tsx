@@ -1,6 +1,6 @@
 import './_VertexEdgeDetailsStyle.css'
 import React, { createRef, useEffect, useState } from 'react';
-import { ArrowBoth, ArrowFrom, ArrowTo } from '../assets/icons';
+import { ArrowBoth, ArrowFrom, ArrowTo, Vertex as VertIcon } from '../assets/icons';
 import { Vertex } from '../p5/models';
 
 interface VertexEdgeDetailsProps {
@@ -32,26 +32,30 @@ export const VertexEdgeDetails: React.FC<VertexEdgeDetailsProps> = ({ vertex }) 
       <div id='edges-info' ref={edgesInfoRef}>
         {/* animate onto the screen when 'isOnScreen' */}
         <div id='edge-details'>
+          <img id='vertex-icon' src={VertIcon} />
           <p>Charles</p>
-          <img id='parallel-icon' src={ArrowBoth} alt='parallel edge' />
+          <img id='edge-icon' src={ArrowBoth} alt='parallel edge' />
           <p>Edge.B</p>
           <p>(property.label)</p>
         </div>
         <div id='edge-details'>
+          <img id='vertex-icon' src={VertIcon} />
           <p>Charles</p>
-          <img id='parallel-icon' src={ArrowTo} alt='parallel edge' />
+          <img id='edge-icon' src={ArrowTo} alt='parallel edge' />
           <p>Edge.B</p>
           <p>(property.label)</p>
         </div>
         <div id='edge-details'>
+          <img id='vertex-icon' src={VertIcon} />
           <p>Charles</p>
-          <img id='parallel-icon' src={ArrowTo} alt='parallel edge' />
+          <img id='edge-icon' src={ArrowTo} alt='parallel edge' />
           <p>Edge.B</p>
           <p>(property.label)</p>
         </div>
         <div id='edge-details'>
+          <img id='vertex-icon' src={VertIcon} />
           <p>Charles</p>
-          <img id='parallel-icon' src={ArrowFrom} alt='parallel edge' />
+          <img id='edge-icon' src={ArrowFrom} alt='parallel edge' />
           <p>Edge.B</p>
           <p>(property.label)</p>
         </div>
