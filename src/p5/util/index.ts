@@ -1,0 +1,2 @@
+export { clickTargetMaatchesCurrentSelection } from './_clickTargetMatchesCurrentSelection'
+export { vertexInSelectedHistory } from './_vertexInSelectedHistory'
