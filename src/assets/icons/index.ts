@@ -9,5 +9,8 @@ import Quesion from './mi-question-icon.svg';
 import Search from './mi-search-icon.svg';
 import SearchDngr from './mi-search-icon-danger.svg';
 import Settings from './mi-settings-icon.svg';
+import ArrowBoth from './mi-both-arrow.svg'
+import ArrowTo from './mi-to-arrow.svg'
+import ArrowFrom from './mi-from-arrow.svg'
 
-export { Chev, ChevDngr, Fetch, Error, Exclaims, HistArr, Link, Quesion, Search, SearchDngr, Settings };
+export { Chev, ChevDngr, Fetch, Error, Exclaims, HistArr, Link, Quesion, Search, SearchDngr, Settings, ArrowBoth, ArrowTo, ArrowFrom };
