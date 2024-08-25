@@ -8,7 +8,7 @@ import { Vertex, LookAtChange, Edge } from "./models";
 import { clickTargetMaatchesCurrentSelection, vertexInSelectedHistory } from "./util";
 
 import CharlesSessionDataR2 from '../assets/data/charles-data-r1-2.json'
-import { SessionData } from "../interfaces";
+import { SessionData, SketchData } from "../interfaces";
 
 
 interface WikiverSketchProps {
@@ -18,19 +18,16 @@ interface WikiverSketchProps {
   setSelectedHistory: React.Dispatch<React.SetStateAction<Vertex[]>>;
 }
 
-const sessionData = (): SessionData => {
+const sessionData = (): SketchData => {
   return {
-    err: null,
-    query: CharlesSessionDataR2.query,
     vertices: CharlesSessionDataR2.vertices,
     edges: CharlesSessionDataR2.edges,
     properties: CharlesSessionDataR2.properties,
     queue: CharlesSessionDataR2.queue,
-    dimensions: calcInitLayoutDimensions()
   }
 }
 
-export const WikiverseSketch: React.FC<WikiverSketchProps> = ({ setSelectedVertex }) => {
+export const WikiverseSketch: React.FC<WikiverSketchProps> = ({ query, setSelectedVertex }) => {
   // SKETCH 
   let wikiFont: Font;
   let cam: Camera;
@@ -91,19 +88,21 @@ export const WikiverseSketch: React.FC<WikiverSketchProps> = ({ setSelectedVerte
         const vert = new Vertex(vertexData);
         if (!traceRay(p5, cam!, vert)) return; // vertex is not click target
 
+        // Deselect current vertex
         if (clickTargetMaatchesCurrentSelection(selectedVertex, vert)) {
-          // Deselect current vertex
           selectedVertex = null;
           setSelectedVertex(null);
           return;
         }
+
         // Select new Vertex
         lookAt.setTarget(vert.coords);
         selectedVertex = vert;
         setSelectedVertex(vert);
+        
         // Fetch new Vertex details...
-        if (vert.label == session.query) return; // origin already fetched...
-        if (vertexInSelectedHistory(selectedHistory, vert)) return; // already fetched...
+        if (vert.label == query) return; // origin already fetched...
+        if (vertexInSelectedHistory(selectedHistory, vert)) return;
         selectedHistory.push(vert);
         console.log('look for new details...')
       })
@@ -120,10 +119,8 @@ export const WikiverseSketch: React.FC<WikiverSketchProps> = ({ setSelectedVerte
       let foundHoveredVert = false;
       session.vertices.forEach(vert => {
         const checkVert = new Vertex(vert);
-        if (selectedVertex?.id == checkVert.id) return;
-        const newVertIsHovered = traceRay(p5, cam!, checkVert);
-
-        if (newVertIsHovered) {
+        if (selectedVertex?.id == checkVert.id) return; // ignore currently selected
+        if (traceRay(p5, cam!, checkVert)) {
           hoveredVertex = checkVert;
           foundHoveredVert = true;
         }
