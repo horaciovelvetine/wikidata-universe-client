@@ -30,16 +30,17 @@ export class LookAtChange {
   }
 
   animInProgress() {
-    return this.currentKeyframe <= this.duration;
-  }
-
-  hasTarget() {
-    return !!this.target;
+    return this.hasTarget() && this.currentKeyframe <= this.duration;
   }
 
   setTarget(point: Point3D) {
     this.target = point;
     this.currentKeyframe = 0;
   }
+
+  private hasTarget() {
+    return !!this.target;
+  }
+
 
 }
