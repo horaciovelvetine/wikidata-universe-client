@@ -1,5 +1,5 @@
 import { P5CanvasInstance, SketchProps } from "@p5-wrapper/react";
-import { iEdge, iVertex, SessionData } from "../../interfaces";
+import { iEdge, iVertex, SketchData } from "../../interfaces";
 import { Camera, Font } from "p5";
 import { Point3D } from "./_Point3D";
 
@@ -63,7 +63,7 @@ export class Vertex implements iVertex {
     p5.pop();
   }
 
-  drawRelatedEdges(p5: P5CanvasInstance, session: SessionData, isHov: boolean = false) {
+  drawRelatedEdges(p5: P5CanvasInstance, session: SketchData, isHov: boolean = false) {
     const edgesToDraw = this.getRelatedEdges(session);
 
     edgesToDraw.forEach(edge => {
@@ -83,26 +83,26 @@ export class Vertex implements iVertex {
     return `https://en.wikipedia.org/wiki/${this.label.replace(" ", "_")}`;
   }
 
-  private getRelatedEdges(session: SessionData) {
+  private getRelatedEdges(session: SketchData) {
     return session.edges.filter(edge => edge.srcId === this.id || edge.tgtId === this.id);
   }
 
-  private getAltVertex(session: SessionData, edge: iEdge) {
+  private getAltVertex(session: SketchData, edge: iEdge) {
     const altId = edge.srcId === this.id ? edge.tgtId : edge.srcId;
     return session.vertices.find(v => v.id === altId);
   }
 
   private setEdgeStrokeColor(p5: P5CanvasInstance, edge: iEdge, isHov: boolean, isParallel: boolean) {
     const opacity = isHov ? 0.4 : 1;
-    const incomingColor = `rgba(80,100,255,${opacity})`;
+    const incomingColor = `rgba(30,0,255,${opacity})`;
     const outgoingColor = `rgba(255,50,80,${opacity})`;
     const bothColor = `rgba(135,20,255,${opacity})`;
     if (isParallel) {
       p5.stroke(bothColor);
     } else if (edge.srcId === this.id) {
-      p5.stroke(incomingColor);
-    } else if (edge.tgtId === this.id) {
       p5.stroke(outgoingColor);
+    } else if (edge.tgtId === this.id) {
+      p5.stroke(incomingColor);
     }
   }
 

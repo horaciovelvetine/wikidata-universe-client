@@ -1,8 +1,8 @@
 import { P5CanvasInstance } from "@p5-wrapper/react";
-import { SessionData } from "../../interfaces";
+import { SketchData } from "../../interfaces";
 import { calcVertexSetMean, minMaxValuesInSet } from "../functions";
 
-export function drawSketchUI(p5: P5CanvasInstance, session: SessionData) {
+export function drawSketchUI(p5: P5CanvasInstance, session: SketchData) {
   p5.background('rgb(1, 1, 14)');
   p5.orbitControl(2, 2, 2);
   p5.rectMode(p5.CENTER);
