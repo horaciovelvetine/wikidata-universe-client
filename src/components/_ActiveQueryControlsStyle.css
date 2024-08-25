@@ -8,8 +8,8 @@
 #aqc-container {
   width: 100%;
   display: flex;
-  position: relative;
-  justify-self: flex-start;
+  grid-column: 1;
+  grid-row: 2;
   margin-bottom: 0.1rem;
   margin-left: 1rem;
   padding: 0.5rem;

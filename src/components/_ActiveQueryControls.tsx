@@ -10,11 +10,9 @@ import { getQueryData } from '../api';
 
 interface ActiveQueryControlsProps {
   curQuery: string | undefined;
-  camFocusHandler: (target: string) => boolean;
-  newQueryHandler: (data: SessionData) => void;
 }
 
-export const ActiveQueryControls: React.FC<ActiveQueryControlsProps> = ({ curQuery, camFocusHandler, newQueryHandler }) => {
+export const ActiveQueryControls: React.FC<ActiveQueryControlsProps> = ({ curQuery }) => {
   const [query, setQuery] = useState(curQuery);
   const [input, setInput] = useState<eInputState>(eInputState.DEFAULT);
   const [fetching, setFetching] = useState(false);
@@ -44,17 +42,16 @@ export const ActiveQueryControls: React.FC<ActiveQueryControlsProps> = ({ curQue
     const els = currentRefs();
 
     if (inputIsUseable(input)) {
-      const tgtInExistingSet = camFocusHandler(query!);
-      if (tgtInExistingSet) return; //already in set, no need to fetch
+      console.log('AQC=>SubmitHandler() todo')
 
-      setFetching(true);
-      const res = await getQueryData(query!);
-      setFetching(false);
-      if (queryIsSuccess(res)) {
-        console.log(res)
-        newQueryHandler(res.data as SessionData);
-        return;
-      }
+      // setFetching(true);
+      // const res = await getQueryData(query!);
+      // setFetching(false);
+      // if (queryIsSuccess(res)) {
+      //   console.log(res)
+      //   newQueryHandler(res.data as SessionData);
+      //   return;
+      // }
       // todo - display error message from data[?]
     }
     shakeInvalidElement(els.cont);
