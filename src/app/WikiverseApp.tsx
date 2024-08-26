@@ -22,6 +22,8 @@ export const WikiverseApp: React.FC<WikiverseAppProps> = () => {
   const [dimensions, setDimensions] = useState(calcInitLayoutDimensions());
   const [query, setQuery] = useState<string>("Charles");
   const [selectedVertex, setSelectedVertex] = useState<Vertex | null>(null);
+  const [hoveredVertex, setHoveredVertex] = useState<Vertex | null>(null);
+
   const [sketchData, setSketchData] = useState<SketchData | null>(null);
   const [camRef, setCamRef] = useState<Camera>();
 
@@ -30,15 +32,20 @@ export const WikiverseApp: React.FC<WikiverseAppProps> = () => {
     return () => window.removeEventListener('resize', () => setDimensions(calcInitLayoutDimensions()));
   }, [])
 
+  const focusVertexHandler = (focusVert: Vertex) => {
+    const { x, y, z } = { ...focusVert.coords }
+    camRef?.lookAt(x, y, z);
+  }
+
   return (
     <div id='wikiverse-container'>
       <VerticalSiteTitle />
       <div id='sketch-container' style={{ width: dimensions.width, height: dimensions.height }}>
-        <MemoizedSketch {...{ query, setSelectedVertex, setSketchData, setCamRef }} />
+        <MemoizedSketch {...{ query, setSelectedVertex, setSketchData, setCamRef, setHoveredVertex }} />
         <div id='sketch-overlay-bot'>
-          <RelatedEdgesDetails {...{ selectedVertex, data: sketchData }} />
+          <RelatedEdgesDetails {...{ selectedVertex, data: sketchData, focusVertexHandler }} />
           <ActiveQueryControls curQuery={query} />
-          <VerTextDetails vertex={selectedVertex} />
+          <VerTextDetails {...{ vertex: selectedVertex, hoveredVertex }} />
         </div>
       </div>
       <Footer />
