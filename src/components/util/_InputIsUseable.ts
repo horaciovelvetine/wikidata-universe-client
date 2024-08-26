@@ -1,5 +1,5 @@
-import { eInputState } from "../../interfaces";
+import { INPUT_STATE } from "../../interfaces";
 
-export function inputIsUseable(state: eInputState): boolean {
-  return state === eInputState.VALID || state === eInputState.DEFAULT;
+export function inputIsUseable(state: INPUT_STATE): boolean {
+  return state === INPUT_STATE.VALID || state === INPUT_STATE.DEFAULT;
 }

@@ -8,4 +8,5 @@ export type { SessionData } from './_SessionData';
 export type { SketchData } from './_SketchData'
 export type { iVertex } from './_Vertex';
 
-export { eInputState } from './_InputState';
+export { INPUT_STATE } from './_InputState';
+export { EDGE_DIR } from '../p5/models/_Edge'

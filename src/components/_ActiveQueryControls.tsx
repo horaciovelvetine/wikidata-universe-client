@@ -1,7 +1,7 @@
 import './_ActiveQueryControlsStyle.css';
 import './animations/_HorizontalShake.css';
 import React, { createRef, useEffect, useState } from 'react';
-import { eInputState, SessionData } from '../interfaces';
+import { INPUT_STATE, SessionData } from '../interfaces';
 import { Search, SearchDngr, Fetch } from '../assets/icons';
 import { flashOverlayElement, shakeInvalidElement } from './animations';
 import { inputStateFromValue, queryIsSuccess, inputIsUseable } from './util';
@@ -14,7 +14,7 @@ interface ActiveQueryControlsProps {
 
 export const ActiveQueryControls: React.FC<ActiveQueryControlsProps> = ({ curQuery }) => {
   const [query, setQuery] = useState(curQuery);
-  const [input, setInput] = useState<eInputState>(eInputState.DEFAULT);
+  const [input, setInput] = useState<INPUT_STATE>(INPUT_STATE.DEFAULT);
   const [fetching, setFetching] = useState(false);
 
   const contRef = createRef<HTMLDivElement>();

@@ -1,12 +1,12 @@
-import { eInputState } from "../../interfaces";
+import { INPUT_STATE } from "../../interfaces";
 import { inputValueIsEmpty } from "./_InputValueIsEmpty";
 
-export function inputStateFromValue(val: string): eInputState {
+export function inputStateFromValue(val: string): INPUT_STATE {
   if (inputValueIsEmpty(val)) {
-    return eInputState.EMPTY;
+    return INPUT_STATE.EMPTY;
   } else if (val.length > 0) {
-    return eInputState.VALID;
+    return INPUT_STATE.VALID;
   } else {
-    return eInputState.INVALID;
+    return INPUT_STATE.INVALID;
   }
 }
