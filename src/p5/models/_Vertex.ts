@@ -2,6 +2,7 @@ import { P5CanvasInstance, SketchProps } from "@p5-wrapper/react";
 import { iEdge, iVertex, SketchData } from "../../interfaces";
 import { Camera, Font } from "p5";
 import { Point3D } from "./_Point3D";
+import { Edge } from "./_Edge";
 
 export class Vertex implements iVertex {
   id: string;
@@ -9,6 +10,7 @@ export class Vertex implements iVertex {
   description: string;
   coords: Point3D;
   radius: number = 30;
+
   constructor(vertex: iVertex);
   constructor(vertex: Vertex) {
     this.id = vertex.id;
@@ -28,52 +30,30 @@ export class Vertex implements iVertex {
     p5.pop();
   }
 
-  // The way that text & p5.js intertact when using WEBGL leaves a bit to be desired
-  // (another) Thank you to @camelCaseSensitive on {github} & @morejpeg on {youtube}
-  // Excellent tutorial for this approach ==> (https://www.youtube.com/watch?v=kJMx0F7e9QU)
-  // HUD Works around flickering caused by state changes above the p5.js instance
   drawLabel(p5: P5CanvasInstance<SketchProps>, cam: Camera, font: Font) {
     const { x, y, z } = this.coords;
-    const camX = cam.eyeX;
-    const camY = cam.eyeY;
-    const camZ = cam.eyeZ;
-    const cenX = cam.centerX;
-    const cenY = cam.centerY;
-    const cenZ = cam.centerZ;
-
-    const labelStr = `${this.label} [x_${(Math.round(x))}, y_${Math.round(y)}, z_${Math.round(z)}]`;
-
-    const pan = p5.atan2(camZ - cenZ, camX - cenX);
-    const tilt = p5.atan2(camY - cenY, p5.dist(camX, camZ, cenX, cenZ));
+    const labelStr = `${this.label} (${this.id})`;
 
     p5.push();
     p5.translate(x, y, z);
-
-    p5.rotateY(-pan);
-    p5.rotateZ(tilt + p5.PI);
-    p5.rotateY(-p5.PI / 2);
-    p5.rotateZ(p5.PI);
-
-    p5.textSize(8);
-    p5.fill('rgb(245, 245, 245)');
-    p5.textFont(font);
-    p5.textAlign(p5.CENTER, p5.CENTER);
-    p5.translate(0, (this.radius * -1.25), 0); // adjusts for position on 'screen'
+    this.applyLabelPositionTransforms(p5, cam);
+    this.applyLabelTextSetup(p5, font);
     p5.text(labelStr, 0, 0)
     p5.pop();
   }
 
   drawRelatedEdges(p5: P5CanvasInstance, session: SketchData, isHov: boolean = false) {
     const edgesToDraw = this.getRelatedEdges(session);
+    if (!edgesToDraw) return;
 
     edgesToDraw.forEach(edge => {
-      const vert2 = this.getAltVertex(session, edge);
-      if (!vert2) return; // no vertex to draw edge to
-      p5.push();
-      const isPara = this.isParallelEdge(vert2, edge, edgesToDraw)
-      this.setEdgeStrokeColor(p5, edge, isHov, isPara);
+      const vert2 = this.getAltVertex(session, edge)!;
+      const isPara = this.isParallelEdge(vert2, edge!, edgesToDraw)
       const { x, y, z } = this.coords;
       const { x: x2, y: y2, z: z2 } = vert2.coords;
+
+      p5.push();
+      this.setEdgeStrokeColor(p5, edge!, isHov, isPara);
       p5.line(x, y, z, x2, y2, z2);
       p5.pop();
     });
@@ -83,13 +63,23 @@ export class Vertex implements iVertex {
     return `https://en.wikipedia.org/wiki/${this.label.replace(" ", "_")}`;
   }
 
-  private getRelatedEdges(session: SketchData) {
-    return session.edges.filter(edge => edge.srcId === this.id || edge.tgtId === this.id);
+  getRelatedEdges(session: SketchData): Edge[] {
+    const mentionEdge = session.edges.filter(edge => (this.id == edge.srcId || this.id == edge.tgtId));
+    const completeEdges = mentionEdge.filter(edge => this.getAltVertex(session, edge) != undefined);
+
+    return completeEdges.map(edgeData => {
+      return new Edge(edgeData)
+    })
   }
 
-  private getAltVertex(session: SketchData, edge: iEdge) {
-    const altId = edge.srcId === this.id ? edge.tgtId : edge.srcId;
-    return session.vertices.find(v => v.id === altId);
+  private getAltVertex(session: SketchData, edge: iEdge): Vertex | null {
+    const altVertexId = edge.srcId === this.id ? edge.tgtId : edge.srcId;
+    const altVertexData = session.vertices.find(v => v.id === altVertexId);
+
+    if (altVertexData) {
+      return new Vertex(altVertexData);
+    }
+    return null;
   }
 
   private setEdgeStrokeColor(p5: P5CanvasInstance, edge: iEdge, isHov: boolean, isParallel: boolean) {
@@ -97,6 +87,7 @@ export class Vertex implements iVertex {
     const incomingColor = `rgba(30,0,255,${opacity})`;
     const outgoingColor = `rgba(255,50,80,${opacity})`;
     const bothColor = `rgba(135,20,255,${opacity})`;
+
     if (isParallel) {
       p5.stroke(bothColor);
     } else if (edge.srcId === this.id) {
@@ -106,14 +97,50 @@ export class Vertex implements iVertex {
     }
   }
 
-  private isParallelEdge(vert2: iVertex, edge: iEdge, edgesToDraw: iEdge[]) {
-    const v2IsTgt = edge.tgtId == vert2.id;
-    let occursAsOther;
-    if (v2IsTgt) {
-      occursAsOther = edgesToDraw.filter(e => e.srcId == vert2.id)
-    } else {
-      occursAsOther = edgesToDraw.filter(e => e.tgtId == vert2.id);
-    }
-    return occursAsOther.length != 0;
+  private isParallelEdge(vert2: iVertex, edge: iEdge, edgesToDraw: iEdge[]): boolean {
+    const isTarget = edge.tgtId === vert2.id; //determine which is which src||tgt
+
+    const parallelEdges = edgesToDraw.filter(e =>
+      isTarget ? e.srcId === vert2.id : e.tgtId === vert2.id
+    );
+
+    return parallelEdges.length !== 0; //true if found
   }
+
+  // The way that text & p5.js intertact when using WEBGL leaves a bit to be desired
+  // (another) Thank you to @camelCaseSensitive on {github} & @morejpeg on {youtube}
+  // Excellent tutorial for this approach ==> (https://www.youtube.com/watch?v=kJMx0F7e9QU)
+  private applyLabelPositionTransforms(p5: P5CanvasInstance<SketchProps>, cam: Camera) {
+    const { pan, tilt } = this.calcCamerasAngles(p5, cam);
+
+    p5.rotateY(-pan); //rotate to face camera horizon
+    p5.rotateZ(tilt + p5.PI); //rotate to face camera vertical
+    p5.rotateY(-p5.PI / 2); // reasons unclear
+    p5.rotateZ(p5.PI); // flip around to face (scenes) up
+  }
+
+  private applyLabelTextSetup(p5: P5CanvasInstance<SketchProps>, font: Font) {
+    p5.textSize(8);
+    p5.fill('rgb(245, 245, 245)');
+    p5.textFont(font);
+    p5.textAlign(p5.CENTER, p5.CENTER);
+    p5.translate(0, (this.radius * -1.25), 0); // position over vertex
+  }
+
+  private calcCamerasAngles(p5: P5CanvasInstance<SketchProps>, cam: Camera) {
+    const { ex, ey, ez } = { ...this.eye(cam) }
+    const { fx, fy, fz } = { ...this.focal(cam) }
+
+    const pan = p5.atan2(ez - fz, ex - fx)
+    const tilt = p5.atan2(ey - fy, p5.dist(ex, ez, fx, fz))
+    return { pan, tilt }
+  }
+
+  private eye(cam: Camera) {
+    return { ex: cam.eyeX, ey: cam.eyeY, ez: cam.eyeZ }
+  }
+  private focal(cam: Camera) {
+    return { fx: cam.centerX, fy: cam.centerY, fz: cam.centerZ }
+  }
+
 }
