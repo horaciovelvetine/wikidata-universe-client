@@ -1,8 +1,8 @@
 import { ArrowBoth, ArrowFrom, ArrowTo } from "../../assets/icons";
-import { EDGE_TYPE } from "../_EdgeDetails";
+import { EDGE_DIR } from "../../interfaces";
 
-export function edgeDirectionIcon(type: EDGE_TYPE) {
-  if (type == EDGE_TYPE.TO) return ArrowTo;
-  if (type == EDGE_TYPE.FROM) return ArrowFrom;
+export function edgeDirectionIcon(direction: EDGE_DIR) {
+  if (direction == EDGE_DIR.OUTGOING) return ArrowTo;
+  if (direction == EDGE_DIR.INCOMING) return ArrowFrom;
   return ArrowBoth;
 }
