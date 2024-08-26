@@ -14,7 +14,7 @@ import { SketchData } from "../interfaces";
 interface WikiverSketchProps {
   query: string | undefined;
   setSelectedVertex: React.Dispatch<React.SetStateAction<Vertex | null>>;
-  setSketchData: React.Dispatch<React.SetStateAction<SketchData | undefined>>;
+  setSketchData: React.Dispatch<React.SetStateAction<SketchData | null>>;
   setCamRef: React.Dispatch<React.SetStateAction<Camera | undefined>>
 }
 
