@@ -1,47 +1,43 @@
 import './_RelatedEdgesDetailsStyle.css'
 import React, { createRef, useEffect, useState } from 'react';
 import { Edge, Vertex } from '../p5/models';
-import { iEdge, SketchData } from '../interfaces';
-import { EDGE_TYPE, EdgeDetails } from './_EdgeDetails';
+import { SketchData } from '../interfaces';
+import { EdgeDetails } from './_EdgeDetails';
 
 interface RelatedEdgesDetailsProps {
-  vertex: Vertex | null;
-  data: SketchData | undefined;
+  selectedVertex: Vertex | null;
+  data: SketchData | null;
 }
 
-export const RelatedEdgesDetails: React.FC<RelatedEdgesDetailsProps> = ({ vertex, data }) => {
+export const RelatedEdgesDetails: React.FC<RelatedEdgesDetailsProps> = ({ selectedVertex, data }) => {
   const [isOnScreen, setIsOnScreen] = useState(false);
-  const [relatedEdges, setRelatedEdges] = useState<Edge[]>([])
+  const [relatedEdges, setRelatedEdges] = useState<Edge[] | null>(null)
+
   const contRef = createRef<HTMLDivElement>();
   const edgesInfoRef = createRef<HTMLDivElement>();
 
   useEffect(() => {
-    if (vertex != null) {
-      setRelatedEdges(vertex.getRelatedEdges(data!))
+    if (selectedVertex != null) {
+      setRelatedEdges(selectedVertex.getRelatedEdges(data!))
       setIsOnScreen(true);
     } else {
-      setRelatedEdges([])
+      setRelatedEdges(null)
       setIsOnScreen(false);
     }
-  }, [vertex])
+  }, [selectedVertex])
 
-  useEffect(() => {
-    // animate refs...
-  }, [isOnScreen])
-  useEffect(() => {
-    console.log('related edges changes:', relatedEdges)
-  }, [relatedEdges])
-
-
+  const blockWheelScrollDetailsHandler = (event: React.WheelEvent) => {
+    // prevent wheel scroll when hovering details...
+    event.stopPropagation();
+  }
 
   return (
     <div id='edges-info-container' ref={contRef}>
-      {/* permanenet on screen */}
-      <div id='edges-info' ref={edgesInfoRef}>
+      <div id='edges-info' ref={edgesInfoRef} onWheel={blockWheelScrollDetailsHandler}>
         <ul id='details-list'>
-          {/* {relatedEdges.map((edge, index) => (
-            <EdgeDetails key={index} edge={edge} data={data} />
-          ))} */}
+          {relatedEdges?.map((edge, index) => (
+            <EdgeDetails key={index} {...{ edge, data, selectedVertex, relatedEdges }} />
+          ))}
         </ul>
       </div>
     </div>

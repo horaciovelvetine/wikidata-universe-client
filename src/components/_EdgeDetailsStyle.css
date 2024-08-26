@@ -1,0 +1,34 @@
+@import url('../assets/Palette.css');
+
+@font-face {
+  font-family: 'CharisSIL-Regular';
+  src: url('../assets/font/CharisSIL-Regular.ttf') format('truetype');
+}
+
+#edge-details {
+  display: inline-flex;
+}
+
+#vertex-icon {
+  height: 1.2rem;
+}
+
+#edge-type-icon {
+  height: 1.2rem;
+}
+
+
+#title-container {
+  text-align: end;
+}
+
+#edge-details {
+  display: flex;
+  gap: 0.35rem;
+}
+
+#property-text {
+  font-size: 1.2rem;
+  color: rgb(var(--font));
+  text-shadow: 2px 2px 2px black;
+}

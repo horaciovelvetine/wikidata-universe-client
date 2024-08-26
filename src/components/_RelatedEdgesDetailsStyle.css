@@ -18,30 +18,18 @@
 #edges-info {
   display: flex;
   flex-direction: column;
+  max-height: 12rem;
+  padding: 0.5rem 0.75rem;
+  overflow-y: auto;
+  border-style: solid;
+  border-color: rgba(var(--font), 10%);
+  border-radius: 0.5rem;
+  scrollbar-color: transparent;
 }
 
-#title-container {
-  text-align: end;
-}
-
-#title {
-  font-size: 1.1rem;
-  color: rgb(var(--font), 35%);
-  font-family: 'CharisSIL-Regular', sans-serif;
-  text-shadow: 2px 2px 2px black;
-}
-
-#edge-details {
-  text-shadow: 2px 2px 2px black;
-  font-size: 1.2rem;
+#details-list {
+  list-style: none;
   display: flex;
-  gap: 0.35rem;
-}
-
-#edge-icon {
-  height: 1.2rem;
-}
-
-#vertex-icon {
-  height: 1.2rem;
+  flex-direction: column;
+  align-items: end;
 }
