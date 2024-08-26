@@ -2,6 +2,8 @@ import { iEdge, SketchData } from "../../interfaces";
 import { Property } from "./_Property";
 import { Vertex } from "./_Vertex";
 
+export enum EDGE_DIR { INCOMING, OUTGOING, PARALLEL }
+
 export class Edge implements iEdge {
   srcId: string;
   tgtId: string | null;
@@ -28,5 +30,12 @@ export class Edge implements iEdge {
 
   getPropertyDetails(data: SketchData): Property {
     return data.properties.find(property => this.propertyId == property.id)
+  }
+
+  getEdgeDirection(currentlySelectedVertex: Vertex) {
+    if (currentlySelectedVertex.id == this.srcId) {
+      return EDGE_DIR.OUTGOING;
+    }
+    return EDGE_DIR.INCOMING;
   }
 }
