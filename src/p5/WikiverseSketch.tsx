@@ -4,18 +4,18 @@ import { P5CanvasInstance, ReactP5Wrapper, Sketch } from "@p5-wrapper/react";
 import { Camera, Font } from "p5";
 
 import { calcInitLayoutDimensions, setupCameraView, traceRay, drawSketchUI } from "./functions";
-import { Vertex, LookAtChange, Edge } from "./models";
-import { clickTargetMaatchesCurrentSelection, vertexInSelectedHistory } from "./util";
+import { Vertex, LookAtChange } from "./models";
+import { clickTargetMatchesCurrentSelection, vertexInSelectedHistory } from "./util";
 
 import CharlesSessionDataR2 from '../assets/data/charles-data-r1-2.json'
-import { SessionData, SketchData } from "../interfaces";
+import { SketchData } from "../interfaces";
 
 
 interface WikiverSketchProps {
   query: string | undefined;
   setSelectedVertex: React.Dispatch<React.SetStateAction<Vertex | null>>;
-  setDisplayedEdgesDetails: React.Dispatch<React.SetStateAction<Edge[]>>;
-  setSelectedHistory: React.Dispatch<React.SetStateAction<Vertex[]>>;
+  setSketchData: React.Dispatch<React.SetStateAction<SketchData | undefined>>;
+  setCamRef: React.Dispatch<React.SetStateAction<Camera | undefined>>
 }
 
 const sessionData = (): SketchData => {
@@ -27,16 +27,16 @@ const sessionData = (): SketchData => {
   }
 }
 
-export const WikiverseSketch: React.FC<WikiverSketchProps> = ({ query, setSelectedVertex }) => {
+export const WikiverseSketch: React.FC<WikiverSketchProps> = ({ query, setSelectedVertex, setSketchData, setCamRef }) => {
   // SKETCH 
   let wikiFont: Font;
   let cam: Camera;
   const lookAt: LookAtChange = new LookAtChange(null)
   // DATA
-  let selectedVertex: Vertex | null;
-  let hoveredVertex: Vertex | null;
-  let session = sessionData();
+  let hoveredVertex: Vertex | null = null;
+  let selectedVertex: Vertex | null = null;
   let selectedHistory: Vertex[] = [];
+  let session = sessionData();
 
   const WikiverseSketch: Sketch = (p5: P5CanvasInstance) => {
 
@@ -49,8 +49,8 @@ export const WikiverseSketch: React.FC<WikiverSketchProps> = ({ query, setSelect
       p5.createCanvas(width, height, p5.WEBGL);
       p5.textFont(wikiFont!); //set in preload
       cam = setupCameraView(p5, cam);
-      selectedVertex = null;
-      hoveredVertex = null;
+      setCamRef(cam)
+      setSketchData(session)
     };
 
     //* ==>      <== *//
@@ -89,7 +89,7 @@ export const WikiverseSketch: React.FC<WikiverSketchProps> = ({ query, setSelect
         if (!traceRay(p5, cam!, vert)) return; // vertex is not click target
 
         // Deselect current vertex
-        if (clickTargetMaatchesCurrentSelection(selectedVertex, vert)) {
+        if (clickTargetMatchesCurrentSelection(selectedVertex, vert)) {
           selectedVertex = null;
           setSelectedVertex(null);
           return;
@@ -99,7 +99,6 @@ export const WikiverseSketch: React.FC<WikiverSketchProps> = ({ query, setSelect
         lookAt.setTarget(vert.coords);
         selectedVertex = vert;
         setSelectedVertex(vert);
-        
         // Fetch new Vertex details...
         if (vert.label == query) return; // origin already fetched...
         if (vertexInSelectedHistory(selectedHistory, vert)) return;
