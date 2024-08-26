@@ -22,7 +22,7 @@ export const WikiverseApp: React.FC<WikiverseAppProps> = () => {
   const [dimensions, setDimensions] = useState(calcInitLayoutDimensions());
   const [query, setQuery] = useState<string>("Charles");
   const [selectedVertex, setSelectedVertex] = useState<Vertex | null>(null);
-  const [sketchData, setSketchData] = useState<SketchData>();
+  const [sketchData, setSketchData] = useState<SketchData | null>(null);
   const [camRef, setCamRef] = useState<Camera>();
 
   useEffect(() => {
@@ -36,7 +36,7 @@ export const WikiverseApp: React.FC<WikiverseAppProps> = () => {
       <div id='sketch-container' style={{ width: dimensions.width, height: dimensions.height }}>
         <MemoizedSketch {...{ query, setSelectedVertex, setSketchData, setCamRef }} />
         <div id='sketch-overlay-bot'>
-          <RelatedEdgesDetails vertex={selectedVertex} data={sketchData} />
+          <RelatedEdgesDetails {...{ selectedVertex, data: sketchData }} />
           <ActiveQueryControls curQuery={query} />
           <VerTextDetails vertex={selectedVertex} />
         </div>
