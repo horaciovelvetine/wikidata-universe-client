@@ -72,8 +72,8 @@
 
 #attr-lbl {
   display: inline;
-  font-size: 1.1rem;
-  color: rgb(var(--font), 35%);
+  font-size: 1rem;
+  color: rgb(var(--font), 50%);
   font-family: 'CharisSIL-Regular', sans-serif;
 }
 
