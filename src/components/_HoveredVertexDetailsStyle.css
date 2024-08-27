@@ -1,0 +1,59 @@
+@import url('../assets/Palette.css');
+
+@font-face {
+  font-family: 'CharisSIL-Regular';
+  src: url('../assets/font/CharisSIL-Regular.ttf') format('truetype');
+}
+
+#hovered-vertex-container {
+  display: flex;
+  justify-self: flex-end;
+  grid-column: 2;
+  opacity: 75%;
+}
+
+#cur-hovered {
+  display: inline-flex;
+  align-items: center;
+  padding-right: 1rem;
+  margin-top: 6px;
+  font-size: 1.3rem;
+  text-shadow: 0px 1px 2px black;
+}
+
+#cur-hov-icon {
+  height: 1.4rem;
+}
+
+#cur-hov-label {
+  text-shadow: 0px 1px 2px black;
+  color: rgb(var(--font));
+}
+
+#cur-hov-coords {
+  text-shadow: 0px 1px 2px black;
+  padding-left: 1rem;
+}
+
+#attr-label {
+  color: rgb(var(--font), 50%);
+  font-family: 'CharisSIL-Regular', sans-serif;
+}
+
+#app-settings-icon {
+  height: 2rem;
+  margin-right: 1rem;
+  margin-top: 0.5rem;
+  opacity: 80%;
+  transition: opacity 235ms;
+}
+
+#app-settings-icon:hover {
+  transition: opacity 235ms;
+  opacity: 100%;
+}
+
+#app-settings-icon:not(:hover) {
+  transition: opacity 235ms;
+  opacity: 80%;
+}
