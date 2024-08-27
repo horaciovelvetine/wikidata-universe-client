@@ -9,12 +9,12 @@ import { getQueryData } from '../api';
 
 
 interface ActiveQueryControlsProps {
-  curQuery: string | undefined;
+  query: string | undefined;
 }
 
-export const ActiveQueryControls: React.FC<ActiveQueryControlsProps> = ({ curQuery }) => {
-  const [query, setQuery] = useState(curQuery);
-  const [input, setInput] = useState<INPUT_STATE>(INPUT_STATE.DEFAULT);
+export const ActiveQueryControls: React.FC<ActiveQueryControlsProps> = ({ query }) => {
+  const [input, setInput] = useState(query);
+  const [inputState, setInputState] = useState<INPUT_STATE>(INPUT_STATE.DEFAULT);
   const [fetching, setFetching] = useState(false);
 
   const contRef = createRef<HTMLDivElement>();
@@ -24,8 +24,8 @@ export const ActiveQueryControls: React.FC<ActiveQueryControlsProps> = ({ curQue
   const iconDngrRef = createRef<HTMLImageElement>();
 
   function handleInputChanges(e: React.ChangeEvent<HTMLInputElement>) {
-    setQuery(e.target.value);
-    setInput(inputStateFromValue(e.target.value));
+    setInput(e.target.value);
+    setInputState(inputStateFromValue(e.target.value));
   }
 
   const currentRefs = () => {
@@ -41,17 +41,8 @@ export const ActiveQueryControls: React.FC<ActiveQueryControlsProps> = ({ curQue
 
     const els = currentRefs();
 
-    if (inputIsUseable(input)) {
+    if (inputIsUseable(inputState)) {
       console.log('AQC=>SubmitHandler() todo')
-
-      // setFetching(true);
-      // const res = await getQueryData(query!);
-      // setFetching(false);
-      // if (queryIsSuccess(res)) {
-      //   console.log(res)
-      //   newQueryHandler(res.data as SessionData);
-      //   return;
-      // }
       // todo - display error message from data[?]
     }
     shakeInvalidElement(els.cont);
