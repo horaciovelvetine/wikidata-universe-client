@@ -2,17 +2,19 @@ import './_RelatedEdgesDetailsStyle.css'
 import React, { createRef, useEffect, useState } from 'react';
 import { Edge, Vertex } from '../p5/models';
 import { SketchData } from '../interfaces';
-import { EdgeDetails } from './_EdgeDetails';
+import { EdgeDetails } from '../components';
+import { showHideRelatedEdges } from './animations';
 
 interface RelatedEdgesDetailsProps {
   selectedVertex: Vertex | null;
   data: SketchData | null;
+  focusVertexHandler: (otherVert: Vertex) => void;
 }
 
-export const RelatedEdgesDetails: React.FC<RelatedEdgesDetailsProps> = ({ selectedVertex, data }) => {
+export const RelatedEdgesDetails: React.FC<RelatedEdgesDetailsProps> = ({ selectedVertex, data, focusVertexHandler }) => {
+  if (selectedVertex == null) return;
   const [isOnScreen, setIsOnScreen] = useState(false);
   const [relatedEdges, setRelatedEdges] = useState<Edge[] | null>(null)
-
   const contRef = createRef<HTMLDivElement>();
   const edgesInfoRef = createRef<HTMLDivElement>();
 
@@ -26,9 +28,12 @@ export const RelatedEdgesDetails: React.FC<RelatedEdgesDetailsProps> = ({ select
     }
   }, [selectedVertex])
 
+  useEffect(() => {
+    showHideRelatedEdges(contRef.current!, isOnScreen)
+  }, [isOnScreen])
+
   const blockWheelScrollDetailsHandler = (event: React.WheelEvent) => {
-    // prevent wheel scroll when hovering details...
-    event.stopPropagation();
+    event.stopPropagation(); // prevent scroll when hovering details...
   }
 
   return (
@@ -36,7 +41,7 @@ export const RelatedEdgesDetails: React.FC<RelatedEdgesDetailsProps> = ({ select
       <div id='edges-info' ref={edgesInfoRef} onWheel={blockWheelScrollDetailsHandler}>
         <ul id='details-list'>
           {relatedEdges?.map((edge, index) => (
-            <EdgeDetails key={index} {...{ edge, data, selectedVertex, relatedEdges }} />
+            <EdgeDetails key={index} {...{ edge, data, selectedVertex, relatedEdges, focusVertexHandler }} />
           ))}
         </ul>
       </div>

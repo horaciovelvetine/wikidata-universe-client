@@ -13,6 +13,11 @@
   grid-column: 2;
   grid-row: 1;
   margin-right: 1rem;
+  border-style: solid;
+  border-color: rgba(var(--font), 5%);
+  border-radius: 0.5rem;
+  transform: translateX(5rem);
+  backdrop-filter: blur(0.5rem);
 }
 
 #edges-info {
@@ -21,10 +26,13 @@
   max-height: 12rem;
   padding: 0.5rem 0.75rem;
   overflow-y: auto;
-  border-style: solid;
-  border-color: rgba(var(--font), 10%);
-  border-radius: 0.5rem;
-  scrollbar-color: transparent;
+  scrollbar-color: rgba(var(--font), 25%) transparent;
+  transition: scrollbar-color 0.2s ease-in-out;
+}
+
+#edges-info:not(:hover) {
+  transition: scrollbar-color 0.2s ease-in-out;
+  scrollbar-color: rgba(var(--font), 0%) transparent;
 }
 
 #details-list {
@@ -32,4 +40,5 @@
   display: flex;
   flex-direction: column;
   align-items: end;
+  gap: 0.1rem
 }
