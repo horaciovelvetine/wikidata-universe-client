@@ -9,7 +9,7 @@ export class Vertex implements iVertex {
   label: string;
   description: string;
   coords: Point3D;
-  radius: number = 30;
+  radius: number = 20;
 
   constructor(vertex: iVertex);
   constructor(vertex: Vertex) {
@@ -19,12 +19,16 @@ export class Vertex implements iVertex {
     this.coords = vertex.coords;
   }
 
-  draw(p5: P5CanvasInstance) {
+  draw(p5: P5CanvasInstance, curSelectedVert: Vertex | null) {
     p5.push();
     p5.translate(this.coords.x, this.coords.y, this.coords.z);
     p5.strokeWeight(1.2);
     p5.stroke(1, 1, 14);
-    p5.fill("rgba(245, 245, 245, 0.85)");
+    if (curSelectedVert?.id == this.id) {
+      p5.fill("rgba(165, 205, 255, 1)");
+    } else {
+      p5.fill("rgba(205, 205, 205, 0.5)");
+    }
     p5.box(this.radius);
     p5.stroke(0);
     p5.pop();
@@ -32,7 +36,7 @@ export class Vertex implements iVertex {
 
   drawLabel(p5: P5CanvasInstance<SketchProps>, cam: Camera, font: Font) {
     const { x, y, z } = this.coords;
-    const labelStr = `${this.label} (${this.id})`;
+    const labelStr = `${this.label}`;
 
     p5.push();
     p5.translate(x, y, z);
@@ -40,6 +44,7 @@ export class Vertex implements iVertex {
     this.applyLabelTextSetup(p5, font);
     p5.text(labelStr, 0, 0)
     p5.pop();
+
   }
 
   drawRelatedEdges(p5: P5CanvasInstance, session: SketchData, isHov: boolean = false) {
@@ -65,6 +70,13 @@ export class Vertex implements iVertex {
    */
   url() {
     return `https://en.wikipedia.org/wiki/${this.label.replace(" ", "_")}`;
+  }
+
+  /**
+   * @return an object containing the rounded { @x , @y , @z } coords 
+   */
+  xyz() {
+    return { x: Math.round(this.coords.x), y: Math.round(this.coords.y), z: Math.round(this.coords.z) }
   }
 
   /**
