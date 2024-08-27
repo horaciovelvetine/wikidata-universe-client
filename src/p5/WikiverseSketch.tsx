@@ -13,9 +13,10 @@ import { SketchData } from "../interfaces";
 
 interface WikiverSketchProps {
   query: string | undefined;
+  setHoveredVertex: React.Dispatch<React.SetStateAction<Vertex | null>>
   setSelectedVertex: React.Dispatch<React.SetStateAction<Vertex | null>>;
   setSketchData: React.Dispatch<React.SetStateAction<SketchData | null>>;
-  setCamRef: React.Dispatch<React.SetStateAction<Camera | undefined>>
+  setLookAtRef: React.Dispatch<React.SetStateAction<LookAtChange | undefined>>
 }
 
 const sessionData = (): SketchData => {
@@ -27,7 +28,7 @@ const sessionData = (): SketchData => {
   }
 }
 
-export const WikiverseSketch: React.FC<WikiverSketchProps> = ({ query, setSelectedVertex, setSketchData, setCamRef }) => {
+export const WikiverseSketch: React.FC<WikiverSketchProps> = ({ query, setSelectedVertex, setSketchData, setLookAtRef, setHoveredVertex }) => {
   // SKETCH 
   let wikiFont: Font;
   let cam: Camera;
@@ -49,7 +50,7 @@ export const WikiverseSketch: React.FC<WikiverSketchProps> = ({ query, setSelect
       p5.createCanvas(width, height, p5.WEBGL);
       p5.textFont(wikiFont!); //set in preload
       cam = setupCameraView(p5, cam);
-      setCamRef(cam)
+      setLookAtRef(lookAt)
       setSketchData(session)
     };
 
@@ -70,7 +71,7 @@ export const WikiverseSketch: React.FC<WikiverSketchProps> = ({ query, setSelect
       }
 
       session.vertices.forEach((vDat) => {
-        new Vertex(vDat).draw(p5);
+        new Vertex(vDat).draw(p5, selectedVertex);
       });
 
       if (lookAt.animInProgress()) {
@@ -97,6 +98,8 @@ export const WikiverseSketch: React.FC<WikiverSketchProps> = ({ query, setSelect
 
         // Select new Vertex
         lookAt.setTarget(vert.coords);
+        hoveredVertex = null;
+        setHoveredVertex(null);
         selectedVertex = vert;
         setSelectedVertex(vert);
         // Fetch new Vertex details...
@@ -120,11 +123,13 @@ export const WikiverseSketch: React.FC<WikiverSketchProps> = ({ query, setSelect
         const checkVert = new Vertex(vert);
         if (selectedVertex?.id == checkVert.id) return; // ignore currently selected
         if (traceRay(p5, cam!, checkVert)) {
+          setHoveredVertex(checkVert);
           hoveredVertex = checkVert;
           foundHoveredVert = true;
         }
       });
       if (!foundHoveredVert) {
+        setHoveredVertex(null);
         hoveredVertex = null;
       }
     };
