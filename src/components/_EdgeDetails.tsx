@@ -11,9 +11,10 @@ interface EdgeDetailsProps {
   data: SketchData | null;
   selectedVertex: Vertex | null;
   relatedEdges: Edge[];
+  focusVertexHandler: (otherVert: Vertex) => void;
 }
 
-export const EdgeDetails: React.FC<EdgeDetailsProps> = ({ edge, data, selectedVertex, relatedEdges }) => {
+export const EdgeDetails: React.FC<EdgeDetailsProps> = ({ edge, data, selectedVertex, relatedEdges, focusVertexHandler }) => {
   const property = edge.getPropertyDetails(data!);
   if (property == undefined) return; //todo -> refactors for animateable version
   const endpoints = edge.getVertexEndpoints(data!);
@@ -22,15 +23,31 @@ export const EdgeDetails: React.FC<EdgeDetailsProps> = ({ edge, data, selectedVe
   if (parallelEdges == undefined) return; //todo -> refactors for animateable version
   const edgeDirection = parallelEdges!.length > 0 ? EDGE_DIR.PARALLEL : edge.getEdgeDirection(selectedVertex!);
   const icon = edgeDirectionIcon(edgeDirection);
+  const propertyTextColor = () => {
+    switch (edgeDirection) {
+      case EDGE_DIR.INCOMING:
+        return 'incoming'
+      case EDGE_DIR.OUTGOING:
+        return 'outgoing'
+      default:
+        return 'parallel'
+    }
+  }
 
   return (
     <>
       <div id='edge-details'>
-        <img id='vertex-icon' src={VertIcon} alt='represents current selected vertex' />
-        <p id='property-text'>{property.label}</p>
-        <img id='edge-type-icon' src={icon} alt='parallel edge' />
-        <img id='vertex-icon' src={VertIcon} alt='represents current selected vertex' />
-        <p id='property-text'>{otherVert.label}</p>
+        <a id='src-vert-container' onClick={() => focusVertexHandler(selectedVertex!)}>
+          <img id='vertex-icon' src={VertIcon} alt='represents current selected vertex' />
+        </a>
+        <div id='property-container'>
+          <p id='property-text' className={propertyTextColor()}>{property.label}</p>
+          <img id='edge-type-icon' src={icon} alt='parallel edge' />
+        </div>
+        <a id='alt-vert-container' onClick={() => focusVertexHandler(otherVert)}>
+          <img id='vertex-icon' src={VertIcon} alt='represents alternate vertex' />
+          <p id='alt-vert-text'>{otherVert.label}</p>
+        </a>
       </div>
     </>
   )
