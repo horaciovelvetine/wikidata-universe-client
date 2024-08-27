@@ -19,6 +19,20 @@
   width: fit-content;
 }
 
+/* #cur-hovered-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 7px;
+  font-size: 1.3rem;
+  text-shadow: 0px 1px 2px black;
+  opacity: 50%;
+}
+
+#cur-hovered-label {
+  color: rgb(var(--font));
+  opacity: 0;
+} */
+
 #attr-list {
   display: flex;
   align-items: center;

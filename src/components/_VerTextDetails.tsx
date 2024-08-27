@@ -6,12 +6,11 @@ import { Chev, ChevDngr, Link } from '../assets/icons'
 import { Vertex } from '../p5/models';
 
 
-
 interface VerTextDetailsProps {
-  vertex: Vertex | null;
+  selectedVertex: Vertex | null;
 }
 
-export const VerTextDetails: React.FC<VerTextDetailsProps> = ({ vertex }) => {
+export const VerTextDetails: React.FC<VerTextDetailsProps> = ({ selectedVertex }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const chevIconRef = createRef<HTMLImageElement>();
@@ -21,12 +20,12 @@ export const VerTextDetails: React.FC<VerTextDetailsProps> = ({ vertex }) => {
   const vertextInfoRef = createRef<HTMLDivElement>();
 
   useEffect(() => {
-    if (vertex == null) {
+    if (selectedVertex == null) {
       setIsOpen(false);
     } else {
       setIsOpen(true);
     }
-  }, [vertex]);
+  }, [selectedVertex]);
 
   useEffect(() => {
     rotateChevIcon(chevIconRef.current!, isOpen, '0.35s');
@@ -36,7 +35,7 @@ export const VerTextDetails: React.FC<VerTextDetailsProps> = ({ vertex }) => {
   }, [isOpen]);
 
   function handleVerTextToggleClick() {
-    if (vertex == null) {
+    if (selectedVertex == null) {
       flashNoneSelectedMsg(noCurSelRef.current!, 1000);
       flashOverlayElement(chevDangRef.current!, chevIconRef.current!, 1000);
       return
@@ -49,9 +48,9 @@ export const VerTextDetails: React.FC<VerTextDetailsProps> = ({ vertex }) => {
       <div id='vertext-info' ref={vertextInfoRef}>
         <div id='vertext-container'>
           <ul id='attr-list' ref={attrListRef}>
-            <li id='attr'>{vertex != null ? <><span id='attr-lbl'>label_ </span>{vertex.label}</> : ''}</li>
-            <li id='attr'>{vertex != null ? <><span id='attr-lbl'>desc_ </span> {vertex.description}</> : ''}</li>
-            <li id='attr'>{vertex != null ? <a id='attr-link' href={vertex != null ? vertex.url() : ''} target='_blank' rel='noreferrer' >
+            <li id='attr'>{selectedVertex != null ? <><span id='attr-lbl'>label_ </span>{selectedVertex.label}</> : ''}</li>
+            <li id='attr'>{selectedVertex != null ? <><span id='attr-lbl'>desc_ </span> {selectedVertex.description}</> : ''}</li>
+            <li id='attr'>{selectedVertex != null ? <a id='attr-link' href={selectedVertex != null ? selectedVertex.url() : ''} target='_blank' rel='noreferrer' >
               <img src={Link} id='attr-link-icon' alt='Wikipedia link icon' />
             </a> : ''}
             </li>
@@ -67,3 +66,5 @@ export const VerTextDetails: React.FC<VerTextDetailsProps> = ({ vertex }) => {
       </div>
     </>);
 };
+
+
