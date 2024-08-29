@@ -13,5 +13,6 @@ import ArrowBoth from './mi-both-arrow.svg'
 import ArrowTo from './mi-to-arrow.svg'
 import ArrowFrom from './mi-from-arrow.svg'
 import Vertex from './mi-vertex-icon.svg'
+import VertexSel from './mi-vertex-icon-selected.svg'
 
-export { Chev, ChevDngr, Fetch, Error, Exclaims, HistArr, Link, Quesion, Search, SearchDngr, Settings, ArrowBoth, ArrowTo, ArrowFrom, Vertex };
+export { Chev, ChevDngr, Fetch, Error, Exclaims, HistArr, Link, Quesion, Search, SearchDngr, Settings, ArrowBoth, ArrowTo, ArrowFrom, Vertex, VertexSel };
