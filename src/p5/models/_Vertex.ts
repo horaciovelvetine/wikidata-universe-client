@@ -25,9 +25,9 @@ export class Vertex implements iVertex {
     p5.strokeWeight(1.2);
     p5.stroke(1, 1, 14);
     if (curSelectedVert?.id == this.id) {
-      p5.fill("rgba(165, 205, 255, 1)");
+      p5.fill("rgba(252 , 220 , 18, 0.9)");
     } else {
-      p5.fill("rgba(205, 205, 205, 0.5)");
+      p5.fill("rgba(205, 205, 205, 0.8)");
     }
     p5.box(this.radius);
     p5.stroke(0);
