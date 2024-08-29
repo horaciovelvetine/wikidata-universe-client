@@ -1,7 +1,7 @@
 import './_EdgeDetailsStyle.css'
 
 import React from "react";
-import { Vertex as VertIcon } from '../assets/icons'
+import { Vertex as VertIcon, VertexSel } from '../assets/icons'
 import { edgeDirectionIcon } from './util';
 import { Edge, Vertex } from '../p5/models';
 import { SketchData, EDGE_DIR } from '../interfaces';
@@ -38,7 +38,7 @@ export const EdgeDetails: React.FC<EdgeDetailsProps> = ({ edge, data, selectedVe
     <>
       <div id='edge-details'>
         <a id='src-vert-container' onClick={() => focusVertexHandler(selectedVertex!)}>
-          <img id='vertex-icon' src={VertIcon} alt='represents current selected vertex' />
+          <img id='vertex-icon' src={VertexSel} alt='represents current selected vertex' />
         </a>
         <div id='property-container'>
           <p id='property-text' className={propertyTextColor()}>{property.label}</p>
