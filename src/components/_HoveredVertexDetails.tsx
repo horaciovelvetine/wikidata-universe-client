@@ -23,7 +23,7 @@ export const HoveredVertexDetails: React.FC<HoveredVertexDetailsProps> = ({ hove
         <>
           <img id='cur-hov-icon' src={VertIcon} />
           <span id='cur-hov-label'>{hoveredVertex.label}</span>
-          <span id='cur-hov-coords'><span id='attr-label'> @x_</span>{hv.x},<span id='attr-label'>y_</span>{hv.y}, <span id='attr-label'>z_</span>{hv.z} <span id='attr-label'></span></span>
+          <span id='cur-hov-coords'><span id='attr-label'> x_</span>{hv.x}<span id='attr-label'>y_</span>{hv.y} <span id='attr-label'>z_</span>{hv.z} <span id='attr-label'></span></span>
         </>
       ) : ''}</p>
       <img id='app-settings-icon' src={Settings} />
