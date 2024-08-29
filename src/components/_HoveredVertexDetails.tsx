@@ -1,6 +1,6 @@
 import './_HoveredVertexDetailsStyle.css'
 import React, { createRef, useEffect } from 'react';
-import { Vertex as VertIcon, Settings } from '../assets/icons'
+import { Vertex as VertIcon } from '../assets/icons'
 import { Vertex } from '../p5/models';
 import { fadeInHoveredLabel } from './animations';
 
@@ -23,10 +23,9 @@ export const HoveredVertexDetails: React.FC<HoveredVertexDetailsProps> = ({ hove
         <>
           <img id='cur-hov-icon' src={VertIcon} />
           <span id='cur-hov-label'>{hoveredVertex.label}</span>
-          <span id='cur-hov-coords'><span id='attr-label'> x_</span>{hv.x}<span id='attr-label'>y_</span>{hv.y} <span id='attr-label'>z_</span>{hv.z} <span id='attr-label'></span></span>
+          <span id='cur-hov-coords'><span id='attr-label'> x</span>{hv.x} <span id='attr-label'>y</span>{hv.y}  <span id='attr-label'>z</span>{hv.z} <span id='attr-label'></span></span>
         </>
       ) : ''}</p>
-      <img id='app-settings-icon' src={Settings} />
     </div>
   );
 };

@@ -7,15 +7,15 @@
 
 #hovered-vertex-container {
   display: flex;
-  justify-self: flex-end;
-  grid-column: 2;
+  justify-self: flex-start;
+  grid-column: 1;
   opacity: 75%;
+  margin-left: 1rem;
 }
 
 #cur-hovered {
   display: inline-flex;
   align-items: center;
-  padding-right: 1rem;
   margin-top: 6px;
   font-size: 1.3rem;
   text-shadow: 0px 1px 2px black;
@@ -38,22 +38,4 @@
 #attr-label {
   color: rgb(var(--font), 50%);
   font-family: 'CharisSIL-Regular', sans-serif;
-}
-
-#app-settings-icon {
-  height: 2rem;
-  margin-right: 1rem;
-  margin-top: 0.5rem;
-  opacity: 80%;
-  transition: opacity 235ms;
-}
-
-#app-settings-icon:hover {
-  transition: opacity 235ms;
-  opacity: 100%;
-}
-
-#app-settings-icon:not(:hover) {
-  transition: opacity 235ms;
-  opacity: 80%;
 }

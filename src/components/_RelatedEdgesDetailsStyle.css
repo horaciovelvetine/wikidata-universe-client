@@ -23,7 +23,7 @@
 #edges-info {
   display: flex;
   flex-direction: column;
-  max-height: 12rem;
+  max-height: 7rem;
   padding: 0.5rem 0.75rem;
   overflow-y: auto;
   scrollbar-color: rgba(var(--font), 25%) transparent;
