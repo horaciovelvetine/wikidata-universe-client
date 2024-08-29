@@ -13,7 +13,7 @@ interface ActiveQueryControlsProps {
 }
 
 export const ActiveQueryControls: React.FC<ActiveQueryControlsProps> = ({ query }) => {
-  const [input, setInput] = useState(query);
+  const [input, setInput] = useState<string | undefined>(query);
   const [inputState, setInputState] = useState<INPUT_STATE>(INPUT_STATE.DEFAULT);
   const [fetching, setFetching] = useState(false);
 
@@ -67,7 +67,7 @@ export const ActiveQueryControls: React.FC<ActiveQueryControlsProps> = ({ query 
   return (
     <div id='aqc-container' ref={contRef}>
       <form id='aqc-query-form' onSubmit={handleQuerySubmit}>
-        <input id='aqc-query-input' type='text' value={query} onChange={handleInputChanges} ref={inputRef} />
+        <input id='aqc-query-input' type='text' value={input} onChange={handleInputChanges} ref={inputRef} />
         {dynamicButton()}
       </form>
     </div>
