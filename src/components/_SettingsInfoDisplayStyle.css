@@ -1,0 +1,26 @@
+@import url('../assets/Palette.css');
+
+@font-face {
+  font-family: 'CharisSIL-Regular';
+  src: url('../assets/font/CharisSIL-Regular.ttf') format('truetype');
+}
+
+
+
+#app-settings-icon {
+  height: 2rem;
+  margin-right: 1rem;
+  margin-top: 0.5rem;
+  opacity: 80%;
+  transition: opacity 235ms;
+}
+
+#app-settings-icon:hover {
+  transition: opacity 235ms;
+  opacity: 100%;
+}
+
+#app-settings-icon:not(:hover) {
+  transition: opacity 235ms;
+  opacity: 80%;
+}

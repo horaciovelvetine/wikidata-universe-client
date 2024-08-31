@@ -17,8 +17,8 @@
   display: inline-flex;
   align-items: center;
   margin-top: 6px;
-  font-size: 1.3rem;
-  text-shadow: 0px 1px 2px black;
+  font-size: 1.5rem;
+  text-shadow: 0px 2px 3px rgb(var(--sketch-bg));
 }
 
 #cur-hov-icon {
@@ -30,12 +30,13 @@
   color: rgb(var(--font));
 }
 
-#cur-hov-coords {
+#cur-hov-desc {
   text-shadow: 0px 1px 2px black;
-  padding-left: 1rem;
+  color: rgba(var(--font), 0.5);
+  padding: 0.25rem;
 }
 
 #attr-label {
-  color: rgb(var(--font), 50%);
+  color: rgb(var(--font), 65%);
   font-family: 'CharisSIL-Regular', sans-serif;
 }
