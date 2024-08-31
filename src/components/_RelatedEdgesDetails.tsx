@@ -12,7 +12,6 @@ interface RelatedEdgesDetailsProps {
 }
 
 export const RelatedEdgesDetails: React.FC<RelatedEdgesDetailsProps> = ({ selectedVertex, data, focusVertexHandler }) => {
-  if (selectedVertex == null) return;
   const [isOnScreen, setIsOnScreen] = useState(false);
   const [relatedEdges, setRelatedEdges] = useState<Edge[] | null>(null)
   const contRef = createRef<HTMLDivElement>();
