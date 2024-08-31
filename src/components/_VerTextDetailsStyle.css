@@ -19,7 +19,8 @@
   margin-right: 1rem;
   border-radius: 0.5rem;
   backdrop-filter: blur(0.1rem);
-  background-color: rgba(var(--sketch-bg), 0.5);
+  background-color: rgba(var(--sketch-bg), 0.75);
+  text-shadow: 0px 1px 1px black;
 }
 
 #vertext-icon-cont {

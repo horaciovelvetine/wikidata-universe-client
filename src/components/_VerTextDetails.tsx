@@ -1,7 +1,7 @@
 import './_VerTextDetailsStyle.css';
 import React, { createRef, useEffect, useState } from 'react';
 
-import { changeFocusOpacity, flashOverlayElement, toggleSelectedVertexIcon } from './animations';
+import { changeFocusOpacity, flashOverlayElement, toggleSelectedVertexIcon, toggleVertextBackgrounds } from './animations';
 import { Vertex as VertIcon, VertexSel } from '../assets/icons'
 import { Vertex } from '../p5/models';
 
@@ -27,6 +27,7 @@ export const VerTextDetails: React.FC<VerTextDetailsProps> = ({ selectedVertex }
   useEffect(() => {
     toggleSelectedVertexIcon(noVertIconRef.current!, vertIconRef.current!, isOpen, 235)
     changeFocusOpacity(vertextInfoRef.current!, isOpen, '235ms', '1', '0.5');
+    toggleVertextBackgrounds(vertextInfoRef.current!, isOpen)
   }, [isOpen]);
 
   return (
