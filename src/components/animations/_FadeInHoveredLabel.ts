@@ -1,6 +1,5 @@
 export function fadeInHoveredLabel(ele: HTMLElement, show: boolean, duration: string = '0.06s') {
-  const transition = `opacity ${duration} linear`;
-  ele.style.transition = transition
+  ele.style.transition = `opacity ${duration} linear`;
   if (show) {
     ele.style.opacity = '1';
   } else {

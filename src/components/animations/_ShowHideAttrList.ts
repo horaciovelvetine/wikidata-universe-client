@@ -1,10 +1,8 @@
 export function showHideAttrList(ele: HTMLElement, isOpen: boolean, time: string = '0.25s') {
-  const transition = `transform ${time} linear`;
+  ele.style.transition = `transform ${time} linear`;
   if (!isOpen) {
-    ele.style.transition = transition;
     ele.style.transform = 'translateY(5rem)';
   } else {
-    ele.style.transition = transition;
     ele.style.transform = 'translateY(0rem)';
   }
 }
