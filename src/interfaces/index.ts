@@ -1,10 +1,10 @@
 export type { ApiStatus } from './_ApiStatus';
+export type { RequestPayload } from './_RequestPayload'
 export type { Dimensions } from './_Dimensions';
 export type { iEdge } from './_Edge';
 export type { iPoint3D } from './_Point3D';
 export type { iProperty } from './_Property'
 export type { RequestResponse } from './_RequestResponse';
-export type { SessionData } from './_SessionData';
 export type { SketchData } from './_SketchData'
 export type { iVertex } from './_Vertex';
 

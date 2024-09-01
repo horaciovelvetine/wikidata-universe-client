@@ -1,6 +1,7 @@
-import { SessionData } from "./_SessionData";
+import { RequestPayload } from "./_RequestPayload";
 
 export interface RequestResponse {
   status: number;
-  data: SessionData | string;
+  errMsg: string | undefined;
+  data: RequestPayload;
 }
