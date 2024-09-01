@@ -3,32 +3,24 @@ import CharisTTF from "../assets/font/CharisSIL-Regular.ttf";
 import { P5CanvasInstance, ReactP5Wrapper, Sketch } from "@p5-wrapper/react";
 import { Camera, Font } from "p5";
 
-import { calcInitLayoutDimensions, setupCameraView, traceRay, drawSketchUI } from "./functions";
+import { calcInitLayoutDimensions, traceRay, drawSketchUI } from "./functions";
 import { Vertex, LookAtChange } from "./models";
 import { clickTargetMatchesCurrentSelection, vertexInSelectedHistory } from "./util";
 
-import CharlesSessionDataR2 from '../assets/data/charles-data-r1-2.json'
 import { SketchData } from "../interfaces";
+import { postRelatedDataQueue } from "../api";
 
 
 interface WikiverSketchProps {
-  query: string | undefined;
+  curQuery: string;
+  sketchData: SketchData; // used to init then becomes stale(!!!)
   setHoveredVertex: React.Dispatch<React.SetStateAction<Vertex | null>>
   setSelectedVertex: React.Dispatch<React.SetStateAction<Vertex | null>>;
-  setSketchData: React.Dispatch<React.SetStateAction<SketchData | null>>;
+  setSketchData: React.Dispatch<React.SetStateAction<SketchData>>;
   setLookAtRef: React.Dispatch<React.SetStateAction<LookAtChange | undefined>>
 }
 
-const sessionData = (): SketchData => {
-  return {
-    vertices: CharlesSessionDataR2.vertices,
-    edges: CharlesSessionDataR2.edges,
-    properties: CharlesSessionDataR2.properties,
-    queue: CharlesSessionDataR2.queue,
-  }
-}
-
-export const WikiverseSketch: React.FC<WikiverSketchProps> = ({ query, setSelectedVertex, setSketchData, setLookAtRef, setHoveredVertex }) => {
+export const WikiverseSketch: React.FC<WikiverSketchProps> = ({ curQuery, sketchData, setSelectedVertex, setSketchData, setLookAtRef, setHoveredVertex }) => {
   // SKETCH 
   let wikiFont: Font;
   let cam: Camera;
@@ -37,20 +29,49 @@ export const WikiverseSketch: React.FC<WikiverSketchProps> = ({ query, setSelect
   let hoveredVertex: Vertex | null = null;
   let selectedVertex: Vertex | null = null;
   let selectedHistory: Vertex[] = [];
-  let session = sessionData();
+  let session = sketchData;
+
+  console.log('initSketchData()=', sketchData)
+
+  const postRelatedPayload = () => {
+    return {
+      query: curQuery,
+      dimensions: calcInitLayoutDimensions(),
+      vertices: sketchData.vertices,
+      edges: sketchData.edges,
+      properties: sketchData.properties,
+      queue: sketchData.queue
+    }
+  }
 
   const WikiverseSketch: Sketch = (p5: P5CanvasInstance) => {
-
-    //* ==>       <== *//
-    //* ==> SETUP <== *//
-    //* ==>       <== *//
     p5.preload = () => { wikiFont = p5.loadFont(CharisTTF); };
-    p5.setup = () => {
+    p5.setup = async () => {
       const { width, height } = calcInitLayoutDimensions();
       p5.createCanvas(width, height, p5.WEBGL);
       p5.textFont(wikiFont!); //set in preload
-      cam = setupCameraView(p5, cam);
+
+      cam = p5.createCamera();
+      if (curQuery != '') {
+        const originVertex = new Vertex(sketchData?.vertices[0])
+        selectedVertex = originVertex
+        setSelectedVertex(originVertex)
+
+        const { x, y, z } = originVertex.coords
+        cam.setPosition(x, y, (z + 150));
+        cam.lookAt(0, 0, 0); // start somewhere move to origin...
+        lookAt.setTarget(originVertex.coords);
+      }
+
       setLookAtRef(lookAt)
+
+      if (curQuery != '') {
+        //
+        //TODO SHOULD BE REMOVEABLE AS FULL APP INITS (W/ SEARCH FIRST)
+        //
+        const relatedRes = await postRelatedDataQueue(postRelatedPayload())
+        session = relatedRes.data;
+      }
       setSketchData(session)
     };
 
@@ -58,7 +79,8 @@ export const WikiverseSketch: React.FC<WikiverSketchProps> = ({ query, setSelect
     //* ==> DRAW <== *//
     //* ==>      <== *//
     p5.draw = () => {
-      drawSketchUI(p5, session);
+      drawSketchUI(p5, session, curQuery);
+      if (curQuery == '') return;
 
       if (!!selectedVertex) {
         selectedVertex.drawLabel(p5, cam!, wikiFont!);
@@ -85,6 +107,7 @@ export const WikiverseSketch: React.FC<WikiverSketchProps> = ({ query, setSelect
     //* ==> CLICK <== *//
     //* ==>       <== *//
     p5.mouseClicked = () => {
+      if (curQuery == '') return;
       session.vertices.forEach((vertexData) => {
         const vert = new Vertex(vertexData);
         if (!traceRay(p5, cam!, vert)) return; // vertex is not click target
@@ -103,7 +126,7 @@ export const WikiverseSketch: React.FC<WikiverSketchProps> = ({ query, setSelect
         selectedVertex = vert;
         setSelectedVertex(vert);
         // Fetch new Vertex details...
-        if (vert.label == query) return; // origin already fetched...
+        if (vert.label == curQuery) return; // origin already fetched...
         if (vertexInSelectedHistory(selectedHistory, vert)) return;
         selectedHistory.push(vert);
         console.log('look for new details...')
@@ -114,6 +137,7 @@ export const WikiverseSketch: React.FC<WikiverSketchProps> = ({ query, setSelect
     //* ==> HOVER <== *//
     //* ==>       <== *//
     p5.mouseMoved = () => {
+      if (curQuery == '') return;
       if (hoveredVertex != null) {
         if (traceRay(p5, cam!, hoveredVertex)) return; // same vertex still hovered
       }

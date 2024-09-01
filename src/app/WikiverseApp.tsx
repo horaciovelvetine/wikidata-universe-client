@@ -6,25 +6,23 @@ import { VerticalSiteTitle, Footer, VerTextDetails, ActiveQueryControls, Related
 import { WikiverseSketch } from '../p5/WikiverseSketch';
 import { calcInitLayoutDimensions } from '../p5/functions';
 import { LookAtChange, Point3D, Vertex } from '../p5/models';
-import { Camera } from 'p5';
-
-
 
 interface WikiverseAppProps {
   apiStatusRes: ApiStatus;
 }
 
 const MemoizedSketch = memo(WikiverseSketch, (prevProps, nextProps) => {
-  return prevProps.query == nextProps.query
+  return prevProps.curQuery == nextProps.curQuery;
 })
 
 export const WikiverseApp: React.FC<WikiverseAppProps> = () => {
   const [dimensions, setDimensions] = useState(calcInitLayoutDimensions());
-  const [query, setQuery] = useState<string>("Charles");
   const [selectedVertex, setSelectedVertex] = useState<Vertex | null>(null);
   const [hoveredVertex, setHoveredVertex] = useState<Vertex | null>(null);
 
-  const [sketchData, setSketchData] = useState<SketchData | null>(null);
+
+  const [curQuery, setCurQuery] = useState<string>('');
+  const [sketchData, setSketchData] = useState<SketchData>({} as SketchData);
   const [lookAtRef, setLookAtRef] = useState<LookAtChange>();
 
   useEffect(() => {
@@ -41,18 +39,22 @@ export const WikiverseApp: React.FC<WikiverseAppProps> = () => {
     <div id='wikiverse-container'>
       <VerticalSiteTitle />
       <div id='sketch-container' style={{ width: dimensions.width, height: dimensions.height }}>
+
+        {/** TOP UI DETAILS */}
         <div id='sketch-overlay-top'>
           <HoveredVertexDetails {...{ hoveredVertex }} />
         </div>
 
         {/* SKETCH START */}
-        <MemoizedSketch {...{ query, setSelectedVertex, setSketchData, setLookAtRef, setHoveredVertex }} />
+        <MemoizedSketch {...{ curQuery, sketchData, setSelectedVertex, setSketchData, setLookAtRef, setHoveredVertex }} />
 
+        {/* BOTTOM UI DETAILS */}
         <div id='sketch-overlay-bot'>
-          <RelatedEdgesDetails {...{ selectedVertex, data: sketchData, focusVertexHandler }} />
-          <ActiveQueryControls {...{ query }} />
+          <RelatedEdgesDetails {...{ selectedVertex, sketchData, focusVertexHandler }} />
+          <ActiveQueryControls {...{ curQuery, setCurQuery, setSketchData }} />
           <VerTextDetails {...{ selectedVertex }} />
         </div>
+
       </div>
       <Footer />
     </div>
