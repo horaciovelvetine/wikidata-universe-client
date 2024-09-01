@@ -2,7 +2,8 @@ import { P5CanvasInstance } from "@p5-wrapper/react";
 import { SketchData } from "../../interfaces";
 import { calcVertexSetMean, minMaxValuesInSet } from "../functions";
 
-export function drawSketchUI(p5: P5CanvasInstance, session: SketchData) {
+export function drawSketchUI(p5: P5CanvasInstance, session: SketchData, curQuery: string) {
+
   p5.background('rgb(1, 1, 14)');
   p5.orbitControl(2, 2, 2);
   p5.rectMode(p5.CENTER);
@@ -10,6 +11,8 @@ export function drawSketchUI(p5: P5CanvasInstance, session: SketchData) {
   const aspectRatio = p5.width / p5.height;
   const defaultFoc = (2 * p5.atan(p5.height / 2 / 800));
   p5.perspective(defaultFoc, aspectRatio, 1, 80000);
+
+  if (curQuery == '') return;
 
   const meanPoint = calcVertexSetMean(session.vertices);
   const minMax = minMaxValuesInSet(session.vertices);
