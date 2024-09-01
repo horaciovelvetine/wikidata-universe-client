@@ -18,9 +18,9 @@
   grid-row: 2;
   margin-right: 1rem;
   border-radius: 0.5rem;
-  backdrop-filter: blur(0.1rem);
-  background-color: rgba(var(--sketch-bg), 0.75);
+  backdrop-filter: blur(0.25rem);
   text-shadow: 0px 1px 1px black;
+  padding-left: 0.5rem;
 }
 
 #vertext-icon-cont {
@@ -57,8 +57,10 @@
   color: rgba(var(--font), 0.4);
   display: inline-flex;
   padding-left: 0.5rem;
+  padding-right: 0.3rem;
   text-overflow: ellipsis;
   overflow: hidden;
+
 }
 
 /* #vertext-container {

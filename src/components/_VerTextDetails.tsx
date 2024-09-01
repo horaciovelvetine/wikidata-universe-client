@@ -26,8 +26,8 @@ export const VerTextDetails: React.FC<VerTextDetailsProps> = ({ selectedVertex }
 
   useEffect(() => {
     toggleVertextBackgrounds(vertextInfoRef.current!, isOpen)
-    toggleSelectedVertexIcon(noVertIconRef.current!, vertIconRef.current!, isOpen, 235)
-    changeFocusOpacity(vertextInfoRef.current!, isOpen, '235ms', '1', '0.5');
+    toggleSelectedVertexIcon(noVertIconRef.current!, vertIconRef.current!, isOpen)
+    changeFocusOpacity(vertextInfoRef.current!, isOpen);
   }, [isOpen]);
 
   return (
