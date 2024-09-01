@@ -1,4 +1,4 @@
-export function toggleSelectedVertexIcon(noSelIcon: HTMLElement, selIcon: HTMLElement, isOpen: boolean, duration: number = 500) {
+export function toggleSelectedVertexIcon(noSelIcon: HTMLElement, selIcon: HTMLElement, isOpen: boolean, duration: number = 235) {
   const transition = `opacity ${duration}ms linear`;
   noSelIcon.style.transition = transition;
   selIcon.style.transition = transition;
