@@ -7,11 +7,11 @@ import { showHideRelatedEdges } from './animations';
 
 interface RelatedEdgesDetailsProps {
   selectedVertex: Vertex | null;
-  data: SketchData | null;
+  sketchData: SketchData | null;
   focusVertexHandler: (otherVert: Vertex) => void;
 }
 
-export const RelatedEdgesDetails: React.FC<RelatedEdgesDetailsProps> = ({ selectedVertex, data, focusVertexHandler }) => {
+export const RelatedEdgesDetails: React.FC<RelatedEdgesDetailsProps> = ({ selectedVertex, sketchData, focusVertexHandler }) => {
   const [isOnScreen, setIsOnScreen] = useState(false);
   const [relatedEdges, setRelatedEdges] = useState<Edge[] | null>(null)
   const contRef = createRef<HTMLDivElement>();
@@ -19,7 +19,7 @@ export const RelatedEdgesDetails: React.FC<RelatedEdgesDetailsProps> = ({ select
 
   useEffect(() => {
     if (selectedVertex != null) {
-      setRelatedEdges(selectedVertex.getRelatedEdges(data!))
+      setRelatedEdges(selectedVertex.getRelatedEdges(sketchData!))
       setIsOnScreen(true);
     } else {
       setRelatedEdges(null)
@@ -40,7 +40,7 @@ export const RelatedEdgesDetails: React.FC<RelatedEdgesDetailsProps> = ({ select
       <div id='edges-info' ref={edgesInfoRef} onWheel={blockWheelScrollDetailsHandler}>
         <ul id='details-list'>
           {relatedEdges?.map((edge, index) => (
-            <EdgeDetails key={index} {...{ edge, data, selectedVertex, relatedEdges, focusVertexHandler }} />
+            <EdgeDetails key={index} {...{ edge, sketchData, selectedVertex, relatedEdges, focusVertexHandler }} />
           ))}
         </ul>
       </div>
