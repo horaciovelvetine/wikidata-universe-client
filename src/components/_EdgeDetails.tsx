@@ -8,16 +8,16 @@ import { SketchData, EDGE_DIR } from '../interfaces';
 
 interface EdgeDetailsProps {
   edge: Edge;
-  data: SketchData | null;
+  sketchData: SketchData | null;
   selectedVertex: Vertex | null;
   relatedEdges: Edge[];
   focusVertexHandler: (otherVert: Vertex) => void;
 }
 
-export const EdgeDetails: React.FC<EdgeDetailsProps> = ({ edge, data, selectedVertex, relatedEdges, focusVertexHandler }) => {
-  const property = edge.getPropertyDetails(data!);
+export const EdgeDetails: React.FC<EdgeDetailsProps> = ({ edge, sketchData, selectedVertex, relatedEdges, focusVertexHandler }) => {
+  const property = edge.getPropertyDetails(sketchData!);
   if (property == undefined) return; //todo -> refactors for animateable version
-  const endpoints = edge.getVertexEndpoints(data!);
+  const endpoints = edge.getVertexEndpoints(sketchData!);
   const otherVert = endpoints.src.id == selectedVertex?.id ? endpoints.tgt : endpoints.src;
   const parallelEdges = selectedVertex?.parallelEdges(otherVert, edge, relatedEdges)
   if (parallelEdges == undefined) return; //todo -> refactors for animateable version
