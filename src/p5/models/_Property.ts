@@ -1,6 +1,6 @@
 import { iProperty } from "../../interfaces";
 
-export class Property {
+export class Property implements iProperty {
   id: string;
   label: string;
   description: string;
