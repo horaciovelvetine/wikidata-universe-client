@@ -29,7 +29,9 @@ export class Edge implements iEdge {
   }
 
   getPropertyDetails(data: SketchData): Property {
-    return data.properties.find(property => this.propertyId == property.id)
+    const property: Property | undefined = data.properties.find(prop => this.propertyId == prop.id);
+    // TODO => defaulting behavior for missing properties
+    return property ? property : new Property({ id: "def", label: "def", description: "def" })
   }
 
   getEdgeDirection(currentlySelectedVertex: Vertex) {

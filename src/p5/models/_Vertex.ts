@@ -30,7 +30,7 @@ export class Vertex implements iVertex {
       p5.fill("rgba(205, 205, 205, 0.8)");
     }
     p5.box(this.radius);
-    p5.stroke(0);
+    p5.noStroke();
     p5.pop();
   }
 
@@ -69,7 +69,10 @@ export class Vertex implements iVertex {
    * @see URL is a guess, Wikidata Entities do not always have article representations.
    */
   url() {
-    return `https://en.wikipedia.org/wiki/${this.label.replace(" ", "_")}`;
+    const wikidataUrl = /^P/.test(this.id) ?
+      `https://www.wikidata.org/wiki/Property:${this.id}` :
+      `https://en.wikipedia.org/wiki/${this.label.replace(" ", "_")}`;
+    return wikidataUrl;
   }
 
   /**
