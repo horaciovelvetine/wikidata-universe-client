@@ -15,17 +15,17 @@ export const HoveredVertexDetails: React.FC<HoveredVertexDetailsProps> = ({ hove
     fadeInHoveredLabel(curHovRef.current!, !!hoveredVertex)
   }, [hoveredVertex])
 
-  const hv = hoveredVertex?.xyz()!
-
   return (
     <div id='hovered-vertex-container'>
-      <p id='cur-hovered' ref={curHovRef}> {hoveredVertex != null ? (
+      <div id='cur-hovered' ref={curHovRef}> {hoveredVertex != null ? (
         <>
           <img id='cur-hov-icon' src={VertIcon} />
-          <span id='cur-hov-label'>{hoveredVertex.label}:</span>
-          <span id='cur-hov-desc'>{hoveredVertex.description}</span>
+          <div id='cur-hov-text-container'>
+            <p id='cur-hov-label'>{hoveredVertex.label}:</p>
+            <p id='cur-hov-desc'>{hoveredVertex.description}</p>
+          </div>
         </>
-      ) : ''}</p>
+      ) : <></>}</div>
     </div>
   );
 };
