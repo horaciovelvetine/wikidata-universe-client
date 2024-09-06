@@ -1,20 +1,21 @@
 import './_ActiveQueryControlsStyle.css';
 import './animations/_HorizontalShake.css';
-import React, { createRef, useEffect, useState } from 'react';
-import { INPUT_STATE, SketchData } from '../interfaces';
+
+import React, { createRef, Dispatch, SetStateAction, useState } from 'react';
+
+import { INPUT_STATE, RequestResponse } from '../interfaces';
 import { Search, SearchDngr, Fetch } from '../assets/icons';
 import { flashOverlayElement, shakeInvalidElement } from './animations';
 import { getQueryData } from '../api';
 
 
 interface ActiveQueryControlsProps {
-  curQuery: string;
-  setCurQuery: React.Dispatch<React.SetStateAction<string>>
-  setSketchData: React.Dispatch<React.SetStateAction<SketchData>>
+  originQuery: string;
+  setInitQueryRes: Dispatch<SetStateAction<RequestResponse>>;
 }
 
-export const ActiveQueryControls: React.FC<ActiveQueryControlsProps> = ({ curQuery, setCurQuery, setSketchData }) => {
-  const [input, setInput] = useState<string>(curQuery);
+export const ActiveQueryControls: React.FC<ActiveQueryControlsProps> = ({ originQuery, setInitQueryRes }) => {
+  const [input, setInput] = useState<string>(originQuery);
   const [inputState, setInputState] = useState<INPUT_STATE>(INPUT_STATE.DEFAULT);
   const [fetching, setFetching] = useState(false);
 
@@ -26,7 +27,7 @@ export const ActiveQueryControls: React.FC<ActiveQueryControlsProps> = ({ curQue
 
   function handleInputChanges(e: React.ChangeEvent<HTMLInputElement>) {
     setInput(e.target.value);
-    if (curQuery == e.target.value) {
+    if (originQuery == e.target.value) {
       setInputState(INPUT_STATE.DEFAULT);
     } else if (e.target.value.length == 0) {
       setInputState(INPUT_STATE.EMPTY);
@@ -54,8 +55,7 @@ export const ActiveQueryControls: React.FC<ActiveQueryControlsProps> = ({ curQue
       const res = await getQueryData(input!)
       setFetching(false);
       if (res.status == 200) {
-        setSketchData(res.data as SketchData)
-        setCurQuery(input)
+        setInitQueryRes(res)
       }
     } else {
       shakeInvalidElement(els.cont);
