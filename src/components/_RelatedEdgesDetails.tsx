@@ -6,12 +6,12 @@ import { EdgeDetails } from '../components';
 import { showHideRelatedEdges } from './animations';
 
 interface RelatedEdgesDetailsProps {
-  selectedVertex: Vertex | null;
-  sketchData: SketchData | null;
-  focusVertexHandler: (otherVert: Vertex) => void;
+  selectedVertex: Vertex;
+  sketchData: SketchData;
+  adjustLookAtHandler: (otherVert: Vertex) => void;
 }
 
-export const RelatedEdgesDetails: React.FC<RelatedEdgesDetailsProps> = ({ selectedVertex, sketchData, focusVertexHandler }) => {
+export const RelatedEdgesDetails: React.FC<RelatedEdgesDetailsProps> = ({ selectedVertex, sketchData, adjustLookAtHandler }) => {
   const [isOnScreen, setIsOnScreen] = useState(false);
   const [relatedEdges, setRelatedEdges] = useState<Edge[] | null>(null)
   const contRef = createRef<HTMLDivElement>();
@@ -28,6 +28,7 @@ export const RelatedEdgesDetails: React.FC<RelatedEdgesDetailsProps> = ({ select
   }, [selectedVertex])
 
   useEffect(() => {
+    if (selectedVertex == null) return;
     showHideRelatedEdges(contRef.current!, isOnScreen)
   }, [isOnScreen])
 
@@ -36,14 +37,18 @@ export const RelatedEdgesDetails: React.FC<RelatedEdgesDetailsProps> = ({ select
   }
 
   return (
-    <div id='edges-info-container' ref={contRef}>
-      <div id='edges-info' ref={edgesInfoRef} onWheel={blockWheelScrollDetailsHandler}>
-        <ul id='details-list'>
-          {relatedEdges?.map((edge, index) => (
-            <EdgeDetails key={index} {...{ edge, sketchData, selectedVertex, relatedEdges, focusVertexHandler }} />
-          ))}
-        </ul>
-      </div>
-    </div>
+    <>
+      {selectedVertex == null ? <></> : <>
+        <div id='edges-info-container' ref={contRef}>
+          <div id='edges-info' ref={edgesInfoRef} onWheel={blockWheelScrollDetailsHandler}>
+            <ul id='details-list'>
+              {relatedEdges?.map((edge, index) => (
+                <EdgeDetails key={index} {...{ edge, sketchData, selectedVertex, relatedEdges, adjustLookAtHandler }} />
+              ))}
+            </ul>
+          </div>
+        </div>
+      </>}
+    </>
   );
 }
