@@ -1,6 +1,18 @@
 import { iVertex } from "../../interfaces";
 
-export function minMaxValuesInSet(vertices: iVertex[]): { x: { min: number, max: number }, y: { min: number, max: number }, z: { min: number, max: number } } {
+export interface MinMaxSet {
+  x: MinMax;
+  y: MinMax;
+  z: MinMax
+}
+
+interface MinMax {
+  min: number;
+  max: number;
+  diff: number;
+}
+
+export function minMaxValuesInSet(vertices: iVertex[]): MinMaxSet {
   let xMin = Infinity, xMax = -Infinity;
   let yMin = Infinity, yMax = -Infinity;
   let zMin = Infinity, zMax = -Infinity;
@@ -12,5 +24,9 @@ export function minMaxValuesInSet(vertices: iVertex[]): { x: { min: number, max:
     if (vertex.coords.z < zMin) zMin = vertex.coords.z;
     if (vertex.coords.z > zMax) zMax = vertex.coords.z;
   });
-  return { x: { min: xMin, max: xMax }, y: { min: yMin, max: yMax }, z: { min: zMin, max: zMax } };
+
+  const xDiff = xMax - xMin
+  const yDiff = yMax - yMin
+  const zDiff = zMax - zMin
+  return { x: { min: xMin, max: xMax, diff: xDiff }, y: { min: yMin, max: yMax, diff: yDiff }, z: { min: zMin, max: zMax, diff: zDiff } };
 }
