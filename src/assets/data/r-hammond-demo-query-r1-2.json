@@ -1,0 +1,5819 @@
+{
+  "err" : null,
+  "query" : "Richard Hammond",
+  "vertices" : [ {
+    "id" : "Q4853732",
+    "label" : "children's writer",
+    "description" : "writer of literature targeted primarily at children",
+    "coords" : {
+      "x" : 192.82595991844963,
+      "y" : -175.64296798708924,
+      "z" : 254.22089663274824
+    }
+  }, {
+    "id" : "Q23129",
+    "label" : "Herefordshire",
+    "description" : "ceremonial county, and unitary non-metropolitan county and district, in England",
+    "coords" : {
+      "x" : -81.22682445111028,
+      "y" : -139.70518973344855,
+      "z" : -283.8250038588659
+    }
+  }, {
+    "id" : "Q297265",
+    "label" : "Richard Hammond",
+    "description" : "English motoring journalist and broadcaster",
+    "coords" : {
+      "x" : 0.0,
+      "y" : 0.0,
+      "z" : 0.0
+    }
+  }, {
+    "id" : "Q397343",
+    "label" : "Solihull",
+    "description" : "town in the West Midlands of England",
+    "coords" : {
+      "x" : -153.9116328516764,
+      "y" : -7.002751693521901,
+      "z" : -290.1286442379514
+    }
+  }, {
+    "id" : "Q71521142",
+    "label" : "reproduction right not represented by CISAC member",
+    "description" : "mentioned by a member of CISAC that reproduction rights of visual works of an artist are not represented by them",
+    "coords" : {
+      "x" : 28.788471082942436,
+      "y" : 98.24431856152287,
+      "z" : 342.0306723823729
+    }
+  }, {
+    "id" : "Q5",
+    "label" : "human",
+    "description" : "any member of Homo sapiens, unique extant species of the genus Homo, from embryo to adult",
+    "coords" : {
+      "x" : 178.0946493209426,
+      "y" : 284.8196999703831,
+      "z" : 117.57566405595429
+    }
+  }, {
+    "id" : "Q7335666",
+    "label" : "Ripon Grammar School",
+    "description" : "school in North Yorkshire, UK",
+    "coords" : {
+      "x" : -195.1958472509366,
+      "y" : -251.39715526783056,
+      "z" : -55.7330116761745
+    }
+  }, {
+    "id" : "Q7558100",
+    "label" : "Solihull School",
+    "description" : "school in Solihull, UK",
+    "coords" : {
+      "x" : -210.97776813981517,
+      "y" : 47.167399334648564,
+      "z" : -248.2185104447912
+    }
+  }, {
+    "id" : "Q22997091",
+    "label" : "Amanda Etheridge",
+    "description" : null,
+    "coords" : {
+      "x" : 116.711573190872,
+      "y" : 183.08282653695534,
+      "z" : 76.36427393028481
+    }
+  }, {
+    "id" : "Q13610143",
+    "label" : "Mark",
+    "description" : "male given name",
+    "coords" : {
+      "x" : 280.3044737571605,
+      "y" : -173.56102641478608,
+      "z" : -163.28722831543743
+    }
+  }, {
+    "id" : "Q21903339",
+    "label" : "W. Chump & Sons Ltd",
+    "description" : "independent television production company",
+    "coords" : {
+      "x" : 152.94307148749274,
+      "y" : 21.464089691512527,
+      "z" : -44.108219702369276
+    }
+  }, {
+    "id" : "Q2711174",
+    "label" : "Hammond",
+    "description" : "family name",
+    "coords" : {
+      "x" : -269.1253381095298,
+      "y" : 140.08993944358065,
+      "z" : 147.6084785459185
+    }
+  }, {
+    "id" : "Q69289562",
+    "label" : "December 19, 1969",
+    "description" : "date in Gregorian calendar",
+    "coords" : {
+      "x" : -484.72564652004394,
+      "y" : -516.8092163288075,
+      "z" : 617.5751195112458
+    }
+  }, {
+    "id" : "Q18814623",
+    "label" : "autobiographer",
+    "description" : "person who wrote their autobiography",
+    "coords" : {
+      "x" : 364.85646898455605,
+      "y" : -52.0946948241147,
+      "z" : -13.05733690527088
+    }
+  }, {
+    "id" : "Q1930187",
+    "label" : "journalist",
+    "description" : "person who collects, writes, and distributes news and other information",
+    "coords" : {
+      "x" : 96.99044399788193,
+      "y" : -157.29579051107734,
+      "z" : 130.441872399261
+    }
+  }, {
+    "id" : "Q1249148",
+    "label" : "Richard",
+    "description" : "male given name",
+    "coords" : {
+      "x" : -229.3001008255139,
+      "y" : 235.67255536809756,
+      "z" : 52.09558874686907
+    }
+  }, {
+    "id" : "Q69301923",
+    "label" : "November 30, 1997",
+    "description" : "date in Gregorian calendar",
+    "coords" : {
+      "x" : -499.37451831229157,
+      "y" : 656.9153574080883,
+      "z" : -535.5622427828146
+    }
+  }, {
+    "id" : "Q1860",
+    "label" : "English",
+    "description" : "West Germanic language",
+    "coords" : {
+      "x" : -265.37712953946374,
+      "y" : 54.29655470031662,
+      "z" : -18.865948385703405
+    }
+  }, {
+    "id" : "Q5666376",
+    "label" : "Harrogate College",
+    "description" : "College in Harrogate, England",
+    "coords" : {
+      "x" : -96.2547277214519,
+      "y" : -237.96109713781442,
+      "z" : -205.88184237640422
+    }
+  }, {
+    "id" : "Q661529",
+    "label" : "Ripon",
+    "description" : "cathedral city in the Borough of Harrogate, North Yorkshire, England",
+    "coords" : {
+      "x" : -237.96181631844235,
+      "y" : -221.8142434278043,
+      "z" : -8.68822253844806
+    }
+  }, {
+    "id" : "Q145",
+    "label" : "United Kingdom",
+    "description" : "country in north-west Europe",
+    "coords" : {
+      "x" : -217.73655165758132,
+      "y" : -77.27656354130811,
+      "z" : -121.78972833747764
+    }
+  }, {
+    "id" : "Q33162",
+    "label" : "Top Gear",
+    "description" : "British automotive television show, 2002-2022",
+    "coords" : {
+      "x" : -194.88889410609687,
+      "y" : -13.21004078745544,
+      "z" : 16.03466950033075
+    }
+  }, {
+    "id" : "Q4740856",
+    "label" : "Amazon Prime Video",
+    "description" : "American video streaming service",
+    "coords" : {
+      "x" : 308.31435946989643,
+      "y" : 139.889755664828,
+      "z" : -148.10343510122618
+    }
+  }, {
+    "id" : "Q947873",
+    "label" : "television presenter",
+    "description" : "person who introduces or hosts television programs",
+    "coords" : {
+      "x" : 265.7507413401487,
+      "y" : 114.6735207058394,
+      "z" : 230.44086018669213
+    }
+  }, {
+    "id" : "Q73555012",
+    "label" : "works protected by copyrights",
+    "description" : "literary and artistic works by creator protected by copyrights (author's rights)",
+    "coords" : {
+      "x" : 87.81603500394738,
+      "y" : 290.047895461043,
+      "z" : -185.90667530214967
+    }
+  }, {
+    "id" : "Q36180",
+    "label" : "writer",
+    "description" : "person who uses written words to communicate ideas and to produce literary works",
+    "coords" : {
+      "x" : 170.38327157205205,
+      "y" : -238.04093707050683,
+      "z" : 194.75505872786988
+    }
+  } ],
+  "edges" : [ {
+    "srcId" : "Q1249148",
+    "tgtId" : "Q39164767",
+    "propertyId" : "P460",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q23129",
+    "tgtId" : "Q7116045",
+    "propertyId" : "P1792",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1249148",
+    "tgtId" : "Q65177267",
+    "propertyId" : "P361",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q986",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "Q200325",
+    "propertyId" : "P2184",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q947873",
+    "tgtId" : "Q94498772",
+    "propertyId" : "P279",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q1410",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q209663",
+    "propertyId" : "P832",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q4853732",
+    "tgtId" : "Q32784446",
+    "propertyId" : "P6186",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "P166",
+    "propertyId" : "P1963",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "Q23852",
+    "propertyId" : "P527",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q7558100",
+    "tgtId" : "Q26498983",
+    "propertyId" : "P527",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q947873",
+    "tgtId" : "Q13590141",
+    "propertyId" : "P279",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q178435",
+    "propertyId" : "P4132",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "Q1156970",
+    "propertyId" : "P1269",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1249148",
+    "tgtId" : "Q2509",
+    "propertyId" : "P1750",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q2964710",
+    "propertyId" : "P371",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q42262",
+    "propertyId" : "P463",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q947873",
+    "tgtId" : "Q59522048",
+    "propertyId" : "P6186",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q661529",
+    "tgtId" : "Q61023920",
+    "propertyId" : "P1464",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1249148",
+    "tgtId" : "Q18073734",
+    "propertyId" : "P460",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q4740856",
+    "tgtId" : "Q59152282",
+    "propertyId" : "P31",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q13610143",
+    "tgtId" : "Q8229",
+    "propertyId" : "P282",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q8016",
+    "propertyId" : "P6",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q424",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q36180",
+    "tgtId" : "Q108762424",
+    "propertyId" : "P279",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "Q61788060",
+    "propertyId" : "P1344",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q36823",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q7824523",
+    "propertyId" : "P527",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q38272",
+    "propertyId" : "P706",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q935983",
+    "propertyId" : "P86",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q7558100",
+    "tgtId" : "Q67575123",
+    "propertyId" : "P7959",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "P1412",
+    "propertyId" : "P1963",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q56650537",
+    "propertyId" : "P3103",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "Q42762",
+    "propertyId" : "P361",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q403",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q7200373",
+    "propertyId" : "P4132",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "P1813",
+    "propertyId" : "P1963",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q917",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q216160",
+    "propertyId" : "P371",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q150",
+    "propertyId" : "P737",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q691",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q128995",
+    "propertyId" : "P6",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1249148",
+    "tgtId" : "Q15720871",
+    "propertyId" : "P460",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : null,
+    "propertyId" : "P571",
+    "label" : "April 12, 1927",
+    "type" : "DateTime"
+  }, {
+    "srcId" : "Q13610143",
+    "tgtId" : "Q17520944",
+    "propertyId" : "P460",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1249148",
+    "tgtId" : "Q18059424",
+    "propertyId" : "P460",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q661529",
+    "tgtId" : "Q27104997",
+    "propertyId" : "P31",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q36705",
+    "propertyId" : "P2936",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q297265",
+    "tgtId" : null,
+    "propertyId" : "P2031",
+    "label" : "November 30, 1997",
+    "type" : "DateTime"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q11703",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q5785",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q18814623",
+    "tgtId" : "Q864380",
+    "propertyId" : "P279",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q23129",
+    "tgtId" : "Q5738061",
+    "propertyId" : "P797",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1249148",
+    "tgtId" : "Q10862233",
+    "propertyId" : "P1533",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "Q7390",
+    "propertyId" : "P4733",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "P463",
+    "propertyId" : "P1963",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q6574",
+    "propertyId" : "P421",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q7558100",
+    "tgtId" : null,
+    "propertyId" : "P571",
+    "label" : "November 30, 1559",
+    "type" : "DateTime"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q9531",
+    "propertyId" : "P272",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q9676",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q20",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q4453957",
+    "propertyId" : "P437",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q297265",
+    "tgtId" : "Q71521142",
+    "propertyId" : "P6275",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q1348800",
+    "propertyId" : "P527",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q73555012",
+    "tgtId" : "Q104844567",
+    "propertyId" : "P527",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1930187",
+    "tgtId" : "Q36180",
+    "propertyId" : "P279",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q242797",
+    "propertyId" : "P2587",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "Q3769299",
+    "propertyId" : "P1552",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q7123539",
+    "propertyId" : "P371",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q23129",
+    "tgtId" : "Q204720",
+    "propertyId" : "P36",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "P27",
+    "propertyId" : "P1963",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q7824513",
+    "propertyId" : "P527",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q183231",
+    "propertyId" : "P1304",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q7335666",
+    "tgtId" : null,
+    "propertyId" : "P571",
+    "label" : "November 30, 1554",
+    "type" : "DateTime"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q1088364",
+    "propertyId" : "P1344",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q159583",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q6334588",
+    "propertyId" : "P1465",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "P1196",
+    "propertyId" : "P1963",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q18221",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q25",
+    "propertyId" : "P150",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q3491268",
+    "propertyId" : "P282",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q36180",
+    "tgtId" : "P50",
+    "propertyId" : "P1687",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q71521142",
+    "tgtId" : "Q71530142",
+    "propertyId" : "P1535",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q668",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q397343",
+    "tgtId" : "Q67575123",
+    "propertyId" : "P7959",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q5150848",
+    "propertyId" : "P463",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q40317",
+    "propertyId" : "P832",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q826700",
+    "propertyId" : "P463",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q297265",
+    "tgtId" : "Q1930187",
+    "propertyId" : "P106",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q23666",
+    "propertyId" : "P706",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q1983621",
+    "propertyId" : "P9241",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q128985",
+    "propertyId" : "P6",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1249148",
+    "tgtId" : "Q84596503",
+    "propertyId" : "P460",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q1928989",
+    "propertyId" : "P463",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q23129",
+    "tgtId" : "Q8077931",
+    "propertyId" : "P1464",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q23663136",
+    "propertyId" : "P3103",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q506687",
+    "propertyId" : "P2587",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q18814623",
+    "tgtId" : "Q12737077",
+    "propertyId" : "P31",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q242",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q32803935",
+    "propertyId" : "P5996",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q1043527",
+    "propertyId" : "P463",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q71521142",
+    "tgtId" : "Q71534274",
+    "propertyId" : "P1535",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "P1317",
+    "propertyId" : "P1963",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "P40",
+    "propertyId" : "P1963",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "P569",
+    "propertyId" : "P1963",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q265",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q661529",
+    "tgtId" : "Q145",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1249148",
+    "tgtId" : "Q22293445",
+    "propertyId" : "P460",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q280856",
+    "propertyId" : "P35",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q4853732",
+    "tgtId" : "Q788499",
+    "propertyId" : "P910",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q115",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q4740856",
+    "tgtId" : "Q135288",
+    "propertyId" : "P750",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1249148",
+    "tgtId" : "Q15728186",
+    "propertyId" : "P460",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q297265",
+    "tgtId" : "Q2711174",
+    "propertyId" : "P734",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q12021746",
+    "propertyId" : "P3161",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q1033",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q335644",
+    "propertyId" : "P2587",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q740768",
+    "propertyId" : "P2587",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "P39",
+    "propertyId" : "P1963",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q21903339",
+    "tgtId" : "Q297265",
+    "propertyId" : "P112",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q7824525",
+    "propertyId" : "P527",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q10664",
+    "propertyId" : "P6",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "P1741",
+    "propertyId" : "P1963",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q2071905",
+    "propertyId" : "P750",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q297265",
+    "tgtId" : "Q36180",
+    "propertyId" : "P106",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q297265",
+    "tgtId" : "Q1249148",
+    "propertyId" : "P735",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q60771002",
+    "propertyId" : "P527",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q25224",
+    "propertyId" : "P38",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q1392475",
+    "propertyId" : "P3103",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q183",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q661529",
+    "tgtId" : "Q86309218",
+    "propertyId" : "P1465",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q9531",
+    "propertyId" : "P170",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q21",
+    "propertyId" : "P150",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q7985",
+    "propertyId" : "P527",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q683120",
+    "propertyId" : "P12443",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "P3373",
+    "propertyId" : "P1963",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q29",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q34770",
+    "propertyId" : "P6106",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : null,
+    "propertyId" : "P580",
+    "label" : "October 20, 2002",
+    "type" : "DateTime"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "P570",
+    "propertyId" : "P1963",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "P140",
+    "propertyId" : "P1963",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q1404827",
+    "propertyId" : "P1589",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q23276",
+    "propertyId" : "P915",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q13610143",
+    "tgtId" : "Q17520952",
+    "propertyId" : "P460",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q7888721",
+    "propertyId" : "P4132",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q7558100",
+    "tgtId" : "Q8724522",
+    "propertyId" : "P3876",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q13610143",
+    "tgtId" : "Q4642",
+    "propertyId" : "P460",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q46",
+    "propertyId" : "P30",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q1030",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "Q43619",
+    "propertyId" : "P129",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q184425",
+    "propertyId" : "P1344",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q947873",
+    "tgtId" : "Q58635633",
+    "propertyId" : "P31",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q11010",
+    "propertyId" : "P194",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q605326",
+    "propertyId" : "P463",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q23129",
+    "tgtId" : "Q8508759",
+    "propertyId" : "P910",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "P735",
+    "propertyId" : "P1963",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q6840573",
+    "propertyId" : "P5996",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1249148",
+    "tgtId" : "Q18201502",
+    "propertyId" : "P460",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q114",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q654705",
+    "propertyId" : "P2587",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q151991",
+    "propertyId" : "P463",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q12859294",
+    "propertyId" : "P527",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q45177",
+    "propertyId" : "P463",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q36180",
+    "tgtId" : "Q6963972",
+    "propertyId" : "P6186",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q44676",
+    "propertyId" : "P527",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q1359130",
+    "propertyId" : "P2936",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1249148",
+    "tgtId" : "Q18201498",
+    "propertyId" : "P460",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q148",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q34770",
+    "propertyId" : "P31",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q186896",
+    "propertyId" : "P371",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q784",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q3040066",
+    "propertyId" : "P155",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q36180",
+    "tgtId" : "Q482980",
+    "propertyId" : "P279",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q7824521",
+    "propertyId" : "P527",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "P8258",
+    "propertyId" : "P1963",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "Q372949",
+    "propertyId" : "P1552",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q17",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q108556886",
+    "propertyId" : "P463",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q16",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q297265",
+    "tgtId" : "Q4853732",
+    "propertyId" : "P106",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q31573",
+    "propertyId" : "P150",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q128956",
+    "propertyId" : "P6",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q23129",
+    "tgtId" : "Q1609779",
+    "propertyId" : "P1365",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q41825",
+    "propertyId" : "P6106",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q3624078",
+    "propertyId" : "P31",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q186371",
+    "propertyId" : "P371",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q928",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q947873",
+    "tgtId" : "Q211236",
+    "propertyId" : "P279",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q145",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q6834520",
+    "propertyId" : "P1740",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q23129",
+    "tgtId" : "Q156150",
+    "propertyId" : "P47",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q334",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q1137302",
+    "propertyId" : "P1344",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "P737",
+    "propertyId" : "P1963",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1930187",
+    "tgtId" : "Q482980",
+    "propertyId" : "P279",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q23129",
+    "tgtId" : "Q1376956",
+    "propertyId" : "P47",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q9309",
+    "propertyId" : "P2936",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q22752889",
+    "propertyId" : "P371",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q3114830",
+    "propertyId" : "P418",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q1070049",
+    "propertyId" : "P2587",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q36180",
+    "tgtId" : "Q5849863",
+    "propertyId" : "P910",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q801",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q947873",
+    "tgtId" : "Q33999",
+    "propertyId" : "P279",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q13353",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q13610143",
+    "tgtId" : "Q1522689",
+    "propertyId" : "P460",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q7335666",
+    "tgtId" : "Q967098",
+    "propertyId" : "P31",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q218",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q7335666",
+    "tgtId" : "Q269770",
+    "propertyId" : "P31",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q833",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q2711174",
+    "tgtId" : "Q1860",
+    "propertyId" : "P407",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q763",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q241",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q21903339",
+    "tgtId" : null,
+    "propertyId" : "P571",
+    "label" : "June 30, 2015",
+    "type" : "DateTime"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "Q26401003",
+    "propertyId" : "P279",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q36180",
+    "tgtId" : "Q116465820",
+    "propertyId" : "P460",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q947873",
+    "tgtId" : "Q15980804",
+    "propertyId" : "P279",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q7824511",
+    "propertyId" : "P527",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q1411125",
+    "propertyId" : "P910",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q33000",
+    "propertyId" : "P37",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q30",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q297265",
+    "tgtId" : "Q7558100",
+    "propertyId" : "P69",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q43274",
+    "propertyId" : "P35",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q47499",
+    "propertyId" : "P832",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "P1050",
+    "propertyId" : "P1963",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q2097387",
+    "propertyId" : "P2936",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q213465",
+    "propertyId" : "P915",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q25289",
+    "propertyId" : "P37",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q4761497",
+    "propertyId" : "P162",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1249148",
+    "tgtId" : "Q15720963",
+    "propertyId" : "P460",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "P19",
+    "propertyId" : "P1963",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q763",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q277252",
+    "propertyId" : "P463",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q376150",
+    "propertyId" : "P463",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "P20",
+    "propertyId" : "P1963",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q930730",
+    "propertyId" : "P527",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q397343",
+    "tgtId" : "Q185066",
+    "propertyId" : "P190",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q6256",
+    "propertyId" : "P31",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "P119",
+    "propertyId" : "P1963",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1249148",
+    "tgtId" : "Q9056",
+    "propertyId" : "P407",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "Q315",
+    "propertyId" : "P2283",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q7335666",
+    "tgtId" : "Q21241814",
+    "propertyId" : "P131",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q5329170",
+    "propertyId" : "P279",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q7824517",
+    "propertyId" : "P527",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q12734727",
+    "propertyId" : "P3103",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "P2067",
+    "propertyId" : "P1963",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q23129",
+    "tgtId" : "Q8328611",
+    "propertyId" : "P1791",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q2863003",
+    "propertyId" : "P463",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q22997091",
+    "tgtId" : "Q297265",
+    "propertyId" : "P26",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q9648",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q13610143",
+    "tgtId" : "Q1321",
+    "propertyId" : "P407",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q458",
+    "propertyId" : "P47",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q9142",
+    "propertyId" : "P2936",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q314504",
+    "propertyId" : "P371",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q12330003",
+    "propertyId" : "P737",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "Q3307505",
+    "propertyId" : "P1552",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q4740856",
+    "tgtId" : "Q3884",
+    "propertyId" : "P178",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q419",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q9314",
+    "propertyId" : "P2936",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1249148",
+    "tgtId" : "Q18201505",
+    "propertyId" : "P460",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "Q720858",
+    "propertyId" : "P2579",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q4740856",
+    "tgtId" : "Q165970",
+    "propertyId" : "P479",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q1014",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q4853732",
+    "tgtId" : "Q12737077",
+    "propertyId" : "P31",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q21903339",
+    "tgtId" : "Q314504",
+    "propertyId" : "P127",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q258",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q1553250",
+    "propertyId" : "P527",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q17495",
+    "propertyId" : "P463",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "P8313",
+    "propertyId" : "P1963",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q379085",
+    "propertyId" : "P2587",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q843",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1249148",
+    "tgtId" : "Q12308941",
+    "propertyId" : "P31",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q16641",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q1346342",
+    "propertyId" : "P279",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q320021",
+    "propertyId" : "P2587",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q463543",
+    "propertyId" : "P2587",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q397343",
+    "tgtId" : "Q7897276",
+    "propertyId" : "P31",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q23635",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q23129",
+    "tgtId" : "Q67531905",
+    "propertyId" : "P460",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q2711174",
+    "tgtId" : "Q101352",
+    "propertyId" : "P31",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q7768229",
+    "propertyId" : "P463",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q4740856",
+    "tgtId" : "Q723685",
+    "propertyId" : "P1056",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "Q23404",
+    "propertyId" : "P2579",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1249148",
+    "tgtId" : "Q122382049",
+    "propertyId" : "P460",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q823428",
+    "propertyId" : "P463",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q2711174",
+    "tgtId" : "Q8229",
+    "propertyId" : "P282",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q65132216",
+    "propertyId" : "P1344",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q37560",
+    "propertyId" : "P737",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q115805380",
+    "propertyId" : "P527",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q7558100",
+    "tgtId" : "Q708676",
+    "propertyId" : "P1454",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q13610143",
+    "tgtId" : "Q31966",
+    "propertyId" : "P138",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q334029",
+    "propertyId" : "P1344",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "Q8195619",
+    "propertyId" : "P1034",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : null,
+    "propertyId" : "P7295",
+    "label" : "September 14, 1752",
+    "type" : "DateTime"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q13196750",
+    "propertyId" : "P5658",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q661529",
+    "tgtId" : "Q894087",
+    "propertyId" : "P131",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q663492",
+    "propertyId" : "P463",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1930187",
+    "tgtId" : "Q12737077",
+    "propertyId" : "P31",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1930187",
+    "tgtId" : "Q15980804",
+    "propertyId" : "P279",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q1049",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q878",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1249148",
+    "tgtId" : "Q18059417",
+    "propertyId" : "P460",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q947873",
+    "tgtId" : "Q4164871",
+    "propertyId" : "P31",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q23580217",
+    "propertyId" : "P527",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q4567134",
+    "propertyId" : "P527",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q603200",
+    "propertyId" : "P527",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q754",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q16",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q9576",
+    "propertyId" : "P6",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q106241388",
+    "propertyId" : "P527",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q27479",
+    "propertyId" : "P361",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q907311",
+    "propertyId" : "P750",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q84570734",
+    "propertyId" : "P136",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q166546",
+    "propertyId" : "P463",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q9309",
+    "propertyId" : "P37",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q946638",
+    "propertyId" : "P915",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q924",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q27968",
+    "propertyId" : "P2579",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "P800",
+    "propertyId" : "P1963",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q397343",
+    "tgtId" : "Q1925858",
+    "propertyId" : "P131",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q399",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q191472",
+    "propertyId" : "P449",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q397343",
+    "tgtId" : "Q1925858",
+    "propertyId" : "P1376",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q3330103",
+    "propertyId" : "P122",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "P3222",
+    "propertyId" : "P1963",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "P1576",
+    "propertyId" : "P1963",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q188822",
+    "propertyId" : "P463",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q398",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q25230",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q13610143",
+    "tgtId" : "Q6766392",
+    "propertyId" : "P1533",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q4740856",
+    "tgtId" : "Q3070866",
+    "propertyId" : "P750",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q1233197",
+    "propertyId" : "P2989",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q956699",
+    "propertyId" : "P832",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q209316",
+    "propertyId" : "P2587",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q14549",
+    "propertyId" : "P2936",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "Q171318",
+    "propertyId" : "P1552",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q15978258",
+    "propertyId" : "P463",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q1402021",
+    "propertyId" : "P942",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "Q39546",
+    "propertyId" : "P2283",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "P937",
+    "propertyId" : "P1963",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q33000",
+    "propertyId" : "P2936",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q34020",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q76836247",
+    "propertyId" : "P460",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q4853732",
+    "tgtId" : "Q28640",
+    "propertyId" : "P31",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q36180",
+    "tgtId" : "Q13019738",
+    "propertyId" : "P2354",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q36180",
+    "tgtId" : "Q1626130",
+    "propertyId" : "P1382",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "P1477",
+    "propertyId" : "P1963",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q7824519",
+    "propertyId" : "P527",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q264766",
+    "propertyId" : "P6",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q1156228",
+    "propertyId" : "P527",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q672",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q13610143",
+    "tgtId" : "Q9063",
+    "propertyId" : "P407",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1930187",
+    "tgtId" : "Q108300140",
+    "propertyId" : "P31",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q397343",
+    "tgtId" : "Q8759973",
+    "propertyId" : "P910",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q51929369",
+    "propertyId" : "P5110",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q3086706",
+    "propertyId" : "P2852",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q18814623",
+    "tgtId" : "Q4184",
+    "propertyId" : "P101",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q20",
+    "propertyId" : "P47",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q1860",
+    "propertyId" : "P37",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q661529",
+    "tgtId" : "Q163",
+    "propertyId" : "P7959",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q38",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : null,
+    "propertyId" : "P571",
+    "label" : "December 6, 1921",
+    "type" : "DateTime"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q958",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1249148",
+    "tgtId" : "Q15720943",
+    "propertyId" : "P460",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q233611",
+    "propertyId" : "P463",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q4853732",
+    "tgtId" : "Q36180",
+    "propertyId" : "P279",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q524828",
+    "propertyId" : "P1344",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q19771",
+    "propertyId" : "P463",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q21903339",
+    "tgtId" : "Q314504",
+    "propertyId" : "P112",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "P69",
+    "propertyId" : "P1963",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q244",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q760",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q921",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q1122261",
+    "propertyId" : "P209",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q7558100",
+    "tgtId" : "Q397343",
+    "propertyId" : "P276",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q2580491",
+    "propertyId" : "P172",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q13610143",
+    "tgtId" : "Q17520946",
+    "propertyId" : "P460",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q661529",
+    "tgtId" : "Q8663692",
+    "propertyId" : "P910",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q9174",
+    "propertyId" : "P6106",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q862579",
+    "propertyId" : "P2587",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1930187",
+    "tgtId" : "Q7076967",
+    "propertyId" : "P910",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q142",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q170424",
+    "propertyId" : "P463",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q827525",
+    "propertyId" : "P463",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q397343",
+    "tgtId" : "Q23905832",
+    "propertyId" : "P1464",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q9314",
+    "propertyId" : "P37",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "Q110551885",
+    "propertyId" : "P279",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q665624",
+    "propertyId" : "P527",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q817",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q332019",
+    "propertyId" : "P2587",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q301487",
+    "propertyId" : "P1344",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q4853732",
+    "tgtId" : "Q131539",
+    "propertyId" : "P425",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q3772571",
+    "propertyId" : "P463",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q19650550",
+    "propertyId" : "P527",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q2346748",
+    "propertyId" : "P915",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q20055561",
+    "propertyId" : "P6",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "Q215627",
+    "propertyId" : "P279",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q233",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q237623",
+    "propertyId" : "P2587",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q7824515",
+    "propertyId" : "P527",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q11007",
+    "propertyId" : "P209",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q47018901",
+    "propertyId" : "P6106",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q3519604",
+    "propertyId" : "P2587",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q29462",
+    "propertyId" : "P2587",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q541279",
+    "propertyId" : "P2936",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q30597846",
+    "propertyId" : "P527",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q954",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q805",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q5398426",
+    "propertyId" : "P31",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q21200",
+    "propertyId" : "P737",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q13610143",
+    "tgtId" : "Q12308941",
+    "propertyId" : "P31",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q12743436",
+    "propertyId" : "P3103",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q23681",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "Q1239812",
+    "propertyId" : "P1552",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q201817",
+    "propertyId" : "P2587",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1249148",
+    "tgtId" : "Q18201510",
+    "propertyId" : "P460",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q408",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q4740856",
+    "tgtId" : "P8055",
+    "propertyId" : "P1687",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q36",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q201966",
+    "propertyId" : "P37",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q131105",
+    "propertyId" : "P2989",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q844329",
+    "propertyId" : "P6379",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q1288568",
+    "propertyId" : "P31",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1249148",
+    "tgtId" : "Q7333907",
+    "propertyId" : "P460",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q1036",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q664",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q7335666",
+    "tgtId" : "Q163",
+    "propertyId" : "P7959",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5666376",
+    "tgtId" : "Q21822439",
+    "propertyId" : "P31",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q6063",
+    "propertyId" : "P208",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q3915671",
+    "propertyId" : "P2936",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q10302194",
+    "propertyId" : "P3969",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "P451",
+    "propertyId" : "P1963",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q769",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q323138",
+    "propertyId" : "P8744",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q84969419",
+    "propertyId" : "P7084",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q7824527",
+    "propertyId" : "P527",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q3244280",
+    "propertyId" : "P172",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q32670711",
+    "propertyId" : "P1792",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "Q785260",
+    "propertyId" : "P1552",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "Q16686448",
+    "propertyId" : "P1542",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "P102",
+    "propertyId" : "P1963",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "P25",
+    "propertyId" : "P1963",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q20472817",
+    "propertyId" : "P3103",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q21903339",
+    "tgtId" : "Q4761497",
+    "propertyId" : "P127",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q1246",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "P3219",
+    "propertyId" : "P1963",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q397343",
+    "tgtId" : "Q145",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q104674",
+    "propertyId" : "P610",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q686",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q654660",
+    "propertyId" : "P2587",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q2630372",
+    "propertyId" : "P915",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q654787",
+    "propertyId" : "P2587",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q36180",
+    "tgtId" : "E42",
+    "propertyId" : "P12861",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q297265",
+    "tgtId" : "Q21903339",
+    "propertyId" : "P1830",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q22890",
+    "propertyId" : "P706",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q1775461",
+    "propertyId" : "P5109",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q297265",
+    "tgtId" : "Q947873",
+    "propertyId" : "P106",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q147276",
+    "propertyId" : "P6106",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q661529",
+    "tgtId" : "Q515",
+    "propertyId" : "P31",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q757",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q1411470",
+    "propertyId" : "P1344",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1249148",
+    "tgtId" : "Q48718831",
+    "propertyId" : "P460",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q23129",
+    "tgtId" : "Q84079865",
+    "propertyId" : "P7867",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "P509",
+    "propertyId" : "P1963",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q334",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q414",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q928",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1930187",
+    "tgtId" : "Q108289407",
+    "propertyId" : "P279",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q7976",
+    "propertyId" : "P527",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "P108",
+    "propertyId" : "P1963",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q318917",
+    "propertyId" : "P4132",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q3109261",
+    "propertyId" : "P6106",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q4740856",
+    "tgtId" : "Q484847",
+    "propertyId" : "P452",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q13610143",
+    "tgtId" : "Q109671932",
+    "propertyId" : "P361",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q219",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q23129",
+    "tgtId" : "Q180673",
+    "propertyId" : "P31",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q565654",
+    "propertyId" : "P2587",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "P1411",
+    "propertyId" : "P1963",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "Q8425",
+    "propertyId" : "P361",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q7824512",
+    "propertyId" : "P527",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "Q154954",
+    "propertyId" : "P279",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "P26",
+    "propertyId" : "P1963",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q661529",
+    "tgtId" : "Q10172270",
+    "propertyId" : "P1792",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q43",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q778145",
+    "propertyId" : "P2587",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q963",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q784975",
+    "propertyId" : "P2184",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q9531",
+    "propertyId" : "P449",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q734",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q11109963",
+    "propertyId" : "P1151",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q114",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q781",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q1009",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q129373",
+    "propertyId" : "P2633",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q1020",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q884",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q13610143",
+    "tgtId" : "Q17520955",
+    "propertyId" : "P460",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q25305",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "Q2",
+    "propertyId" : "P129",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1249148",
+    "tgtId" : "Q1860",
+    "propertyId" : "P407",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q7824524",
+    "propertyId" : "P527",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q30",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q463515",
+    "propertyId" : "P2587",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "Q83500",
+    "propertyId" : "P1552",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q9559",
+    "propertyId" : "P6",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q3293979",
+    "propertyId" : "P1344",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q4426267",
+    "propertyId" : "P463",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q397343",
+    "tgtId" : "Q3957",
+    "propertyId" : "P31",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q3866537",
+    "propertyId" : "P463",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q31",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q35",
+    "propertyId" : "P47",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q16250843",
+    "propertyId" : "P527",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q13610143",
+    "tgtId" : "Q7411",
+    "propertyId" : "P407",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q23129",
+    "tgtId" : "Q1136601",
+    "propertyId" : "P31",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q815439",
+    "propertyId" : "P2587",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q4740856",
+    "tgtId" : "Q3884",
+    "propertyId" : "P127",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q145",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q142",
+    "propertyId" : "P47",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q678",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q953",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "P2048",
+    "propertyId" : "P1963",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q4033111",
+    "propertyId" : "P463",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q181817",
+    "propertyId" : "P832",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q9129",
+    "propertyId" : "P737",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "P1559",
+    "propertyId" : "P1963",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q5611262",
+    "propertyId" : "P463",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q21903339",
+    "tgtId" : "Q216160",
+    "propertyId" : "P112",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q7558100",
+    "tgtId" : "Q708676",
+    "propertyId" : "P31",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q192",
+    "propertyId" : "P6",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q8475",
+    "propertyId" : "P463",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q244",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q10648",
+    "propertyId" : "P6",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q21903339",
+    "tgtId" : "Q4830453",
+    "propertyId" : "P31",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q473746",
+    "propertyId" : "P3161",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q21903339",
+    "tgtId" : "Q4761497",
+    "propertyId" : "P112",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1930187",
+    "tgtId" : "Q4164871",
+    "propertyId" : "P31",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q124653007",
+    "propertyId" : "P361",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q656801",
+    "propertyId" : "P463",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q145",
+    "propertyId" : "P495",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q711",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q794",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q436353",
+    "propertyId" : "P1811",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q1137807",
+    "propertyId" : "P2587",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "P3388",
+    "propertyId" : "P1963",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q826",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q1480793",
+    "propertyId" : "P463",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "Q238372",
+    "propertyId" : "P1552",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q112567272",
+    "propertyId" : "P527",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q458",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q766",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q6655",
+    "propertyId" : "P421",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q13610143",
+    "tgtId" : "Q6757805",
+    "propertyId" : "P460",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q710",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q4740856",
+    "tgtId" : "Q30",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q174193",
+    "propertyId" : "P155",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q113162",
+    "propertyId" : "P2184",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q23129",
+    "tgtId" : "Q23135",
+    "propertyId" : "P47",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : null,
+    "propertyId" : "P582",
+    "label" : "December 18, 2022",
+    "type" : "DateTime"
+  }, {
+    "srcId" : "Q4740856",
+    "tgtId" : "Q54820071",
+    "propertyId" : "P437",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q77",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q104858667",
+    "propertyId" : "P527",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1930187",
+    "tgtId" : "Q11030",
+    "propertyId" : "P425",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q1044",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q1475560",
+    "propertyId" : "P3103",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q1065",
+    "propertyId" : "P463",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q232",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q709",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q7824514",
+    "propertyId" : "P527",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q4740856",
+    "tgtId" : "Q484531",
+    "propertyId" : "P750",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q4740856",
+    "tgtId" : "Q30",
+    "propertyId" : "P276",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q44661",
+    "propertyId" : "P527",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q3174312",
+    "propertyId" : "P1552",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q334695",
+    "propertyId" : "P2587",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q4740856",
+    "tgtId" : "Q102336293",
+    "propertyId" : "P31",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q5043",
+    "propertyId" : "P140",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q1045",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q23129",
+    "tgtId" : "Q48038",
+    "propertyId" : "P131",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q27",
+    "propertyId" : "P47",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q70172",
+    "propertyId" : "P371",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q8229",
+    "propertyId" : "P282",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q21903339",
+    "tgtId" : "Q845015",
+    "propertyId" : "P159",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q9142",
+    "propertyId" : "P37",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q668",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1249148",
+    "tgtId" : "Q150",
+    "propertyId" : "P407",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q297265",
+    "tgtId" : "Q5",
+    "propertyId" : "P31",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q754",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q651641",
+    "propertyId" : "P4132",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q822",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q196627",
+    "propertyId" : "P832",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q36180",
+    "tgtId" : "Q483501",
+    "propertyId" : "P279",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q7335666",
+    "tgtId" : "Q145",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1249148",
+    "tgtId" : "Q15720880",
+    "propertyId" : "P460",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q43448",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "P1971",
+    "propertyId" : "P1963",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q723685",
+    "propertyId" : "P437",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q227",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q126125",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q7824509",
+    "propertyId" : "P527",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q21203",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q431471",
+    "propertyId" : "P2587",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q112099",
+    "propertyId" : "P31",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q28",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q13610143",
+    "tgtId" : "Q100320817",
+    "propertyId" : "P460",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q7923975",
+    "propertyId" : "P910",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q298",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q73555012",
+    "tgtId" : "Q50423863",
+    "propertyId" : "P1542",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q23129",
+    "tgtId" : "Q23103",
+    "propertyId" : "P47",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "P106",
+    "propertyId" : "P1963",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q7335666",
+    "tgtId" : "Q661529",
+    "propertyId" : "P131",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q7817",
+    "propertyId" : "P463",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q691",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q9545",
+    "propertyId" : "P6",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q51929403",
+    "propertyId" : "P5110",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q7416",
+    "propertyId" : "P6",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q7824510",
+    "propertyId" : "P527",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q27",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q297265",
+    "tgtId" : "Q1930187",
+    "propertyId" : "P101",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q173175",
+    "propertyId" : "P371",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q297265",
+    "tgtId" : "Q5666376",
+    "propertyId" : "P69",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q796",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q128967",
+    "propertyId" : "P6",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q397343",
+    "tgtId" : "Q8749644",
+    "propertyId" : "P1792",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "Q18387795",
+    "propertyId" : "P1552",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q297265",
+    "tgtId" : "Q397343",
+    "propertyId" : "P19",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q3324796",
+    "propertyId" : "P361",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q661529",
+    "tgtId" : "Q1115575",
+    "propertyId" : "P31",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q116248079",
+    "propertyId" : "P527",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q159",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q174193",
+    "propertyId" : "P1365",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q1234617",
+    "propertyId" : "P3103",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q297265",
+    "tgtId" : "Q661529",
+    "propertyId" : "P551",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q7112788",
+    "propertyId" : "P5125",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q4115170",
+    "propertyId" : "P172",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "Q8205328",
+    "propertyId" : "P2283",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q518603",
+    "propertyId" : "P2587",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q35672",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q21903339",
+    "tgtId" : "Q1367306",
+    "propertyId" : "P121",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q22997091",
+    "tgtId" : "Q5",
+    "propertyId" : "P31",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q8253451",
+    "propertyId" : "P1151",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q229",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q4740856",
+    "tgtId" : "Q79576",
+    "propertyId" : "P750",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q7824522",
+    "propertyId" : "P527",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q36180",
+    "tgtId" : "Q2250012",
+    "propertyId" : "P425",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q697897",
+    "propertyId" : "P1344",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q13414953",
+    "propertyId" : "P6106",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q271611",
+    "propertyId" : "P2587",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q40807",
+    "propertyId" : "P85",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q1042",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q230",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "P3342",
+    "propertyId" : "P1963",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q878",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q84",
+    "propertyId" : "P36",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q813",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q14549",
+    "propertyId" : "P37",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q334723",
+    "propertyId" : "P2587",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q7335666",
+    "tgtId" : "Q8724427",
+    "propertyId" : "P3876",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q4740856",
+    "tgtId" : null,
+    "propertyId" : "P571",
+    "label" : "September 7, 2006",
+    "type" : "DateTime"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q297265",
+    "propertyId" : "P371",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q22",
+    "propertyId" : "P150",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q521227",
+    "propertyId" : "P463",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q252",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q8607617",
+    "propertyId" : "P7867",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q785",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "Q1156970",
+    "propertyId" : "P361",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q7558100",
+    "tgtId" : "Q145",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q21903339",
+    "tgtId" : "Q216160",
+    "propertyId" : "P127",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "Q185836",
+    "propertyId" : "P1552",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q1528507",
+    "propertyId" : "P2853",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q458",
+    "propertyId" : "P463",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q1019",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q36180",
+    "tgtId" : "Q12737077",
+    "propertyId" : "P31",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q1030",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q4740856",
+    "tgtId" : "Q94",
+    "propertyId" : "P400",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1930187",
+    "tgtId" : "Q58635633",
+    "propertyId" : "P279",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q95885",
+    "propertyId" : "P371",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q146233",
+    "propertyId" : "P2989",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q801",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q4740856",
+    "tgtId" : "Q3884",
+    "propertyId" : "P112",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "Q1071027",
+    "propertyId" : "P1552",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q81299",
+    "propertyId" : "P463",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "Q223642",
+    "propertyId" : "P1552",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q4853732",
+    "tgtId" : "Q11163999",
+    "propertyId" : "P425",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q1860",
+    "propertyId" : "P2936",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q2568366",
+    "propertyId" : "P793",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q843589",
+    "propertyId" : "P421",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q26988",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q41",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q297265",
+    "tgtId" : "Q73555012",
+    "propertyId" : "P7763",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q18814623",
+    "tgtId" : "Q8279874",
+    "propertyId" : "P910",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q41614",
+    "propertyId" : "P122",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q29051543",
+    "propertyId" : "P3823",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q1049",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q36180",
+    "tgtId" : "Q4943143",
+    "propertyId" : "P425",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q854",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "Q164509",
+    "propertyId" : "P279",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q397343",
+    "tgtId" : "Q1549591",
+    "propertyId" : "P31",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q29653",
+    "propertyId" : "P2587",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q41550",
+    "propertyId" : "P463",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q73555012",
+    "tgtId" : "Q73568642",
+    "propertyId" : "P31",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q683",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "P172",
+    "propertyId" : "P1963",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q7558100",
+    "tgtId" : "Q2418495",
+    "propertyId" : "P31",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q17853087",
+    "propertyId" : "P138",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q37",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q1764511",
+    "propertyId" : "P463",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "P103",
+    "propertyId" : "P1963",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q1016",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q7558100",
+    "tgtId" : null,
+    "propertyId" : "P571",
+    "label" : "January 1, 1904",
+    "type" : "DateTime"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q214",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q297265",
+    "tgtId" : "Q13610143",
+    "propertyId" : "P735",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q658845",
+    "propertyId" : "P1344",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q13610143",
+    "tgtId" : "Q9072",
+    "propertyId" : "P407",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q408",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q13610143",
+    "tgtId" : "Q17520949",
+    "propertyId" : "P460",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q55011311",
+    "propertyId" : "P527",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q4740856",
+    "tgtId" : "Q108372628",
+    "propertyId" : "P527",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q1061257",
+    "propertyId" : "P2852",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q23129",
+    "tgtId" : "Q5864808",
+    "propertyId" : "P2184",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "P551",
+    "propertyId" : "P1963",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q20181813",
+    "propertyId" : "P31",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q44679",
+    "propertyId" : "P527",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1930187",
+    "tgtId" : "P1455",
+    "propertyId" : "P1963",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q23058732",
+    "propertyId" : "P527",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q20672086",
+    "propertyId" : "P1999",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q833",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q109621125",
+    "propertyId" : "P527",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q96",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q899770",
+    "propertyId" : "P463",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q22997091",
+    "tgtId" : null,
+    "propertyId" : "P569",
+    "label" : "July 1, 1965",
+    "type" : "DateTime"
+  }, {
+    "srcId" : "Q297265",
+    "tgtId" : "Q7335666",
+    "propertyId" : "P69",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q13196750",
+    "propertyId" : "P1622",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q128976",
+    "propertyId" : "P6",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q52431970",
+    "propertyId" : "P5110",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q13157897",
+    "propertyId" : "P527",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q51929218",
+    "propertyId" : "P5110",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q36180",
+    "tgtId" : "P2093",
+    "propertyId" : "P1687",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q717",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q7994501",
+    "propertyId" : "P172",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q12738495",
+    "propertyId" : "P3103",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q13610143",
+    "tgtId" : "Q2531",
+    "propertyId" : "P1750",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q8646",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q183",
+    "propertyId" : "P47",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q7824518",
+    "propertyId" : "P527",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q73555012",
+    "tgtId" : "Q707401",
+    "propertyId" : "P4967",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q1037",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q503323",
+    "propertyId" : "P2587",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q10818",
+    "propertyId" : "P793",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q2625543",
+    "propertyId" : "P463",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q85810136",
+    "propertyId" : "P527",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q23129",
+    "tgtId" : "Q145",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q216108",
+    "propertyId" : "P449",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q682111",
+    "propertyId" : "P3161",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q661529",
+    "tgtId" : "Q184392",
+    "propertyId" : "P190",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "P1636",
+    "propertyId" : "P1963",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q397343",
+    "tgtId" : "Q6574",
+    "propertyId" : "P421",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q39",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q842490",
+    "propertyId" : "P463",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q1240211",
+    "propertyId" : "P3103",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q189062",
+    "propertyId" : "P463",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "Q48277",
+    "propertyId" : "P1552",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q297265",
+    "tgtId" : "Q22997091",
+    "propertyId" : "P26",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "P22",
+    "propertyId" : "P1963",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q297265",
+    "tgtId" : "Q18814623",
+    "propertyId" : "P106",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1930187",
+    "tgtId" : "Q32451653",
+    "propertyId" : "P6186",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q9104978",
+    "propertyId" : "P910",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q902",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q297265",
+    "tgtId" : "Q145",
+    "propertyId" : "P27",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q22997091",
+    "tgtId" : "Q453722",
+    "propertyId" : "P735",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q238",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q21",
+    "propertyId" : "P2341",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1249148",
+    "tgtId" : "Q7411",
+    "propertyId" : "P407",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "P734",
+    "propertyId" : "P1963",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q297265",
+    "tgtId" : "Q33162",
+    "propertyId" : "P800",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q4740856",
+    "tgtId" : "Q3884",
+    "propertyId" : "P749",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q19809",
+    "propertyId" : "P832",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "P4602",
+    "propertyId" : "P1963",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q1072120",
+    "propertyId" : "P463",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q661529",
+    "tgtId" : "Q18511725",
+    "propertyId" : "P31",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q661529",
+    "tgtId" : "Q104395429",
+    "propertyId" : "P797",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q947873",
+    "tgtId" : "Q6642588",
+    "propertyId" : "P2354",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q9134365",
+    "propertyId" : "P1906",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q1028",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q654641",
+    "propertyId" : "P2587",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q458",
+    "propertyId" : "P361",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1930187",
+    "tgtId" : "Q28640",
+    "propertyId" : "P31",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q189",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q947873",
+    "tgtId" : "Q22976182",
+    "propertyId" : "P279",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q373478",
+    "propertyId" : "P2587",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q21903339",
+    "tgtId" : "Q33685",
+    "propertyId" : "P31",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q865",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "P1449",
+    "propertyId" : "P1963",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q1005",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q65044634",
+    "propertyId" : "P527",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q22997091",
+    "tgtId" : "Q30433557",
+    "propertyId" : "P734",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q7335666",
+    "tgtId" : "Q5155053",
+    "propertyId" : "P31",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q695",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q862751",
+    "propertyId" : "P1344",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q842",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q340195",
+    "propertyId" : "P463",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q25289",
+    "propertyId" : "P2936",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q27",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q7558100",
+    "tgtId" : "Q1925858",
+    "propertyId" : "P131",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q1050",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q1027",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q843",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q155",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q51929517",
+    "propertyId" : "P5110",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q398",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q31",
+    "propertyId" : "P47",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q6383803",
+    "propertyId" : "P6",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q782942",
+    "propertyId" : "P463",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q179164",
+    "propertyId" : "P122",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q191384",
+    "propertyId" : "P463",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q7033019",
+    "propertyId" : "P527",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q8908",
+    "propertyId" : "P463",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1249148",
+    "tgtId" : "Q15721563",
+    "propertyId" : "P460",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q7335666",
+    "tgtId" : "Q159334",
+    "propertyId" : "P31",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q3919830",
+    "propertyId" : "P1792",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q702",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q4740856",
+    "tgtId" : "Q368215",
+    "propertyId" : "P750",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q835992",
+    "propertyId" : "P2587",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q7824526",
+    "propertyId" : "P527",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q697",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "Q6697530",
+    "propertyId" : "P910",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q117",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5666376",
+    "tgtId" : "Q145",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "Q1314553",
+    "propertyId" : "P1552",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q664",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q7269768",
+    "propertyId" : "P527",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q2363292",
+    "propertyId" : "P527",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q272201",
+    "propertyId" : "P6",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q590227",
+    "propertyId" : "P35",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q499327",
+    "propertyId" : "P5109",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q7979",
+    "propertyId" : "P527",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q37143",
+    "propertyId" : "P463",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q297265",
+    "tgtId" : null,
+    "propertyId" : "P569",
+    "label" : "December 19, 1969",
+    "type" : "DateTime"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "Q15978631",
+    "propertyId" : "P460",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q25228",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q909128",
+    "propertyId" : "P2587",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q7240943",
+    "propertyId" : "P3103",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q233",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q26",
+    "propertyId" : "P150",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q740714",
+    "propertyId" : "P2587",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1930187",
+    "tgtId" : "Q46034607",
+    "propertyId" : "P1382",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q947873",
+    "tgtId" : "Q44508716",
+    "propertyId" : "P279",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q6241693",
+    "propertyId" : "P1791",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q32501",
+    "propertyId" : "P2596",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q52433289",
+    "propertyId" : "P5110",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q14211",
+    "propertyId" : "P1313",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q23129",
+    "tgtId" : "Q23165",
+    "propertyId" : "P47",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q7558100",
+    "tgtId" : "Q82708",
+    "propertyId" : "P140",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q13610143",
+    "tgtId" : "Q15728956",
+    "propertyId" : "P460",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q26273",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "Q55983715",
+    "propertyId" : "P31",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q947873",
+    "tgtId" : "Q7072597",
+    "propertyId" : "P910",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q397343",
+    "tgtId" : "Q1115575",
+    "propertyId" : "P31",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q423",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q685",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q21",
+    "propertyId" : "P138",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q33742",
+    "propertyId" : "P31",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q297265",
+    "tgtId" : "Q4740856",
+    "propertyId" : "P108",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "P101",
+    "propertyId" : "P1963",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "E10",
+    "propertyId" : "P12861",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q778",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q8002",
+    "propertyId" : "P527",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q222",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q45",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q22807045",
+    "propertyId" : "P371",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q7825",
+    "propertyId" : "P463",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q712",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q1860",
+    "propertyId" : "P364",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q83278",
+    "propertyId" : "P163",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q258",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q212",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q3910936",
+    "propertyId" : "P3103",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1249148",
+    "tgtId" : "Q8229",
+    "propertyId" : "P282",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q165762",
+    "propertyId" : "P237",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1249148",
+    "tgtId" : "Q48718820",
+    "propertyId" : "P460",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q661529",
+    "tgtId" : "Q7632657",
+    "propertyId" : "P31",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1930187",
+    "tgtId" : "P800",
+    "propertyId" : "P1963",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q30192",
+    "propertyId" : "P421",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q52431955",
+    "propertyId" : "P5110",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q16894228",
+    "propertyId" : "P421",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q111911970",
+    "propertyId" : "P527",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q36180",
+    "tgtId" : "Q28640",
+    "propertyId" : "P31",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q1013",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q1775415",
+    "propertyId" : "P5109",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q79",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q851",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q217438",
+    "propertyId" : "P6106",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q2193276",
+    "propertyId" : "P793",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q7824516",
+    "propertyId" : "P527",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q269412",
+    "propertyId" : "P35",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q4761497",
+    "propertyId" : "P1431",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q921",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q180589",
+    "propertyId" : "P6",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q297265",
+    "tgtId" : "Q23129",
+    "propertyId" : "P551",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "Q641118",
+    "propertyId" : "P1552",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q297265",
+    "tgtId" : "Q1860",
+    "propertyId" : "P1412",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q21903339",
+    "tgtId" : "Q297265",
+    "propertyId" : "P127",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q9682",
+    "propertyId" : "P35",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q7558100",
+    "tgtId" : "Q3914",
+    "propertyId" : "P31",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q23129",
+    "tgtId" : "Q116444440",
+    "propertyId" : "P194",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q33162",
+    "tgtId" : "Q7824528",
+    "propertyId" : "P527",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q51929290",
+    "propertyId" : "P5110",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q71521142",
+    "tgtId" : "Q78514488",
+    "propertyId" : "P31",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q4740856",
+    "tgtId" : "Q30",
+    "propertyId" : "P159",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q35",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1860",
+    "tgtId" : "Q192184",
+    "propertyId" : "P17",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q129006",
+    "propertyId" : "P6",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q13610143",
+    "tgtId" : "Q16279012",
+    "propertyId" : "P460",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q23129",
+    "tgtId" : "Q9677436",
+    "propertyId" : "P1465",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q7463363",
+    "propertyId" : "P1464",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q5",
+    "tgtId" : "P742",
+    "propertyId" : "P1963",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q1249148",
+    "tgtId" : "Q2322",
+    "propertyId" : "P1750",
+    "label" : null,
+    "type" : "EntityId"
+  }, {
+    "srcId" : "Q145",
+    "tgtId" : "Q769",
+    "propertyId" : "P530",
+    "label" : null,
+    "type" : "EntityId"
+  } ],
+  "properties" : [ {
+    "id" : "P27",
+    "label" : "country of citizenship",
+    "description" : "the object is a country that recognizes the subject as its citizen"
+  }, {
+    "id" : "P735",
+    "label" : "given name",
+    "description" : "first name or another given name of this person; values used with the property should not link disambiguations nor family names"
+  }, {
+    "id" : "P551",
+    "label" : "residence",
+    "description" : "the place where the person is or has been, resident"
+  }, {
+    "id" : "P2031",
+    "label" : "work period (start)",
+    "description" : "start of period during which a person or group flourished (fl. = \"floruit\") in their professional activity"
+  }, {
+    "id" : "P7763",
+    "label" : "copyright status as a creator",
+    "description" : "states if the body of work published during the lifetime of this creator is still copyrighted or in the public domain"
+  }, {
+    "id" : "P101",
+    "label" : "field of work",
+    "description" : "specialization of a person or organization; see P106 for the occupation"
+  }, {
+    "id" : "P1830",
+    "label" : "owner of",
+    "description" : "entities owned by the subject"
+  }, {
+    "id" : "P734",
+    "label" : "family name",
+    "description" : "part of full name of person"
+  }, {
+    "id" : "P569",
+    "label" : "date of birth",
+    "description" : "date on which the subject was born"
+  }, {
+    "id" : "P26",
+    "label" : "spouse",
+    "description" : "the subject has the object as their spouse (husband, wife, partner, etc.). Use \"unmarried partner\" (P451) for non-married companions"
+  }, {
+    "id" : "P1412",
+    "label" : "languages spoken, written or signed",
+    "description" : "language(s) that a person or a people speaks, writes or signs, including the native language(s)"
+  }, {
+    "id" : "P108",
+    "label" : "employer",
+    "description" : "person or organization for which the subject works or worked"
+  }, {
+    "id" : "P6275",
+    "label" : "copyright representative",
+    "description" : "person or organisation who represents the copyright for this person or work of art"
+  }, {
+    "id" : "P31",
+    "label" : "instance of",
+    "description" : "that class of which this subject is a particular example and member; different from P279 (subclass of); for example: K2 is an instance of mountain; volcano is a subclass of mountain (and an instance of volcanic landform)"
+  }, {
+    "id" : "P800",
+    "label" : "notable work",
+    "description" : "notable scientific, artistic or literary work, or other work of significance among subject's works"
+  }, {
+    "id" : "P106",
+    "label" : "occupation",
+    "description" : "occupation of a person; see also \"field of work\" (Property:P101), \"position held\" (Property:P39)"
+  }, {
+    "id" : "P19",
+    "label" : "place of birth",
+    "description" : "most specific known birth location of a person, animal or fictional character"
+  }, {
+    "id" : "P69",
+    "label" : "educated at",
+    "description" : "educational institution attended by subject"
+  } ],
+  "queue" : {
+    "queued" : {
+      "2" : [ "November 30, 1554", "Q51929290", "Q115", "Q117", "Q233611", "Q5611262", "November 30, 1559", "Q114", "Q164509", "P1589", "Q113162", "Q10648", "P1344", "Q7072597", "Q12743436", "Q335644", "Q33999", "P272", "Q31573", "P495", "P4602", "P1576", "Q16279012", "Q104674", "Q22752889", "Q1626130", "Q10664", "Q47018901", "Q862751", "Q44676", "Q44679", "Q22890", "Q658845", "Q42262", "Q71534274", "Q17853087", "Q1122261", "Q297265", "Q142", "P279", "P276", "Q641118", "Q23663136", "P1317", "P1559", "P1313", "Q44661", "Q7076967", "Q827525", "P1552", "P1791", "Q7888721", "P1792", "Q4164871", "P282", "Q1528507", "Q26498983", "Q7116045", "Q5785", "Q3624078", "Q159", "Q9677436", "Q398", "Q192184", "Q155", "Q399", "Q862579", "Q108300140", "Q18201510", "P1382", "Q9072", "Q6241693", "Q183231", "Q163", "Q65044634", "Q340195", "Q148", "Q36823", "Q32670711", "P1376", "Q18201505", "Q18201502", "Q150", "Q473746", "Q112099", "P1365", "Q1156228", "Q104844567", "Q280856", "Q436353", "Q4642", "Q183", "Q484847", "Q154954", "Q788499", "Q12734727", "Q223642", "Q82708", "Q3070866", "January 1, 1904", "Q3915671", "Q17520955", "Q65132216", "Q17520952", "Q1043527", "Q9104978", "Q27479", "Q2346748", "Q782942", "Q1288568", "Q179164", "Q17520949", "Q17520946", "June 30, 2015", "Q17520944", "Q189", "E10", "Q1115575", "Q4426267", "Q2625543", "Q10818", "Q18059417", "Q3491268", "Q192", "Q146233", "September 7, 2006", "Q22807045", "Q301487", "Q930730", "P3103", "Q116444440", "P3342", "Q18059424", "Q524828", "Q6334588", "Q101352", "Q8646", "Q264766", "Q209316", "Q41550", "P1151", "P5109", "Q3919830", "Q318917", "E42", "Q7897276", "Q376150", "Q29462", "Q1346342", "P5996", "P3161", "Q7979", "Q7976", "Q314504", "Q18073734", "Q453722", "Q16250843", "Q84596503", "Q11703", "P2067", "Q12330003", "Q7112788", "Q159583", "Q201817", "Q3324796", "Q463515", "Q17495", "Q6655", "Q7985", "Q2071905", "Q159334", "Q94498772", "P3388", "Q463543", "Q7824509", "Q1137302", "P7959", "Q682111", "Q185836", "Q22293445", "Q12738495", "P6", "P915", "Q242797", "P2048", "P910", "Q51929218", "P1196", "P3373", "P2283", "Q7824518", "Q7824519", "Q7824516", "Q7824517", "Q7824514", "Q7824515", "Q33742", "Q7824512", "Q7824513", "Q7824510", "Q907311", "Q7824511", "Q215627", "Q2", "Q9559", "Q41825", "P942", "Q15720943", "P706", "Q373478", "Q61023920", "Q106241388", "Q23165", "Q4567134", "Q14211", "Q8229", "Q9314", "Q1553250", "Q1314553", "Q8475", "P937", "Q843589", "Q651641", "Q204720", "Q16641", "Q842490", "Q37560", "Q8002", "Q6063", "Q191472", "Q817", "Q15720963", "Q7390", "Q2964710", "Q813", "Q603200", "Q3174312", "Q115805380", "P2093", "Q909128", "Q1070049", "Q9576", "Q180589", "December 18, 2022", "Q15978258", "Q211236", "Q8016", "Q28640", "Q805", "Q84969419", "Q801", "Q32803935", "P17", "Q55983715", "P742", "Q39546", "Q23580217", "Q833", "Q178435", "Q835992", "P749", "P509", "P5110", "P20", "P22", "P25", "Q51929403", "Q1392475", "Q654705", "Q100320817", "Q16686448", "Q8425", "Q6256", "Q822", "P1813", "Q41614", "Q499327", "Q697897", "P1811", "April 12, 1927", "Q84570734", "P30", "P737", "Q826", "P5125", "P36", "Q200325", "P35", "P38", "P37", "P39", "Q854", "Q851", "Q40317", "Q116248079", "Q967098", "P40", "P527", "Q48038", "Q3769299", "P47", "Q9531", "Q272201", "Q842", "Q843", "Q9309", "Q665624", "Q108372628", "Q71530142", "P750", "Q2193276", "Q2418495", "P50", "Q7240943", "Q81299", "Q8749644", "Q48277", "Q70172", "Q13414953", "Q37143", "Q9545", "Q67575123", "Q109671932", "Q10302194", "P1622", "Q878", "Q124653007", "Q69289562", "Q1137807", "Q865", "P530", "Q894087", "Q899770", "Q334723", "Q4115170", "Q1233197", "Q2531", "Q1983621", "Q414", "P2936", "Q277252", "Q84079865", "P85", "Q419", "Q13196750", "P86", "Q740768", "Q482980", "Q9174", "P571", "Q79576", "P570", "Q3866537", "P797", "Q403", "P793", "Q131539", "Q884", "Q181817", "Q7632657", "P8055", "Q408", "Q269412", "Q7333907", "Q6697530", "Q23103", "Q3884", "P103", "Q678", "Q131105", "Q663492", "Q672", "Q6766392", "P102", "Q4943143", "Q108556886", "Q2863003", "October 20, 2002", "Q654787", "Q95885", "Q165762", "Q13590141", "Q424", "Q9129", "Q423", "Q237623", "Q668", "Q34020", "Q664", "P2989", "Q27104997", "P1411", "Q6840573", "Q12308941", "Q25305", "Q27968", "P580", "P582", "July 1, 1965", "Q15978631", "Q214", "P127", "Q458", "Q11109963", "P364", "P122", "Q695", "P121", "Q213465", "Q697", "Q212", "P3823", "Q7033019", "Q32451653", "Q219", "Q218", "P129", "Q23135", "Q2509", "Q45177", "P371", "P131", "Q3244280", "Q129006", "Q1410", "Q683", "Q173175", "P1636", "Q686", "P112", "Q685", "Q1549591", "P119", "P8258", "Q8724522", "Q1411470", "Q1156970", "Q784975", "Q9142", "Q691", "P361", "Q13353", "Q740714", "Q1030", "Q238", "Q233", "Q232", "Q43448", "Q3114830", "Q723685", "P4733", "P1465", "Q8195619", "P1464", "Q332019", "Q122382049", "Q39164767", "Q8908", "Q7817", "Q1037", "Q320021", "P150", "Q242", "Q46034607", "Q241", "Q1033", "Q58635633", "Q1036", "Q3307505", "Q126125", "P136", "Q1042", "P138", "Q227", "Q222", "Q104858667", "P4967", "P3876", "P1454", "P1455", "Q229", "Q7269768", "Q7923975", "Q19650550", "Q186896", "Q1928989", "P140", "Q1049", "Q7825", "Q165970", "Q230", "Q1044", "Q1045", "Q258", "Q147276", "P166", "P1449", "Q8607617", "Q1050", "P1687", "Q135288", "Q29051543", "Q32784446", "Q23852", "Q20055561", "Q6383803", "P172", "Q20472817", "Q22976182", "Q128995", "P170", "P159", "Q1065", "P155", "Q244", "Q48718831", "Q1088364", "Q506687", "P1431", "Q1240211", "Q21200", "Q21203", "Q484531", "P162", "P163", "Q252", "Q12737077", "Q815439", "Q778145", "Q34770", "Q5398426", "P1269", "P2354", "P2596", "Q112567272", "Q55011311", "Q4033111", "Q23635", "P194", "P190", "Q2322", "Q216108", "Q265", "Q76836247", "Q217438", "P178", "Q36705", "P2587", "Q1367306", "Q3330103", "Q1348800", "P2341", "Q1009", "Q23404", "Q111911970", "Q1246", "December 6, 1921", "Q1005", "Q108762424", "Q33685", "Q30192", "Q298", "Q116465820", "P2579", "Q3109261", "Q43274", "Q1019", "Q1016", "Q26401003", "Q7994501", "Q188822", "Q1013", "Q1014", "Q1020", "Q18511725", "Q565654", "P1477", "Q23666", "Q1027", "Q1028", "Q7411", "Q323138", "Q26273", "Q196627", "Q15728956", "Q171318", "Q605326", "Q7416", "Q20672086", "Q30433557", "Q6574", "Q13019738", "Q23905832", "Q5155053", "P1056", "Q78514488", "Q156150", "Q1775461", "P7867", "P1050", "Q708676", "Q5150848", "Q5738061", "Q7123539", "Q826700", "Q541279", "P3222", "Q201966", "Q184425", "Q65177267", "Q1234617", "Q83278", "Q43619", "Q6757805", "Q56650537", "P3219", "Q42762", "P1034", "Q334029", "Q38272", "Q6834520", "Q238372", "Q59152282", "Q19771", "Q590227", "Q209663", "Q128976", "Q6963972", "Q151991", "Q4453957", "P4132", "Q51929369", "Q13157897", "Q32501", "Q128985", "Q12021746", "Q20181813", "Q8077931", "Q2250012", "P2184", "Q18221", "Q3040066", "Q8205328", "Q128956", "Q334695", "Q845015", "Q18201498", "P5658", "Q368215", "Q21241814", "Q128967", "Q191384", "Q785260", "Q30597846", "Q54820071", "Q3910936", "Q110551885", "Q189062", "Q52431970", "Q216160", "Q521227", "Q2097387", "Q1522689", "Q372949", "P1906", "Q5864808", "Q104395429", "September 14, 1752", "Q917", "Q8508759", "Q1072120", "Q7824527", "Q7824528", "Q7824525", "Q7824526", "Q7824523", "Q7824524", "Q720858", "Q9676", "Q7824521", "Q7824522", "Q5329170", "Q3086706", "Q25230", "Q52431955", "P8313", "P6379", "Q902", "Q25224", "Q25228", "Q69301923", "Q17", "Q16", "Q9682", "Q180673", "Q864380", "Q683120", "Q18387795", "Q4761497", "Q20", "Q22", "Q21", "Q2580491", "Q26", "Q25", "Q28", "Q27", "Q3914", "Q29", "P832", "Q921", "Q16894228", "Q21822439", "Q928", "Q5849863", "Q19809", "Q31", "Q170424", "Q12859294", "Q30", "Q47499", "Q924", "Q1475560", "Q35", "Q37", "Q36", "Q39", "Q38", "Q1071027", "Q710", "Q712", "Q954", "Q711", "Q953", "Q60771002", "Q4184", "Q717", "Q1359130", "P8744", "Q958", "Q41", "Q43", "Q46", "Q2363292", "Q45", "Q174193", "P610", "Q9648", "Q5043", "Q109621125", "Q1775415", "Q3772571", "Q709", "Q702", "Q9134365", "Q15720871", "Q1402021", "Q823428", "Q8253451", "Q431471", "Q51929517", "Q1061257", "P400", "Q734", "Q15720880", "Q102336293", "P407", "Q844329", "Q25289", "P6106", "Q108289407", "Q963", "Q2568366", "Q67531905", "P12443", "Q29653", "Q77", "Q79", "Q31966", "Q707401", "Q1764511", "Q33000", "Q754", "P425", "Q7768229", "P421", "P7295", "Q44508716", "Q50423863", "Q83500", "Q84", "P1740", "Q23681", "P1741", "Q515", "Q757", "Q1609779", "Q656801", "Q52433289", "Q271611", "Q35672", "Q7200373", "Q73568642", "Q986", "P9241", "Q186371", "P1971", "Q94", "P418", "Q96", "Q1136601", "Q483501", "Q8328611", "Q1321", "Q166546", "Q946638", "Q778", "Q10862233", "Q379085", "Q503323", "P1963", "P449", "Q935983", "P209", "Q654641", "P208", "Q9056", "Q781", "Q766", "Q11007", "P7084", "Q760", "Q763", "Q769", "P437", "Q6642588", "Q1376956", "Q1925858", "Q269770", "Q9063", "Q185066", "Q11010", "Q315", "Q794", "P463", "Q48718820", "Q59522048", "Q796", "P3969", "P1304", "P2633", "P1542", "Q1404827", "Q654660", "Q8663692", "Q86309218", "Q26988", "Q4830453", "Q23058732", "Q11163999", "Q61788060", "P452", "Q3519604", "P451", "Q785", "Q15728186", "Q7463363", "Q784", "P1535", "Q8724427", "P1533", "Q15721563", "Q956699", "P12861", "Q184392", "Q1411125", "Q518603", "Q40807", "P460", "Q3293979", "Q11030", "Q85810136", "Q14549", "Q334", "Q10172270", "P6186", "P2853", "Q1239812", "P2852", "Q3957", "Q8279874", "Q2630372", "Q8759973", "Q1480793", "P479", "P237", "P1999", "Q23276", "P1750", "Q129373", "Q15980804" ]
+    },
+    "invalid" : [ ]
+  },
+  "dimensions" : {
+    "width" : 251.0,
+    "height" : 148.0
+  }
+}

@@ -8,21 +8,20 @@ import { SketchData, EDGE_DIR } from '../interfaces';
 
 interface EdgeDetailsProps {
   edge: Edge;
-  sketchData: SketchData | null;
-  selectedVertex: Vertex | null;
+  sketchData: SketchData;
+  selectedVertex: Vertex;
   relatedEdges: Edge[];
-  focusVertexHandler: (otherVert: Vertex) => void;
+  adjustLookAtHandler: (otherVert: Vertex) => void;
 }
 
-export const EdgeDetails: React.FC<EdgeDetailsProps> = ({ edge, sketchData, selectedVertex, relatedEdges, focusVertexHandler }) => {
+export const EdgeDetails: React.FC<EdgeDetailsProps> = ({ edge, sketchData, selectedVertex, relatedEdges, adjustLookAtHandler }) => {
   const property = edge.getPropertyDetails(sketchData!);
-  if (property == undefined) return; //todo -> refactors for animateable version
   const endpoints = edge.getVertexEndpoints(sketchData!);
   const otherVert = endpoints.src.id == selectedVertex?.id ? endpoints.tgt : endpoints.src;
   const parallelEdges = selectedVertex?.parallelEdges(otherVert, edge, relatedEdges)
-  if (parallelEdges == undefined) return; //todo -> refactors for animateable version
   const edgeDirection = parallelEdges!.length > 0 ? EDGE_DIR.PARALLEL : edge.getEdgeDirection(selectedVertex!);
   const icon = edgeDirectionIcon(edgeDirection);
+
   const propertyTextColor = () => {
     switch (edgeDirection) {
       case EDGE_DIR.INCOMING:
@@ -37,14 +36,14 @@ export const EdgeDetails: React.FC<EdgeDetailsProps> = ({ edge, sketchData, sele
   return (
     <>
       <div id='edge-details'>
-        <a id='src-vert-container' onClick={() => focusVertexHandler(selectedVertex!)}>
+        <a id='src-vert-container' onClick={() => adjustLookAtHandler(selectedVertex!)}>
           <img id='vertex-icon' src={VertexSel} alt='represents current selected vertex' />
         </a>
         <div id='property-container'>
           <p id='property-text' className={propertyTextColor()}>{property.label}</p>
           <img id='edge-type-icon' src={icon} alt='parallel edge' />
         </div>
-        <a id='alt-vert-container' onClick={() => focusVertexHandler(otherVert)}>
+        <a id='alt-vert-container' onClick={() => adjustLookAtHandler(otherVert)}>
           <img id='vertex-icon' src={VertIcon} alt='represents alternate vertex' />
           <p id='alt-vert-text'>{otherVert.label}</p>
         </a>
