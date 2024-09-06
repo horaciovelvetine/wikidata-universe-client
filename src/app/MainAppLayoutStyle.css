@@ -1,5 +1,20 @@
 @import url('../assets/Palette.css');
 
+@font-face {
+  font-family: 'CharisSIL-Regular';
+  src: url('../assets/font/CharisSIL-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'CharisSIL-Bold';
+  src: url('../assets/font/CharisSIL-Bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'CharisSIL-Italic';
+  src: url('../assets/font/CharisSIL-Italic.ttf') format('truetype');
+}
+
 * {
   box-sizing: border-box;
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -7,7 +22,7 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color-scheme: light dark;
+  color-scheme: dark;
   margin: 0;
   padding: 0;
 }
@@ -29,39 +44,20 @@ body {
   width: 100vw;
 }
 
-#wikiverse-container {
+#wikiverse-main {
   height: 100%;
   width: 100%;
   display: block;
+  overflow: hidden;
 }
 
-#sketch-container {
+#query-sketch {
+  /* Height/Width set in component for resize */
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   overflow: clip;
   box-shadow: 0rem 0rem 2rem 1rem rgba(0, 0, 0, 0.22);
-}
-
-#sketch-overlay-top {
-  position: absolute;
-  display: grid;
-  grid-template-rows: auto;
-  grid-template-columns: 1fr 1fr;
-  top: 0%;
-  width: 100%;
-  margin-top: 0.1rem;
-  background-color: transparent;
-}
-
-#sketch-overlay-bot {
-  position: absolute;
-  display: grid;
-  grid-template-rows: auto auto;
-  grid-template-columns: 40% 60%;
-  bottom: 0%;
-  width: 100%;
-  margin-bottom: 0.1rem;
-  background-color: transparent;
+  background-color: rgb(1, 1, 14);
 }
