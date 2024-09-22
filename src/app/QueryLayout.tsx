@@ -7,26 +7,26 @@ import { Wikiverse } from '../p5/Wikiverse';
 import { ActiveQueryControls, HoveredVertexDetails, RelatedEdgesDetails, VerTextDetails } from '../components';
 
 interface Props {
-  initQueryRes: RequestResponse;
-  setInitQueryRes: Dispatch<SetStateAction<RequestResponse>>
+  querySessionData: RequestResponse;
+  setQuerySessionData: Dispatch<SetStateAction<RequestResponse>>
 }
 
 const MemoizedSketch = memo(Wikiverse, (prevProps, nextProps) => {
   return prevProps.originQuery == nextProps.originQuery;
 })
 
-export const QueryLayout: React.FC<Props> = ({ initQueryRes, setInitQueryRes }) => {
-  const initQueryData: RequestPayload = { ...initQueryRes.data }
-  const [originQuery, setOriginQuery] = useState<string>(initQueryRes.data.query) // validates p5.sketch re-render
+export const QueryLayout: React.FC<Props> = ({ querySessionData, setQuerySessionData }) => {
+  const initQueryData: RequestPayload = { ...querySessionData.data }
+  const [originQuery, setOriginQuery] = useState<string>(querySessionData.data.query) // validates p5.sketch re-render
   const [sketchData, setSketchData] = useState<SketchData>(initQueryData);
-  const [selectedVertex, setSelectedVertex] = useState<Vertex | null>(null); // init res has only origin data
+  const [selectedVertex, setSelectedVertex] = useState<Vertex | null>(null);
   const [hoveredVertex, setHoveredVertex] = useState<Vertex | null>(null);
   const [cameraRef, setCameraRef] = useState<CameraManager>()
 
   useEffect(() => {
-    setOriginQuery(initQueryRes.data.query)
+    setOriginQuery(querySessionData.data.query)
     setSketchData(initQueryData)
-  }, [initQueryRes])
+  }, [querySessionData])
 
   const adjustLookAtHandler = (vert: Vertex) => {
     cameraRef?.setTarget(vert.coords);
@@ -41,14 +41,14 @@ export const QueryLayout: React.FC<Props> = ({ initQueryRes, setInitQueryRes }) 
       </div>
 
       {/* SKETCH START  */}
-      {initQueryRes.status == 200 ?
+      {querySessionData.status == 200 ?
         <MemoizedSketch {...{ originQuery, initQueryData, setSketchData, setSelectedVertex, setHoveredVertex, setCameraRef }} />
         : <></>}
 
       {/* OVERLAY BOT START */}
       <div id='sketch-overlay-bot'>
         {!!selectedVertex ? <RelatedEdgesDetails {...{ selectedVertex, sketchData, adjustLookAtHandler }} /> : <></>}
-        <ActiveQueryControls {...{ originQuery, setInitQueryRes }} />
+        <ActiveQueryControls {...{ originQuery, setQuerySessionData }} />
         <VerTextDetails {...{ selectedVertex }} />
       </div>
 

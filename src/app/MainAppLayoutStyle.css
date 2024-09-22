@@ -59,5 +59,13 @@ body {
   transform: translate(-50%, -50%);
   overflow: clip;
   box-shadow: 0rem 0rem 2rem 1rem rgba(0, 0, 0, 0.22);
-  background-color: rgb(1, 1, 14);
+}
+
+#standby-sketch {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  overflow: clip;
+  z-index: -2;
 }
