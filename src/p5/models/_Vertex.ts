@@ -69,10 +69,11 @@ export class Vertex implements iVertex {
    * @see URL is a guess, Wikidata Entities do not always have article representations.
    */
   url() {
-    const wikidataUrl = /^P/.test(this.id) ?
-      `https://www.wikidata.org/wiki/Property:${this.id}` :
-      `https://en.wikipedia.org/wiki/${this.label.replace(" ", "_")}`;
-    return wikidataUrl;
+    // TODO back to fix
+    // const wikidataUrl = /^P/.test(this.id) ?
+    //   `https://www.wikidata.org/wiki/Property:${this.id}` :
+    //   `https://en.wikipedia.org/wiki/${this.label.replace(" ", "_")}`;
+    return '';
   }
 
   /**

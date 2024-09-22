@@ -55,7 +55,7 @@ export class SketchManager {
     // DATA STATE
     this.originQuery = initQueryData.query
     this.data = { ...initQueryData }
-    this.selectedVertex = new Vertex(this.data.vertices[0]);
+    this.selectedVertex = new Vertex(this.data.vertices[0]); //todo redo for origin - should base on originQuery
     this.setSelectedVertex(this.selectedVertex);
     this.actionsHistory = new ActionsHistoryManager();
   }
@@ -91,6 +91,7 @@ export class SketchManager {
 
   async initPostRelatedDataRequest() {
     postRelatedDataQueue({ ...this.data, dimensions: calcInitLayoutDimensions(), query: this.originQuery }).then(res => {
+      console.log('relatedData Res', res);
       this.data = { ...res.data }
       this.setSketchData({ ...res.data }) // tell react
     }); // TODO - catch for possible fetch related issue catching

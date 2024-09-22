@@ -18,62 +18,62 @@ export const Wikiverse: React.FC<WikiverseProps> = ({ initQueryData, setSketchDa
   const sketch: Sketch = (p5) => {
 
     //!/=> Contains operating details of sketch
-    const S = new SketchManager({ p5, initQueryData, setSketchData, setSelectedVertex, setHoveredVertex, setCameraRef })
+    const SK = new SketchManager({ p5, initQueryData, setSketchData, setSelectedVertex, setHoveredVertex, setCameraRef })
 
     //*/=> SETUP...
-    p5.preload = () => { S.preloadFont() }
+    p5.preload = () => { SK.preloadFont() }
     p5.setup = () => {
-      S.createCanvas()
-      S.setTextFont()
-      S.initCameraManaged();
-      S.initPostRelatedDataRequest();
+      SK.createCanvas()
+      SK.setTextFont()
+      SK.initCameraManaged();
+      // SK.initPostRelatedDataRequest();
     };
 
     //*/=> DRAW...
     p5.draw = () => {
-      S.drawUI();
-      S.drawSelectedDetails();
-      S.drawHoveredDetails();
-      S.drawVertices();
-      S.advanceCanimations()
+      SK.drawUI();
+      SK.drawSelectedDetails();
+      SK.drawHoveredDetails();
+      SK.drawVertices();
+      SK.advanceCanimations()
     };
 
     //*/=> MOUSE PRESS...
     // TODO => Captures ability to check L vs. R is currently unused
     p5.mousePressed = () => {
-      const mouseTarget = S.mousePositionIsOnAVertex();
+      const mouseTarget = SK.mousePositionIsOnAVertex();
       if (mouseTarget == null) return;
 
       // Deselect...
-      if (S.targetAlreadySelected(mouseTarget)) {
-        S.selectedVertex = null;
+      if (SK.targetAlreadySelected(mouseTarget)) {
+        SK.selectedVertex = null;
         setSelectedVertex(null);
         return
       }
       // New Selection Made...
       // TODO => Refine behavior around click action recording
-      S.handleClickTargetValid(mouseTarget);
-      if (S.clickTargetIsOrigin(mouseTarget)) return; // dont re-fetch
-      if (S.clickTargetInHistory(mouseTarget)) return;
+      SK.handleClickTargetValid(mouseTarget);
+      if (SK.clickTargetIsOrigin(mouseTarget)) return; // dont re-fetch
+      if (SK.clickTargetInHistory(mouseTarget)) return;
 
-      S.addClickTargetToHistory(mouseTarget)
-
+      SK.addClickTargetToHistory(mouseTarget)
       // TODO => jumping off point for additional fetch logic (re: initPostRelated....)
+
     };
 
     //*/=> HOVER...
     p5.mouseMoved = () => {
-      if (S.stillHoveredLastVertex()) return; // change nothing
-      const mouseTarget = S.mousePositionIsOnAVertex(); // Vertex || null;
-      if (S.targetAlreadySelected(mouseTarget)) return; // already selected, don't hover
+      if (SK.stillHoveredLastVertex()) return; // change nothing
+      const mouseTarget = SK.mousePositionIsOnAVertex(); // Vertex || null;
+      if (SK.targetAlreadySelected(mouseTarget)) return; // already selected, don't hover
 
-      S.hoveredVertex = mouseTarget;
+      SK.hoveredVertex = mouseTarget;
       setHoveredVertex(mouseTarget)
     };
 
     //*/=> RESIZE...
     p5.windowResized = () => {
-      S.handleResize()
+      SK.handleResize()
     };
 
     //*/=> KEYPRESS...
