@@ -11,10 +11,10 @@ import { getQueryData } from '../api';
 
 interface ActiveQueryControlsProps {
   originQuery: string;
-  setInitQueryRes: Dispatch<SetStateAction<RequestResponse>>;
+  setQuerySessionData: Dispatch<SetStateAction<RequestResponse>>;
 }
 
-export const ActiveQueryControls: React.FC<ActiveQueryControlsProps> = ({ originQuery, setInitQueryRes }) => {
+export const ActiveQueryControls: React.FC<ActiveQueryControlsProps> = ({ originQuery, setQuerySessionData }) => {
   const [input, setInput] = useState<string>(originQuery);
   const [inputState, setInputState] = useState<INPUT_STATE>(INPUT_STATE.DEFAULT);
   const [fetching, setFetching] = useState(false);
@@ -55,7 +55,7 @@ export const ActiveQueryControls: React.FC<ActiveQueryControlsProps> = ({ origin
       const res = await getQueryData(input!)
       setFetching(false);
       if (res.status == 200) {
-        setInitQueryRes(res)
+        setQuerySessionData(res)
       }
     } else {
       shakeInvalidElement(els.cont);
