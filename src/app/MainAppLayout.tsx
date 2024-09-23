@@ -1,12 +1,11 @@
 import './MainAppLayoutStyle.css'
 
 import React, { createRef, useEffect, useState } from 'react';
-import { Footer, VerticalSiteTitle } from '../components';
 import { Dimensions, RequestResponse } from '../interfaces';
 import { calcInitLayoutDimensions } from '../p5/functions';
-import { QueryLayout } from './QueryLayout';
-import { MainQuerySessionInput } from '../components/_MainQuerySessionInput';
+import { ActiveQueryLayout } from './ActiveQueryLayout';
 import { StandbySketch } from '../p5/StandbySketch';
+import { Footer, VerticalSiteTitle, ApiOfflineNotice, MainQuerySessionInput } from '../components';
 import { showHideElement } from '../components/animations';
 
 
@@ -34,13 +33,16 @@ export const MainAppLayout: React.FC<MainAppLayoutProps> = ({ apiStatusResponse 
     }
   }, [activeQuerySession])
 
+  const apiOnline = apiStatusResponse.status == 200;
+  const apiOffline = apiStatusResponse.status != 200;
 
   return (
     <div id='wikiverse-main'>
       <VerticalSiteTitle />
       <div id='query-sketch' style={{ width: containerDimensions.width, height: containerDimensions.height }}>
-        <MainQuerySessionInput {...{ setQuerySessionData, setActiveQuerySession }} />
-        {activeQuerySession ? <QueryLayout {... { querySessionData, setQuerySessionData }} /> : <></>}
+        {apiOnline ? <MainQuerySessionInput {...{ setQuerySessionData, setActiveQuerySession }} /> : <></>}
+        {apiOffline ? <ApiOfflineNotice /> : <></>}
+        {activeQuerySession ? <ActiveQueryLayout {... { querySessionData, setQuerySessionData }} /> : <></>}
       </div>
       <div id='standby-sketch' ref={stanbySktchRef}>
         <StandbySketch dimensions={containerDimensions} />

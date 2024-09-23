@@ -1,0 +1,73 @@
+#error-message-container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  backdrop-filter: blur(3px);
+  backdrop-filter: brightness(0.6);
+  opacity: 0;
+}
+
+#error-message-container>* {
+  pointer-events: none;
+}
+
+#unavailable-glogo-container {
+  position: absolute;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+#unavailable-glogo {
+  height: 75%;
+  opacity: 0.08;
+  animation-name: slow-globe-rotation;
+  animation-duration: 280s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+#question-mark-icon {
+  position: absolute;
+  width: 30%;
+  z-index: -1;
+  opacity: 0.1;
+  transform: translate(-10rem) rotate(165deg);
+}
+
+#exclamation-mark-icon {
+  position: absolute;
+  width: 30%;
+  z-index: -1;
+  opacity: 0.1;
+  transform: translate(10rem) rotate(15deg);
+}
+
+#error-text-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-shadow: 1px 1px 2px black;
+}
+
+#error-title {
+  font-family: "Charis SIL", serif !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
+  font-size: 3.5rem;
+  text-shadow: rgb(var(--gray-900)) 0.1rem 0.1rem 0.1rem;
+  margin-bottom: 1rem;
+}
+
+#error-message {
+  font-size: 1.2rem;
+}
+
+#related-links-container {
+  z-index: 3;
+}

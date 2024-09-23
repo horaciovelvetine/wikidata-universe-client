@@ -1,11 +1,12 @@
+import './_ApiOfflineNoticeStyle.css'
+import './animations/_SlowGlobeRotation.css'
+
 import { createRef, useEffect } from "react";
 
 import { Exclaims, Question } from "../assets/icons";
 import GlobeLogo from '../assets/imgs/globe-outline-no-bg-white.svg'
 
-
-
-
+import { showHideElement } from "./animations";
 
 export const ApiOfflineNotice: React.FC = () => {
 
@@ -13,7 +14,7 @@ export const ApiOfflineNotice: React.FC = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      fadeInElement(containerRef.current!);
+      showHideElement(containerRef.current!, true);
     }, 1);
   }, []);
 
