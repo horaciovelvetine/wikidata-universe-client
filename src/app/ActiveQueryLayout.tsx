@@ -1,10 +1,10 @@
-import './QueryLayoutStyle.css'
-
+import './ActiveQueryLayoutStyle.css'
 import React, { Dispatch, memo, SetStateAction, useEffect, useState } from 'react';
-import { RequestPayload, RequestResponse, SketchData } from '../interfaces';
-import { CameraManager, Vertex } from '../p5/models';
+
 import { Wikiverse } from '../p5/Wikiverse';
-import { ActiveQueryControls, HoveredVertexDetails, RelatedEdgesDetails, VerTextDetails } from '../components';
+import { CameraManager, Vertex } from '../p5/models';
+import { RequestPayload, RequestResponse, SketchData } from '../interfaces';
+import { ActiveQueryControls, HoveredVertexDetails, RelatedEdgesDetails, VerTextDetails } from '../components/ActiveQueryLayout';
 
 interface Props {
   querySessionData: RequestResponse;
@@ -15,7 +15,7 @@ const MemoizedSketch = memo(Wikiverse, (prevProps, nextProps) => {
   return prevProps.originQuery == nextProps.originQuery;
 })
 
-export const QueryLayout: React.FC<Props> = ({ querySessionData, setQuerySessionData }) => {
+export const ActiveQueryLayout: React.FC<Props> = ({ querySessionData, setQuerySessionData }) => {
   const initQueryData: RequestPayload = { ...querySessionData.data }
   const [originQuery, setOriginQuery] = useState<string>(querySessionData.data.query) // validates p5.sketch re-render
   const [sketchData, setSketchData] = useState<SketchData>(initQueryData);
