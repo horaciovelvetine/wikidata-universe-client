@@ -1,6 +1,5 @@
-import { iEdge, SketchData } from "../../interfaces";
-import { Property } from "./_Property";
-import { Vertex } from "./_Vertex";
+import { iEdge, iProperty, SketchData } from "../../interfaces";
+import { Vertex, Property } from "./";
 
 export enum EDGE_DIR { INCOMING, OUTGOING, PARALLEL }
 
@@ -29,7 +28,7 @@ export class Edge implements iEdge {
   }
 
   getPropertyDetails(data: SketchData): Property {
-    const property: Property | undefined = data.properties.find(prop => this.propertyId == prop.id);
+    const property: iProperty | undefined = data.properties.find(prop => this.propertyId == prop.id);
     // TODO => defaulting behavior for missing properties
     return property ? property : new Property({ id: "def", label: "def", description: "def" })
   }
