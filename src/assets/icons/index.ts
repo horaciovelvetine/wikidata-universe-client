@@ -5,7 +5,7 @@ import Error from './mi-error-icon.svg';
 import Exclaims from './mi-exclaim-icon.svg';
 import HistArr from './mi-history-icon.svg';
 import Link from './mi-link-icon.svg';
-import Quesion from './mi-question-icon.svg';
+import Question from './mi-question-icon.svg';
 import Search from './mi-search-icon.svg';
 import SearchDngr from './mi-search-icon-danger.svg';
 import Settings from './mi-settings-icon.svg';
@@ -15,4 +15,4 @@ import ArrowFrom from './mi-from-arrow.svg'
 import Vertex from './mi-vertex-icon.svg'
 import VertexSel from './mi-vertex-icon-selected.svg'
 
-export { Chev, ChevDngr, Fetch, Error, Exclaims, HistArr, Link, Quesion, Search, SearchDngr, Settings, ArrowBoth, ArrowTo, ArrowFrom, Vertex, VertexSel };
+export { Chev, ChevDngr, Fetch, Error, Exclaims, HistArr, Link, Question, Search, SearchDngr, Settings, ArrowBoth, ArrowTo, ArrowFrom, Vertex, VertexSel };
