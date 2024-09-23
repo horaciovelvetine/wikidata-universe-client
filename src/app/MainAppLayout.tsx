@@ -41,7 +41,7 @@ export const MainAppLayout: React.FC<MainAppLayoutProps> = ({ apiStatusResponse 
       <VerticalSiteTitle />
       <div id='query-sketch' style={{ width: containerDimensions.width, height: containerDimensions.height }}>
         {apiOnline ? <MainQuerySessionInput {...{ setQuerySessionData, setActiveQuerySession }} /> : <></>}
-        {apiOffline ? <ApiOfflineNotice /> : <></>}
+        {apiOffline ? <ApiOfflineNotice apiStatus={apiStatusResponse} /> : <></>}
         {activeQuerySession ? <ActiveQueryLayout {... { querySessionData, setQuerySessionData }} /> : <></>}
       </div>
       <div id='standby-sketch' ref={stanbySktchRef}>

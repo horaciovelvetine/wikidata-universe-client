@@ -7,8 +7,13 @@ import { Exclaims, Question } from "../assets/icons";
 import GlobeLogo from '../assets/imgs/globe-outline-no-bg-white.svg'
 
 import { showHideElement } from "./animations";
+import { RequestResponse } from '../interfaces';
 
-export const ApiOfflineNotice: React.FC = () => {
+interface ApiOfflineProps {
+  apiStatus: RequestResponse;
+}
+
+export const ApiOfflineNotice: React.FC<ApiOfflineProps> = ({ apiStatus }) => {
 
   const containerRef = createRef<HTMLDivElement>();
 
@@ -22,8 +27,8 @@ export const ApiOfflineNotice: React.FC = () => {
     <>
       <div id='error-message-container' ref={containerRef}>
         <div id='error-text-container'>
-          <h1 id='error-title'>{404} API Unavailable</h1>
-          <p id='error-message'>Sorry, the API is currently unavailable. Please try again later.</p>
+          <h1 id='error-title'>{apiStatus.status} Unavailable</h1>
+          <p id='error-message'>{apiStatus.errMsg}</p>
         </div>
         <div id='unavailable-glogo-container'>
           <img src={GlobeLogo} alt="Wikipedia globe logo" id="unavailable-glogo" />

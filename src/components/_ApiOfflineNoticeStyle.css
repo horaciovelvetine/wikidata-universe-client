@@ -1,3 +1,8 @@
+@font-face {
+  font-family: 'CharisSIL-Regular';
+  src: url('../assets/font/CharisSIL-Regular.ttf') format('truetype');
+}
+
 #error-message-container {
   display: flex;
   height: 100%;
@@ -52,13 +57,12 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   text-shadow: 1px 1px 2px black;
 }
 
 #error-title {
-  font-family: "Charis SIL", serif !important;
-  font-weight: 400 !important;
-  font-style: normal !important;
+  font-family: "CharisSIL-Regular", serif;
   font-size: 3.5rem;
   text-shadow: rgb(var(--gray-900)) 0.1rem 0.1rem 0.1rem;
   margin-bottom: 1rem;
