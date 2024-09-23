@@ -18,7 +18,6 @@ interface SketchManagerProps {
   setCameraRef: Dispatch<React.SetStateAction<CameraManager | undefined>>;
 }
 
-//!/=> COMPONENT <=/!//
 /**
  * Manages the sketch state, including the p5 canvas, camera, UI, and data.
  * Handles interactions with vertices and updates the React state accordingly.
@@ -34,11 +33,13 @@ interface SketchManagerProps {
  * @property {Camera | undefined} cam - The p5 camera instance.
  * @property {CameraManager} camMngr - The camera manager for handling camera animations.
  * @property {UI} ui - The UI manager for drawing UI elements.
- * @property {string} originQuery - The initial query string used to fetch data.
+ * @property {string} originQuery - The initial query string used to fetch data (@note: this appears to be a duplication, but is essentialy as a reference values outside of the SketchData - data variable to prevent flickering on subsequent data being loaded - this is a neccasary duplication pending underlying struct change).
  * @property {SketchData} data - The data used in the sketch, including vertices and edges.
  * @property {Vertex | null} selectedVertex - The currently selected vertex.
  * @property {Vertex | null} hoveredVertex - The currently hovered vertex.
  */
+
+//!/=> COMPONENT <=/!//
 export class SketchManager {
 
   //*/=> REACT STATE
