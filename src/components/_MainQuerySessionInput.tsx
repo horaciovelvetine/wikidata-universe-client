@@ -1,22 +1,30 @@
 import './_MainQuerySessionInputStyle.css'
+import './animations/_RotateElement.css'
+import './animations/_SlowGlobeRotation.css'
+
 import GlobeLogo from '../assets/imgs/globe-outline-no-bg-white.svg'
 import { Search, Fetch } from '../assets/icons';
 
-import React, { useEffect, useState } from 'react';
+import { FC, Dispatch, createRef, useEffect, useState, SetStateAction } from 'react';
 
-import { INPUT_STATE } from '../interfaces';
+import { INPUT_STATE, RequestResponse } from '../interfaces';
 import { getQueryData } from '../api';
 import { hideElementAndRemoveDisplay, shakeInvalidElement, showHideElement } from './animations';
 
-export const MainQuerySessionInput: React.FC = () => {
+interface MainQuerySessionInputProps {
+  setQuerySessionData: Dispatch<SetStateAction<RequestResponse>>,
+  setActiveQuerySession: Dispatch<SetStateAction<boolean>>
+}
+
+export const MainQuerySessionInput: FC<MainQuerySessionInputProps> = ({ setActiveQuerySession, setQuerySessionData }) => {
   const [input, setInput] = useState<string>('');
   const [inputState, setInputState] = useState<INPUT_STATE>(INPUT_STATE.PLACEHOLDER);
   const [isFetching, setIsFetching] = useState(false);
   // Refs
-  const containerRef = React.createRef<HTMLDivElement>();
-  const inputRef = React.createRef<HTMLInputElement>();
-  const submitRef = React.createRef<HTMLButtonElement>();
-  const errNoticeRef = React.createRef<HTMLDivElement>();
+  const containerRef = createRef<HTMLDivElement>();
+  const inputRef = createRef<HTMLInputElement>();
+  const submitRef = createRef<HTMLButtonElement>();
+  const errNoticeRef = createRef<HTMLDivElement>();
 
   useEffect(() => {
     setTimeout(() => {
@@ -28,41 +36,42 @@ export const MainQuerySessionInput: React.FC = () => {
     return state === INPUT_STATE.VALID;
   };
 
+  const getCurrentRefs = () => {
+    return { input: inputRef.current!, submit: submitRef.current!, cont: containerRef.current!, err: errNoticeRef.current! }
+
+  }
+
   const formSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const inputTR = inputRef.current!
-    const submitTR = submitRef.current!
-    const contTR = containerRef.current!
-    const errTR = errNoticeRef.current!;
+    const eles = getCurrentRefs();
 
     if (!inputIsValid(inputState)) {
-      shakeInvalidElement(inputTR)
-      shakeInvalidElement(submitTR)
+      shakeInvalidElement(eles.input)
+      shakeInvalidElement(eles.submit)
       return;
     }
+
     setIsFetching(true);
 
-    if (input != undefined) { // TODO remove this goofy obstacle
-      const response = await getQueryData(input)
+    const response = await getQueryData(input)
 
-      if (response.status != 200) {
-        showHideElement(errTR, true, "0.15")
-        setTimeout(() => {
-          showHideElement(errTR, false, "0.15")
-        }, 2000)
-        shakeInvalidElement(inputTR)
-        shakeInvalidElement(submitTR)
-        setIsFetching(false);
-        setInputState(INPUT_STATE.INVALID);
-        return;
-      }
+    if (response.status != 200) {
+      showHideElement(eles.err, true, "0.15")
+      setTimeout(() => {
+        showHideElement(eles.err, false, "0.15")
+      }, 2000)
+      shakeInvalidElement(eles.input)
+      shakeInvalidElement(eles.submit)
+      setIsFetching(false);
+      setInputState(INPUT_STATE.INVALID);
+      return;
     }
 
     setIsFetching(false);
-    //TODO jump in success side here
-    // handleFetchSuccess(input, response.data);
-    hideElementAndRemoveDisplay(contTR, "0.75s")
+    setActiveQuerySession(true);
+    setQuerySessionData(response);
+    hideElementAndRemoveDisplay(eles.cont, "0.75s")
   };
 
   const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {

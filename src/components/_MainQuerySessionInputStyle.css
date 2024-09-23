@@ -81,10 +81,11 @@
 
 #mq-fetch-icon {
   height: 1.5rem;
-  animation-name: fetch-button-rotation;
+  animation-name: rotate-element;
   animation-duration: 3s;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
+  transform-origin: center center;
 }
 
 #mq-input::placeholder {
@@ -98,31 +99,30 @@
 
 #mq-glogo-container {
   position: absolute;
-  top: 20%;
-  left: 28.5%;
+  top: 15%;
+  left: 25%;
   width: 100%;
   height: 100%;
   z-index: -1;
 }
 
 #mq-glogo {
-  position: absolute;
-  height: 66%;
+  height: 75%;
   z-index: -1;
-  opacity: 0.08;
   animation-name: slow-globe-rotation;
-  animation-duration: 280s;
+  animation-duration: 200s;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
+  transform-origin: center center;
   transition: opacity 3s;
 }
 
 #mq-glogo:hover {
-  opacity: 0.109;
+  opacity: 0.15;
 }
 
 #mq-glogo:not(:hover) {
-  opacity: 0.08;
+  opacity: 0.1;
 }
 
 #mq-title {
