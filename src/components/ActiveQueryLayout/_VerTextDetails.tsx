@@ -1,9 +1,9 @@
 import './_VerTextDetailsStyle.css';
 import React, { createRef, useEffect, useState } from 'react';
 
-import { changeFocusOpacity, toggleSelectedVertexIcon, toggleVertextBackgrounds } from './animations';
-import { Vertex as VertIcon, VertexSel } from '../assets/icons'
-import { Vertex } from '../p5/models';
+import { changeFocusOpacity, toggleSelectedVertexIcon, toggleVertextBackgrounds } from '../animations';
+import { Vertex as VertIcon, VertexSel } from '../../assets/icons'
+import { Vertex } from '../../p5/models';
 
 
 interface VerTextDetailsProps {

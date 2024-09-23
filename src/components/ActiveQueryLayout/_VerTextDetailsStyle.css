@@ -1,13 +1,13 @@
-@import url('../assets/Palette.css');
+@import url('../../assets/Palette.css');
 
 @font-face {
   font-family: 'CharisSIL-Regular';
-  src: url('../assets/font/CharisSIL-Regular.ttf') format('truetype');
+  src: url('../../assets/font/CharisSIL-Regular.ttf') format('truetype');
 }
 
 @font-face {
   font-family: 'CharisSIL-Bold';
-  src: url('../assets/font/CharisSIL-Bold.ttf') format('truetype');
+  src: url('../../assets/font/CharisSIL-Bold.ttf') format('truetype');
 }
 
 #vertext-info {

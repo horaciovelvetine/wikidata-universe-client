@@ -1,12 +1,12 @@
 import './_ActiveQueryControlsStyle.css';
-import './animations/_HorizontalShake.css';
+import '../animations/_HorizontalShake.css';
 
 import React, { createRef, Dispatch, SetStateAction, useState } from 'react';
 
-import { INPUT_STATE, RequestResponse } from '../interfaces';
-import { Search, SearchDngr, Fetch } from '../assets/icons';
-import { flashOverlayElement, shakeInvalidElement } from './animations';
-import { getQueryData } from '../api';
+import { INPUT_STATE, RequestResponse } from '../../interfaces';
+import { Search, SearchDngr, Fetch } from '../../assets/icons';
+import { flashOverlayElement, shakeInvalidElement } from '../animations';
+import { getQueryData } from '../../api';
 
 
 interface ActiveQueryControlsProps {

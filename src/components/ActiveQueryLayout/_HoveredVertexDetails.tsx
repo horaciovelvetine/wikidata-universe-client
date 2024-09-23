@@ -1,8 +1,8 @@
 import './_HoveredVertexDetailsStyle.css'
 import React, { createRef, useEffect } from 'react';
-import { Vertex as VertIcon } from '../assets/icons'
-import { Vertex } from '../p5/models';
-import { fadeInHoveredLabel } from './animations';
+import { Vertex as VertIcon } from '../../assets/icons'
+import { Vertex } from '../../p5/models';
+import { fadeInHoveredLabel } from '../animations';
 
 interface HoveredVertexDetailsProps {
   hoveredVertex: Vertex | null;
