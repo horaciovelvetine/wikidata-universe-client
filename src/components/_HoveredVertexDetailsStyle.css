@@ -1,0 +1,49 @@
+@import url('../assets/Palette.css');
+
+@font-face {
+  font-family: 'CharisSIL-Regular';
+  src: url('../assets/font/CharisSIL-Regular.ttf') format('truetype');
+}
+
+#hovered-vertex-container {
+  display: flex;
+  justify-self: flex-start;
+  align-items: center;
+  grid-column: 1;
+  opacity: 75%;
+  margin-left: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+#cur-hovered {
+  display: inline-flex;
+  justify-items: center;
+  align-items: center;
+  margin-top: 6px;
+  font-size: 1.5rem;
+  text-shadow: 0px 2px 3px rgb(var(--sketch-bg));
+}
+
+#cur-hov-icon {
+  height: 2rem;
+  padding-right: 0.25rem;
+}
+
+#cut-hov-text-container {
+  display: inline-flex;
+  flex-direction: column;
+  
+}
+
+#cur-hov-label {
+  align-self: start;
+  font-family: 'CharisSIL-Regular', sans-serif;
+  text-shadow: 0px 1px 2px black;
+  color: rgb(var(--font));
+  text-wrap: nowrap;
+}
+
+#cur-hov-desc {
+  text-shadow: 0px 1px 2px black;
+  color: rgba(var(--font), 0.5);
+}

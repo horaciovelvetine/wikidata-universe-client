@@ -1,17 +1,16 @@
-import axios from 'axios';
-import { buildApiUrl } from '../functions';
-import { IApiStatus } from '../interfaces';
+import axios from "axios";
+import { RequestResponse } from "../interfaces";
+import { API_URL } from "./_ApiUrl";
 
-export async function getApiStatusRequest(): Promise<IApiStatus> {
+export async function getApiStatus(): Promise<RequestResponse> {
   return await axios
-    .get(buildApiUrl("status"))
-    .then((response) => {
-      return { code: response.status, message: response.data };
-    }).catch(error => {
-      if (error.code === "ERR_NETWORK") {
-        return { message: "The WikiData Universe API is currently offline. Try again later.", code: 500 };
+    .get(API_URL("status"))
+    .then((res) => {
+      return { status: res.status, data: res.data, errMsg: undefined };
+    }).catch(err => {
+      if (err.code === "ERR_NETWORK") {
+        return { errMsg: "The WikiData Universe API is currently offline. Try again later.", status: 500, data: {} } as RequestResponse;
       }
-      debugger;
-      return { message: "Unknown Error Encountered.", code: 404 };
+      return { errMsg: "Unknown Error Encountered.", status: 404, data: {} } as RequestResponse;
     });
 }

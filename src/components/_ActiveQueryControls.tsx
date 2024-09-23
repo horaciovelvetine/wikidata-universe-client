@@ -1,115 +1,90 @@
-import '../styles/components/ActiveQueryControls.css'
-import '../styles/animations/FetchButtonRotation.css'
-import SearchIcon from '../assets/img/mi-search-icon.svg'
-import ChevMenuIcon from '../assets/img/mi-chev-right-icon.svg'
-import LoadingIcon from '../assets/img/mi-sync-arrows-icon.svg'
+import './_ActiveQueryControlsStyle.css';
+import './animations/_HorizontalShake.css';
 
-import React, { useEffect, useState } from 'react';
-import { fadeInElement, shakeElement, rotateChevIcon, toggleCurSelVertexInfoDisplay } from '../functions';
-import { INPUT_STATES } from './_MainQueryInput';
-import { getInitQueryDataRequest } from '../api';
-import { Vertex } from './_p5'
+import React, { createRef, Dispatch, SetStateAction, useState } from 'react';
+
+import { INPUT_STATE, RequestResponse } from '../interfaces';
+import { Search, SearchDngr, Fetch } from '../assets/icons';
+import { flashOverlayElement, shakeInvalidElement } from './animations';
+import { getQueryData } from '../api';
 
 
 interface ActiveQueryControlsProps {
-  currentQuery: string;
-  curSelVertex: Vertex | undefined;
+  originQuery: string;
+  setQuerySessionData: Dispatch<SetStateAction<RequestResponse>>;
 }
 
-export const ActiveQueryControls: React.FC<ActiveQueryControlsProps> = ({ currentQuery, curSelVertex }) => {
-  const [query, setQuery] = useState(currentQuery)
-  const [queryState, setQueryState] = useState<INPUT_STATES>(INPUT_STATES.PLACEHOLDER);
-  const [isFetching, setIsFetching] = useState(false);
-  const [infoDisOpen, setInfoDisOpen] = useState(curSelVertex ? true : false);
+export const ActiveQueryControls: React.FC<ActiveQueryControlsProps> = ({ originQuery, setQuerySessionData }) => {
+  const [input, setInput] = useState<string>(originQuery);
+  const [inputState, setInputState] = useState<INPUT_STATE>(INPUT_STATE.DEFAULT);
+  const [fetching, setFetching] = useState(false);
 
-  const containerRef = React.createRef<HTMLDivElement>();
-  const inputRef = React.createRef<HTMLInputElement>();
-  const submitRef = React.createRef<HTMLButtonElement>();
-  const toggleRef = React.createRef<HTMLButtonElement>();
-  const curSelVertDispRef = React.createRef<HTMLUListElement>();
+  const contRef = createRef<HTMLDivElement>();
+  const inputRef = createRef<HTMLInputElement>();
+  const submitRef = createRef<HTMLButtonElement>();
+  const iconRef = createRef<HTMLImageElement>();
+  const iconDngrRef = createRef<HTMLImageElement>();
 
-  //==> Animate Query Input FadeIn
-  useEffect(() => {
-    setTimeout(() => {
-      fadeInElement(containerRef.current!);
-    }, 100)
-  }, [])
+  function handleInputChanges(e: React.ChangeEvent<HTMLInputElement>) {
+    setInput(e.target.value);
+    if (originQuery == e.target.value) {
+      setInputState(INPUT_STATE.DEFAULT);
+    } else if (e.target.value.length == 0) {
+      setInputState(INPUT_STATE.EMPTY);
+    } else if (e.target.value.length > 0) {
+      setInputState(INPUT_STATE.VALID)
+    } else {
+      setInputState(INPUT_STATE.INVALID)
+    }
+  }
 
-  useEffect(() => {
-    console.log('curSeleVertex() AQC: ', curSelVertex)
-  }, [curSelVertex])
+  const currentRefs = () => {
+    return {
+      cont: contRef.current!, input: inputRef.current!,
+      submit: submitRef.current!, icon: iconRef.current!,
+      iconDng: iconDngrRef.current!,
+    }
+  }
 
-  // 
-  // HANDLERS ==>
-  const submitNewQueryHandler = async (e: React.FormEvent<HTMLFormElement>) => {
+  async function handleQuerySubmit(e: React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
-    const inputTR = inputRef.current!
-    const submitTR = submitRef.current!
+    const els = currentRefs();
 
-    if (queryState == (INPUT_STATES.INVALID || INPUT_STATES.PLACEHOLDER) || query.length == 0) {
-      shakeElement(inputTR);
-      shakeElement(submitTR)
-      setQuery(currentQuery);
-      return;
+    if (inputState === INPUT_STATE.VALID) {
+      setFetching(true);
+      const res = await getQueryData(input!)
+      setFetching(false);
+      if (res.status == 200) {
+        setQuerySessionData(res)
+      }
+    } else {
+      shakeInvalidElement(els.cont);
+      shakeInvalidElement(els.input);
+      flashOverlayElement(els.iconDng, els.icon, 820);
+      shakeInvalidElement(els.submit);
     }
   }
 
-  const inputChangeValidHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setQuery(e.target.value);
-    if (e.target.value.length > 0) {
-      setQueryState(INPUT_STATES.VALID);
-    }
-  }
 
-  const handleCurSelToggleClick = () => {
-    setInfoDisOpen(!infoDisOpen);
-    rotateChevIcon(toggleRef.current!, infoDisOpen);
-    toggleCurSelVertexInfoDisplay(curSelVertDispRef.current!, infoDisOpen)
-  }
-
-  const searchButton = () => {
+  const dynamicButton = () => {
     return (
-      <><button id='aqc-submit' ref={submitRef} type='submit'>
-        <div id='icon-adjustment-layer'>
-          < img id='aqc-icon' src={SearchIcon} />
-        </div >
-      </button></>);
-  }
-
-  const fetchingButton = () => {
-    return (
-      <><button id='aqc-fetch-submit' ref={submitRef} type='button'>
-        <div id='icon-adjustment-layer'>
-          < img id='aqc-fetch-icon' src={LoadingIcon} />
-        </div>
-      </button></>);
+      <button id='aqc-query-submit' type='submit' onClick={(e) => handleQuerySubmit(e)} ref={submitRef}>
+        <img id='aqc-invalid-query-icon' src={SearchDngr} alt='magnifying glass search' ref={iconDngrRef} />
+        {fetching ? <img id='aqc-query-fetching-icon' src={Fetch} alt='fetching data' /> :
+          <>
+            <img id='aqc-query-submit-icon' src={Search} alt='magnifying glass search' ref={iconRef} />
+          </>}
+      </button>
+    );
   }
 
   return (
-    <div id='aqc-container' ref={containerRef}>
-
-      <div id='aqc'>
-        <form id='aqc-form' onSubmit={submitNewQueryHandler}>
-          <input id='aqc-input' ref={inputRef} type='text' value={query} onChange={inputChangeValidHandler}></input>
-          {isFetching ? fetchingButton() : searchButton()}
-        </form>
-
-        <div id='aqc-cur-sel-container' >
-          <button id='aqc-cur-sel-toggle' ref={toggleRef} onClick={handleCurSelToggleClick}>
-            <img id='aqc-cur-sel-icon' src={ChevMenuIcon} alt='small chevron facing the bottom of the screen' />
-          </button>
-
-          <div id='aqm-cur-sel-container'>
-            <ul id='aqm-cur-sel-list' ref={curSelVertDispRef}>
-              <li><a href={'https://en.wikipedia.org/wiki/' + curSelVertex?.label.replace(" ", "_")} target='_blank'>{curSelVertex?.label}</a></li>
-              <li>{curSelVertex?.description}</li>
-            </ul>
-          </div>
-
-        </div>
-
-      </div>
-
+    <div id='aqc-container' ref={contRef}>
+      <form id='aqc-query-form' onSubmit={handleQuerySubmit}>
+        <input id='aqc-query-input' type='text' value={input} onChange={(e) => handleInputChanges(e)} ref={inputRef} />
+        {dynamicButton()}
+      </form>
     </div>
   );
 };
+

@@ -1,4 +1,4 @@
-export interface IEdge {
+export interface iEdge {
   srcId: string;
   tgtId: string | null;
   propertyId: string;

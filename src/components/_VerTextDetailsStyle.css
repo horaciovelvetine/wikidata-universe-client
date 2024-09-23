@@ -1,0 +1,67 @@
+@import url('../assets/Palette.css');
+
+@font-face {
+  font-family: 'CharisSIL-Regular';
+  src: url('../assets/font/CharisSIL-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'CharisSIL-Bold';
+  src: url('../assets/font/CharisSIL-Bold.ttf') format('truetype');
+}
+
+#vertext-info {
+  display: flex;
+  align-items: center;
+  justify-self: flex-end;
+  grid-column: 2;
+  grid-row: 2;
+  margin-right: 1rem;
+  border-radius: 0.5rem;
+  backdrop-filter: blur(0.5rem);
+  text-shadow: 0px 1px 1px black;
+}
+
+#vertext-icon-cont {
+  display: inline-flex;
+  position: relative;
+}
+
+#vertext-icon {
+  position: absolute;
+  right: 0;
+  opacity: 0;
+}
+
+#vertext-details {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: baseline;
+  padding: 0.1rem 1rem;
+  border-radius: 0.5rem;
+  border-color: rgba(var(--font), 0.1);
+  border-style: solid;
+}
+
+#vertext-label {
+  font-size: 1.65rem;
+  color: rgba(var(--font));
+  font-family: 'CharisSIL-Regular', sans-serif;
+  transition: font-size 235ms, text-decoration 235ms;
+  text-wrap: nowrap;
+}
+
+#vertext-label:hover {
+  font-size: 1.8rem;
+  text-decoration: underline;
+}
+
+#vertext-desc {
+  font-size: 1.3rem;
+  color: rgba(var(--font), 0.4);
+  display: inline-flex;
+  padding-left: 0.5rem;
+  padding-right: 0.3rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}

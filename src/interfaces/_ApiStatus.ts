@@ -1,4 +1,4 @@
-export interface IApiStatus {
+export interface ApiStatus {
   code: number;
   message: string;
 }

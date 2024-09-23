@@ -1,8 +1,8 @@
-import { IPoint3D } from ".";
+import { iPoint3D } from "./_Point3D";
 
-export interface IVertex {
+export interface iVertex {
   id: string;
   label: string;
-  description: string;
-  coords: IPoint3D;
+  description: string | null;
+  coords: iPoint3D;
 }

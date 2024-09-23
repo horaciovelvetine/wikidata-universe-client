@@ -1,25 +1,27 @@
-import '../styles/components/Footer.css';
-import { IApiStatus } from "../interfaces";
+import './_FooterStyle.css';
+import React from 'react';
 
-interface FooterProps {
-  apiStatus: IApiStatus;
-}
-
-export const Footer: React.FC<FooterProps> = ({ apiStatus }) => {
+export const Footer: React.FC = () => {
+  const bl = "_blank";
   const githubUrl = "https://github.com/horaciovelvetine";
   const frontendUrl = githubUrl + "/wikidata-universe-client";
   const backendUrl = githubUrl + "/wikidata-universe-api";
-  const learnMoreUrl = githubUrl + "/ForceDrawnGraphs"
+  const learnMoreUrl = githubUrl + "/ForceDrawnGraphs";
 
   return (
-    <>
-      <div id="related-links-container">
-        <ul id="related-links-list">
-          <li id="related-link">github: <a href={frontendUrl}>frontend</a> | <a href={backendUrl}>backend</a></li>
-          <li id="related-link">©2024 by <a href={githubUrl}>@horaciovelvetine</a></li>
-          <li id="related-link">about <a href={learnMoreUrl}>wikiverse</a></li>
+    <footer>
+      <div id='container'>
+        <ul id='list'>
+          <li id='ftr-item'>github:
+            <a href={frontendUrl} target={bl}>frontend</a> |
+            <a href={backendUrl} target={bl}> backend</a>
+          </li>
+          <li id='ftr-item'>©2024 by <a href={githubUrl} target={bl}>@horaciovelvetine</a></li>
+          <li id='ftr-item'>about <a href={learnMoreUrl} target={bl}>wikiverse</a></li>
         </ul>
       </div>
-    </>
+    </footer>
   );
 };
+
+export default Footer;
