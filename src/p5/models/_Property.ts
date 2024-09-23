@@ -10,8 +10,4 @@ export class Property implements iProperty {
     this.label = property.label;
     this.description = property.description;
   }
-
-  url() { 
-    
-  }
 }
