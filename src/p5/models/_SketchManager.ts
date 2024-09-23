@@ -240,6 +240,10 @@ export class SketchManager {
    * @note => forced to be truthy for a return value becuase for this to be called, a starting place exists!
    */
   getOriginVertByQuery() {
-    return this.data.vertices.find(vertex => vertex.label === this.originQuery)!;
+    let originVertex = this.data.vertices.find(vertex => vertex.label === this.originQuery);
+    if (!originVertex) {
+      originVertex = this.data.vertices.find(vertex => vertex.fetched === true);
+    }
+    return originVertex!;
   }
 }
