@@ -10,6 +10,7 @@ export class Vertex implements iVertex {
   description: string;
   coords: Point3D;
   radius: number = 20;
+  fetched: boolean;
 
   constructor(vertex: iVertex);
   constructor(vertex: Vertex) {
@@ -17,6 +18,7 @@ export class Vertex implements iVertex {
     this.label = vertex.label;
     this.description = vertex.description;
     this.coords = vertex.coords;
+    this.fetched = vertex.fetched;
   }
 
   draw(p5: P5CanvasInstance, curSelectedVert: Vertex | null) {
@@ -91,9 +93,15 @@ export class Vertex implements iVertex {
    */
   getRelatedEdges(session: SketchData): Edge[] {
     const mentionEdge = session.edges.filter(edge => (this.id == edge.srcId || this.id == edge.tgtId));
-    const completeEdges = mentionEdge.filter(edge => this.getAltVertex(session, edge) != undefined);
+    const fetchCompleteEdges = mentionEdge.filter(edge => {
+      const edObj = new Edge(edge);
+      const { src, tgt } = edObj.getVertexEndpoints(session);
+      // edge is incomplete or unfetched, do not display
+      if (tgt == undefined || src == undefined || !src.fetched || !tgt.fetched) return;
+      return edge;
+    })
 
-    return completeEdges.map(edgeData => {
+    return fetchCompleteEdges.map(edgeData => {
       return new Edge(edgeData)
     })
   }
