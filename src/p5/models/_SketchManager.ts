@@ -4,7 +4,7 @@ import { Dispatch } from "react";
 import { Camera, Font } from "p5";
 import { P5CanvasInstance } from "@p5-wrapper/react";
 
-import { CameraManager, Vertex, UI, ActionsHistoryManager, Action } from "./";
+import { CameraManager, Vertex, UI } from "./";
 import { RequestPayload, SketchData } from "../../interfaces";
 import { calcInitLayoutDimensions, traceRay } from "../functions";
 import { postRelatedDataQueue } from "../../api";
@@ -20,6 +20,7 @@ interface SketchManagerProps {
 
 //!/=> COMPONENT <=/!//
 export class SketchManager {
+  
   //*/=> REACT STATE
   setSketchData: Dispatch<React.SetStateAction<SketchData>>;
   setSelectedVertex: Dispatch<React.SetStateAction<Vertex | null>>;
@@ -38,26 +39,29 @@ export class SketchManager {
   data: SketchData;
   selectedVertex: Vertex | null = null;
   hoveredVertex: Vertex | null = null;
-  actionsHistory: ActionsHistoryManager;
+  // actionsHistory: ActionsHistoryManager;
 
   //*/=> CONSTRUCTOR
   constructor({ p5, initQueryData, setSketchData, setSelectedVertex, setHoveredVertex, setCameraRef }: SketchManagerProps) {
+    
     // REACT STATE
     this.setSketchData = setSketchData;
     this.setSelectedVertex = setSelectedVertex;
     this.setHoveredVertex = setHoveredVertex;
     this.setCameraRef = setCameraRef;
+    
     // SKETCH STATE
     this.p5 = p5;
     this.camMngr = new CameraManager(p5);
     this.setCameraRef(this.camMngr);
     this.ui = new UI(p5);
+    
     // DATA STATE
     this.originQuery = initQueryData.query
     this.data = { ...initQueryData }
     this.selectedVertex = new Vertex(this.data.vertices[0]); //todo redo for origin - should base on originQuery
     this.setSelectedVertex(this.selectedVertex);
-    this.actionsHistory = new ActionsHistoryManager();
+    // this.actionsHistory = new ActionsHistoryManager();
   }
 
   preloadFont() {
@@ -157,11 +161,11 @@ export class SketchManager {
   }
 
   clickTargetInHistory(tgt: Vertex) {
-    return this.actionsHistory.alreadyClicked(tgt);
+    // return this.actionsHistory.alreadyClicked(tgt);
   }
 
   addClickTargetToHistory(tgt: Vertex) {
-    this.actionsHistory.recordNewAction(new Action('click', tgt));
+    // this.actionsHistory.recordNewAction(new Action('click', tgt));
   }
 
   handleResize() {
