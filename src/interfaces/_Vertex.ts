@@ -6,4 +6,5 @@ export interface iVertex {
   description: string | null;
   coords: iPoint3D;
   fetched: boolean;
+  origin: boolean;
 }

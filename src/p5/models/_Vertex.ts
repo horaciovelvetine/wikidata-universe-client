@@ -11,6 +11,7 @@ export class Vertex implements iVertex {
   coords: Point3D;
   radius: number = 20;
   fetched: boolean;
+  origin: boolean;
 
   constructor(vertex: iVertex);
   constructor(vertex: Vertex) {
@@ -19,8 +20,12 @@ export class Vertex implements iVertex {
     this.description = vertex.description;
     this.coords = vertex.coords;
     this.fetched = vertex.fetched;
+    this.origin = vertex.origin;
   }
 
+  /**
+   * Draws an onscreen representation of the Vertex inside the p5 instance
+   */
   draw(p5: P5CanvasInstance, curSelectedVert: Vertex | null) {
     p5.push();
     p5.translate(this.coords.x, this.coords.y, this.coords.z);
@@ -36,19 +41,27 @@ export class Vertex implements iVertex {
     p5.pop();
   }
 
+  /**
+   * Draws an onscreen label text appearing above the Vertex in the p5 instance
+   */
   drawLabel(p5: P5CanvasInstance<SketchProps>, cam: Camera, font: Font) {
-    const { x, y, z } = this.coords;
-    const labelStr = `${this.label}`;
 
-    p5.push();
-    p5.translate(x, y, z);
-    this.applyLabelPositionTransforms(p5, cam);
-    this.applyLabelTextSetup(p5, font);
-    p5.text(labelStr, 0, 0)
-    p5.pop();
+    if (this.fetched) {
+      const { x, y, z } = this.coords;
+      const labelStr = `${this.label}`;
 
+      p5.push();
+      p5.translate(x, y, z);
+      this.applyLabelPositionTransforms(p5, cam);
+      this.applyLabelTextSetup(p5, font);
+      p5.text(labelStr, 0, 0)
+      p5.pop();
+    }
   }
 
+  /**
+   * Draws any edge which mentions this Vertex (ingoing and outgoing)
+   */
   drawRelatedEdges(p5: P5CanvasInstance, session: SketchData, isHov: boolean = false) {
     const edgesToDraw = this.getRelatedEdges(session);
     if (!edgesToDraw) return;
@@ -64,6 +77,7 @@ export class Vertex implements iVertex {
       p5.line(x, y, z, x2, y2, z2);
       p5.pop();
     });
+
   }
 
   /**
@@ -72,10 +86,10 @@ export class Vertex implements iVertex {
    */
   url() {
     // TODO back to fix
-    // const wikidataUrl = /^P/.test(this.id) ?
-    //   `https://www.wikidata.org/wiki/Property:${this.id}` :
-    //   `https://en.wikipedia.org/wiki/${this.label.replace(" ", "_")}`;
-    return '';
+    const wikidataUrl = /^P/.test(this.id) ?
+      `https://www.wikidata.org/wiki/Property:${this.id}` :
+      `https://en.wikipedia.org/wiki/${this.label.replace(" ", "_")}`;
+    return wikidataUrl
   }
 
   /**
@@ -126,7 +140,6 @@ export class Vertex implements iVertex {
   }
 
   /**
-   *  
    * The way that text & p5.js intertact when using WEBGL leaves a bit to be desired
    * (another) Thank you to @camelCaseSensitive on {github} & @morejpeg on {youtube}
    * Excellent tutorial for this approach ==> (https://www.youtube.com/watch?v=kJMx0F7e9QU)
@@ -163,9 +176,16 @@ export class Vertex implements iVertex {
     return { pan, tilt }
   }
 
+  /**
+   * The given Cameras eye positions - this is where it is located in space 
+   */
   private eye(cam: Camera) {
     return { ex: cam.eyeX, ey: cam.eyeY, ez: cam.eyeZ }
   }
+
+  /**
+   * The given Cameras center positions - this is where it is looking in space
+   */
   private focal(cam: Camera) {
     return { fx: cam.centerX, fy: cam.centerY, fz: cam.centerZ }
   }
