@@ -3,19 +3,19 @@ import '../animations/_HorizontalShake.css';
 
 import React, { createRef, Dispatch, SetStateAction, useState } from 'react';
 
-import { INPUT_STATE, RequestResponse } from '../../interfaces';
+import { INPUT_STATE, RequestPayload, RequestResponse } from '../../interfaces';
 import { Search, SearchDngr, Fetch } from '../../assets/icons';
 import { flashOverlayElement, shakeInvalidElement } from '../animations';
 import { getQueryData } from '../../api';
 
 
 interface ActiveQueryControlsProps {
-  originQuery: string;
+  initQueryData: RequestPayload;
   setQuerySessionData: Dispatch<SetStateAction<RequestResponse>>;
 }
 
-export const ActiveQueryControls: React.FC<ActiveQueryControlsProps> = ({ originQuery, setQuerySessionData }) => {
-  const [input, setInput] = useState<string>(originQuery);
+export const ActiveQueryControls: React.FC<ActiveQueryControlsProps> = ({ initQueryData, setQuerySessionData }) => {
+  const [input, setInput] = useState<string>(initQueryData.query);
   const [inputState, setInputState] = useState<INPUT_STATE>(INPUT_STATE.DEFAULT);
   const [fetching, setFetching] = useState(false);
 
@@ -27,7 +27,7 @@ export const ActiveQueryControls: React.FC<ActiveQueryControlsProps> = ({ origin
 
   function handleInputChanges(e: React.ChangeEvent<HTMLInputElement>) {
     setInput(e.target.value);
-    if (originQuery == e.target.value) {
+    if (initQueryData.query == e.target.value) {
       setInputState(INPUT_STATE.DEFAULT);
     } else if (e.target.value.length == 0) {
       setInputState(INPUT_STATE.EMPTY);
