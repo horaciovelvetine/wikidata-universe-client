@@ -3,9 +3,9 @@ import { RequestPayload, SketchData } from '../interfaces';
 import { CameraManager, Vertex } from './models';
 import { ReactP5Wrapper, Sketch } from '@p5-wrapper/react';
 import { SketchManager } from "./models/_SketchManager";
+import { sketchDataCoordsSummary } from '../utils';
 
 interface WikiverseProps {
-  originQuery: string; // unused except to refresh component state for fully new queries
   initQueryData: RequestPayload;
   setSketchData: Dispatch<React.SetStateAction<SketchData>>;
   setSelectedVertex: Dispatch<React.SetStateAction<Vertex | null>>;
@@ -22,24 +22,26 @@ export const Wikiverse: React.FC<WikiverseProps> = ({ initQueryData, setSketchDa
 
     //*/=> SETUP...
     p5.preload = () => { SK.preloadFont() }
-    p5.setup = () => {
+    p5.setup = async () => {
       SK.createCanvas()
       SK.setTextFont()
       SK.initCameraManaged();
-      // SK.initPostRelatedDataRequest();
+      SK.initPostRelatedDataRequest();
     };
 
     //*/=> DRAW...
     p5.draw = () => {
       SK.drawUI();
+      SK.drawVertices();
       SK.drawSelectedDetails();
       SK.drawHoveredDetails();
-      SK.drawVertices();
       SK.advanceCanimations()
     };
 
-    //*/=> MOUSE PRESS...
     // TODO => Captures ability to check L vs. R is currently unused
+    // TODO => Refine behavior around click action recording
+
+    //*/=> MOUSE PRESS...
     p5.mousePressed = () => {
       const mouseTarget = SK.mousePositionIsOnAVertex();
       if (mouseTarget == null) return;
@@ -51,13 +53,9 @@ export const Wikiverse: React.FC<WikiverseProps> = ({ initQueryData, setSketchDa
         return
       }
       // New Selection Made...
-      // TODO => Refine behavior around click action recording
       SK.handleClickTargetValid(mouseTarget);
-      if (SK.clickTargetIsOrigin(mouseTarget)) return; // dont re-fetch
-      if (SK.clickTargetInHistory(mouseTarget)) return;
+      if (SK.clickTargetIsOrigin(mouseTarget)) return;
 
-      SK.addClickTargetToHistory(mouseTarget)
-      // TODO => jumping off point for additional fetch logic (re: initPostRelated....)
 
     };
 
@@ -77,7 +75,11 @@ export const Wikiverse: React.FC<WikiverseProps> = ({ initQueryData, setSketchDa
     };
 
     //*/=> KEYPRESS...
-    p5.keyPressed = () => { };
+    p5.keyPressed = () => {
+      if (p5.key === 'i' || p5.key === 'I') {
+        console.log(sketchDataCoordsSummary(SK.data));
+      }
+    };
   }
 
   return <ReactP5Wrapper sketch={sketch} />;
