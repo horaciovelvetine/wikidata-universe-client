@@ -6,3 +6,11 @@
   width: 100%;
   z-index: 1000;
 }
+
+#sketch-data-summary-container h5 {
+  text-decoration: underline;
+}
+
+#sketch-data-summary-container h4 {
+  text-decoration: underline;
+}

@@ -46,13 +46,14 @@ const SketchDataDebugSummary: React.FC<SketchDataDebugProps> = ({ sketchData, ca
 
   return (
     <div id="sketch-data-summary-container">
+      <h4>Debug:</h4>
       <p>Verts: {vertCount}</p>
       <p>Edges: {edgeCount}</p>
       <p>Props: {propCount}</p>
-      <p>Dim:</p>
+      <h5>Dim:</h5>
       <p>w x {width}</p>
       <p>h x {height}</p>
-      <p>Cam:</p>
+      <h5>Cam:</h5>
       <p>FOC: {`x: ${curCamLookAt.x}, y: ${curCamLookAt.y}, z: ${curCamLookAt.z}`}</p>
       <p>POS: {`x: ${curCamPos.x}, y: ${curCamPos.y}, z: ${curCamPos.z}`}</p>
     </div>
