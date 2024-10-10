@@ -28,6 +28,7 @@ export const VerTextDetails: React.FC<VerTextDetailsProps> = ({ selectedVertex }
     toggleVertextBackgrounds(vertextInfoRef.current!, isOpen)
     toggleSelectedVertexIcon(noVertIconRef.current!, vertIconRef.current!, isOpen)
     changeFocusOpacity(vertextInfoRef.current!, isOpen);
+    //todo move empty box off screen so outline is not displayed
   }, [isOpen]);
 
   return (
@@ -38,6 +39,7 @@ export const VerTextDetails: React.FC<VerTextDetailsProps> = ({ selectedVertex }
           <a href={selectedVertex?.url()} target='_blank'>
             <div id='vertext-label'>
               {selectedVertex?.label}
+              <span id='wikimedia-id'>{selectedVertex?.id}</span>
             </div>
           </a>
           <div id='vertext-desc'>
