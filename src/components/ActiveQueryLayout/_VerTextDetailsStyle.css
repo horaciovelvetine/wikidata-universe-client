@@ -39,8 +39,6 @@
   align-items: baseline;
   padding: 0.1rem 1rem;
   border-radius: 0.5rem;
-  border-color: rgba(var(--font), 0.1);
-  border-style: solid;
 }
 
 #vertext-label {
