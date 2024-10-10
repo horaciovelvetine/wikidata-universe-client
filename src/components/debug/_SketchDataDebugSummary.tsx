@@ -42,7 +42,7 @@ const SketchDataDebugSummary: React.FC<SketchDataDebugProps> = ({ sketchData, ca
     const intervalId = setInterval(updateCameraValues, 100); // Update every 100ms
 
     return () => clearInterval(intervalId); // Cleanup interval on component unmount
-  }, [cameraRef]);
+  }, [cameraRef, sketchData]);
 
   return (
     <div id="sketch-data-summary-container">
