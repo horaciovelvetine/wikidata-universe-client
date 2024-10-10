@@ -18,7 +18,6 @@ export class UI {
   draw(data: SketchData) {
     this.p5.background(UI_BG())
     this.p5.orbitControl(2, 2, 2); // sensitivity adjustments
-    this.p5.rectMode(this.p5.CENTER)
 
     if (!this.displayBoundingBox && !this.displayOrientAxis) return;
     const meanPnt = calcVertexSetMean(data.vertices);

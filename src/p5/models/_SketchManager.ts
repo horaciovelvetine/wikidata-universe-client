@@ -5,7 +5,7 @@ import { Camera, Font } from "p5";
 import { P5CanvasInstance } from "@p5-wrapper/react";
 
 import { CameraManager, Vertex, UI } from "./";
-import { RequestPayload, SketchData } from "../../interfaces";
+import { iEdge, iVertex, RequestPayload, SketchData } from "../../interfaces";
 import { calcInitLayoutDimensions, traceRay } from "../functions";
 import { postRelatedDataQueue } from "../../api";
 
@@ -56,6 +56,7 @@ export class SketchManager {
   ui: UI;
 
   //*/=> DATA STATE
+  originVertex: iVertex
   originQuery: string;
   data: SketchData;
   selectedVertex: Vertex | null = null;
@@ -78,9 +79,13 @@ export class SketchManager {
     this.ui = new UI(p5);
 
     // DATA STATE
+    this.data = initQueryData;
+    // this.setSketchData(this.data) // should be able to be skipped 
+
     this.originQuery = initQueryData.query
-    this.data = { ...initQueryData }
-    this.selectedVertex = new Vertex(this.getOriginVertByQuery());
+    this.originVertex = this.getOriginVertex();
+
+    this.selectedVertex = new Vertex(this.originVertex);
     this.setSelectedVertex(this.selectedVertex);
   }
 
@@ -125,21 +130,29 @@ export class SketchManager {
     const aspectRatio = (this.p5.width / this.p5.height);
     const fovRad = (2 * this.p5.atan(this.p5.height / 2 / 800))
     this.p5.perspective(fovRad, aspectRatio, 1, 12000)
-    this.cam.setPosition(0, 0, 250); // assumes origin is positioned @ (0,0,0)
-    this.cam.lookAt(0, 50, 0) // look slightly below vertex for init 'pan-up' effect
+    const { x, y, z } = this.originVertex.coords;
+    this.cam.setPosition(x, y, (z + 150)); // assumes origin is positioned @ (0,0,0)
+    this.cam.lookAt(x, (y + 50), z) // look slightly below vertex for init 'pan-up' effect
   }
 
   /**
    * @method initPostRelatedDataRequest - Fetches related data and updates the sketch data.
    */
   async initPostRelatedDataRequest() {
-    postRelatedDataQueue({ ...this.data, dimensions: calcInitLayoutDimensions(), query: this.originQuery }).then(res => {
-      console.log('relatedData Res', res);
-      this.data = { ...res.data }
-      this.setSketchData({ ...res.data }) // tell react
-    }); // TODO - catch for possible fetch related issue catching
-  }
+    const payload = {
+      ...this.data, dimensions: calcInitLayoutDimensions(), query: this.originQuery
+    }
 
+    await postRelatedDataQueue({ ...payload })
+      .then(response => {
+        this.data = response.data;
+        this.setSketchData(this.data)
+        console.log("dataUpdateResponseReached()::", this.data)
+      }).catch(e => {
+        console.error(e);
+        debugger;
+      })
+  }
 
   /**
     * @method drawUI - Draws the UI elements.
@@ -156,6 +169,7 @@ export class SketchManager {
     if (this.selectedVertex == null) return;
     if (this.cam == undefined) return;
     if (this.wikiFont == undefined) return;
+    if (this.selectedVertex.fetched == false) return;
     this.selectedVertex.drawLabel(this.p5, this.cam, this.wikiFont)
     this.selectedVertex.drawRelatedEdges(this.p5, this.data, true)
   }
@@ -168,6 +182,7 @@ export class SketchManager {
     if (this.hoveredVertex == null) return;
     if (this.cam == undefined) return;
     if (this.wikiFont == undefined) return;
+    if (this.hoveredVertex.fetched == false) return;
     this.hoveredVertex.drawLabel(this.p5, this.cam, this.wikiFont)
     this.hoveredVertex.drawRelatedEdges(this.p5, this.data, true)
   }
@@ -177,7 +192,10 @@ export class SketchManager {
    */
   drawVertices() {
     this.data.vertices.forEach(vData => {
-      new Vertex(vData).draw(this.p5, this.selectedVertex);
+      // console.log(vData)
+      if (vData.fetched != false) {
+        new Vertex(vData).draw(this.p5, this.selectedVertex);
+      };
     })
   }
   /**
@@ -196,8 +214,9 @@ export class SketchManager {
     let mouseTarget: Vertex | null = null;
     this.data.vertices.forEach(vert => {
       const checkVert = new Vertex(vert);
-      if (traceRay(this.p5, this.cam!, checkVert))
+      if (checkVert.fetched == true && traceRay(this.p5, this.cam!, checkVert)) {
         mouseTarget = checkVert;
+      }
     })
     return mouseTarget;
   }
@@ -213,6 +232,7 @@ export class SketchManager {
    * @method handleClickTargetValid - Handles a valid click on a Vertex.
    */
   handleClickTargetValid(tgt: Vertex) {
+    if (tgt.fetched == false) return;
     this.hoveredVertex = null;
     this.setHoveredVertex(null);
     this.selectedVertex = tgt;
@@ -236,14 +256,9 @@ export class SketchManager {
   }
 
   /**
-   * @method getOriginVertByQuery - Gets the origin vertex by the initial query string.
-   * @note => forced to be truthy for a return value becuase for this to be called, a starting place exists!
+   * @method getOriginVertex - Finds the Vertex where .origin() == true
    */
-  getOriginVertByQuery() {
-    let originVertex = this.data.vertices.find(vertex => vertex.label === this.originQuery);
-    if (!originVertex) {
-      originVertex = this.data.vertices.find(vertex => vertex.fetched === true);
-    }
-    return originVertex!;
+  getOriginVertex() {
+    return this.data.vertices.find(vertex => vertex.origin === true)!;
   }
 }
