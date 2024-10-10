@@ -5,28 +5,23 @@ import { Wikiverse } from '../p5/Wikiverse';
 import { CameraManager, Vertex } from '../p5/models';
 import { RequestPayload, RequestResponse, SketchData } from '../interfaces';
 import { ActiveQueryControls, HoveredVertexDetails, RelatedEdgesDetails, VerTextDetails } from '../components/ActiveQueryLayout';
+import SketchDataDebugSummary from '../components/debug/_SketchDataDebugSummary';
 
-interface Props {
+interface ActiveQueryLayoutProps {
   querySessionData: RequestResponse;
   setQuerySessionData: Dispatch<SetStateAction<RequestResponse>>
 }
 
 const MemoizedSketch = memo(Wikiverse, (prevProps, nextProps) => {
-  return prevProps.originQuery == nextProps.originQuery;
+  return prevProps.initQueryData.query == nextProps.initQueryData.query;
 })
 
-export const ActiveQueryLayout: React.FC<Props> = ({ querySessionData, setQuerySessionData }) => {
+export const ActiveQueryLayout: React.FC<ActiveQueryLayoutProps> = ({ querySessionData, setQuerySessionData }) => {
   const initQueryData: RequestPayload = { ...querySessionData.data }
-  const [originQuery, setOriginQuery] = useState<string>(querySessionData.data.query) // validates p5.sketch re-render
   const [sketchData, setSketchData] = useState<SketchData>(initQueryData);
   const [selectedVertex, setSelectedVertex] = useState<Vertex | null>(null);
   const [hoveredVertex, setHoveredVertex] = useState<Vertex | null>(null);
   const [cameraRef, setCameraRef] = useState<CameraManager>()
-
-  useEffect(() => {
-    setOriginQuery(querySessionData.data.query)
-    setSketchData(initQueryData)
-  }, [querySessionData])
 
   const adjustLookAtHandler = (vert: Vertex) => {
     cameraRef?.setTarget(vert.coords);
@@ -34,7 +29,7 @@ export const ActiveQueryLayout: React.FC<Props> = ({ querySessionData, setQueryS
 
   return (
     <>
-
+      <SketchDataDebugSummary {...{ sketchData, cameraRef }} />
       {/* OVERLAY TOP START */}
       <div id='sketch-overlay-top'>
         <HoveredVertexDetails {...{ hoveredVertex }} />
@@ -42,16 +37,15 @@ export const ActiveQueryLayout: React.FC<Props> = ({ querySessionData, setQueryS
 
       {/* SKETCH START  */}
       {querySessionData.status == 200 ?
-        <MemoizedSketch {...{ originQuery, initQueryData, setSketchData, setSelectedVertex, setHoveredVertex, setCameraRef }} />
+        <MemoizedSketch {...{ initQueryData, setSketchData, setSelectedVertex, setHoveredVertex, setCameraRef }} />
         : <></>}
 
       {/* OVERLAY BOT START */}
       <div id='sketch-overlay-bot'>
         {!!selectedVertex ? <RelatedEdgesDetails {...{ selectedVertex, sketchData, adjustLookAtHandler }} /> : <></>}
-        <ActiveQueryControls {...{ originQuery, setQuerySessionData }} />
+        <ActiveQueryControls {...{ initQueryData, setQuerySessionData }} />
         <VerTextDetails {...{ selectedVertex }} />
       </div>
-
     </>
   );
 };
