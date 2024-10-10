@@ -34,15 +34,16 @@ export const MainAppLayout: React.FC<MainAppLayoutProps> = ({ apiStatusResponse 
   }, [activeQuerySession])
 
   const apiOnline = apiStatusResponse.status == 200;
-  const apiOffline = apiStatusResponse.status != 200;
 
   return (
     <div id='wikiverse-main'>
       <VerticalSiteTitle />
       <div id='query-sketch' style={{ width: containerDimensions.width, height: containerDimensions.height }}>
-        {apiOnline ? <MainQuerySessionInput {...{ setQuerySessionData, setActiveQuerySession }} /> : <></>}
-        {apiOffline ? <ApiOfflineNotice apiStatus={apiStatusResponse} /> : <></>}
-        {activeQuerySession ? <ActiveQueryLayout {... { querySessionData, setQuerySessionData }} /> : <></>}
+        {apiOnline ?
+          <MainQuerySessionInput {...{ setQuerySessionData, setActiveQuerySession }} /> :
+          <ApiOfflineNotice apiStatus={apiStatusResponse} />}
+        {activeQuerySession ?
+          <ActiveQueryLayout {... { querySessionData, setQuerySessionData }} /> : <></>}
       </div>
       <div id='standby-sketch' ref={stanbySktchRef}>
         <StandbySketch dimensions={containerDimensions} />
