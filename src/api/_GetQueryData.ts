@@ -2,8 +2,6 @@ import axios from "axios";
 import { API_URL } from "./_ApiUrl";
 import { RequestResponse } from "../interfaces";
 
-import DemoRelatedQueueResponse from '../assets/data/r-hammond-demo-query-r1-2.json'
-
 export async function getQueryData(query: string): Promise<RequestResponse> {
   return await axios.get(API_URL('query-data'), { params: { query } })
     .then(res => {
