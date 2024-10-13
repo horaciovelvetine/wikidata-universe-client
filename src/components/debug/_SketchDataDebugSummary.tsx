@@ -3,14 +3,14 @@ import './_SketchDataDebugSummaryStyle.css'
 
 import { SketchData } from '../../interfaces';
 import { calcInitLayoutDimensions } from '../../p5/functions';
-import { CameraManager } from '../../p5/models';
+import { SketchManager } from '../../p5/models/_SketchManager';
 
 interface SketchDataDebugProps {
   sketchData: SketchData,
-  cameraRef: CameraManager | undefined;
+  aqlSketchRef: SketchManager | undefined;
 }
 
-const SketchDataDebugSummary: React.FC<SketchDataDebugProps> = ({ sketchData, cameraRef }) => {
+export const SketchDataDebugSummary: React.FC<SketchDataDebugProps> = ({ sketchData, aqlSketchRef }) => {
   const { width, height } = calcInitLayoutDimensions()
   const [curCamLookAt, setCurCamLookAt] = useState({ x: 0, y: 0, z: 0 });
   const [curCamPos, setCurCamPos] = useState({ x: 0, y: 0, z: 0 });
@@ -21,15 +21,15 @@ const SketchDataDebugSummary: React.FC<SketchDataDebugProps> = ({ sketchData, ca
   useEffect(() => {
     const updateCameraValues = () => {
       setCurCamLookAt({
-        x: Math.round((cameraRef?.cam?.centerX ?? 0)),
-        y: Math.round((cameraRef?.cam?.centerY ?? 0)),
-        z: Math.round((cameraRef?.cam?.centerZ ?? 0))
+        x: Math.round((aqlSketchRef?.CAM().cam?.centerX ?? 0)),
+        y: Math.round((aqlSketchRef?.CAM().cam?.centerY ?? 0)),
+        z: Math.round((aqlSketchRef?.CAM().cam?.centerZ ?? 0))
       });
 
       setCurCamPos({
-        x: Math.round((cameraRef?.cam?.eyeX ?? 0)),
-        y: Math.round((cameraRef?.cam?.eyeY ?? 0)),
-        z: Math.round((cameraRef?.cam?.eyeZ ?? 0))
+        y: Math.round((aqlSketchRef?.CAM().cam?.eyeY ?? 0)),
+        x: Math.round((aqlSketchRef?.CAM().cam?.eyeX ?? 0)),
+        z: Math.round((aqlSketchRef?.CAM().cam?.eyeZ ?? 0))
       });
 
       setVertCount(sketchData?.vertices?.length ?? 0)
@@ -42,7 +42,7 @@ const SketchDataDebugSummary: React.FC<SketchDataDebugProps> = ({ sketchData, ca
     const intervalId = setInterval(updateCameraValues, 100); // Update every 100ms
 
     return () => clearInterval(intervalId); // Cleanup interval on component unmount
-  }, [cameraRef, sketchData]);
+  }, [aqlSketchRef, sketchData]);
 
   return (
     <div id="sketch-data-summary-container">
@@ -60,4 +60,4 @@ const SketchDataDebugSummary: React.FC<SketchDataDebugProps> = ({ sketchData, ca
   );
 };
 
-export default SketchDataDebugSummary;
+

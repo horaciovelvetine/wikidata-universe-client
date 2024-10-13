@@ -1,59 +1,39 @@
 import CharisTTF from "../../assets/font/CharisSIL-Regular.ttf";
 
-import { Dispatch } from "react";
+import { Dispatch, SetStateAction } from "react";
 import { Camera, Font } from "p5";
 import { P5CanvasInstance } from "@p5-wrapper/react";
 
-import { CameraManager, Vertex, UI } from "./";
-import { iEdge, iVertex, RequestPayload, SketchData } from "../../interfaces";
+import { CameraManager, Vertex, UIManager } from "./";
+import { iVertex, RequestPayload, SessionSettingsState, SketchData } from "../../interfaces";
 import { calcInitLayoutDimensions, traceRay } from "../functions";
 import { postRelatedDataQueue } from "../../api";
 
 interface SketchManagerProps {
   p5: P5CanvasInstance;
   initQueryData: RequestPayload;
-  setSketchData: Dispatch<React.SetStateAction<SketchData>>;
-  setSelectedVertex: Dispatch<React.SetStateAction<Vertex | null>>;
-  setHoveredVertex: Dispatch<React.SetStateAction<Vertex | null>>;
-  setCameraRef: Dispatch<React.SetStateAction<CameraManager | undefined>>;
+  setSketchData: Dispatch<SetStateAction<SketchData>>;
+  setSelectedVertex: Dispatch<SetStateAction<Vertex | null>>;
+  setHoveredVertex: Dispatch<SetStateAction<Vertex | null>>;
+  // called once on construction to inform React of the Sketch for access w/o re-rendering the sketch.
+  setSketchRef: (sk: SketchManager) => void;
+  sessionSettingsState: SessionSettingsState;
 }
 
-/**
- * Manages the sketch state, including the p5 canvas, camera, UI, and data.
- * Handles interactions with vertices and updates the React state accordingly.
- * 
- * @class SketchManager
- * 
- * @property {Dispatch<React.SetStateAction<SketchData>>} setSketchData - Function to update the sketch data in React state.
- * @property {Dispatch<React.SetStateAction<Vertex | null>>} setSelectedVertex - Function to update the selected vertex in React state.
- * @property {Dispatch<React.SetStateAction<Vertex | null>>} setHoveredVertex - Function to update the hovered vertex in React state.
- * @property {Dispatch<React.SetStateAction<CameraManager | undefined>>} setCameraRef - Function to update the camera manager reference in React state.
- * @property {P5CanvasInstance} p5 - The p5 canvas instance.
- * @property {Font | undefined} wikiFont - The font used for rendering text, loaded in preload.
- * @property {Camera | undefined} cam - The p5 camera instance.
- * @property {CameraManager} camMngr - The camera manager for handling camera animations.
- * @property {UI} ui - The UI manager for drawing UI elements.
- * @property {string} originQuery - The initial query string used to fetch data (@note: this appears to be a duplication, but is essentialy as a reference values outside of the SketchData - data variable to prevent flickering on subsequent data being loaded - this is a neccasary duplication pending underlying struct change).
- * @property {SketchData} data - The data used in the sketch, including vertices and edges.
- * @property {Vertex | null} selectedVertex - The currently selected vertex.
- * @property {Vertex | null} hoveredVertex - The currently hovered vertex.
- */
 
-//!/=> COMPONENT <=/!//
 export class SketchManager {
-
   //*/=> REACT STATE
-  setSketchData: Dispatch<React.SetStateAction<SketchData>>;
-  setSelectedVertex: Dispatch<React.SetStateAction<Vertex | null>>;
-  setHoveredVertex: Dispatch<React.SetStateAction<Vertex | null>>;
-  setCameraRef: Dispatch<React.SetStateAction<CameraManager | undefined>>;
+  setSketchData: Dispatch<SetStateAction<SketchData>>;
+  setSelectedVertex: Dispatch<SetStateAction<Vertex | null>>;
+  setHoveredVertex: Dispatch<SetStateAction<Vertex | null>>;
 
   //*/=> SKETCH STATE
   p5: P5CanvasInstance
   wikiFont: Font | undefined; // called in preload... not actual undefined possible
   cam: Camera | undefined;
   camMngr: CameraManager; // camera animation helper(s)
-  ui: UI;
+  uiMngr: UIManager;
+  showUnfetchedVertex: boolean;
 
   //*/=> DATA STATE
   originVertex: iVertex
@@ -61,32 +41,52 @@ export class SketchManager {
   data: SketchData;
   selectedVertex: Vertex | null = null;
   hoveredVertex: Vertex | null = null;
-  // actionsHistory: ActionsHistoryManager;
+
 
   //*/=> CONSTRUCTOR
-  constructor({ p5, initQueryData, setSketchData, setSelectedVertex, setHoveredVertex, setCameraRef }: SketchManagerProps) {
+  constructor({ p5, initQueryData, setSketchData, setSelectedVertex, setHoveredVertex, sessionSettingsState, setSketchRef }: SketchManagerProps) {
 
     // REACT STATE
     this.setSketchData = setSketchData;
     this.setSelectedVertex = setSelectedVertex;
     this.setHoveredVertex = setHoveredVertex;
-    this.setCameraRef = setCameraRef;
 
     // SKETCH STATE
     this.p5 = p5;
     this.camMngr = new CameraManager(p5);
-    this.setCameraRef(this.camMngr);
-    this.ui = new UI(p5);
+    this.uiMngr = new UIManager(p5, sessionSettingsState);
+    this.showUnfetchedVertex = sessionSettingsState.showUnfetchedVertices
 
     // DATA STATE
     this.data = initQueryData;
-    // this.setSketchData(this.data) // should be able to be skipped 
 
     this.originQuery = initQueryData.query
     this.originVertex = this.getOriginVertex();
 
     this.selectedVertex = new Vertex(this.originVertex);
     this.setSelectedVertex(this.selectedVertex);
+    setSketchRef(this);
+  }
+
+  /**
+   * @method UI - gets the stored instance of the UIManager
+   */
+  UI() {
+    return this.uiMngr;
+  }
+
+  /**
+   * @method CAM - gets the stored instance of the CameraManager
+   */
+  CAM() {
+    return this.camMngr;
+  }
+
+  /**
+   * @method toggleShowUnfetchedVertices() - Used as an external hatch to toggle the current value for showUnfetchedVertex being used when drawing the P5.js sketch itself. 
+   */
+  toggleShowUnfetchedVertices() {
+    this.showUnfetchedVertex = !this.showUnfetchedVertex;
   }
 
   /**
@@ -157,7 +157,7 @@ export class SketchManager {
     * @method drawUI - Draws the UI elements.
    */
   drawUI() {
-    this.ui.draw(this.data);
+    this.uiMngr.draw(this.data);
   }
 
   /**
@@ -192,7 +192,7 @@ export class SketchManager {
   drawVertices() {
     this.data.vertices.forEach(vData => {
       // console.log(vData)
-      if (vData.fetched != false) {
+      if (this.showUnfetchedVertex || vData.fetched != false) {
         new Vertex(vData).draw(this.p5, this.selectedVertex);
       };
     })

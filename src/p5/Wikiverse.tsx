@@ -1,24 +1,25 @@
-import React, { Dispatch } from 'react';
-import { RequestPayload, SketchData } from '../interfaces';
-import { CameraManager, Vertex } from './models';
+import React, { Dispatch, SetStateAction } from 'react';
+import { RequestPayload, SessionSettingsState, SketchData } from '../interfaces';
+import { Vertex } from './models';
 import { ReactP5Wrapper, Sketch } from '@p5-wrapper/react';
 import { SketchManager } from "./models/_SketchManager";
 import { sketchDataCoordsSummary } from '../utils';
 
 interface WikiverseProps {
   initQueryData: RequestPayload;
-  setSketchData: Dispatch<React.SetStateAction<SketchData>>;
-  setSelectedVertex: Dispatch<React.SetStateAction<Vertex | null>>;
-  setHoveredVertex: Dispatch<React.SetStateAction<Vertex | null>>;
-  setCameraRef: Dispatch<React.SetStateAction<CameraManager | undefined>>;
+  setSketchData: Dispatch<SetStateAction<SketchData>>;
+  setSelectedVertex: Dispatch<SetStateAction<Vertex | null>>;
+  setHoveredVertex: Dispatch<SetStateAction<Vertex | null>>;
+  setSketchRef: (sk: SketchManager) => void;
+  sessionSettingsState: SessionSettingsState;
 }
 
-// { note } - Y axis is reversed of expectation per P5.js
-export const Wikiverse: React.FC<WikiverseProps> = ({ initQueryData, setSketchData, setSelectedVertex, setHoveredVertex, setCameraRef }) => {
+//! { note } - Y axis is reversed of natural expectation in P5.js
+export const Wikiverse: React.FC<WikiverseProps> = ({ initQueryData, setSketchData, setSelectedVertex, setHoveredVertex, setSketchRef, sessionSettingsState }) => {
   const sketch: Sketch = (p5) => {
 
     //!/=> Contains operating details of sketch
-    const SK = new SketchManager({ p5, initQueryData, setSketchData, setSelectedVertex, setHoveredVertex, setCameraRef })
+    const SK = new SketchManager({ p5, initQueryData, setSketchData, setSelectedVertex, setHoveredVertex, setSketchRef, sessionSettingsState })
 
     //*/=> SETUP...
     p5.preload = () => { SK.preloadFont() }
@@ -38,9 +39,6 @@ export const Wikiverse: React.FC<WikiverseProps> = ({ initQueryData, setSketchDa
       SK.advanceCanimations()
     };
 
-    // TODO => Captures ability to check L vs. R is currently unused
-    // TODO => Refine behavior around click action recording
-
     //*/=> MOUSE PRESS...
     p5.mousePressed = () => {
       const mouseTarget = SK.mousePositionIsOnAVertex();
@@ -55,8 +53,6 @@ export const Wikiverse: React.FC<WikiverseProps> = ({ initQueryData, setSketchDa
       // New Selection Made...
       SK.handleClickTargetValid(mouseTarget);
       if (SK.clickTargetIsOrigin(mouseTarget)) return;
-
-
     };
 
     //*/=> HOVER...
@@ -78,6 +74,13 @@ export const Wikiverse: React.FC<WikiverseProps> = ({ initQueryData, setSketchDa
     p5.keyPressed = () => {
       if (p5.key === 'i' || p5.key === 'I') {
         console.log(sketchDataCoordsSummary(SK.data));
+      }
+      if (p5.key === ',' || p5.key === '<') {
+        sessionSettingsState.setShowDebugDetails(prev => { return !prev })
+      }
+
+      if (p5.key === '.' || p5.key === '>') {
+        sessionSettingsState.setShowUnfetchedVertices(prev => { return !prev })
       }
     };
   }

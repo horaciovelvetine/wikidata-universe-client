@@ -1,22 +1,41 @@
 import './MainAppLayoutStyle.css'
 
-import React, { createRef, useEffect, useState } from 'react';
-import { Dimensions, RequestResponse } from '../interfaces';
+import React, { createRef, useEffect, useState, useCallback, memo } from 'react';
+import { Dimensions, RequestResponse, SessionSettingsState } from '../interfaces';
 import { calcInitLayoutDimensions } from '../p5/functions';
 import { ActiveQueryLayout } from './ActiveQueryLayout';
 import { StandbySketch } from '../p5/StandbySketch';
-import { Footer, VerticalSiteTitle, ApiOfflineNotice, MainQuerySessionInput } from '../components';
+import { Footer, VerticalSiteTitle, ApiOfflineNotice, MainQuerySessionInput, SessionSettings } from '../components';
 import { showHideElement } from '../components/animations';
-
+import { UIManager } from '../p5/models';
+import { SketchManager } from '../p5/models/_SketchManager';
 
 interface MainAppLayoutProps {
   apiStatusResponse: RequestResponse
 }
 
+const MemoizedStndbySketch = memo(StandbySketch, () => { return true });
+
 export const MainAppLayout: React.FC<MainAppLayoutProps> = ({ apiStatusResponse }) => {
   const [containerDimensions, setContainerDimensions] = useState<Dimensions>(calcInitLayoutDimensions())
   const [activeQuerySession, setActiveQuerySession] = useState(false);
   const [querySessionData, setQuerySessionData] = useState<RequestResponse>(apiStatusResponse);
+
+  // Settings:
+  const [showDebugDetails, setShowDebugDetails] = useState(false);
+  const [showUnfetchedVertices, setShowUnfetchedVertices] = useState(false);
+  const [showMedianAxis, setShowMedianAxis] = useState(false);
+  const [showMedianBoundBox, setShowMedianBoundBox] = useState(false);
+  const [showDimensionBoundBox, setShowDimensionBoundBox] = useState(false);
+  const [malSketchRef, setMALSketchRef] = useState<SketchManager>();
+
+  const sessionSettingsState: SessionSettingsState = {
+    showDebugDetails, setShowDebugDetails,
+    showUnfetchedVertices, setShowUnfetchedVertices,
+    showMedianAxis, setShowMedianAxis,
+    showMedianBoundBox, setShowMedianBoundBox,
+    showDimensionBoundBox, setShowDimensionBoundBox
+  };
 
   const stanbySktchRef = createRef<HTMLDivElement>()
 
@@ -33,20 +52,45 @@ export const MainAppLayout: React.FC<MainAppLayoutProps> = ({ apiStatusResponse 
     }
   }, [activeQuerySession])
 
+  /**
+   * Accesses the SketchManager which contains the P5.js sketches details and state, allowing sketch changes w/o additional re-render when React state changes
+   */
+  useEffect(() => {
+    malSketchRef?.UI().toggleShowMedianAxis()
+  }, [showMedianAxis])
+
+  useEffect(() => {
+    malSketchRef?.UI().toggleShowMedianBoundBox()
+  }, [showMedianBoundBox])
+
+  useEffect(() => {
+    malSketchRef?.UI().toggleShowDimensionBoundBox()
+  }, [showDimensionBoundBox])
+
+  useEffect(() => {
+    malSketchRef?.toggleShowUnfetchedVertices()
+  }, [showUnfetchedVertices])
+
   const apiOnline = apiStatusResponse.status == 200;
 
   return (
     <div id='wikiverse-main'>
       <VerticalSiteTitle />
       <div id='query-sketch' style={{ width: containerDimensions.width, height: containerDimensions.height }}>
+        {/* Settings Gear Icon */}
+        <SessionSettings {...sessionSettingsState} />
+
+        {/* Initialize a Query Session or API offline */}
         {apiOnline ?
           <MainQuerySessionInput {...{ setQuerySessionData, setActiveQuerySession }} /> :
           <ApiOfflineNotice apiStatus={apiStatusResponse} />}
+
+        {/* Active Query Session */}
         {activeQuerySession ?
-          <ActiveQueryLayout {... { querySessionData, setQuerySessionData }} /> : <></>}
+          <ActiveQueryLayout {... { querySessionData, setQuerySessionData, sessionSettingsState, setMALSketchRef }} /> : <></>}
       </div>
       <div id='standby-sketch' ref={stanbySktchRef}>
-        <StandbySketch dimensions={containerDimensions} />
+        <MemoizedStndbySketch dimensions={containerDimensions} />
       </div>
       <Footer />
     </div>
