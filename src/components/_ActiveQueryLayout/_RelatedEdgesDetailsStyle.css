@@ -9,27 +9,21 @@
 #edges-info-container {
   display: flex;
   justify-self: flex-end;
-  align-self: end;
   grid-column: 2;
   grid-row: 1;
-  margin-right: 1rem;
   border-radius: 0.5rem;
-  transform: translateX(5rem);
-  backdrop-filter: blur(0.5rem);
+  backdrop-filter: blur(0.2rem);
 }
 
 #edges-info {
-  display: flex;
-  flex-direction: column;
+  display: block;
+  /* flex-direction: column; */
   max-height: 7.25rem;
   padding: 0.5rem 0.75rem;
   overflow-y: auto;
-  max-width: 38rem;
   scrollbar-color: rgba(var(--font), 25%) transparent;
   transition: scrollbar-color 0.2s ease-in-out;
   border-radius: 0.5rem;
-  border-color: rgba(var(--font), 0.1);
-  border-style: solid;
 }
 
 #edges-info:not(:hover) {

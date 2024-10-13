@@ -6,7 +6,7 @@ import { EdgeDetails } from './_EdgeDetails';
 import { showHideRelatedEdges } from '../animations';
 
 interface RelatedEdgesDetailsProps {
-  selectedVertex: Vertex;
+  selectedVertex: Vertex | null;
   sketchData: SketchData;
   adjustLookAtHandler: (otherVert: Vertex) => void;
 }
@@ -40,17 +40,15 @@ export const RelatedEdgesDetails: React.FC<RelatedEdgesDetailsProps> = ({ select
 
   return (
     <>
-      {selectedVertex == null ? <></> : <>
         <div id='edges-info-container' ref={contRef}>
           <div id='edges-info' ref={edgesInfoRef} onWheel={blockWheelScrollDetailsHandler}>
             <ul id='details-list'>
               {relatedEdges?.map((edge, index) => (
-                <EdgeDetails key={index} {...{ edge, sketchData, selectedVertex, relatedEdges, adjustLookAtHandler }} />
+                selectedVertex && <EdgeDetails key={index} {...{ edge, sketchData, selectedVertex, relatedEdges, adjustLookAtHandler }} />
               ))}
             </ul>
           </div>
         </div>
-      </>}
     </>
   );
 }
