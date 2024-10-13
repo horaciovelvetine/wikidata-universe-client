@@ -1,15 +1,15 @@
-import './_MainQuerySessionInputStyle.css'
-import './animations/_RotateElement.css'
-import './animations/_SlowGlobeRotation.css'
+import './MainQuerySessionInputStyle.css'
+import '../animations/_RotateElement.css'
+import '../animations/_SlowGlobeRotation.css'
 
-import GlobeLogo from '../assets/imgs/globe-outline-no-bg-white.svg'
-import { Search, Fetch } from '../assets/icons';
+import GlobeLogo from '../../assets/imgs/globe-outline-no-bg-white.svg'
+import { Search, Fetch } from '../../assets/icons';
 
 import { FC, Dispatch, createRef, useEffect, useState, SetStateAction } from 'react';
 
-import { INPUT_STATE, RequestResponse } from '../interfaces';
-import { getQueryData } from '../api';
-import { hideElementAndRemoveDisplay, shakeInvalidElement, showHideElement } from './animations';
+import { INPUT_STATE, RequestResponse } from '../../interfaces';
+import { getQueryData } from '../../api';
+import { hideElementAndRemoveDisplay, shakeInvalidElement, showHideElement } from '../animations';
 
 interface MainQuerySessionInputProps {
   setQuerySessionData: Dispatch<SetStateAction<RequestResponse>>,

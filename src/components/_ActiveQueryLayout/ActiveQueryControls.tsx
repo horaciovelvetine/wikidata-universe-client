@@ -1,4 +1,4 @@
-import './_ActiveQueryControlsStyle.css';
+import './ActiveQueryControlsStyle.css';
 import '../animations/_HorizontalShake.css';
 
 import React, { createRef, Dispatch, SetStateAction, useState } from 'react';

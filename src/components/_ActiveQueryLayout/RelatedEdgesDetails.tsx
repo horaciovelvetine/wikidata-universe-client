@@ -1,8 +1,8 @@
-import './_RelatedEdgesDetailsStyle.css'
+import './RelatedEdgesDetailsStyle.css'
 import React, { createRef, useEffect, useState } from 'react';
 import { Edge, Vertex } from '../../p5/models';
 import { SketchData } from '../../interfaces';
-import { EdgeDetails } from './_EdgeDetails';
+import { EdgeDetails } from './EdgeDetails';
 import { showHideRelatedEdges } from '../animations';
 
 interface RelatedEdgesDetailsProps {
@@ -40,15 +40,15 @@ export const RelatedEdgesDetails: React.FC<RelatedEdgesDetailsProps> = ({ select
 
   return (
     <>
-        <div id='edges-info-container' ref={contRef}>
-          <div id='edges-info' ref={edgesInfoRef} onWheel={blockWheelScrollDetailsHandler}>
-            <ul id='details-list'>
-              {relatedEdges?.map((edge, index) => (
-                selectedVertex && <EdgeDetails key={index} {...{ edge, sketchData, selectedVertex, relatedEdges, adjustLookAtHandler }} />
-              ))}
-            </ul>
-          </div>
+      <div id='edges-info-container' ref={contRef}>
+        <div id='edges-info' ref={edgesInfoRef} onWheel={blockWheelScrollDetailsHandler}>
+          <ul id='details-list'>
+            {relatedEdges?.map((edge, index) => (
+              selectedVertex && <EdgeDetails key={index} {...{ edge, sketchData, selectedVertex, relatedEdges, adjustLookAtHandler }} />
+            ))}
+          </ul>
         </div>
+      </div>
     </>
   );
 }

@@ -1,5 +1,13 @@
-export { ApiOfflineNotice } from './_MainAppLayout/_ApiOfflineNotice'
-export { Footer } from './_MainAppLayout/_Footer';
-export { HorizonSiteTitle } from './_MainAppLayout/_HorizonSiteTitle';
-export { MainQuerySessionInput } from './_MainAppLayout/_MainQuerySessionInput'
-export { VerticalSiteTitle } from './_MainAppLayout/_VerticalSiteTitle';
+// MainAppLayout
+export { ApiOfflineNotice } from './_MainAppLayout/ApiOfflineNotice'
+export { Footer } from './_MainAppLayout/Footer';
+export { HorizonSiteTitle } from './_MainAppLayout/HorizonSiteTitle';
+export { MainQuerySessionInput } from './_MainAppLayout/MainQuerySessionInput'
+export { VerticalSiteTitle } from './_MainAppLayout/VerticalSiteTitle';
+
+//ActiveQueryLayout
+export { ActiveQueryControls } from './_ActiveQueryLayout/ActiveQueryControls'
+export { EdgeDetails } from './_ActiveQueryLayout/EdgeDetails'
+export { HoveredVertexDetails } from './_ActiveQueryLayout/HoveredVertexDetails'
+export { RelatedEdgesDetails } from './_ActiveQueryLayout/RelatedEdgesDetails'
+export { VerTextDetails } from './_ActiveQueryLayout/VerTextDetails'

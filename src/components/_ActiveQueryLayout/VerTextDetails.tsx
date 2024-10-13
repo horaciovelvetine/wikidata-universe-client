@@ -1,4 +1,4 @@
-import './_VerTextDetailsStyle.css';
+import './VerTextDetailsStyle.css';
 import React, { createRef, useEffect, useState } from 'react';
 
 import { changeFocusOpacity, toggleSelectedVertexIcon, toggleVertextBackgrounds } from '../animations';

@@ -1,4 +1,4 @@
-import './_HoveredVertexDetailsStyle.css'
+import './HoveredVertexDetailsStyle.css'
 import React, { createRef, useEffect } from 'react';
 import { Vertex as VertIcon } from '../../assets/icons'
 import { Vertex } from '../../p5/models';

@@ -1,4 +1,4 @@
-import './_EdgeDetailsStyle.css'
+import './EdgeDetailsStyle.css'
 
 import React from "react";
 import { Vertex as VertIcon, VertexSel } from '../../assets/icons'
