@@ -1,7 +1,17 @@
-export { P5SketchMain } from "./_P5SketchMain";
-export { RelatedLinksInfobox } from "./_RelatedLinksInfobox";
-export { MainQueryInput } from "./_MainQueryInput";
-export { WikidataUniverseAppMain } from "./_WikidataUniverseAppMain";
+// MainAppLayout
+export { ApiOfflineNotice } from './_MainAppLayout/ApiOfflineNotice'
+export { Footer } from './_MainAppLayout/Footer';
+export { HorizonSiteTitle } from './_MainAppLayout/HorizonSiteTitle';
+export { MainQuerySessionInput } from './_MainAppLayout/MainQuerySessionInput'
+export { SessionSettings } from './_MainAppLayout/SessionSettings'
+export { VerticalSiteTitle } from './_MainAppLayout/VerticalSiteTitle';
 
+//ActiveQueryLayout
+export { ActiveQueryControls } from './_ActiveQueryLayout/ActiveQueryControls'
+export { EdgeDetails } from './_ActiveQueryLayout/EdgeDetails'
+export { HoveredVertexDetails } from './_ActiveQueryLayout/HoveredVertexDetails'
+export { RelatedEdgesDetails } from './_ActiveQueryLayout/RelatedEdgesDetails'
+export { VerTextDetails } from './_ActiveQueryLayout/VerTextDetails'
 
-
+//debug menu
+export { SketchDataDebugSummary } from './debug/_SketchDataDebugSummary'

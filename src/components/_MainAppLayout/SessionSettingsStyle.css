@@ -1,0 +1,28 @@
+@import url('../../assets/Palette.css');
+
+#session-settings-container {
+  position: absolute;
+  display: grid;
+  width: 100%;
+  z-index: 1000;
+}
+
+#session-settings-menu-container {
+  display: none;
+  /* width: 15rem;
+  height: 15rem; */
+  justify-self: flex-end;
+  border-radius: 0.5rem;
+  margin-right: 1rem;
+  background-color: rgb(var(--body-bg), 0.25);
+}
+
+#session-settings-menu-header {
+  color: rgb(var(--font), 0.6)
+}
+
+#session-settings-icon {
+  height: 2.25rem;
+  margin: 0.65rem;
+  justify-self: flex-end;
+}

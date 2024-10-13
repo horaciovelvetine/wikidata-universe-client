@@ -1,0 +1,73 @@
+@import url('../../assets/Palette.css');
+
+@font-face {
+  font-family: 'CharisSIL-Regular';
+  src: url('../../assets/font/CharisSIL-Regular.ttf') format('truetype');
+}
+
+#edge-details {
+  display: inline-flex;
+  gap: 0.25rem;
+}
+
+#vertex-icon {
+  height: 1.4rem;
+}
+
+#src-vert-container {
+  cursor: pointer;
+}
+
+
+/** PROPERTY **/
+
+#property-container {
+  display: inline-flex;
+}
+
+#edge-type-icon {
+  height: 1.4rem;
+}
+
+.incoming {
+  /* border-bottom: 2px solid; */
+  border-radius: 0.25rem;
+  border-color: rgb(var(--edge-in));
+  background-color: rgba(var(--edge-in), 45%);
+
+}
+
+.outgoing {
+  /* border-bottom: 2px solid; */
+  border-radius: 0.25rem;
+  border-color: rgb(var(--edge-out));
+  background-color: rgba(var(--edge-out), 25%);
+}
+
+.parallel {
+  /* border-bottom: 2px solid; */
+  border-radius: 0.25rem;
+  border-color: rgb(var(--edge-para));
+  background-color: rgba(var(--edge-para), 45%);
+}
+
+#property-text {
+  font-size: 1.2rem;
+  padding-inline: 0.2rem;
+  color: rgb(var(--font));
+  text-shadow: 1px 1px 1px black;
+}
+
+
+/** ALT VERTEX */
+
+#alt-vert-container {
+  display: inline-flex;
+  cursor: pointer;
+}
+
+#alt-vert-text {
+  font-size: 1.2rem;
+  color: rgb(var(--font));
+  text-shadow: 1px 1px 1px black;
+}

@@ -1,0 +1,85 @@
+@import url('../../assets/Palette.css');
+
+@font-face {
+  font-family: 'CharisSIL-Regular';
+  src: url('../../assets/font/CharisSIL-Regular.ttf') format('truetype');
+}
+
+#aqc-container {
+  width: 100%;
+  display: flex;
+  grid-column: 1;
+  grid-row: 2;
+  margin-bottom: 0.1rem;
+  margin-left: 1rem;
+  padding: 0.5rem;
+  opacity: 45%;
+  transition: all 0.25s;
+}
+
+#aqc-container:focus-within {
+  transition: all 0.25s;
+  opacity: 85%;
+}
+
+#aqc-query-form {
+  display: flex;
+  min-width: 90%;
+  align-items: center;
+}
+
+#aqc-query-input {
+  width: 100%;
+  font-size: 1.3rem;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  border-radius: 0.1rem;
+  padding-left: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid;
+  border-color: rgb(var(--font));
+}
+
+#aqc-query-submit {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  position: relative;
+}
+
+#aqc-query-submit-icon {
+  height: 2rem;
+  padding-inline: 0.5rem;
+  margin-top: 0.2rem;
+  margin-bottom: 0.2rem;
+}
+
+#aqc-invalid-query-icon {
+  position: absolute;
+  right: 0.3%;
+  height: 2rem;
+  padding-inline: 0.5rem;
+  margin-top: 0.2rem;
+  margin-bottom: 0.2rem;
+  opacity: 0%;
+  z-index: 1;
+}
+
+#aqc-query-fetching-icon {
+  height: 2rem;
+  padding-inline: 0.5rem;
+  margin-top: 0.2rem;
+  margin-bottom: 0.2rem;
+  animation: rotate 2s infinite;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
