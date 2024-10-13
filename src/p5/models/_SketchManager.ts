@@ -147,7 +147,6 @@ export class SketchManager {
       .then(response => {
         this.data = response.data;
         this.setSketchData(this.data)
-        console.log("dataUpdateResponseReached()::", this.data)
       }).catch(e => {
         console.error(e);
         debugger;
