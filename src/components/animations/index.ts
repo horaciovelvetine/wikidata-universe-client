@@ -7,3 +7,4 @@ export { showHideElement } from './_ShowHideElement'
 export { showHideRelatedEdges } from './_ShowHideRelatedEdges';
 export { toggleSelectedVertexIcon } from './_ToggleSelectedVertexIcons'
 export { toggleVertextBackgrounds } from './_ToggleVertextBackgrounds'
+export { toggleDisplayVisibility } from './_ToggleDisplayVisibility'
