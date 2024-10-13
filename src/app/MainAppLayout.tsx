@@ -1,13 +1,13 @@
 import './MainAppLayoutStyle.css'
 
-import React, { createRef, useEffect, useState, useCallback, memo } from 'react';
+import React, { createRef, useEffect, useState, memo } from 'react';
 import { Dimensions, RequestResponse, SessionSettingsState } from '../interfaces';
-import { calcInitLayoutDimensions } from '../p5/functions';
 import { ActiveQueryLayout } from './ActiveQueryLayout';
-import { StandbySketch } from '../p5/StandbySketch';
 import { Footer, VerticalSiteTitle, ApiOfflineNotice, MainQuerySessionInput, SessionSettings } from '../components';
 import { showHideElement } from '../components/animations';
-import { UIManager } from '../p5/models';
+
+import { StandbySketch } from '../p5/StandbySketch';
+import { calcInitLayoutDimensions } from '../p5/functions';
 import { SketchManager } from '../p5/models/_SketchManager';
 
 interface MainAppLayoutProps {
