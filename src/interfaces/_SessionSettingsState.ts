@@ -11,4 +11,6 @@ export interface SessionSettingsState {
   setShowMedianBoundBox: Dispatch<SetStateAction<boolean>>;
   showDimensionBoundBox: boolean;
   setShowDimensionBoundBox: Dispatch<SetStateAction<boolean>>;
+  isLoading: boolean;
+  setIsLoading: Dispatch<SetStateAction<boolean>>;
 }

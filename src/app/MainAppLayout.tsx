@@ -3,7 +3,7 @@ import './MainAppLayoutStyle.css'
 import React, { createRef, useEffect, useState, memo } from 'react';
 import { Dimensions, RequestResponse, SessionSettingsState } from '../interfaces';
 import { ActiveQueryLayout } from './ActiveQueryLayout';
-import { Footer, VerticalSiteTitle, ApiOfflineNotice, MainQuerySessionInput, SessionSettings } from '../components';
+import { Footer, VerticalSiteTitle, ApiOfflineNotice, MainQuerySessionInput, SessionSettings, LoadingBar } from '../components';
 import { showHideElement } from '../components/animations';
 
 import { StandbySketch } from '../p5/StandbySketch';
@@ -22,6 +22,7 @@ export const MainAppLayout: React.FC<MainAppLayoutProps> = ({ apiStatusResponse 
   const [querySessionData, setQuerySessionData] = useState<RequestResponse>(apiStatusResponse);
 
   // Settings:
+  const [isLoading, setIsLoading] = useState(false);
   const [showDebugDetails, setShowDebugDetails] = useState(false);
   const [showUnfetchedVertices, setShowUnfetchedVertices] = useState(false);
   const [showMedianAxis, setShowMedianAxis] = useState(false);
@@ -34,7 +35,8 @@ export const MainAppLayout: React.FC<MainAppLayoutProps> = ({ apiStatusResponse 
     showUnfetchedVertices, setShowUnfetchedVertices,
     showMedianAxis, setShowMedianAxis,
     showMedianBoundBox, setShowMedianBoundBox,
-    showDimensionBoundBox, setShowDimensionBoundBox
+    showDimensionBoundBox, setShowDimensionBoundBox,
+    isLoading, setIsLoading
   };
 
   const stanbySktchRef = createRef<HTMLDivElement>()
@@ -78,6 +80,7 @@ export const MainAppLayout: React.FC<MainAppLayoutProps> = ({ apiStatusResponse 
       <VerticalSiteTitle />
       <div id='query-sketch' style={{ width: containerDimensions.width, height: containerDimensions.height }}>
         {/* Settings Gear Icon */}
+        <LoadingBar isLoading={isLoading} />
         <SessionSettings {...sessionSettingsState} />
 
         {/* Initialize a Query Session or API offline */}

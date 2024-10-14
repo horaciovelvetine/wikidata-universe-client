@@ -2,6 +2,7 @@
 export { ApiOfflineNotice } from './_MainAppLayout/ApiOfflineNotice'
 export { Footer } from './_MainAppLayout/Footer';
 export { HorizonSiteTitle } from './_MainAppLayout/HorizonSiteTitle';
+export { LoadingBar } from './_MainAppLayout/LoadingBar'
 export { MainQuerySessionInput } from './_MainAppLayout/MainQuerySessionInput'
 export { SessionSettings } from './_MainAppLayout/SessionSettings'
 export { VerticalSiteTitle } from './_MainAppLayout/VerticalSiteTitle';
