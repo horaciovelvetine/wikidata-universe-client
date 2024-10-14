@@ -78,9 +78,9 @@ export const MainAppLayout: React.FC<MainAppLayoutProps> = ({ apiStatusResponse 
   return (
     <div id='wikiverse-main'>
       <VerticalSiteTitle />
+      <LoadingBar isLoading={isLoading} />
       <div id='query-sketch' style={{ width: containerDimensions.width, height: containerDimensions.height }}>
         {/* Settings Gear Icon */}
-        <LoadingBar isLoading={isLoading} />
         <SessionSettings {...sessionSettingsState} />
 
         {/* Initialize a Query Session or API offline */}

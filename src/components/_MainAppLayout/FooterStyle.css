@@ -4,7 +4,7 @@ footer {
   position: fixed;
   width: 100%;
   bottom: 2.5%;
-  color: rgb(var(--font));
+  color: rgba(var(--font), 0.75);
 }
 
 footer #container {
@@ -19,7 +19,7 @@ footer #list {
   list-style: none;
   display: flex;
   background-color: transparent;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
 }
 
 @media (max-width: 768px) {
@@ -55,12 +55,12 @@ footer #list {
 
 #ftr-item a:hover {
   transition: font-size 235ms, text-decoration 235ms;
-  font-size: 1.3rem;
+  font-size: 1.6rem;
   text-decoration: underline;
 }
 
 #ftr-item a:not(:hover) {
   transition: font-size 235ms, text-decoration 235ms;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   text-decoration: none;
 }

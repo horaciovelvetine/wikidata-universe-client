@@ -1,5 +1,6 @@
 import { Dimensions } from '../interfaces';
 import { ReactP5Wrapper, P5CanvasInstance, Sketch } from '@p5-wrapper/react';
+import { calcInitLayoutDimensions } from './functions';
 
 interface ErrorSketchProps {
   dimensions: Dimensions
@@ -22,6 +23,11 @@ export const StandbySketch: React.FC<ErrorSketchProps> = ({ dimensions }) => {
         particles[i].move();
         particles[i].joinNearby(particles.slice(i))
       }
+    }
+
+    p5.windowResized = () => {
+      const { width, height } = calcInitLayoutDimensions();
+      p5.resizeCanvas(width, height)
     }
   }
 
