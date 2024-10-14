@@ -1,9 +1,10 @@
 import './SessionSettingsStyle.css'
 
-import React, { createRef, Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
+import { createRef, FC, useEffect, useState } from 'react';
 
 import { Settings as SettingsIcon } from '../../assets/icons';
 import { SessionSettingsState } from '../../interfaces/'
+import { SessionSettingsToggleOption } from './SessionSettingsToggleOption';
 import { changeFocusOpacity, showHideElement, toggleDisplayVisibility } from '../animations';
 
 export const SessionSettings: FC<SessionSettingsState> = ({ showDebugDetails, setShowDebugDetails, showUnfetchedVertices, setShowUnfetchedVertices, showMedianAxis, setShowMedianAxis, showMedianBoundBox, setShowDimensionBoundBox, showDimensionBoundBox, setShowMedianBoundBox }) => {
@@ -18,55 +19,28 @@ export const SessionSettings: FC<SessionSettingsState> = ({ showDebugDetails, se
     changeFocusOpacity(iconRef.current!, showMenu, '0.25s', '60%')
   }, [showMenu])
 
-  const showHideLabel = (show: boolean) => {
-    return !show ? " (show)" : " (hide)" ;
-  }
+  const allToggleSettings = [
+    { key: showDebugDetails, action: setShowDebugDetails, label: "Debug Details", shortcut: "," },
+    { key: showUnfetchedVertices, action: setShowUnfetchedVertices, label: "Unfetched Vertices", shortcut: "u" },
+    { key: showMedianAxis, action: setShowMedianAxis, label: "Median Orientation Axis", shortcut: "a" },
+    { key: showMedianBoundBox, action: setShowMedianBoundBox, label: "Median Bounding Box", shortcut: "m" },
+    { key: showDimensionBoundBox, action: setShowDimensionBoundBox, label: "Dimension Bounding Box", shortcut: "d" }
+  ]
 
   return (
-    <div id='session-settings-container'>
+    <div id='session-settings-container' onClick={(e) => { e.stopPropagation() }}>
       <img id='session-settings-icon' src={SettingsIcon} alt='gear to toggle displaying current settings menu' onClick={() => setShowMenu(prev => !prev)} ref={iconRef} />
       <div id='session-settings-menu-container' ref={menuContainerRef}>
-        <h3 id='session-settings-menu-header'>Settings:</h3>
-        <label>
-          <input
-            type="checkbox"
-            checked={showDebugDetails}
-            onChange={() => setShowDebugDetails(prev => !prev)}
+        <h3 id='session-settings-menu-header'>Settings</h3>
+        {allToggleSettings.map((setting, index) => (
+          <SessionSettingsToggleOption
+            key={index}
+            isEnabled={setting.key}
+            onToggle={setting.action}
+            label={setting.label}
+            shortcut={setting.shortcut}
           />
-          {showHideLabel(showDebugDetails)} Debug Details
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            checked={showUnfetchedVertices}
-            onChange={() => setShowUnfetchedVertices(prev => !prev)}
-          />
-          {showHideLabel(showUnfetchedVertices)} Unfetched Vertices
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            checked={showMedianAxis}
-            onChange={() => setShowMedianAxis(prev => !prev)}
-          />
-          {showHideLabel(showMedianAxis)} Median Axis
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            checked={showMedianBoundBox}
-            onChange={() => setShowMedianBoundBox(prev => !prev)}
-          />
-          {showHideLabel(showMedianBoundBox)} Median Bound Box
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            checked={showDimensionBoundBox}
-            onChange={() => setShowDimensionBoundBox(prev => !prev)}
-          />
-          {showHideLabel(showDimensionBoundBox)} Dimension Bound Box
-        </label>
+        ))}
       </div>
     </div>
   );

@@ -142,6 +142,7 @@ export class SketchManager {
    * @method initPostRelatedDataRequest - Fetches related data and updates the sketch data.
    */
   async initPostRelatedDataRequest() {
+    this.setIsLoading(true); //==> in-case were here on reload.
     const payload = {
       ...this.data, dimensions: calcInitLayoutDimensions(), query: this.originQuery
     }
