@@ -72,15 +72,28 @@ export const Wikiverse: React.FC<WikiverseProps> = ({ initQueryData, setSketchDa
 
     //*/=> KEYPRESS...
     p5.keyPressed = () => {
-      if (p5.key === 'i' || p5.key === 'I') {
-        console.log(sketchDataCoordsSummary(SK.data));
-      }
-      if (p5.key === ',' || p5.key === '<') {
-        sessionSettingsState.setShowDebugDetails(prev => { return !prev })
-      }
-
-      if (p5.key === '.' || p5.key === '>') {
-        sessionSettingsState.setShowUnfetchedVertices(prev => { return !prev })
+      switch (p5.key.toLowerCase()) {
+        case 'i':
+          console.log(sketchDataCoordsSummary(SK.data));
+          break;
+        case ',':
+        case '<':
+          sessionSettingsState.setShowDebugDetails(prev => !prev);
+          break;
+        case 'u':
+          sessionSettingsState.setShowUnfetchedVertices(prev => !prev);
+          break;
+        case 'a':
+          sessionSettingsState.setShowMedianAxis(prev => !prev);
+          break;
+        case 'm':
+          sessionSettingsState.setShowMedianBoundBox(prev => !prev);
+          break;
+        case 'd':
+          sessionSettingsState.setShowDimensionBoundBox(prev => !prev);
+          break;
+        default:
+          break;
       }
     };
   }
