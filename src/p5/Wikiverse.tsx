@@ -16,9 +16,8 @@ interface WikiverseProps {
 
 //! { note } - Y axis is reversed of natural expectation in P5.js
 export const Wikiverse: React.FC<WikiverseProps> = ({ initQueryData, setSketchData, setSelectedVertex, setHoveredVertex, setSketchRef, sessionSettingsState }) => {
-  const sketch: Sketch = (p5) => {
 
-    //!/=> Contains operating details of sketch
+  const sketch: Sketch = (p5) => { //SketchManager contains a lionshare of the p5 sketch specific details
     const SK = new SketchManager({ p5, initQueryData, setSketchData, setSelectedVertex, setHoveredVertex, setSketchRef, sessionSettingsState })
 
     //*/=> SETUP...
@@ -72,25 +71,17 @@ export const Wikiverse: React.FC<WikiverseProps> = ({ initQueryData, setSketchDa
 
     //*/=> KEYPRESS...
     p5.keyPressed = () => {
-      switch (p5.key.toLowerCase()) {
-        case 'i':
+      switch (p5.key) {
+        case '?':
           console.log(sketchDataCoordsSummary(SK.data));
           break;
         case ',':
         case '<':
           sessionSettingsState.setShowDebugDetails(prev => !prev);
           break;
-        case 'u':
+        case '.':
+        case '>':
           sessionSettingsState.setShowUnfetchedVertices(prev => !prev);
-          break;
-        case 'a':
-          sessionSettingsState.setShowMedianAxis(prev => !prev);
-          break;
-        case 'm':
-          sessionSettingsState.setShowMedianBoundBox(prev => !prev);
-          break;
-        case 'd':
-          sessionSettingsState.setShowDimensionBoundBox(prev => !prev);
           break;
         default:
           break;

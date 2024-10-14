@@ -4,7 +4,7 @@ interface SessionSettingsToggleOptionProps {
   isEnabled: boolean;
   onToggle: Dispatch<SetStateAction<boolean>>;
   label: string;
-  shortcut: string;
+  shortcut: string | null;
 }
 
 export const SessionSettingsToggleOption: React.FC<SessionSettingsToggleOptionProps> = ({ isEnabled, onToggle, label, shortcut }) => {
@@ -14,9 +14,11 @@ export const SessionSettingsToggleOption: React.FC<SessionSettingsToggleOptionPr
         {label}
       </label>
       <div>
-        <span id='setting-toggle-shortcut'>
-          [{shortcut}]{" "}
-        </span>
+        {shortcut && (
+          <span id='setting-toggle-shortcut'>
+            [{shortcut}]{" "}
+          </span>
+        )}
         <input
           id='setting-toggle-input'
           type="checkbox"

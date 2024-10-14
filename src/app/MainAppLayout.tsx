@@ -14,7 +14,9 @@ interface MainAppLayoutProps {
   apiStatusResponse: RequestResponse
 }
 
-const MemoizedStndbySketch = memo(StandbySketch, () => { return true });
+const MemoizedStndbySketch = memo(StandbySketch, (prevProps, nextProps) => {
+  return prevProps.containerDimensions == nextProps.containerDimensions;
+});
 
 export const MainAppLayout: React.FC<MainAppLayoutProps> = ({ apiStatusResponse }) => {
   const [containerDimensions, setContainerDimensions] = useState<Dimensions>(calcInitLayoutDimensions())
@@ -23,6 +25,7 @@ export const MainAppLayout: React.FC<MainAppLayoutProps> = ({ apiStatusResponse 
 
   // Settings:
   const [isLoading, setIsLoading] = useState(false);
+  const [showSettings, setShowSettings] = useState(false);
   const [showDebugDetails, setShowDebugDetails] = useState(false);
   const [showUnfetchedVertices, setShowUnfetchedVertices] = useState(false);
   const [showMedianAxis, setShowMedianAxis] = useState(false);
@@ -31,6 +34,7 @@ export const MainAppLayout: React.FC<MainAppLayoutProps> = ({ apiStatusResponse 
   const [malSketchRef, setMALSketchRef] = useState<SketchManager>();
 
   const sessionSettingsState: SessionSettingsState = {
+    showSettings, setShowSettings,
     showDebugDetails, setShowDebugDetails,
     showUnfetchedVertices, setShowUnfetchedVertices,
     showMedianAxis, setShowMedianAxis,
@@ -58,19 +62,23 @@ export const MainAppLayout: React.FC<MainAppLayoutProps> = ({ apiStatusResponse 
    * Accesses the SketchManager which contains the P5.js sketches details and state, allowing sketch changes w/o additional re-render when React state changes
    */
   useEffect(() => {
-    malSketchRef?.UI().toggleShowMedianAxis()
+    if (showSettings)
+      malSketchRef?.UI().toggleShowMedianAxis()
   }, [showMedianAxis])
 
   useEffect(() => {
-    malSketchRef?.UI().toggleShowMedianBoundBox()
+    if (showSettings)
+      malSketchRef?.UI().toggleShowMedianBoundBox()
   }, [showMedianBoundBox])
 
   useEffect(() => {
-    malSketchRef?.UI().toggleShowDimensionBoundBox()
+    if (showSettings)
+      malSketchRef?.UI().toggleShowDimensionBoundBox()
   }, [showDimensionBoundBox])
 
   useEffect(() => {
-    malSketchRef?.toggleShowUnfetchedVertices()
+    if (showSettings)
+      malSketchRef?.toggleShowUnfetchedVertices()
   }, [showUnfetchedVertices])
 
   const apiOnline = apiStatusResponse.status == 200;
@@ -81,19 +89,19 @@ export const MainAppLayout: React.FC<MainAppLayoutProps> = ({ apiStatusResponse 
       <LoadingBar isLoading={isLoading} />
       <div id='query-sketch' style={{ width: containerDimensions.width, height: containerDimensions.height }}>
         {/* Settings Gear Icon */}
-        <SessionSettings {...sessionSettingsState} />
+        <SessionSettings {...{ sessionSettingsState }} />
 
         {/* Initialize a Query Session or API offline */}
         {apiOnline ?
           <MainQuerySessionInput {...{ setQuerySessionData, setActiveQuerySession, sessionSettingsState }} /> :
-          <ApiOfflineNotice apiStatus={apiStatusResponse} />}
+          <ApiOfflineNotice {...{ apiStatusResponse }} />}
 
         {/* Active Query Session */}
         {activeQuerySession ?
           <ActiveQueryLayout {... { querySessionData, setQuerySessionData, sessionSettingsState, setMALSketchRef }} /> : <></>}
       </div>
       <div id='standby-sketch' ref={stanbySktchRef}>
-        <MemoizedStndbySketch dimensions={containerDimensions} />
+        <MemoizedStndbySketch {...{ containerDimensions }} />
       </div>
       <Footer />
     </div>

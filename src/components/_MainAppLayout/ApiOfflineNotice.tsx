@@ -10,10 +10,10 @@ import { showHideElement } from "../animations";
 import { RequestResponse } from '../../interfaces';
 
 interface ApiOfflineProps {
-  apiStatus: RequestResponse;
+  apiStatusResponse: RequestResponse;
 }
 
-export const ApiOfflineNotice: React.FC<ApiOfflineProps> = ({ apiStatus }) => {
+export const ApiOfflineNotice: React.FC<ApiOfflineProps> = ({ apiStatusResponse }) => {
 
   const containerRef = createRef<HTMLDivElement>();
 
@@ -27,8 +27,8 @@ export const ApiOfflineNotice: React.FC<ApiOfflineProps> = ({ apiStatus }) => {
     <>
       <div id='error-message-container' ref={containerRef}>
         <div id='error-text-container'>
-          <h1 id='error-title'>{apiStatus.status} Unavailable</h1>
-          <p id='error-message'>{apiStatus.errMsg}</p>
+          <h1 id='error-title'>{apiStatusResponse.status} Unavailable</h1>
+          <p id='error-message'>{apiStatusResponse.errMsg}</p>
         </div>
         <div id='unavailable-glogo-container'>
           <img src={GlobeLogo} alt="Wikipedia globe logo" id="unavailable-glogo" />

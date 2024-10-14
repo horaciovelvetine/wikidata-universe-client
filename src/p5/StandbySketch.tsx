@@ -1,18 +1,18 @@
-import { Dimensions } from '../interfaces';
+import { Dimensions, SessionSettingsState } from '../interfaces';
 import { ReactP5Wrapper, P5CanvasInstance, Sketch } from '@p5-wrapper/react';
 import { calcInitLayoutDimensions } from './functions';
 
 interface ErrorSketchProps {
-  dimensions: Dimensions
+  containerDimensions: Dimensions
 }
 
-export const StandbySketch: React.FC<ErrorSketchProps> = ({ dimensions }) => {
+export const StandbySketch: React.FC<ErrorSketchProps> = ({ containerDimensions }) => {
   let particles: Particle[] = [];
   const sketch: Sketch = (p5: P5CanvasInstance) => {
     p5.setup = () => {
-      p5.createCanvas(dimensions.width, dimensions.height);
-      for (let n = 0; n < dimensions.width / 10; n++) {
-        const particle = new Particle(dimensions, p5);
+      p5.createCanvas(containerDimensions.width, containerDimensions.height);
+      for (let n = 0; n < containerDimensions.width / 10; n++) {
+        const particle = new Particle(containerDimensions, p5);
         particles.push(particle);
       }
     }
