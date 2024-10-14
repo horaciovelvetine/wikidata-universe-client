@@ -7,19 +7,20 @@ import { Search, Fetch } from '../../assets/icons';
 
 import { FC, Dispatch, createRef, useEffect, useState, SetStateAction } from 'react';
 
-import { INPUT_STATE, RequestResponse } from '../../interfaces';
+import { INPUT_STATE, RequestResponse, SessionSettingsState } from '../../interfaces';
 import { getQueryData } from '../../api';
 import { hideElementAndRemoveDisplay, shakeInvalidElement, showHideElement } from '../animations';
 
 interface MainQuerySessionInputProps {
   setQuerySessionData: Dispatch<SetStateAction<RequestResponse>>,
   setActiveQuerySession: Dispatch<SetStateAction<boolean>>
+  sessionSettingsState: SessionSettingsState
 }
 
-export const MainQuerySessionInput: FC<MainQuerySessionInputProps> = ({ setActiveQuerySession, setQuerySessionData }) => {
+export const MainQuerySessionInput: FC<MainQuerySessionInputProps> = ({ setActiveQuerySession, setQuerySessionData, sessionSettingsState }) => {
   const [input, setInput] = useState<string>('');
   const [inputState, setInputState] = useState<INPUT_STATE>(INPUT_STATE.PLACEHOLDER);
-  const [isFetching, setIsFetching] = useState(false);
+  const { isLoading, setIsLoading } = sessionSettingsState;
   // Refs
   const containerRef = createRef<HTMLDivElement>();
   const inputRef = createRef<HTMLInputElement>();
@@ -28,7 +29,7 @@ export const MainQuerySessionInput: FC<MainQuerySessionInputProps> = ({ setActiv
 
   useEffect(() => {
     setTimeout(() => {
-      showHideElement(containerRef.current!, true, "0.25");
+      showHideElement(containerRef.current!, true, "0.35");
     }, 1);
   }, []);
 
@@ -52,7 +53,7 @@ export const MainQuerySessionInput: FC<MainQuerySessionInputProps> = ({ setActiv
       return;
     }
 
-    setIsFetching(true);
+    setIsLoading(true);
 
     const response = await getQueryData(input)
 
@@ -63,12 +64,10 @@ export const MainQuerySessionInput: FC<MainQuerySessionInputProps> = ({ setActiv
       }, 2000)
       shakeInvalidElement(eles.input)
       shakeInvalidElement(eles.submit)
-      setIsFetching(false);
+      setIsLoading(false);
       setInputState(INPUT_STATE.INVALID);
       return;
     }
-
-    setIsFetching(false);
     setActiveQuerySession(true);
     setQuerySessionData(response);
     hideElementAndRemoveDisplay(eles.cont, "0.75s")
@@ -120,7 +119,7 @@ export const MainQuerySessionInput: FC<MainQuerySessionInputProps> = ({ setActiv
         <div id='mq-form-container'>
           <form id='mq-form' onSubmit={formSubmitHandler}>
             <input id='mq-input' ref={inputRef} type="text" placeholder="Search..." onChange={inputChangeHandler} />
-            {isFetching ? fetchingButton() : searchButton()}
+            {isLoading ? fetchingButton() : searchButton()}
           </form>
         </div>
       </div>

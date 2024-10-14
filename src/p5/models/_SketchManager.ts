@@ -26,6 +26,7 @@ export class SketchManager {
   setSketchData: Dispatch<SetStateAction<SketchData>>;
   setSelectedVertex: Dispatch<SetStateAction<Vertex | null>>;
   setHoveredVertex: Dispatch<SetStateAction<Vertex | null>>;
+  setIsLoading: Dispatch<SetStateAction<boolean>>;
 
   //*/=> SKETCH STATE
   p5: P5CanvasInstance
@@ -50,6 +51,8 @@ export class SketchManager {
     this.setSketchData = setSketchData;
     this.setSelectedVertex = setSelectedVertex;
     this.setHoveredVertex = setHoveredVertex;
+    this.setIsLoading = sessionSettingsState.setIsLoading;
+
 
     // SKETCH STATE
     this.p5 = p5;
@@ -150,7 +153,9 @@ export class SketchManager {
       }).catch(e => {
         console.error(e);
         debugger;
-      })
+      }).finally(() => {
+        this.setIsLoading(false);
+      });
   }
 
   /**

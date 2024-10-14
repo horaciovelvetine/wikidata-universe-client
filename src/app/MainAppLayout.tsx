@@ -85,7 +85,7 @@ export const MainAppLayout: React.FC<MainAppLayoutProps> = ({ apiStatusResponse 
 
         {/* Initialize a Query Session or API offline */}
         {apiOnline ?
-          <MainQuerySessionInput {...{ setQuerySessionData, setActiveQuerySession }} /> :
+          <MainQuerySessionInput {...{ setQuerySessionData, setActiveQuerySession, sessionSettingsState }} /> :
           <ApiOfflineNotice apiStatus={apiStatusResponse} />}
 
         {/* Active Query Session */}
