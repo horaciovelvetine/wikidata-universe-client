@@ -37,6 +37,7 @@ body {
   height: 100vh;
   width: 100vw;
   overflow: clip;
+  background-color: rgb(var(--body-bg));
 }
 
 #root {
