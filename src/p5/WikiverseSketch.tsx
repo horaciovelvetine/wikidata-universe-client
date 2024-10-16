@@ -1,24 +1,24 @@
-import React, { Dispatch, SetStateAction } from 'react';
-import { RequestPayload, SessionSettingsState, SketchData } from '../interfaces';
+import React, { Dispatch, FC, SetStateAction } from 'react';
+import { RequestPayload, RequestResponse, SessionSettingsState, SketchData } from '../interfaces';
 import { Vertex } from './models';
 import { ReactP5Wrapper, Sketch } from '@p5-wrapper/react';
 import { SketchManager } from "./models/_SketchManager";
 import { sketchDataCoordsSummary } from '../utils';
 
 interface WikiverseProps {
-  initQueryData: RequestPayload;
-  setSketchData: Dispatch<SetStateAction<SketchData>>;
+  initialQueryResponse: RequestResponse | null; // only used to determine re-renders
+  setWikiverseSketchData: Dispatch<SetStateAction<SketchData | null>>;
   setSelectedVertex: Dispatch<SetStateAction<Vertex | null>>;
   setHoveredVertex: Dispatch<SetStateAction<Vertex | null>>;
-  setSketchRef: (sk: SketchManager) => void;
+  setP5SketchRef: Dispatch<SetStateAction<SketchManager | null>>; // to ref sketch details
   sessionSettingsState: SessionSettingsState;
 }
 
 //! { note } - Y axis is reversed of natural expectation in P5.js
-export const Wikiverse: React.FC<WikiverseProps> = ({ initQueryData, setSketchData, setSelectedVertex, setHoveredVertex, setSketchRef, sessionSettingsState }) => {
+export const WikiverseSketch: FC<WikiverseProps> = ({ initialQueryResponse, setWikiverseSketchData, setSelectedVertex, setHoveredVertex, setP5SketchRef, sessionSettingsState }) => {
 
   const sketch: Sketch = (p5) => { //SketchManager contains a lionshare of the p5 sketch specific details
-    const SK = new SketchManager({ p5, initQueryData, setSketchData, setSelectedVertex, setHoveredVertex, setSketchRef, sessionSettingsState })
+    const SK = new SketchManager({ p5, initialQueryResponse, setWikiverseSketchData, setSelectedVertex, setHoveredVertex, setP5SketchRef, sessionSettingsState })
 
     //*/=> SETUP...
     p5.preload = () => { SK.preloadFont() }
