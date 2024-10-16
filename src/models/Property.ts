@@ -1,4 +1,4 @@
-import { iProperty } from "../../interfaces";
+import { iProperty } from "../interfaces";
 
 export class Property implements iProperty {
   id: string;

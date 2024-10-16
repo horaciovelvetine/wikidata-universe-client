@@ -1,7 +1,7 @@
-export { CameraManager } from './_CameraManager'
-export { Edge } from './_Edge'
-export { Point3D } from './_Point3D';
-export { Property } from './_Property'
-export { UIManager } from './_UIManager'
-export { Vertex } from './_Vertex';
-export { SketchManager } from './_SketchManager'
+export { CameraManager } from './CameraManager'
+export { Edge } from './Edge'
+export { Point3D } from './Point3D';
+export { Property } from './Property'
+export { UIManager } from './UIManager'
+export { Vertex } from './Vertex';
+export { SketchManager } from './SketchManager'

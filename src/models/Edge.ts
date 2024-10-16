@@ -1,5 +1,5 @@
-import { iEdge, iProperty, SketchData } from "../../interfaces";
-import { Vertex, Property } from "./";
+import { iEdge, iProperty, SketchData } from "../interfaces";
+import { Vertex, Property } from ".";
 
 export enum EDGE_DIR { INCOMING, OUTGOING, PARALLEL }
 

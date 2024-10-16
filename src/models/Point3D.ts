@@ -1,4 +1,4 @@
-import { iPoint3D } from "../../interfaces";
+import { iPoint3D } from "../interfaces";
 
 export class Point3D implements iPoint3D {
   x: number;

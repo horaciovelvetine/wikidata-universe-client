@@ -1,13 +1,21 @@
-import CharisTTF from "../../assets/font/CharisSIL-Regular.ttf";
+import CharisTTF from "../assets/font/CharisSIL-Regular.ttf";
 
 import { Dispatch, SetStateAction } from "react";
 import { Camera, Font } from "p5";
 import { P5CanvasInstance } from "@p5-wrapper/react";
 
-import { CameraManager, Vertex, UIManager } from "./";
-import { iVertex, RequestPayload, RequestResponse, SessionSettingsState, SketchData } from "../../interfaces";
-import { calcInitLayoutDimensions, traceRay } from "../functions";
-import { postRelatedDataQueue } from "../../api";
+import { CameraManager, Vertex, UIManager } from ".";
+import { iVertex, RequestPayload, RequestResponse, SessionSettingsState, SketchData } from "../interfaces";
+import { traceRay } from "../p5/functions";
+import { postRelatedDataQueue } from "../api";
+
+interface CoordsSummary {
+  id: string,
+  label: string,
+  x: number,
+  y: number,
+  z: number
+}
 
 interface SketchManagerProps {
   p5: P5CanvasInstance;
@@ -109,8 +117,12 @@ export class SketchManager {
   * @method createCanvas - Creates the p5 canvas with initial dimensions.
    */
   createCanvas() {
-    const { width, height } = calcInitLayoutDimensions();
+    const { width, height } = this.calcInitLayoutDimensions();
     this.p5.createCanvas(width, height, this.p5.WEBGL)
+  }
+
+  calcInitLayoutDimensions() {
+    return { width: Math.round(window.innerWidth * 0.8), height: Math.round(window.innerHeight * 0.85) };
   }
 
   /**
@@ -252,7 +264,7 @@ export class SketchManager {
    * @method handleResize - Handles resizing of the canvas.
    */
   handleResize() {
-    const { width, height } = calcInitLayoutDimensions();
+    const { width, height } = this.calcInitLayoutDimensions();
     this.p5.resizeCanvas(width, height)
   }
 
@@ -261,5 +273,14 @@ export class SketchManager {
    */
   getOriginVertex() {
     return this.data.vertices.find(vertex => vertex.origin === true)!;
+  }
+
+
+  sketchDataCoordsSummary(): CoordsSummary[] {
+    return this.data.vertices.map(vertex => ({
+      id: vertex.id,
+      label: vertex.label,
+      ...vertex.coords
+    }));
   }
 }

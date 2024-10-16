@@ -1,8 +1,8 @@
 import { P5CanvasInstance, SketchProps } from "@p5-wrapper/react";
-import { iEdge, iVertex, SketchData } from "../../interfaces";
+import { iEdge, iVertex, SketchData } from "../interfaces";
 import { Camera, Font } from "p5";
-import { Point3D } from "./_Point3D";
-import { Edge } from "./_Edge";
+import { Point3D } from "./Point3D";
+import { Edge } from "./Edge";
 
 export class Vertex implements iVertex {
   id: string;
@@ -21,6 +21,10 @@ export class Vertex implements iVertex {
     this.coords = vertex.coords;
     this.fetched = vertex.fetched;
     this.origin = vertex.origin;
+  }
+
+  coordsStr() {
+    return `(x: ${Math.round(this.coords.x)}, y: ${Math.round(this.coords.y)}, z: ${Math.round(this.coords.z)})`
   }
 
   /**

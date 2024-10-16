@@ -1,6 +1,6 @@
 import { P5CanvasInstance } from "@p5-wrapper/react";
-import { SessionSettingsState, SketchData } from "../../interfaces";
-import { calcVertexSetMean, minMaxValuesInSet, MinMaxSet } from "../functions";
+import { SessionSettingsState, SketchData } from "../interfaces";
+import { calcVertexSetMean, minMaxValuesInSet, MinMaxSet } from "../p5/functions";
 
 export const UI_BG = (opac: number = 1) => `rgba(1,1,14,${opac})`
 export const UI_FONT = (opac: number = 1) => `rgba(255,255,255, ${opac})`

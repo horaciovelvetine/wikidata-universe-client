@@ -1,6 +1,6 @@
 import { P5CanvasInstance } from "@p5-wrapper/react";
 import { Camera } from "p5";
-import { Point3D } from "./_Point3D";
+import { Point3D } from "./Point3D";
 
 export class CameraManager {
   p5: P5CanvasInstance;
