@@ -5,7 +5,7 @@ import { RequestResponse } from "../interfaces";
 export async function getQueryData(query: string): Promise<RequestResponse> {
   return await axios.get(API_URL('query-data'), { params: { query } })
     .then(res => {
-      console.log("@getQueryData - initResponseData:", res.data)
+      console.log("getQueryData()", res)
       return { status: res.status, data: res.data, errMsg: undefined };
     })
     .catch(err => {

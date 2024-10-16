@@ -6,6 +6,7 @@ export async function getApiStatus(): Promise<RequestResponse> {
   return await axios
     .get(API_URL("status"))
     .then((res) => {
+      console.log("getApiStatus()", res)
       return { status: res.status, data: res.data, errMsg: undefined };
     }).catch(err => {
       if (err.code === "ERR_NETWORK") {
