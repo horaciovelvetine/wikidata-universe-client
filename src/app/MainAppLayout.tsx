@@ -1,40 +1,55 @@
 import './MainAppLayoutStyle.css'
 
 import React, { createRef, useEffect, useState, memo } from 'react';
-import { Dimensions, RequestResponse, SessionSettingsState } from '../interfaces';
-import { ActiveQueryLayout } from './ActiveQueryLayout';
-import { Footer, VerticalSiteTitle, ApiOfflineNotice, MainQuerySessionInput, SessionSettings, LoadingBar } from '../components';
-import { showHideElement } from '../components/animations';
+import { Dimensions, RequestResponse, SessionSettingsState, SketchData } from '../interfaces';
+import { Footer, VerticalSiteTitle, ApiOfflineNotice, SessionSettings, LoadingBar, HoveredVertexDetailsDisplay, SketchDataDebugSummary, InitializeQuerySessionInputMain, toggleElementOpacity } from '../components';
 
-import { StandbySketch } from '../p5/StandbySketch';
+import { StandbySketch } from '../p5/BackgroundSketch';
+import { WikiverseSketch } from '../p5/WikiverseSketch';
 import { calcInitLayoutDimensions } from '../p5/functions';
-import { SketchManager } from '../p5/models/_SketchManager';
+import { Vertex, SketchManager } from '../p5/models';
 
 interface MainAppLayoutProps {
   apiStatusResponse: RequestResponse
 }
 
-const MemoizedStndbySketch = memo(StandbySketch, (prevProps, nextProps) => {
-  return prevProps.containerDimensions == nextProps.containerDimensions;
-});
+// Ignore-rerenders, handlesResize() => { }
+const BackgroundSketchMemo = memo(StandbySketch, () => { return true; });
 
+// locks re-render only on resetting of initResponse...
+const WikiverseSketchMemo = memo(WikiverseSketch, (prevProps, nextProps) => {
+  return prevProps.initialQueryResponse == nextProps.initialQueryResponse;
+})
+
+/**
+ * 
+ *  ====================================
+ *  MAIN APP FUNCTIONAL COMPONENT BEGINS
+ *  MAIN APP FUNCTIONAL COMPONENT BEGINS
+ *  ====================================
+ * 
+ */
 export const MainAppLayout: React.FC<MainAppLayoutProps> = ({ apiStatusResponse }) => {
+  const apiOnline = apiStatusResponse.status == 200;
+  const apiOffline = apiStatusResponse.status != 200;
+  const bgSketchRef = createRef<HTMLDivElement>();
   const [containerDimensions, setContainerDimensions] = useState<Dimensions>(calcInitLayoutDimensions())
-  const [activeQuerySession, setActiveQuerySession] = useState(false);
-  const [querySessionData, setQuerySessionData] = useState<RequestResponse>(apiStatusResponse);
+  const [initialQueryResponse, setInitialQueryResponse] = useState<RequestResponse | null>(null);
 
-  // Settings:
+  // State-Settings:
   const [isLoading, setIsLoading] = useState(false);
+  const [activeQuerySession, setActiveQuerySession] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
   const [showDebugDetails, setShowDebugDetails] = useState(false);
   const [showUnfetchedVertices, setShowUnfetchedVertices] = useState(false);
   const [showMedianAxis, setShowMedianAxis] = useState(false);
   const [showMedianBoundBox, setShowMedianBoundBox] = useState(false);
   const [showDimensionBoundBox, setShowDimensionBoundBox] = useState(false);
-  const [malSketchRef, setMALSketchRef] = useState<SketchManager>();
+  const [p5SketchRef, setP5SketchRef] = useState<SketchManager | null>(null);
 
   const sessionSettingsState: SessionSettingsState = {
     showSettings, setShowSettings,
+    activeQuerySession, setActiveQuerySession,
     showDebugDetails, setShowDebugDetails,
     showUnfetchedVertices, setShowUnfetchedVertices,
     showMedianAxis, setShowMedianAxis,
@@ -43,65 +58,70 @@ export const MainAppLayout: React.FC<MainAppLayoutProps> = ({ apiStatusResponse 
     isLoading, setIsLoading
   };
 
-  const stanbySktchRef = createRef<HTMLDivElement>()
+  // p5-Sketch Duplicative State
+  const [wikiverseSketchData, setWikiverseSketchData] = useState<SketchData | null>(null);
+  const [selectedVertex, setSelectedVertex] = useState<Vertex | null>(null);
+  const [hoveredVertex, setHoveredVertex] = useState<Vertex | null>(null);
 
+  //
+  //** REACT EFFECTS */
+  //
   useEffect(() => {
     window.addEventListener('resize', () => setContainerDimensions(calcInitLayoutDimensions()))
     return () => window.removeEventListener('resize', () => setContainerDimensions(calcInitLayoutDimensions()))
   }, [])
 
-  useEffect(() => {
-    if (activeQuerySession) {
-      showHideElement(stanbySktchRef.current!, false, "1.0");
+  useEffect(() => { // show the BG sketch when no initializeQueryResponse
+    if (initialQueryResponse == null) {
+      toggleElementOpacity(bgSketchRef.current!, true, "250ms");
     } else {
-      showHideElement(stanbySktchRef.current!, true, "0.25");
+      toggleElementOpacity(bgSketchRef.current!, false, "1000ms");
     }
-  }, [activeQuerySession])
+  }, [initialQueryResponse])
 
-  /**
-   * Accesses the SketchManager which contains the P5.js sketches details and state, allowing sketch changes w/o additional re-render when React state changes
-   */
+  //
+  //** p5.JS STATE EFFECT UPDATES */
+  //
   useEffect(() => {
     if (showSettings)
-      malSketchRef?.UI().toggleShowMedianAxis()
+      p5SketchRef?.UI().toggleShowMedianAxis()
   }, [showMedianAxis])
 
   useEffect(() => {
     if (showSettings)
-      malSketchRef?.UI().toggleShowMedianBoundBox()
+      p5SketchRef?.UI().toggleShowMedianBoundBox()
   }, [showMedianBoundBox])
 
   useEffect(() => {
     if (showSettings)
-      malSketchRef?.UI().toggleShowDimensionBoundBox()
+      p5SketchRef?.UI().toggleShowDimensionBoundBox()
   }, [showDimensionBoundBox])
 
   useEffect(() => {
     if (showSettings)
-      malSketchRef?.toggleShowUnfetchedVertices()
+      p5SketchRef?.toggleShowUnfetchedVertices()
   }, [showUnfetchedVertices])
-
-  const apiOnline = apiStatusResponse.status == 200;
 
   return (
     <div id='wikiverse-main'>
       <VerticalSiteTitle />
       <LoadingBar isLoading={isLoading} />
       <div id='query-sketch' style={{ width: containerDimensions.width, height: containerDimensions.height }}>
-        {/* Settings Gear Icon */}
-        <SessionSettings {...{ sessionSettingsState }} />
+        <div id='sketch-overlay-top'>
+          <HoveredVertexDetailsDisplay {...{ hoveredVertex }} />
+          <SessionSettings {...{ sessionSettingsState }} />
+        </div>
 
-        {/* Initialize a Query Session or API offline */}
-        {apiOnline ?
-          <MainQuerySessionInput {...{ setQuerySessionData, setActiveQuerySession, sessionSettingsState }} /> :
-          <ApiOfflineNotice {...{ apiStatusResponse }} />}
+        {apiOffline && <ApiOfflineNotice {... { apiStatusResponse }} />}
+        {apiOnline && <InitializeQuerySessionInputMain {...{ sessionSettingsState, setInitialQueryResponse }} />}
+        {activeQuerySession && <WikiverseSketchMemo {...{ initialQueryResponse, setWikiverseSketchData, setSelectedVertex, setHoveredVertex, setP5SketchRef, sessionSettingsState }} />}
 
-        {/* Active Query Session */}
-        {activeQuerySession ?
-          <ActiveQueryLayout {... { querySessionData, setQuerySessionData, sessionSettingsState, setMALSketchRef }} /> : <></>}
+        <div id='sketch-overlay-bot'>
+          {/* <SketchDataDebugSummary {...{ wikiverseSketchData, p5SketchRef }} /> */}
+        </div>
       </div>
-      <div id='standby-sketch' ref={stanbySktchRef}>
-        <MemoizedStndbySketch {...{ containerDimensions }} />
+      <div id='background-sketch' ref={bgSketchRef}>
+        <BackgroundSketchMemo {...{ containerDimensions }} />
       </div>
       <Footer />
     </div>

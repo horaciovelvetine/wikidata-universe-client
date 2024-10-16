@@ -53,7 +53,6 @@ body {
 }
 
 #query-sketch {
-  /* Height/Width set in component for resize */
   position: fixed;
   top: 50%;
   left: 50%;
@@ -62,11 +61,58 @@ body {
   box-shadow: 0rem 0rem 2rem 1rem rgba(0, 0, 0, 0.22);
 }
 
-#standby-sketch {
+#background-sketch {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   overflow: clip;
   z-index: -2;
+}
+
+#sketch-overlay-top {
+  position: absolute;
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: 1fr 1fr;
+  top: 0%;
+  width: 100%;
+  margin-top: 0.1rem;
+  background-color: transparent;
+}
+
+#sketch-overlay-bot {
+  position: absolute;
+  display: grid;
+  grid-template-rows: auto auto;
+  grid-template-columns: 30% 70%;
+  bottom: 0%;
+  width: 100%;
+  margin-bottom: 0.1rem;
+  background-color: transparent;
+  gap: .2rem;
+}
+
+@keyframes horizontal-shake {
+
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%,
+  80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%,
+  60% {
+    transform: translate3d(4px, 0, 0);
+  }
 }
