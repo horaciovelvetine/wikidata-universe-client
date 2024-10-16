@@ -1,10 +1,5 @@
 #sketch-data-summary-container {
   position: absolute;
-  top: 30%;
-  left: 0.5%;
-  opacity: 50%;
-  width: 100%;
-  z-index: 1000;
 }
 
 #sketch-data-summary-container h5 {
