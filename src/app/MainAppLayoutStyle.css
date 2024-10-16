@@ -58,6 +58,7 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   overflow: clip;
+  background-color: rgb(var(--sketch-bg));
   box-shadow: 0rem 0rem 2rem 1rem rgba(0, 0, 0, 0.22);
 }
 
@@ -84,13 +85,13 @@ body {
 #sketch-overlay-bot {
   position: absolute;
   display: grid;
-  grid-template-rows: auto auto;
-  grid-template-columns: 30% 70%;
+  grid-template-rows: auto 6rem;
+  grid-template-columns: 60% 40%;
   bottom: 0%;
   width: 100%;
-  margin-bottom: 0.1rem;
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
   background-color: transparent;
-  gap: .2rem;
 }
 
 @keyframes horizontal-shake {

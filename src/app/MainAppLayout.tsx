@@ -2,24 +2,28 @@ import './MainAppLayoutStyle.css'
 
 import React, { createRef, useEffect, useState, memo } from 'react';
 import { Dimensions, RequestResponse, SessionSettingsState, SketchData } from '../interfaces';
-import { Footer, VerticalSiteTitle, ApiOfflineNotice, SessionSettings, LoadingBar, HoveredVertexDetailsDisplay, SketchDataDebugSummary, InitializeQuerySessionInputMain, toggleElementOpacity } from '../components';
+import { Footer, VerticalSiteTitle, ApiOfflineNotice, SessionSettings, LoadingBar, HoveredVertexDetailsDisplay, InitializeQuerySessionInputMain, toggleElementOpacity } from '../components';
 
-import { StandbySketch } from '../p5/BackgroundSketch';
-import { WikiverseSketch } from '../p5/WikiverseSketch';
-import { calcInitLayoutDimensions } from '../p5/functions';
-import { Vertex, SketchManager } from '../p5/models';
+import { BackgroundSketch } from '../components/p5/BackgroundSketch';
+import { WikiverseSketch } from '../components/p5/WikiverseSketch';
+import { Vertex, SketchManager } from '../models';
+import { SelectedVertexDetailsDisplay } from '../components/lib/SelectedVertexDetailsDisplay';
 
 interface MainAppLayoutProps {
   apiStatusResponse: RequestResponse
 }
 
 // Ignore-rerenders, handlesResize() => { }
-const BackgroundSketchMemo = memo(StandbySketch, () => { return true; });
+const BackgroundSketchMemo = memo(BackgroundSketch, () => { return true; });
 
 // locks re-render only on resetting of initResponse...
 const WikiverseSketchMemo = memo(WikiverseSketch, (prevProps, nextProps) => {
   return prevProps.initialQueryResponse == nextProps.initialQueryResponse;
 })
+
+const calcInitLayoutDimensions = () => {
+  return { width: Math.round(window.innerWidth * 0.8), height: Math.round(window.innerHeight * 0.85) };
+}
 
 /**
  * 
@@ -79,9 +83,6 @@ export const MainAppLayout: React.FC<MainAppLayoutProps> = ({ apiStatusResponse 
     }
   }, [initialQueryResponse])
 
-  //
-  //** p5.JS STATE EFFECT UPDATES */
-  //
   useEffect(() => {
     if (showSettings)
       p5SketchRef?.UI().toggleShowMedianAxis()
@@ -118,6 +119,7 @@ export const MainAppLayout: React.FC<MainAppLayoutProps> = ({ apiStatusResponse 
 
         <div id='sketch-overlay-bot'>
           {/* <SketchDataDebugSummary {...{ wikiverseSketchData, p5SketchRef }} /> */}
+          <SelectedVertexDetailsDisplay {...{ selectedVertex }} />
         </div>
       </div>
       <div id='background-sketch' ref={bgSketchRef}>
