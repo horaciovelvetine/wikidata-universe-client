@@ -3,6 +3,8 @@ import { Dispatch, SetStateAction } from "react";
 export interface SessionSettingsState {
   showSettings: boolean;
   setShowSettings: Dispatch<SetStateAction<boolean>>;
+  activeQuerySession: boolean;
+  setActiveQuerySession: Dispatch<SetStateAction<boolean>>;
   showDebugDetails: boolean;
   setShowDebugDetails: Dispatch<SetStateAction<boolean>>;
   showUnfetchedVertices: boolean;
