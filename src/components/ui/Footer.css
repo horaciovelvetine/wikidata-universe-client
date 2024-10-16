@@ -1,0 +1,64 @@
+footer {
+  position: fixed;
+  width: 100%;
+  bottom: 2.5%;
+  color: rgba(var(--font), 0.75);
+}
+
+footer #container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+}
+
+footer #list {
+  list-style: none;
+  display: flex;
+  background-color: transparent;
+  font-size: 1.4rem;
+}
+
+@media (max-width: 768px) {
+  footer #list {
+    gap: 0.5rem;
+    flex-direction: column;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  footer #list {
+    gap: 3rem;
+  }
+}
+
+@media (min-width: 1025px) and (max-width: 1440px) {
+  footer #list {
+    gap: 6rem;
+  }
+}
+
+@media (min-width: 1441px) and (max-width: 1920px) {
+  footer #list {
+    gap: 9rem;
+  }
+}
+
+@media (min-width: 1921px) {
+  footer #list {
+    gap: 12rem;
+  }
+}
+
+#ftr-item a:hover {
+  transition: font-size 235ms, text-decoration 235ms;
+  font-size: 1.6rem;
+  text-decoration: underline;
+}
+
+#ftr-item a:not(:hover) {
+  transition: font-size 235ms, text-decoration 235ms;
+  font-size: 1.4rem;
+  text-decoration: none;
+}

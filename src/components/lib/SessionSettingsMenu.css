@@ -1,0 +1,46 @@
+#session-settings-container {
+  position: absolute;
+  display: grid;
+  width: 100%;
+  z-index: 1000;
+}
+
+#session-settings-menu-container {
+  display: none;
+  padding: 0.5rem 1rem;
+  justify-self: flex-end;
+  border-radius: 0.5rem;
+  margin-right: 1rem;
+  background-color: rgb(var(--font), 0.02);
+  box-shadow: 0 0 2px rgba(var(--font), 0.07);
+}
+
+#session-settings-menu-header {
+  justify-self: flex-end;
+  border-bottom: 1px solid rgb(var(--font), 0.2);
+  color: rgb(var(--font), 0.7)
+}
+
+#session-settings-toggle-label {
+  padding: 0.15rem;
+  padding-right: 2rem;
+  color: rgb(var(--font), 0.5);
+}
+
+#setting-toggle-shortcut {
+  font-size: 0.85rem;
+  color: rgb(var(--font), 0.2);
+  margin-left: 0.5rem;
+}
+
+#session-settings-icon {
+  height: 2.25rem;
+  margin: 0.65rem;
+  justify-self: flex-end;
+}
+
+#session-settings-toggle-contents {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

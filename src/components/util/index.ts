@@ -1,1 +1,0 @@
-export { edgeDirectionIcon } from './_EdgeDirectionIcon'
