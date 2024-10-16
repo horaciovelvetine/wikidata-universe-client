@@ -2,7 +2,7 @@ import './SketchDataDebugSummary.css'
 import React, { useEffect, useState } from 'react';
 
 import { SketchData } from '../../interfaces';
-import { SketchManager } from '../../p5/models';
+import { SketchManager } from '../../models';
 
 interface SketchDataDebugProps {
   wikiverseSketchData: SketchData | null,

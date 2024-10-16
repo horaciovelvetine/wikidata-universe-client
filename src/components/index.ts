@@ -1,11 +1,11 @@
 //UNUSED UNFACTORED
-export { HorizonSiteTitle } from './_MainAppLayout/HorizonSiteTitle';
+export { HorizonSiteTitle } from './_grave/HorizonSiteTitle';
 
 //ActiveQueryLayout
-export { ActiveQueryControls } from './_ActiveQueryLayout/ActiveQueryControls'
-export { EdgeDetails } from './_ActiveQueryLayout/EdgeDetails'
-export { RelatedEdgesDetails } from './_ActiveQueryLayout/RelatedEdgesDetails'
-export { VerTextDetails } from './_ActiveQueryLayout/VerTextDetails'
+export { ActiveQueryControls } from './_grave/ActiveQueryControls'
+export { EdgeDetails } from './_grave/EdgeDetails'
+export { RelatedEdgesDetails } from './_grave/RelatedEdgesDetails'
+export { VerTextDetails } from './_grave/VerTextDetails'
 
 //DEBUG COMPONENT:
 export { SketchDataDebugSummary } from './debug/SketchDataDebugSummary'
