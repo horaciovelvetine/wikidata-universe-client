@@ -1,11 +1,11 @@
 import './ActiveQueryControlsStyle.css';
-import '../animations/_HorizontalShake.css';
+// import '../animations/_HorizontalShake.css';
 
 import React, { createRef, Dispatch, SetStateAction, useState } from 'react';
 
 import { INPUT_STATE, RequestPayload, RequestResponse } from '../../interfaces';
 import { Search, SearchDngr, Fetch } from '../../assets/icons';
-import { flashOverlayElement, shakeInvalidElement } from '../animations';
+// import { flashOverlayElement, shakeInvalidElement } from '../animations';
 import { getQueryData } from '../../api';
 
 
@@ -58,10 +58,10 @@ export const ActiveQueryControls: React.FC<ActiveQueryControlsProps> = ({ initQu
         setQuerySessionData(res)
       }
     } else {
-      shakeInvalidElement(els.cont);
-      shakeInvalidElement(els.input);
-      flashOverlayElement(els.iconDng, els.icon, 820);
-      shakeInvalidElement(els.submit);
+      // shakeInvalidElement(els.cont);
+      // shakeInvalidElement(els.input);
+      // flashOverlayElement(els.iconDng, els.icon, 820);
+      // shakeInvalidElement(els.submit);
     }
   }
 

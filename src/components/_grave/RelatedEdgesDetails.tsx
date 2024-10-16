@@ -1,9 +1,9 @@
 import './RelatedEdgesDetailsStyle.css'
 import React, { createRef, useEffect, useState } from 'react';
-import { Edge, Vertex } from '../../p5/models';
+import { Edge, Vertex } from '../../models';
 import { SketchData } from '../../interfaces';
 import { EdgeDetails } from './EdgeDetails';
-import { showHideRelatedEdges } from '../animations';
+// import { showHideRelatedEdges } from '../animations';
 
 interface RelatedEdgesDetailsProps {
   selectedVertex: Vertex | null;
@@ -31,7 +31,7 @@ export const RelatedEdgesDetails: React.FC<RelatedEdgesDetailsProps> = ({ select
 
   useEffect(() => {
     if (selectedVertex == null) return;
-    showHideRelatedEdges(contRef.current!, isOnScreen)
+    // showHideRelatedEdges(contRef.current!, isOnScreen)
   }, [isOnScreen])
 
   const blockWheelScrollDetailsHandler = (event: React.WheelEvent) => {

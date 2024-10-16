@@ -2,8 +2,8 @@ import './EdgeDetailsStyle.css'
 
 import React from "react";
 import { Vertex as VertIcon, VertexSel } from '../../assets/icons'
-import { edgeDirectionIcon } from '../util';
-import { Edge, Vertex } from '../../p5/models';
+import { edgeDirectionIcon } from '..';
+import { Edge, Vertex } from '../../models';
 import { SketchData, EDGE_DIR } from '../../interfaces';
 
 interface EdgeDetailsProps {

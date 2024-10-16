@@ -1,9 +1,9 @@
 import './VerTextDetailsStyle.css';
 import React, { createRef, useEffect, useState } from 'react';
 
-import { changeFocusOpacity, toggleSelectedVertexIcon, toggleVertextBackgrounds } from '../animations';
+// import { changeFocusOpacity, toggleSelectedVertexIcon, toggleVertextBackgrounds } from '../animations';
 import { Vertex as VertIcon, VertexSel } from '../../assets/icons'
-import { Vertex } from '../../p5/models';
+import { Vertex } from '../../models';
 
 
 interface VerTextDetailsProps {
@@ -25,9 +25,9 @@ export const VerTextDetails: React.FC<VerTextDetailsProps> = ({ selectedVertex }
   }, [selectedVertex]);
 
   useEffect(() => {
-    toggleVertextBackgrounds(vertextInfoRef.current!, isOpen)
-    toggleSelectedVertexIcon(noVertIconRef.current!, vertIconRef.current!, isOpen)
-    changeFocusOpacity(vertextInfoRef.current!, isOpen);
+    // toggleVertextBackgrounds(vertextInfoRef.current!, isOpen)
+    // toggleSelectedVertexIcon(noVertIconRef.current!, vertIconRef.current!, isOpen)
+    // changeFocusOpacity(vertextInfoRef.current!, isOpen);
     //todo move empty box off screen so outline is not displayed
   }, [isOpen]);
 
