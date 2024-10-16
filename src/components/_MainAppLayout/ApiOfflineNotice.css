@@ -1,9 +1,4 @@
-@font-face {
-  font-family: 'CharisSIL-Regular';
-  src: url('../assets/font/CharisSIL-Regular.ttf') format('truetype');
-}
-
-#error-message-container {
+#api-offline-notice-cont {
   display: flex;
   height: 100%;
   width: 100%;
@@ -14,21 +9,19 @@
   backdrop-filter: blur(3px);
   backdrop-filter: brightness(0.6);
   opacity: 0;
-}
-
-#error-message-container>* {
   pointer-events: none;
 }
 
-#unavailable-glogo-container {
+#api-offline-notice-globe-cont {
   position: absolute;
   height: 100%;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
-#unavailable-glogo {
-  height: 75%;
+#api-offline-notice-globe-logo {
+  height: 70%;
   opacity: 0.08;
   animation-name: slow-globe-rotation;
   animation-duration: 280s;
@@ -36,7 +29,7 @@
   animation-iteration-count: infinite;
 }
 
-#question-mark-icon {
+#api-offline-notice-question-icon {
   position: absolute;
   width: 30%;
   z-index: -1;
@@ -44,7 +37,7 @@
   transform: translate(-10rem) rotate(165deg);
 }
 
-#exclamation-mark-icon {
+#api-offline-notice-exclaims-icon {
   position: absolute;
   width: 30%;
   z-index: -1;
@@ -52,26 +45,23 @@
   transform: translate(10rem) rotate(15deg);
 }
 
-#error-text-container {
+#api-offline-notice-text-cont {
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-shadow: 1px 1px 2px black;
+  color: rgb(var(--font), 0.75);
 }
 
-#error-title {
+#api-offline-notice-title {
   font-family: "CharisSIL-Regular", serif;
-  font-size: 3.5rem;
+  font-size: 4rem;
   text-shadow: rgb(var(--gray-900)) 0.1rem 0.1rem 0.1rem;
   margin-bottom: 1rem;
 }
 
-#error-message {
-  font-size: 1.2rem;
-}
-
-#related-links-container {
-  z-index: 3;
+#api-offline-notice-notice-msg {
+  font-size: 2rem;
 }
