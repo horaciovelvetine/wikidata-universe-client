@@ -1,7 +1,7 @@
 import { multiply, inv } from "mathjs";
 import { P5CanvasInstance, SketchProps } from "@p5-wrapper/react";
 import { Camera } from "p5";
-import { Vertex } from "../models";
+import { Vertex } from "../../models";
 
 // Credit to @camelCaseSensitive on {github} & @morejpeg on {youtube}
 // For the original code, npm package, and tutorial on so many things p5.js
@@ -16,7 +16,7 @@ export function traceRay(p5: P5CanvasInstance<SketchProps>, cam: Camera, vert: V
   // not an a value intended to be accessed in/by p5.js API - a needed workaround here. 
   const camRenderer = cam as any;
   const p5ProjMat = camRenderer._renderer.uPMatrix.mat4;
-  
+
   const projMat = [
     [p5ProjMat[0], p5ProjMat[1], p5ProjMat[2], p5ProjMat[3]],
     [p5ProjMat[4], p5ProjMat[5], p5ProjMat[6], p5ProjMat[7]],
