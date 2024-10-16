@@ -5,25 +5,24 @@ import { Camera, Font } from "p5";
 import { P5CanvasInstance } from "@p5-wrapper/react";
 
 import { CameraManager, Vertex, UIManager } from "./";
-import { iVertex, RequestPayload, SessionSettingsState, SketchData } from "../../interfaces";
+import { iVertex, RequestPayload, RequestResponse, SessionSettingsState, SketchData } from "../../interfaces";
 import { calcInitLayoutDimensions, traceRay } from "../functions";
 import { postRelatedDataQueue } from "../../api";
 
 interface SketchManagerProps {
   p5: P5CanvasInstance;
-  initQueryData: RequestPayload;
-  setSketchData: Dispatch<SetStateAction<SketchData>>;
+  initialQueryResponse: RequestResponse | null;
+  setWikiverseSketchData: Dispatch<SetStateAction<SketchData | null>>;
   setSelectedVertex: Dispatch<SetStateAction<Vertex | null>>;
   setHoveredVertex: Dispatch<SetStateAction<Vertex | null>>;
-  // called once on construction to inform React of the Sketch for access w/o re-rendering the sketch.
-  setSketchRef: (sk: SketchManager) => void;
+  setP5SketchRef: Dispatch<SetStateAction<SketchManager | null>>;
   sessionSettingsState: SessionSettingsState;
 }
 
 
 export class SketchManager {
   //*/=> REACT STATE
-  setSketchData: Dispatch<SetStateAction<SketchData>>;
+  setSketchData: Dispatch<SetStateAction<SketchData | null>>;
   setSelectedVertex: Dispatch<SetStateAction<Vertex | null>>;
   setHoveredVertex: Dispatch<SetStateAction<Vertex | null>>;
   setIsLoading: Dispatch<SetStateAction<boolean>>;
@@ -38,17 +37,17 @@ export class SketchManager {
 
   //*/=> DATA STATE
   originVertex: iVertex
-  originQuery: string;
-  data: SketchData;
+  originalQuery: string;
+  data: RequestPayload;
   selectedVertex: Vertex | null = null;
   hoveredVertex: Vertex | null = null;
 
 
   //*/=> CONSTRUCTOR
-  constructor({ p5, initQueryData, setSketchData, setSelectedVertex, setHoveredVertex, sessionSettingsState, setSketchRef }: SketchManagerProps) {
+  constructor({ p5, initialQueryResponse, setWikiverseSketchData, setSelectedVertex, setHoveredVertex, sessionSettingsState, setP5SketchRef }: SketchManagerProps) {
 
     // REACT STATE
-    this.setSketchData = setSketchData;
+    this.setSketchData = setWikiverseSketchData;
     this.setSelectedVertex = setSelectedVertex;
     this.setHoveredVertex = setHoveredVertex;
     this.setIsLoading = sessionSettingsState.setIsLoading;
@@ -61,14 +60,14 @@ export class SketchManager {
     this.showUnfetchedVertex = sessionSettingsState.showUnfetchedVertices
 
     // DATA STATE
-    this.data = initQueryData;
+    this.data = initialQueryResponse!.data;
 
-    this.originQuery = initQueryData.query
+    this.originalQuery = this.data.query; //TODO clickToFetchRelated()
     this.originVertex = this.getOriginVertex();
 
     this.selectedVertex = new Vertex(this.originVertex);
     this.setSelectedVertex(this.selectedVertex);
-    setSketchRef(this);
+    setP5SketchRef(this);
   }
 
   /**
@@ -143,11 +142,8 @@ export class SketchManager {
    */
   async initPostRelatedDataRequest() {
     this.setIsLoading(true); //==> in-case were here on reload.
-    const payload = {
-      ...this.data, dimensions: calcInitLayoutDimensions(), query: this.originQuery
-    }
 
-    await postRelatedDataQueue({ ...payload })
+    await postRelatedDataQueue(this.data)
       .then(response => {
         this.data = response.data;
         this.setSketchData(this.data)
@@ -249,7 +245,7 @@ export class SketchManager {
    * @method clickTargetIsOrigin - Checks if the clicked target vertex is the origin vertex.
    */
   clickTargetIsOrigin(tgt: Vertex) {
-    return this.originQuery == tgt.label;
+    return tgt.origin;
   }
 
   /**
