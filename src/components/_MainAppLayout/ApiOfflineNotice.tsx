@@ -1,13 +1,13 @@
 import './ApiOfflineNoticeStyle.css'
-import '../animations/_SlowGlobeRotation.css'
+
 
 import { createRef, useEffect } from "react";
 
 import { Exclaims, Question } from "../../assets/icons";
 import GlobeLogo from '../../assets/imgs/globe-outline-no-bg-white.svg'
 
-import { showHideElement } from "../animations";
 import { RequestResponse } from '../../interfaces';
+import { toggleElementOpacity } from '../';
 
 interface ApiOfflineProps {
   apiStatusResponse: RequestResponse;
@@ -18,9 +18,7 @@ export const ApiOfflineNotice: React.FC<ApiOfflineProps> = ({ apiStatusResponse 
   const containerRef = createRef<HTMLDivElement>();
 
   useEffect(() => {
-    setTimeout(() => {
-      showHideElement(containerRef.current!, true);
-    }, 1);
+    toggleElementOpacity(containerRef.current!, true, '250ms');
   }, []);
 
   return (
