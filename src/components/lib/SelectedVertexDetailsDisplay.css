@@ -1,1 +1,67 @@
-#selected-vertex-details-display {}
+#selected-vertex-details-display {
+  display: flex;
+  align-items: center;
+  grid-column: 1;
+  grid-row: 2;
+  margin-right: 1rem;
+  border-radius: 0.5rem;
+}
+
+#selected-vertex-details-icon-cont {
+  display: inline-flex;
+  position: relative;
+}
+
+#selected-vertex-details-none-selected-icon {
+  position: absolute;
+  left: 0.1;
+}
+
+#selected-vertex-details-selected-icon {}
+
+#selected-vertex-details-text-cont {
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  padding: 0.1rem 1rem;
+  border-radius: 0.5rem;
+  text-shadow: 0px 1px 1px black;
+}
+
+#selected-vertex-details-label-link {}
+
+#selected-vertex-details-label-text-cont {
+  display: inline-flex;
+  align-items: baseline;
+  text-shadow: 0px 1px 1px black;
+}
+
+#selected-vertex-details-label {
+  font-size: 1.65rem;
+  color: rgba(var(--font));
+  font-family: 'CharisSIL-Regular', sans-serif;
+  transition: font-size 235ms, text-decoration 235ms;
+  text-shadow: 0px 1px 1px black;
+  text-wrap: nowrap;
+}
+
+#selected-vertex-details-label:hover {
+  font-size: 1.8rem;
+  text-decoration: underline;
+}
+
+#selected-vertex-details-coords {
+  color: rgba(var(--font), 0.5);
+  padding-left: 0.25rem;
+  text-shadow: 0px 1px 1px black;
+}
+
+#selected-vertex-details-description {
+  font-size: 1.3rem;
+  color: rgba(var(--font), 0.4);
+  display: inline-flex;
+  padding-left: 0.5rem;
+  padding-right: 0.3rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}

@@ -23,7 +23,7 @@ export const HoveredVertexDetailsDisplay: React.FC<HoveredVertexDetailsDisplayPr
 
   const label = hoveredVertex ? hoveredVertex?.label : "";
   const description = hoveredVertex ? hoveredVertex?.description : "";
-  const coords = hoveredVertex ? `(x: ${Math.round(hoveredVertex?.coords.x)}, y: ${Math.round(hoveredVertex?.coords.y)}, z: ${Math.round(hoveredVertex?.coords.z)})` : "";
+  const coords = hoveredVertex ? hoveredVertex?.coordsStr() : "";
 
   return (
     <div id={prfx('details-display')} ref={hoveredDetailsEleRef}>

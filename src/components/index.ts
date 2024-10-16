@@ -5,7 +5,6 @@ export { HorizonSiteTitle } from './_grave/HorizonSiteTitle';
 export { ActiveQueryControls } from './_grave/ActiveQueryControls'
 export { EdgeDetails } from './_grave/EdgeDetails'
 export { RelatedEdgesDetails } from './_grave/RelatedEdgesDetails'
-export { VerTextDetails } from './_grave/VerTextDetails'
 
 //DEBUG COMPONENT:
 export { SketchDataDebugSummary } from './debug/SketchDataDebugSummary'
@@ -13,6 +12,7 @@ export { SketchDataDebugSummary } from './debug/SketchDataDebugSummary'
 export { HoveredVertexDetailsDisplay } from './lib/HoveredVertexDetailsDisplay'
 export { InitializeQuerySessionInputMain } from './lib/InitializeQuerySessionInputMain'
 export { SessionSettings } from './lib/SessionSettingsMenu'
+export { SelectedVertexDetailsDisplay } from './lib/SelectedVertexDetailsDisplay'
 
 //UI:
 export { LoadingBar } from './ui/LoadingBar'
@@ -22,7 +22,6 @@ export { VerticalSiteTitle } from './ui/VerticalSiteTitle';
 
 //UTIL:
 export { edgeDirectionIcon } from './util/EdgeDirectionIcon'
-
 
 //ANIMATION FUNCTIONS:
 export { errorShakeInvalidElement } from './animations/ErrorShakeInvalidElement'
