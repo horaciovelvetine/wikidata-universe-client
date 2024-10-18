@@ -1,14 +1,20 @@
 import './SessionSettingsMenu.css'
 import { Settings as SettingsIcon } from '../../assets/icons';
 
-import { createRef, FC, useEffect, } from 'react';
+import { createRef, Dispatch, FC, SetStateAction, useEffect, } from 'react';
 
 import { SessionSettingsState } from '../../interfaces'
-import { SessionSettingsToggleOption } from './SessionSettingsToggleOption';
 import { toggleElementOpacity, toggleDisplayVisibility, changeFocusOpacity } from '..';
 
 interface SessionSettingsProps {
   sessionSettingsState: SessionSettingsState;
+}
+
+interface SessionSettingsToggleOptionProps {
+  isEnabled: boolean;
+  onToggle: Dispatch<SetStateAction<boolean>>;
+  label: string;
+  shortcut: string | null;
 }
 
 export const SessionSettings: FC<SessionSettingsProps> = ({ sessionSettingsState }) => {
@@ -45,6 +51,29 @@ export const SessionSettings: FC<SessionSettingsProps> = ({ sessionSettingsState
             shortcut={setting.shortcut}
           />
         ))}
+      </div>
+    </div>
+  );
+};
+
+const SessionSettingsToggleOption: FC<SessionSettingsToggleOptionProps> = ({ isEnabled, onToggle, label, shortcut }) => {
+  return (
+    <div id='session-settings-toggle-contents'>
+      <label id='session-settings-toggle-label'>
+        {label}
+      </label>
+      <div>
+        {shortcut && (
+          <span id='setting-toggle-shortcut'>
+            [{shortcut}]{" "}
+          </span>
+        )}
+        <input
+          id='setting-toggle-input'
+          type="checkbox"
+          checked={isEnabled}
+          onChange={() => onToggle(prev => !prev)}
+        />
       </div>
     </div>
   );
