@@ -1,34 +1,48 @@
 import { P5CanvasInstance, SketchProps } from "@p5-wrapper/react";
-import { iEdge, iVertex, SketchData } from "../interfaces";
+import { SketchData } from "../interfaces";
 import { Camera, Font } from "p5";
-import { Point3D } from "./Point3D";
-import { Edge } from "./Edge";
+import { iPoint3D, Point3D } from "./Point3D";
+import { Edge, iEdge } from "./Edge";
+
+export interface iVertex {
+  id: string;
+  label: string;
+  description: string | null;
+  coords: iPoint3D;
+  fetched: boolean;
+  origin: boolean;
+  locked: boolean;
+}
 
 export class Vertex implements iVertex {
   id: string;
   label: string;
-  description: string;
+  description: string | null;
   coords: Point3D;
   radius: number = 20;
   fetched: boolean;
   origin: boolean;
+  locked: boolean;
 
-  constructor(vertex: iVertex);
-  constructor(vertex: Vertex) {
+  constructor(vertex: iVertex) {
     this.id = vertex.id;
     this.label = vertex.label;
     this.description = vertex.description;
     this.coords = vertex.coords;
     this.fetched = vertex.fetched;
     this.origin = vertex.origin;
+    this.locked = vertex.locked;
   }
 
+  /**
+   * @method coordsStr() - this vertices coords in a simple string representation 
+   */
   coordsStr() {
     return `(x: ${Math.round(this.coords.x)}, y: ${Math.round(this.coords.y)}, z: ${Math.round(this.coords.z)})`
   }
 
   /**
-   * Draws an onscreen representation of the Vertex inside the p5 instance
+   * @method draw() - draws an in-sketch representation of the Vertex
    */
   draw(p5: P5CanvasInstance, curSelectedVert: Vertex | null) {
     p5.push();
@@ -46,7 +60,7 @@ export class Vertex implements iVertex {
   }
 
   /**
-   * Draws an onscreen label text appearing above the Vertex in the p5 instance
+   * @method drawLabel() - draws a label hovering facing the (in-sketch) up direction towards the camera
    */
   drawLabel(p5: P5CanvasInstance<SketchProps>, cam: Camera, font: Font) {
 
@@ -64,7 +78,7 @@ export class Vertex implements iVertex {
   }
 
   /**
-   * Draws any edge which mentions this Vertex (ingoing and outgoing)
+   * @method drawRelatedEdges() - draws any edge which mentions this Vertex (ingoing and outgoing) in the sketch
    */
   drawRelatedEdges(p5: P5CanvasInstance, session: SketchData, isHov: boolean = false) {
     const edgesToDraw = this.getRelatedEdges(session);
@@ -113,10 +127,10 @@ export class Vertex implements iVertex {
     const mentionEdge = session.edges.filter(edge => (this.id == edge.srcId || this.id == edge.tgtId));
     const fetchCompleteEdges = mentionEdge.filter(edge => {
       const edObj = new Edge(edge);
-      const { src, tgt } = edObj.getVertexEndpoints(session);
+      // const { src, tgt } = edObj.getVertexEndpoints(session);
       // edge is incomplete or unfetched, do not display
-      if (tgt == undefined || src == undefined || !src.fetched || !tgt.fetched) return;
-      return edge;
+      // if (tgt == undefined || src == undefined || !src.fetched || !tgt.fetched) return;
+      // return edge;
     })
 
     return fetchCompleteEdges.map(edgeData => {

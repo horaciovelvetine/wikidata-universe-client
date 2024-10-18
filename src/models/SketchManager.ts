@@ -5,7 +5,7 @@ import { Camera, Font } from "p5";
 import { P5CanvasInstance } from "@p5-wrapper/react";
 
 import { CameraManager, Vertex, UIManager } from ".";
-import { iVertex, RequestPayload, RequestResponse, SessionSettingsState, SketchData } from "../interfaces";
+import { RequestPayload, RequestResponse, SessionSettingsState, SketchData } from "../interfaces";
 import { traceRay } from "../p5/functions";
 import { postRelatedDataQueue } from "../api";
 
@@ -44,7 +44,7 @@ export class SketchManager {
   showUnfetchedVertex: boolean;
 
   //*/=> DATA STATE
-  originVertex: iVertex
+  originVertex: Vertex
   originalQuery: string;
   data: RequestPayload;
   selectedVertex: Vertex | null = null;
@@ -184,7 +184,7 @@ export class SketchManager {
     if (this.wikiFont == undefined) return;
     if (this.selectedVertex.fetched == false) return;
     this.selectedVertex.drawLabel(this.p5, this.cam, this.wikiFont)
-    this.selectedVertex.drawRelatedEdges(this.p5, this.data, true)
+    // this.selectedVertex.drawRelatedEdges(this.p5, this.data, true)
   }
 
   /**
@@ -197,7 +197,7 @@ export class SketchManager {
     if (this.wikiFont == undefined) return;
     if (this.hoveredVertex.fetched == false) return;
     this.hoveredVertex.drawLabel(this.p5, this.cam, this.wikiFont)
-    this.hoveredVertex.drawRelatedEdges(this.p5, this.data, true)
+    // this.hoveredVertex.drawRelatedEdges(this.p5, this.data, true)
   }
 
   /**

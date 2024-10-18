@@ -1,4 +1,8 @@
-import { iProperty } from "../interfaces";
+export interface iProperty {
+  id: string;
+  label: string;
+  description: string;
+}
 
 export class Property implements iProperty {
   id: string;
