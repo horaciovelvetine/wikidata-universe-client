@@ -1,11 +1,14 @@
-import React, { Dispatch, FC, SetStateAction } from 'react';
-import { RequestPayload, RequestResponse, SessionSettingsState, SketchData } from '../../interfaces';
-import { Vertex, SketchManager } from '../../models';
+import { Dispatch, FC, SetStateAction } from 'react';
 import { ReactP5Wrapper, Sketch } from '@p5-wrapper/react';
+
+import { RequestResponse, SessionSettingsState } from '../../interfaces';
+import { Vertex } from '../../models/Vertex';
+import { SketchManager } from '../../models/SketchManager';
+import { iGraphset } from '../../models/Graphset';
 
 interface WikiverseProps {
   initialQueryResponse: RequestResponse | null; // only used to determine re-renders
-  setWikiverseSketchData: Dispatch<SetStateAction<SketchData | null>>;
+  setWikiverseGraphset: Dispatch<SetStateAction<iGraphset | null>>;
   setSelectedVertex: Dispatch<SetStateAction<Vertex | null>>;
   setHoveredVertex: Dispatch<SetStateAction<Vertex | null>>;
   setP5SketchRef: Dispatch<SetStateAction<SketchManager | null>>; // to ref sketch details
@@ -13,10 +16,10 @@ interface WikiverseProps {
 }
 
 //! { note } - Y axis is reversed of natural expectation in P5.js
-export const WikiverseSketch: FC<WikiverseProps> = ({ initialQueryResponse, setWikiverseSketchData, setSelectedVertex, setHoveredVertex, setP5SketchRef, sessionSettingsState }) => {
+export const WikiverseSketch: FC<WikiverseProps> = ({ initialQueryResponse, setWikiverseGraphset, setSelectedVertex, setHoveredVertex, setP5SketchRef, sessionSettingsState }) => {
 
   const sketch: Sketch = (p5) => { //SketchManager contains a lionshare of the p5 sketch specific details
-    const SK = new SketchManager({ p5, initialQueryResponse, setWikiverseSketchData, setSelectedVertex, setHoveredVertex, setP5SketchRef, sessionSettingsState })
+    const SK = new SketchManager({ p5, initialQueryResponse, setWikiverseGraphset, setSelectedVertex, setHoveredVertex, setP5SketchRef, sessionSettingsState })
 
     //*/=> SETUP...
     p5.preload = () => { SK.preloadFont() }
@@ -49,7 +52,7 @@ export const WikiverseSketch: FC<WikiverseProps> = ({ initialQueryResponse, setW
       }
       // New Selection Made...
       SK.handleClickTargetValid(mouseTarget);
-      if (SK.clickTargetIsOrigin(mouseTarget)) return;
+      
     };
 
     //*/=> HOVER...
@@ -72,6 +75,7 @@ export const WikiverseSketch: FC<WikiverseProps> = ({ initialQueryResponse, setW
       switch (p5.key) {
         case '?':
           console.log(SK.sketchDataCoordsSummary());
+          console.log('SketchData@', SK.data);
           break;
         case ',':
         case '<':
