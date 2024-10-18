@@ -3,7 +3,6 @@ export type { RequestPayload } from './_RequestPayload'
 export type { Dimensions } from './_Dimensions';
 
 export type { RequestResponse } from './_RequestResponse';
-export type { SketchData } from './_SketchData'
 export type { SessionSettingsState } from './_SessionSettingsState'
 
 export { INPUT_STATE } from './_InputState';
