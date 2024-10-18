@@ -1,16 +1,17 @@
-import './SketchDataDebugSummary.css'
+import './GraphsetDetailsSummary.css'
 import React, { createRef, useEffect, useState } from 'react';
 
-import { SessionSettingsState, SketchData } from '../../interfaces';
-import { SketchManager } from '../../models';
+import { SessionSettingsState, } from '../../interfaces';
+import { SketchManager } from '../../models/SketchManager';
+import { iGraphset } from '../../models/Graphset';
 
-interface SketchDataDebugProps {
+interface GraphsetDetailsSummaryProps {
   sessionSettingsState: SessionSettingsState;
-  wikiverseSketchData: SketchData | null,
+  wikiverseGraphset: iGraphset | null,
   p5SketchRef: SketchManager | null;
 }
 
-export const SketchDataDebugSummary: React.FC<SketchDataDebugProps> = ({ wikiverseSketchData, p5SketchRef, sessionSettingsState }) => {
+export const GraphsetDetailsSummary: React.FC<GraphsetDetailsSummaryProps> = ({ wikiverseGraphset, p5SketchRef, sessionSettingsState }) => {
   const { showDebugDetails } = sessionSettingsState;
   const [curCamLookAt, setCurCamLookAt] = useState({ x: 0, y: 0, z: 0 });
   const [curCamPos, setCurCamPos] = useState({ x: 0, y: 0, z: 0 });
@@ -34,9 +35,9 @@ export const SketchDataDebugSummary: React.FC<SketchDataDebugProps> = ({ wikiver
         z: Math.round((p5SketchRef?.CAM().cam?.eyeZ ?? 0))
       });
 
-      setVertCount(wikiverseSketchData?.vertices?.length ?? 0)
-      setEdgeCount(wikiverseSketchData?.edges?.length ?? 0)
-      setPropCount(wikiverseSketchData?.properties?.length ?? 0)
+      setVertCount(wikiverseGraphset?.vertices?.length ?? 0)
+      setEdgeCount(wikiverseGraphset?.edges?.length ?? 0)
+      setPropCount(wikiverseGraphset?.properties?.length ?? 0)
     };
 
     updateCameraValues();
@@ -44,7 +45,7 @@ export const SketchDataDebugSummary: React.FC<SketchDataDebugProps> = ({ wikiver
     const intervalId = setInterval(updateCameraValues, 100); // Update every 100ms
 
     return () => clearInterval(intervalId); // Cleanup interval on component unmount
-  }, [wikiverseSketchData, p5SketchRef]);
+  }, [wikiverseGraphset, p5SketchRef]);
 
   useEffect(() => {
     if (!debugRef.current) return;
