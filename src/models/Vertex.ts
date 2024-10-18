@@ -6,7 +6,7 @@ import { Graphset } from "./Graphset";
 
 export interface iVertex {
   id: string;
-  label: string;
+  label: string | null;
   description: string | null;
   coords: iPoint3D;
   fetched: boolean;
@@ -16,7 +16,7 @@ export interface iVertex {
 
 export class Vertex implements iVertex {
   id: string;
-  label: string;
+  label: string | null;
   description: string | null;
   coords: Point3D;
   radius: number = 20;
@@ -114,12 +114,15 @@ export class Vertex implements iVertex {
    * @see URL is a guess, Wikidata Entities do not always have article representations.
    */
   url() {
-    // TODO back to fix
-    const wikidataUrl = /^P/.test(this.id) ?
-      `https://www.wikidata.org/wiki/Property:${this.id}` :
-      `https://en.wikipedia.org/wiki/${this.label.replace(" ", "_")}`;
-    return wikidataUrl
+    const wdBaseURL = 'https://www.wikidata.org/wiki/';
+    const enWikiBaseURL = 'https://en.wikipedia.org/wiki/';
+    if (this.label != null) {
+      return enWikiBaseURL + this.label.replace(" ", "_")
+    };
+    return /^P/.test(this.id) ?
+      wdBaseURL + `Property:${this.id}` : wdBaseURL + this.id;
   }
+
 
   /**
    * @return an object containing the rounded { @x , @y , @z } coords 
@@ -129,14 +132,14 @@ export class Vertex implements iVertex {
   }
 
   /**
- * Determines if there is a parallel edge for a given vertex and edge in a list of edges.
- * A parallel edge exists if there is another edge with the same source and target ids but flipped.
- * 
- * @param {iVertex} vert2 - The vertex to check against.
- * @param {iEdge} edge - The edge to compare.
- * @param {iEdge[]} edgesToDraw - The list of all edges.
- * @return {Edge[]} - Returns an array of paralell edges, if there are any.
- */
+  * Determines if there is a parallel edge for a given vertex and edge in a list of edges.
+  * A parallel edge exists if there is another edge with the same source and target ids but flipped.
+  * 
+  * @param {iVertex} vert2 - The vertex to check against.
+  * @param {iEdge} edge - The edge to compare.
+  * @param {iEdge[]} edgesToDraw - The list of all edges.
+  * @return {Edge[]} - Returns an array of paralell edges, if there are any.
+  */
   parallelEdges(vert2: iVertex, edge: iEdge, edgesToDraw: iEdge[]): Edge[] {
     const isTarget = edge.tgtId === vert2.id; //determine which is which src||tgt
 

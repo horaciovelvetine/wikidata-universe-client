@@ -4,17 +4,17 @@ import { Dispatch, SetStateAction } from "react";
 import { Camera, Font } from "p5";
 import { P5CanvasInstance } from "@p5-wrapper/react";
 
-import { RequestPayload, RequestResponse, SessionSettingsState } from "../interfaces";
+import { RequestResponse, SessionSettingsState } from "../interfaces";
 import { traceRay } from "../utils";
 import { postRelatedDataQueue } from "../api";
 import { CameraManager, } from "./CameraManager";
-import { iGraphset } from "./Graphset";
+import { Graphset, iGraphset } from "./Graphset";
 import { Vertex } from "./Vertex";
 import { UIManager } from "./UIManager";
 
 interface CoordsSummary {
   id: string,
-  label: string,
+  label: string | null,
   x: number,
   y: number,
   z: number
@@ -47,9 +47,8 @@ export class SketchManager {
   showUnfetchedVertex: boolean;
 
   //*/=> DATA STATE
-  originVertex: Vertex | null = null;
   originalQuery: string;
-  data: RequestPayload;
+  graph: Graphset;
   selectedVertex: Vertex | null = null;
   hoveredVertex: Vertex | null = null;
 
@@ -71,10 +70,9 @@ export class SketchManager {
     this.showUnfetchedVertex = sessionSettingsState.showUnfetchedVertices
 
     // DATA STATE
-    this.data = initialQueryResponse!.data;
 
-    this.originalQuery = this.data.query; //TODO clickToFetchRelated()
-    // this.originVertex = this.getOriginVertex();
+    this.graph = new Graphset(initialQueryResponse!.data);
+    this.originalQuery = initialQueryResponse!.data.query;
 
     this.selectedVertex = null;  //new Vertex(this.originVertex);
     this.setReactSelVert(this.selectedVertex);
@@ -159,10 +157,10 @@ export class SketchManager {
   async initPostRelatedDataRequest() {
     this.setReactIsLoading(true); //==> in-case were here on reload.
 
-    await postRelatedDataQueue(this.data)
+    await postRelatedDataQueue({ query: this.originalQuery, ...this.graph })
       .then(response => {
-        this.data = response.data;
-        this.setReactGraphset(this.data)
+        this.graph = new Graphset(response.data);
+        this.setReactGraphset(this.graph)
       }).catch(e => {
         console.error(e);
         debugger;
@@ -175,7 +173,7 @@ export class SketchManager {
     * @method drawUI - Draws the UI elements.
    */
   drawUI() {
-    this.uiMngr.draw(this.data);
+    this.uiMngr.draw(this.graph);
   }
 
   /**
@@ -208,7 +206,7 @@ export class SketchManager {
    * @method drawVertices - Draws all vertices in the sketch.
    */
   drawVertices() {
-    this.data.vertices.forEach(vData => {
+    this.graph.vertices.forEach(vData => {
       // console.log(vData)
       if (this.showUnfetchedVertex || vData.fetched != false) {
         new Vertex(vData).draw(this.p5, this.selectedVertex);
@@ -229,7 +227,7 @@ export class SketchManager {
    */
   mousePositionIsOnAVertex() {
     let mouseTarget: Vertex | null = null;
-    this.data.vertices.forEach(vert => {
+    this.graph.vertices.forEach(vert => {
       const checkVert = new Vertex(vert);
       if (traceRay(this.p5, this.cam!, checkVert)) {
         mouseTarget = checkVert;
@@ -269,7 +267,7 @@ export class SketchManager {
    * @method sketchDataCoordsSummary - Helper to print sketchData details to the console
    */
   sketchDataCoordsSummary(): CoordsSummary[] {
-    return this.data.vertices.map(vertex => ({
+    return this.graph.vertices.map(vertex => ({
       id: vertex.id,
       label: vertex.label,
       ...vertex.coords

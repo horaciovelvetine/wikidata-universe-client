@@ -1,7 +1,6 @@
 import { P5CanvasInstance } from "@p5-wrapper/react";
 import { SessionSettingsState } from "../interfaces";
-import { calcVertexSetMean, minMaxValuesInSet, MinMaxSet } from "../utils";
-import { iGraphset } from "./Graphset";
+import { Graphset, iGraphset, MinMaxSet } from "./Graphset";
 
 export const UI_BG = (opac: number = 1) => `rgba(1,1,14,${opac})`
 export const UI_FONT = (opac: number = 1) => `rgba(255,255,255, ${opac})`
@@ -26,8 +25,10 @@ export class UIManager {
     this.p5.background(UI_BG())
     this.p5.orbitControl(2, 2, 2); // sensitivity adjustments
 
-    const meanPnt = calcVertexSetMean(data.vertices);
-    const minMax = minMaxValuesInSet(data.vertices);
+    const graph = new Graphset(data);
+
+    const meanPnt = graph.calcVertexSetMean(data.vertices);
+    const minMax = graph.minMaxValuesInSet(data.vertices);
     this.p5.push();
     this.drawDimensionBoundingBox(); //! must call before translate...
     this.p5.translate(meanPnt.x, meanPnt.y, meanPnt.z)
