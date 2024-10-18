@@ -1,14 +1,14 @@
 //UNUSED UNFACTORED
-export { HorizonSiteTitle } from './_grave/HorizonSiteTitle';
+export { HorizonSiteTitle } from './ui/HorizonSiteTitle';
 
 
 //LIB COMPONENTS:
 export { GraphsetDetailsSummary } from './lib/GraphsetDetailsSummary'
-export { HoveredVertexDetailsDisplay } from './lib/HoveredVertexDetailsDisplay'
-export { InitializeQuerySessionInputMain } from './lib/InitializeQuerySessionInputMain'
-export { SessionSettings } from './lib/SessionSettingsMenu'
-export { SelectedVertexDetailsDisplay } from './lib/SelectedVertexDetailsDisplay'
-export { RelatedEdgesDetailsDisplay } from './lib/RelatedEdgesDetailsDisplay'
+export { HoveredVertexDetails } from './lib/HoveredVertexDetails'
+export { InitializeQuerySessionInput } from './lib/InitializeQuerySessionInput'
+export { SessionSettingsMenu } from './lib/SessionSettingsMenu'
+export { SelectedVertexDetails } from './lib/SelectedVertexDetails'
+export { RelatedEdgesDetails } from './lib/RelatedEdgesDetails'
 
 //UI:
 export { LoadingBar } from './ui/LoadingBar'
