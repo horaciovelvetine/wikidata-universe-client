@@ -3,8 +3,10 @@ import { Vertex as VertexIcon, VertexSel } from '../../assets/icons'
 
 import { createRef, FC, useEffect } from 'react';
 import { Vertex } from '../../models';
+import { SessionSettingsState } from '../../interfaces';
 
 interface SelectedVertexDetailsDisplayProps {
+  sessionSettingsState: SessionSettingsState;
   selectedVertex: Vertex | null;
 }
 
@@ -25,7 +27,8 @@ const toggleSelectedVertexIcon = (noSelIcon: HTMLElement, selIcon: HTMLElement, 
   }
 }
 
-export const SelectedVertexDetailsDisplay: FC<SelectedVertexDetailsDisplayProps> = ({ selectedVertex }) => {
+export const SelectedVertexDetailsDisplay: FC<SelectedVertexDetailsDisplayProps> = ({ sessionSettingsState, selectedVertex }) => {
+  const { activeQuerySession } = sessionSettingsState;
   const displayRef = createRef<HTMLDivElement>();
   const noneSelIconRef = createRef<HTMLImageElement>();
   const selIconRef = createRef<HTMLImageElement>();
@@ -39,15 +42,28 @@ export const SelectedVertexDetailsDisplay: FC<SelectedVertexDetailsDisplayProps>
     }
   }, [selectedVertex])
 
-  const label = selectedVertex ? (selectedVertex.label || selectedVertex.id) : 'no-selection';
+  useEffect(() => {
+    if (!displayRef.current) return;
+    // The scoot the bitch side ways protocol...
+    const transition = 'transform 500ms cubic-bezier(0.4, 0.0, 0.2, 1)';
+    displayRef.current.style.transition = transition;
+    if (activeQuerySession) {
+      displayRef.current.style.transform = 'translateX(0)';
+    } else {
+      displayRef.current.style.transform = 'translateX(-100%)';
+    }
+
+  }, [activeQuerySession])
+
+  const label = selectedVertex ? (selectedVertex.label || selectedVertex.id) : '';
   const coords = selectedVertex ? selectedVertex.coordsStr() : '';
   const desc = selectedVertex ? selectedVertex.description : '';
 
   return (
-    <div id={prfx('display')} ref={displayRef}>
+    <div id={prfx('display')} ref={displayRef} onWheel={(e) => { e.stopPropagation() }}>
       <div id={prfx('icon-cont')}>
-        <img id={prfx('none-selected-icon')} src={VertexIcon} ref={noneSelIconRef} />
         <img id={prfx('selected-icon')} src={VertexSel} ref={selIconRef} />
+        <img id={prfx('none-selected-icon')} src={VertexIcon} ref={noneSelIconRef} />
       </div>
       <div id={prfx('text-cont')} ref={textContRef}>
         <a id={prfx('label-link')} href={selectedVertex?.url()} target='_blank'>

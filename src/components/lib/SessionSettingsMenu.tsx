@@ -24,11 +24,11 @@ export const SessionSettings: FC<SessionSettingsProps> = ({ sessionSettingsState
   }, [showSettings])
 
   const allToggleSettings = [
-    { key: showDebugDetails, action: setShowDebugDetails, label: "Debug Details", shortcut: "," },
-    { key: showUnfetchedVertices, action: setShowUnfetchedVertices, label: "Unfetched Vertices", shortcut: "." },
-    { key: showMedianAxis, action: setShowMedianAxis, label: "Median Orientation Axis", shortcut: null },
-    { key: showMedianBoundBox, action: setShowMedianBoundBox, label: "Median Bounding Box", shortcut: null },
-    { key: showDimensionBoundBox, action: setShowDimensionBoundBox, label: "Dimension Bounding Box", shortcut: null }
+    { key: showDebugDetails, action: setShowDebugDetails, label: "Sketch Details", shortcut: "," },
+    { key: showUnfetchedVertices, action: setShowUnfetchedVertices, label: "Display Unfetched Verts", shortcut: "." },
+    { key: showMedianAxis, action: setShowMedianAxis, label: "Axis orientation", shortcut: null },
+    { key: showMedianBoundBox, action: setShowMedianBoundBox, label: "Bounding Box (median)", shortcut: null },
+    { key: showDimensionBoundBox, action: setShowDimensionBoundBox, label: "Bounding Box (dimensions)", shortcut: null }
   ]
 
   return (

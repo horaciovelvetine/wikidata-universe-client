@@ -87,8 +87,7 @@ export const InitializeQuerySessionInputMain: FC<InitializeQuerySessionInputMain
       </div >
 
       <div id={prfx('heading-cont')}>
-        <h1 id={prfx('title')} > explore
-          < a id={prfx('wm-homepage-link')} href={wikidataHomepage} target='_blank' > Wikipedia</a > graphically</h1 >
+        <h1 id={prfx('title')} >explore <a id={prfx('wm-homepage-link')} href={wikidataHomepage} target='_blank' >Wikipedia</a> graphically</h1>
       </div >
 
       <div id={prfx('form-cont')}>

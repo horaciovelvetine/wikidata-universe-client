@@ -3,10 +3,8 @@
   justify-self: start;
   align-items: center;
   grid-column: 1;
-  margin-left: 0.75rem;
-  margin-top: 0.5rem;
   border-radius: 0.5rem;
-  padding: 0.35rem 0.75rem;
+  padding-left: 0.5rem;
 }
 
 #hovered-vertex-display-cont {
@@ -16,7 +14,7 @@
 }
 
 #hovered-vertex-display-icon {
-  height: 3rem;
+  height: 2.25rem;
   padding-right: 0.5rem;
 }
 

@@ -1,29 +1,28 @@
 #selected-vertex-details-display {
   display: flex;
-  align-items: center;
+  align-self: flex-end;
   grid-column: 1;
   grid-row: 2;
-  margin-right: 1rem;
   border-radius: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 
 #selected-vertex-details-icon-cont {
-  display: inline-flex;
-  position: relative;
+  display: flex;
+  align-items: center;
 }
 
-#selected-vertex-details-none-selected-icon {
-  position: absolute;
-  left: 0.1;
-}
+#selected-vertex-details-none-selected-icon {}
 
-#selected-vertex-details-selected-icon {}
+#selected-vertex-details-selected-icon {
+  position: fixed;
+}
 
 #selected-vertex-details-text-cont {
   display: flex;
   flex-direction: column;
   align-items: baseline;
-  padding: 0.1rem 1rem;
+  padding-left: 0.5rem;
   border-radius: 0.5rem;
   text-shadow: 0px 1px 1px black;
 }
@@ -34,6 +33,9 @@
   display: inline-flex;
   align-items: baseline;
   text-shadow: 0px 1px 1px black;
+  overflow-y: auto;
+  scrollbar-color: rgba(var(--font), 25%) transparent;
+  transition: scrollbar-color 0.2s ease-in-out;
 }
 
 #selected-vertex-details-label {
@@ -60,7 +62,6 @@
   font-size: 1.3rem;
   color: rgba(var(--font), 0.4);
   display: inline-flex;
-  padding-left: 0.5rem;
   padding-right: 0.3rem;
   text-overflow: ellipsis;
   overflow: hidden;

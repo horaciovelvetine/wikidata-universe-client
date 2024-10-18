@@ -2,15 +2,16 @@
   position: absolute;
   display: grid;
   width: 100%;
-  z-index: 1000;
+  z-index: 1;
 }
 
 #session-settings-menu-container {
   display: none;
-  padding: 0.5rem 1rem;
+  padding: 0.35rem 1rem;
   justify-self: flex-end;
   border-radius: 0.5rem;
   margin-right: 1rem;
+  margin-top: 0.5rem;
   background-color: rgb(var(--font), 0.02);
   box-shadow: 0 0 2px rgba(var(--font), 0.07);
 }
@@ -22,7 +23,7 @@
 }
 
 #session-settings-toggle-label {
-  padding: 0.15rem;
+  padding: 0.2rem;
   padding-right: 2rem;
   color: rgb(var(--font), 0.5);
 }
@@ -35,7 +36,7 @@
 
 #session-settings-icon {
   height: 2.25rem;
-  margin: 0.65rem;
+  padding-right: 0.5rem;
   justify-self: flex-end;
 }
 

@@ -2,7 +2,7 @@ import './MainAppLayoutStyle.css'
 
 import React, { createRef, useEffect, useState, memo } from 'react';
 import { Dimensions, RequestResponse, SessionSettingsState, SketchData } from '../interfaces';
-import { Footer, VerticalSiteTitle, ApiOfflineNotice, SessionSettings, LoadingBar, HoveredVertexDetailsDisplay, InitializeQuerySessionInputMain, toggleElementOpacity } from '../components';
+import { Footer, VerticalSiteTitle, ApiOfflineNotice, SessionSettings, LoadingBar, HoveredVertexDetailsDisplay, InitializeQuerySessionInputMain, SketchDataDebugSummary, toggleElementOpacity } from '../components';
 
 import { BackgroundSketch } from '../components/p5/BackgroundSketch';
 import { WikiverseSketch } from '../components/p5/WikiverseSketch';
@@ -108,8 +108,9 @@ export const MainAppLayout: React.FC<MainAppLayoutProps> = ({ apiStatusResponse 
       <VerticalSiteTitle />
       <LoadingBar isLoading={isLoading} />
       <div id='query-sketch' style={{ width: containerDimensions.width, height: containerDimensions.height }}>
+
         <div id='sketch-overlay-top'>
-          <HoveredVertexDetailsDisplay {...{ hoveredVertex }} />
+          <HoveredVertexDetailsDisplay {...{ sessionSettingsState, hoveredVertex }} />
           <SessionSettings {...{ sessionSettingsState }} />
         </div>
 
@@ -118,8 +119,8 @@ export const MainAppLayout: React.FC<MainAppLayoutProps> = ({ apiStatusResponse 
         {activeQuerySession && <WikiverseSketchMemo {...{ initialQueryResponse, setWikiverseSketchData, setSelectedVertex, setHoveredVertex, setP5SketchRef, sessionSettingsState }} />}
 
         <div id='sketch-overlay-bot'>
-          {/* <SketchDataDebugSummary {...{ wikiverseSketchData, p5SketchRef }} /> */}
-          <SelectedVertexDetailsDisplay {...{ selectedVertex }} />
+          <SketchDataDebugSummary {...{ wikiverseSketchData, p5SketchRef, sessionSettingsState }} />
+          <SelectedVertexDetailsDisplay {...{ selectedVertex, sessionSettingsState }} />
         </div>
       </div>
       <div id='background-sketch' ref={bgSketchRef}>

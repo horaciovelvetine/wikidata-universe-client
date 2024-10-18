@@ -58,7 +58,7 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   overflow: clip;
-  background-color: rgb(var(--sketch-bg));
+  background-color: transparent;
   box-shadow: 0rem 0rem 2rem 1rem rgba(0, 0, 0, 0.22);
 }
 
@@ -68,24 +68,24 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   overflow: clip;
-  z-index: -2;
+  z-index: -3;
 }
 
 #sketch-overlay-top {
   position: absolute;
   display: grid;
-  grid-template-rows: auto;
+  grid-template-rows: 1fr;
   grid-template-columns: 1fr 1fr;
   top: 0%;
   width: 100%;
-  margin-top: 0.1rem;
+  margin-top: 0.5rem;
   background-color: transparent;
 }
 
 #sketch-overlay-bot {
   position: absolute;
   display: grid;
-  grid-template-rows: auto 6rem;
+  grid-template-rows: auto 10rem;
   grid-template-columns: 60% 40%;
   bottom: 0%;
   width: 100%;
