@@ -1,4 +1,4 @@
-import './InitializeQuerySessionInputMain.css'
+import './InitializeQuerySessionInput.css'
 import GlobeLogo from '../../assets/imgs/globe-outline-no-bg-white.svg'
 import { Search } from '../../assets/icons'
 
@@ -11,13 +11,13 @@ import { errorShakeInvalidElement, toggleElementOpacity, fadeElementAndRemoveDis
 const wikidataHomepage = 'https://www.wikidata.org/wiki/Wikidata:Main_Page';
 const prfx = (suffix: string) => { return 'init-query-session-' + suffix };
 
-interface InitializeQuerySessionInputMainProps {
+interface InitializeQuerySessionInputProps {
   sessionSettingsState: SessionSettingsState
   setInitialQueryResponse: Dispatch<SetStateAction<RequestResponse | null>>;
 }
 
-export const InitializeQuerySessionInputMain: FC<InitializeQuerySessionInputMainProps> = ({ sessionSettingsState, setInitialQueryResponse }) => {
-  const { setIsLoading, setActiveQuerySession } = sessionSettingsState;
+export const InitializeQuerySessionInput: FC<InitializeQuerySessionInputProps> = ({ sessionSettingsState, setInitialQueryResponse }) => {
+  const { setIsLoading, setActiveQuerySession, useOfflineData, apiOnline } = sessionSettingsState;
   const [localInput, setLocalInput] = useState<string>('');
   const [locInpValid, setLocInpValid] = useState<INPUT_STATE>(INPUT_STATE.PLACEHOLDER);
 
@@ -29,7 +29,11 @@ export const InitializeQuerySessionInputMain: FC<InitializeQuerySessionInputMain
   const curElRefs = () => { return { container: contRef.current!, invalidCont: invalidContRef.current!, submit: submitRef.current!, input: inputRef.current! } }
 
   useEffect(() => { // fade the element in on render...
-    toggleElementOpacity(contRef.current!, true, '400ms')
+    if (!useOfflineData && apiOnline) {
+      toggleElementOpacity(contRef.current!, true, '400ms')
+    } else if (!apiOnline) {
+      fadeElementAndRemoveDisplay(contRef.current!, '1ms')
+    }
   }, [])
 
   const submitInitQueryRequestHandler = async (e: FormEvent<HTMLFormElement>) => {

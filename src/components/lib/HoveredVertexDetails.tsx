@@ -1,12 +1,12 @@
-import './HoveredVertexDetailsDisplay.css'
+import './HoveredVertexDetails.css'
 import { Vertex as VertIcon } from '../../assets/icons';
 
 import React, { createRef, useEffect } from 'react';
 
-import { Vertex } from '../../models';
+import { Vertex } from '../../models/Vertex';
 import { toggleElementOpacity } from '../';
 
-interface HoveredVertexDetailsDisplayProps {
+interface HoveredVertexDetailsProps {
   hoveredVertex: Vertex | null;
 }
 
@@ -14,7 +14,7 @@ const prfx = (sufx: string) => {
   return 'hovered-vertex-' + sufx;
 }
 
-export const HoveredVertexDetailsDisplay: React.FC<HoveredVertexDetailsDisplayProps> = ({ hoveredVertex }) => {
+export const HoveredVertexDetails: React.FC<HoveredVertexDetailsProps> = ({ hoveredVertex }) => {
   const hoveredDetailsEleRef = createRef<HTMLDivElement>();
 
   useEffect(() => {

@@ -6,7 +6,7 @@ import { createRef, Dispatch, FC, SetStateAction, useEffect, } from 'react';
 import { SessionSettingsState } from '../../interfaces'
 import { toggleElementOpacity, toggleDisplayVisibility, changeFocusOpacity } from '..';
 
-interface SessionSettingsProps {
+interface SessionSettingsMenuProps {
   sessionSettingsState: SessionSettingsState;
 }
 
@@ -17,8 +17,15 @@ interface SessionSettingsToggleOptionProps {
   shortcut: string | null;
 }
 
-export const SessionSettings: FC<SessionSettingsProps> = ({ sessionSettingsState }) => {
-  const { showSettings, setShowSettings, showDebugDetails, setShowDebugDetails, showUnfetchedVertices, setShowUnfetchedVertices, showMedianAxis, setShowMedianAxis, showMedianBoundBox, setShowMedianBoundBox, showDimensionBoundBox, setShowDimensionBoundBox } = sessionSettingsState;
+export const SessionSettingsMenu: FC<SessionSettingsMenuProps> = ({ sessionSettingsState }) => {
+  const { showSettings, setShowSettings,
+    showDebugDetails, setShowDebugDetails,
+    showUnfetchedVertices, setShowUnfetchedVertices,
+    showMedianAxis, setShowMedianAxis,
+    showMedianBoundBox, setShowMedianBoundBox,
+    showDimensionBoundBox, setShowDimensionBoundBox,
+    useOfflineData, setUseOfflineData
+  } = sessionSettingsState;
 
   const menuContainerRef = createRef<HTMLDivElement>();
   const iconRef = createRef<HTMLImageElement>();
@@ -32,6 +39,7 @@ export const SessionSettings: FC<SessionSettingsProps> = ({ sessionSettingsState
   const allToggleSettings = [
     { key: showDebugDetails, action: setShowDebugDetails, label: "Sketch Details", shortcut: "," },
     { key: showUnfetchedVertices, action: setShowUnfetchedVertices, label: "Display Unfetched Verts", shortcut: "." },
+    { key: useOfflineData, action: setUseOfflineData, label: "Use Offline API data", shortcut: null },
     { key: showMedianAxis, action: setShowMedianAxis, label: "Axis orientation", shortcut: null },
     { key: showMedianBoundBox, action: setShowMedianBoundBox, label: "Bounding Box (median)", shortcut: null },
     { key: showDimensionBoundBox, action: setShowDimensionBoundBox, label: "Bounding Box (dimensions)", shortcut: null }

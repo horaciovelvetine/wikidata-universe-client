@@ -1,11 +1,11 @@
-import './SelectedVertexDetailsDisplay.css'
+import './SelectedVertexDetails.css'
 import { Vertex as VertexIcon, VertexSel } from '../../assets/icons'
 
 import { createRef, FC, useEffect } from 'react';
-import { Vertex } from '../../models';
 import { SessionSettingsState } from '../../interfaces';
+import { Vertex } from '../../models/Vertex';
 
-interface SelectedVertexDetailsDisplayProps {
+interface SelectedVertexDetailsProps {
   sessionSettingsState: SessionSettingsState;
   selectedVertex: Vertex | null;
 }
@@ -27,7 +27,7 @@ const toggleSelectedVertexIcon = (noSelIcon: HTMLElement, selIcon: HTMLElement, 
   }
 }
 
-export const SelectedVertexDetailsDisplay: FC<SelectedVertexDetailsDisplayProps> = ({ sessionSettingsState, selectedVertex }) => {
+export const SelectedVertexDetails: FC<SelectedVertexDetailsProps> = ({ sessionSettingsState, selectedVertex }) => {
   const { activeQuerySession } = sessionSettingsState;
   const displayRef = createRef<HTMLDivElement>();
   const noneSelIconRef = createRef<HTMLImageElement>();
