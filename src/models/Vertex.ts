@@ -1,8 +1,8 @@
 import { P5CanvasInstance, SketchProps } from "@p5-wrapper/react";
-import { SketchData } from "../interfaces";
 import { Camera, Font } from "p5";
 import { iPoint3D, Point3D } from "./Point3D";
 import { Edge, iEdge } from "./Edge";
+import { Graphset } from "./Graphset";
 
 export interface iVertex {
   id: string;
@@ -80,12 +80,12 @@ export class Vertex implements iVertex {
   /**
    * @method drawRelatedEdges() - draws any edge which mentions this Vertex (ingoing and outgoing) in the sketch
    */
-  drawRelatedEdges(p5: P5CanvasInstance, session: SketchData, isHov: boolean = false) {
-    const edgesToDraw = this.getRelatedEdges(session);
+  drawRelatedEdges(p5: P5CanvasInstance, graph: Graphset, isHov: boolean = false) {
+    const edgesToDraw = this.getRelatedEdges(graph);
     if (!edgesToDraw) return;
 
     edgesToDraw.forEach(edge => {
-      const vert2 = this.getAltVertex(session, edge)!;
+      const vert2 = this.getAltVertex(graph, edge)!;
       const isPara = this.parallelEdges(vert2, edge!, edgesToDraw)
       const { x, y, z } = this.coords;
       const { x: x2, y: y2, z: z2 } = vert2.coords;
@@ -96,6 +96,17 @@ export class Vertex implements iVertex {
       p5.pop();
     });
 
+  }
+
+  /**
+ * Gets a list of edges where this vertex's id is used (as either src || tgt), and excludes any edges which are missing some piece of the data.
+ * 
+ * @param {SketchData} session - Data structure containing the vertex, and to check against
+ * @return {Edge[]} - Returns an array of data complete edges.
+ */
+  getRelatedEdges(session: Graphset): Edge[] {
+
+    return [];
   }
 
   /**
@@ -115,27 +126,6 @@ export class Vertex implements iVertex {
    */
   xyz() {
     return { x: Math.round(this.coords.x), y: Math.round(this.coords.y), z: Math.round(this.coords.z) }
-  }
-
-  /**
-   * Gets a list of edges where this vertex's id is used (as either src || tgt), and excludes any edges which are missing some piece of the data.
-   * 
-   * @param {SketchData} session - Data structure containing the vertex, and to check against
-   * @return {Edge[]} - Returns an array of data complete edges.
-   */
-  getRelatedEdges(session: SketchData): Edge[] {
-    const mentionEdge = session.edges.filter(edge => (this.id == edge.srcId || this.id == edge.tgtId));
-    const fetchCompleteEdges = mentionEdge.filter(edge => {
-      const edObj = new Edge(edge);
-      // const { src, tgt } = edObj.getVertexEndpoints(session);
-      // edge is incomplete or unfetched, do not display
-      // if (tgt == undefined || src == undefined || !src.fetched || !tgt.fetched) return;
-      // return edge;
-    })
-
-    return fetchCompleteEdges.map(edgeData => {
-      return new Edge(edgeData)
-    })
   }
 
   /**
@@ -211,7 +201,7 @@ export class Vertex implements iVertex {
   /**
    * @return - The @Vertex object on the other end of the given @Edge 
    */
-  private getAltVertex(session: SketchData, edge: iEdge): Vertex | null {
+  private getAltVertex(session: Graphset, edge: iEdge): Vertex | null {
     const altVertexId = edge.srcId === this.id ? edge.tgtId : edge.srcId;
     const altVertexData = session.vertices.find(v => v.id === altVertexId);
 

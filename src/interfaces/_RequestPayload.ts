@@ -1,4 +1,7 @@
-import { Dimensions, iEdge, iProperty, iVertex } from ".";
+import { Dimensions } from ".";
+import { iVertex } from "../models/Vertex";
+import { iEdge } from "../models/Edge";
+import { iProperty } from "../models/Property";
 
 export interface RequestPayload {
   query: string;

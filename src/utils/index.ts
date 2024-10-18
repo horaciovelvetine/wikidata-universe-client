@@ -1,1 +1,0 @@
-export { sketchDataCoordsSummary } from './_sketchDataCoordsSummary'

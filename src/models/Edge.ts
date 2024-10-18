@@ -1,5 +1,5 @@
 import { SketchData } from "../interfaces";
-import { Vertex, Property } from ".";
+import { Vertex } from "./Vertex";
 
 export enum EDGE_DIR { INCOMING, OUTGOING, PARALLEL }
 

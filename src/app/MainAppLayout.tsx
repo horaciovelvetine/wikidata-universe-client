@@ -6,8 +6,9 @@ import { Footer, VerticalSiteTitle, ApiOfflineNotice, SessionSettings, LoadingBa
 
 import { BackgroundSketch } from '../components/p5/BackgroundSketch';
 import { WikiverseSketch } from '../components/p5/WikiverseSketch';
-import { Vertex, SketchManager } from '../models';
+import { Vertex } from '../models/Vertex';
 import { SelectedVertexDetailsDisplay } from '../components/lib/SelectedVertexDetailsDisplay';
+import { SketchManager } from '../models/SketchManager';
 
 interface MainAppLayoutProps {
   apiStatusResponse: RequestResponse

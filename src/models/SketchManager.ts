@@ -4,10 +4,13 @@ import { Dispatch, SetStateAction } from "react";
 import { Camera, Font } from "p5";
 import { P5CanvasInstance } from "@p5-wrapper/react";
 
-import { CameraManager, Vertex, UIManager } from ".";
-import { RequestPayload, RequestResponse, SessionSettingsState, SketchData } from "../interfaces";
+import { RequestPayload, RequestResponse, SessionSettingsState } from "../interfaces";
 import { traceRay } from "../p5/functions";
 import { postRelatedDataQueue } from "../api";
+import { CameraManager, } from "./CameraManager";
+import { Graphset } from "./Graphset";
+import { Vertex } from "./Vertex";
+import { UIManager } from "./UIManager";
 
 interface CoordsSummary {
   id: string,
@@ -20,7 +23,7 @@ interface CoordsSummary {
 interface SketchManagerProps {
   p5: P5CanvasInstance;
   initialQueryResponse: RequestResponse | null;
-  setWikiverseSketchData: Dispatch<SetStateAction<SketchData | null>>;
+  setWikiverseSketchData: Dispatch<SetStateAction<Graphset | null>>;
   setSelectedVertex: Dispatch<SetStateAction<Vertex | null>>;
   setHoveredVertex: Dispatch<SetStateAction<Vertex | null>>;
   setP5SketchRef: Dispatch<SetStateAction<SketchManager | null>>;
@@ -30,7 +33,7 @@ interface SketchManagerProps {
 
 export class SketchManager {
   //*/=> REACT STATE
-  setSketchData: Dispatch<SetStateAction<SketchData | null>>;
+  setSketchData: Dispatch<SetStateAction<Graphset | null>>;
   setSelectedVertex: Dispatch<SetStateAction<Vertex | null>>;
   setHoveredVertex: Dispatch<SetStateAction<Vertex | null>>;
   setIsLoading: Dispatch<SetStateAction<boolean>>;
@@ -44,7 +47,7 @@ export class SketchManager {
   showUnfetchedVertex: boolean;
 
   //*/=> DATA STATE
-  originVertex: Vertex
+  originVertex: Vertex | null = null;
   originalQuery: string;
   data: RequestPayload;
   selectedVertex: Vertex | null = null;
@@ -71,9 +74,9 @@ export class SketchManager {
     this.data = initialQueryResponse!.data;
 
     this.originalQuery = this.data.query; //TODO clickToFetchRelated()
-    this.originVertex = this.getOriginVertex();
+    // this.originVertex = this.getOriginVertex();
 
-    this.selectedVertex = new Vertex(this.originVertex);
+    this.selectedVertex = null;  //new Vertex(this.originVertex);
     this.setSelectedVertex(this.selectedVertex);
     setP5SketchRef(this);
   }
@@ -144,9 +147,8 @@ export class SketchManager {
     const aspectRatio = (this.p5.width / this.p5.height);
     const fovRad = (2 * this.p5.atan(this.p5.height / 2 / 800))
     this.p5.perspective(fovRad, aspectRatio, 1, 12000)
-    const { x, y, z } = this.originVertex.coords;
-    this.cam.setPosition(x, y, (z + 150)); // assumes origin is positioned @ (0,0,0)
-    this.cam.lookAt(x, (y + 50), z) // look slightly below vertex for init 'pan-up' effect
+    this.cam.setPosition(0, 0, (0 + 250)); // assumes origin is positioned @ (0,0,0)
+    this.cam.lookAt(0, (0 + 100), 0) // look slightly below vertex for init 'pan-up' effect
   }
 
   /**
@@ -275,7 +277,9 @@ export class SketchManager {
     return this.data.vertices.find(vertex => vertex.origin === true)!;
   }
 
-
+  /**
+   * @method sketchDataCoordsSummary - Helper to print sketchData details to the console
+   */
   sketchDataCoordsSummary(): CoordsSummary[] {
     return this.data.vertices.map(vertex => ({
       id: vertex.id,
