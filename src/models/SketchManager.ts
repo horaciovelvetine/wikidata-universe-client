@@ -5,10 +5,10 @@ import { Camera, Font } from "p5";
 import { P5CanvasInstance } from "@p5-wrapper/react";
 
 import { RequestPayload, RequestResponse, SessionSettingsState } from "../interfaces";
-import { traceRay } from "../p5/functions";
+import { traceRay } from "../utils";
 import { postRelatedDataQueue } from "../api";
 import { CameraManager, } from "./CameraManager";
-import { Graphset } from "./Graphset";
+import { iGraphset } from "./Graphset";
 import { Vertex } from "./Vertex";
 import { UIManager } from "./UIManager";
 
@@ -23,7 +23,7 @@ interface CoordsSummary {
 interface SketchManagerProps {
   p5: P5CanvasInstance;
   initialQueryResponse: RequestResponse | null;
-  setWikiverseSketchData: Dispatch<SetStateAction<Graphset | null>>;
+  setWikiverseGraphset: Dispatch<SetStateAction<iGraphset | null>>;
   setSelectedVertex: Dispatch<SetStateAction<Vertex | null>>;
   setHoveredVertex: Dispatch<SetStateAction<Vertex | null>>;
   setP5SketchRef: Dispatch<SetStateAction<SketchManager | null>>;
@@ -33,16 +33,16 @@ interface SketchManagerProps {
 
 export class SketchManager {
   //*/=> REACT STATE
-  setSketchData: Dispatch<SetStateAction<Graphset | null>>;
-  setSelectedVertex: Dispatch<SetStateAction<Vertex | null>>;
-  setHoveredVertex: Dispatch<SetStateAction<Vertex | null>>;
-  setIsLoading: Dispatch<SetStateAction<boolean>>;
+  setReactGraphset: Dispatch<SetStateAction<iGraphset | null>>;
+  setReactSelVert: Dispatch<SetStateAction<Vertex | null>>;
+  setReactHovVert: Dispatch<SetStateAction<Vertex | null>>;
+  setReactIsLoading: Dispatch<SetStateAction<boolean>>;
 
   //*/=> SKETCH STATE
   p5: P5CanvasInstance
-  wikiFont: Font | undefined; // called in preload... not actual undefined possible
+  wikiFont: Font | undefined;
   cam: Camera | undefined;
-  camMngr: CameraManager; // camera animation helper(s)
+  camMngr: CameraManager;
   uiMngr: UIManager;
   showUnfetchedVertex: boolean;
 
@@ -55,13 +55,13 @@ export class SketchManager {
 
 
   //*/=> CONSTRUCTOR
-  constructor({ p5, initialQueryResponse, setWikiverseSketchData, setSelectedVertex, setHoveredVertex, sessionSettingsState, setP5SketchRef }: SketchManagerProps) {
+  constructor({ p5, initialQueryResponse, setWikiverseGraphset, setSelectedVertex, setHoveredVertex, sessionSettingsState, setP5SketchRef }: SketchManagerProps) {
 
     // REACT STATE
-    this.setSketchData = setWikiverseSketchData;
-    this.setSelectedVertex = setSelectedVertex;
-    this.setHoveredVertex = setHoveredVertex;
-    this.setIsLoading = sessionSettingsState.setIsLoading;
+    this.setReactGraphset = setWikiverseGraphset;
+    this.setReactSelVert = setSelectedVertex;
+    this.setReactHovVert = setHoveredVertex;
+    this.setReactIsLoading = sessionSettingsState.setIsLoading;
 
 
     // SKETCH STATE
@@ -77,7 +77,7 @@ export class SketchManager {
     // this.originVertex = this.getOriginVertex();
 
     this.selectedVertex = null;  //new Vertex(this.originVertex);
-    this.setSelectedVertex(this.selectedVertex);
+    this.setReactSelVert(this.selectedVertex);
     setP5SketchRef(this);
   }
 
@@ -128,13 +128,7 @@ export class SketchManager {
     return { width: Math.round(window.innerWidth * 0.8), height: Math.round(window.innerHeight * 0.85) };
   }
 
-  /**
-   * @method advanceCanimations - Advances camera animations if in progress.
-   */
-  advanceCanimations() {
-    if (this.camMngr.animInProgress())
-      this.camMngr.advance()
-  }
+
 
   /**
    * @method initCameraManaged - Initializes the camera and sets it looking at the origin, with a FOV which has modified
@@ -152,20 +146,28 @@ export class SketchManager {
   }
 
   /**
+ * @method advanceCanimations - Advances camera animations if in progress.
+ */
+  advanceCanimations() {
+    if (this.camMngr.animInProgress())
+      this.camMngr.advance()
+  }
+
+  /**
    * @method initPostRelatedDataRequest - Fetches related data and updates the sketch data.
    */
   async initPostRelatedDataRequest() {
-    this.setIsLoading(true); //==> in-case were here on reload.
+    this.setReactIsLoading(true); //==> in-case were here on reload.
 
     await postRelatedDataQueue(this.data)
       .then(response => {
         this.data = response.data;
-        this.setSketchData(this.data)
+        this.setReactGraphset(this.data)
       }).catch(e => {
         console.error(e);
         debugger;
       }).finally(() => {
-        this.setIsLoading(false);
+        this.setReactIsLoading(false);
       });
   }
 
@@ -229,7 +231,7 @@ export class SketchManager {
     let mouseTarget: Vertex | null = null;
     this.data.vertices.forEach(vert => {
       const checkVert = new Vertex(vert);
-      if (checkVert.fetched == true && traceRay(this.p5, this.cam!, checkVert)) {
+      if (traceRay(this.p5, this.cam!, checkVert)) {
         mouseTarget = checkVert;
       }
     })
@@ -247,19 +249,12 @@ export class SketchManager {
    * @method handleClickTargetValid - Handles a valid click on a Vertex.
    */
   handleClickTargetValid(tgt: Vertex) {
-    if (tgt.fetched == false) return;
+    if (tgt == null) return;
     this.hoveredVertex = null;
-    this.setHoveredVertex(null);
+    this.setReactHovVert(null);
     this.selectedVertex = tgt;
-    this.setSelectedVertex(tgt);
+    this.setReactSelVert(tgt);
     this.camMngr.setTarget(tgt.coords) // animate camera to new targets coordinates
-  }
-
-  /**
-   * @method clickTargetIsOrigin - Checks if the clicked target vertex is the origin vertex.
-   */
-  clickTargetIsOrigin(tgt: Vertex) {
-    return tgt.origin;
   }
 
   /**
@@ -268,13 +263,6 @@ export class SketchManager {
   handleResize() {
     const { width, height } = this.calcInitLayoutDimensions();
     this.p5.resizeCanvas(width, height)
-  }
-
-  /**
-   * @method getOriginVertex - Finds the Vertex where .origin() == true
-   */
-  getOriginVertex() {
-    return this.data.vertices.find(vertex => vertex.origin === true)!;
   }
 
   /**

@@ -1,14 +1,12 @@
 import './MainAppLayoutStyle.css'
 
 import React, { createRef, useEffect, useState, memo } from 'react';
-import { Dimensions, RequestResponse, SessionSettingsState, SketchData } from '../interfaces';
-import { Footer, VerticalSiteTitle, ApiOfflineNotice, SessionSettings, LoadingBar, HoveredVertexDetailsDisplay, InitializeQuerySessionInputMain, SketchDataDebugSummary, toggleElementOpacity } from '../components';
+import { Dimensions, RequestResponse, SessionSettingsState } from '../interfaces';
+import { Footer, VerticalSiteTitle, ApiOfflineNotice, SessionSettings, LoadingBar, HoveredVertexDetailsDisplay, InitializeQuerySessionInputMain, GraphsetDetailsSummary, SelectedVertexDetailsDisplay, toggleElementOpacity, BackgroundSketch, WikiverseSketch } from '../components';
 
-import { BackgroundSketch } from '../components/p5/BackgroundSketch';
-import { WikiverseSketch } from '../components/p5/WikiverseSketch';
 import { Vertex } from '../models/Vertex';
-import { SelectedVertexDetailsDisplay } from '../components/lib/SelectedVertexDetailsDisplay';
 import { SketchManager } from '../models/SketchManager';
+import { iGraphset } from '../models/Graphset';
 
 interface MainAppLayoutProps {
   apiStatusResponse: RequestResponse
@@ -26,14 +24,6 @@ const calcInitLayoutDimensions = () => {
   return { width: Math.round(window.innerWidth * 0.8), height: Math.round(window.innerHeight * 0.85) };
 }
 
-/**
- * 
- *  ====================================
- *  MAIN APP FUNCTIONAL COMPONENT BEGINS
- *  MAIN APP FUNCTIONAL COMPONENT BEGINS
- *  ====================================
- * 
- */
 export const MainAppLayout: React.FC<MainAppLayoutProps> = ({ apiStatusResponse }) => {
   const apiOnline = apiStatusResponse.status == 200;
   const apiOffline = apiStatusResponse.status != 200;
@@ -64,7 +54,7 @@ export const MainAppLayout: React.FC<MainAppLayoutProps> = ({ apiStatusResponse 
   };
 
   // p5-Sketch Duplicative State
-  const [wikiverseSketchData, setWikiverseSketchData] = useState<SketchData | null>(null);
+  const [wikiverseGraphset, setWikiverseGraphset] = useState<iGraphset | null>(null);
   const [selectedVertex, setSelectedVertex] = useState<Vertex | null>(null);
   const [hoveredVertex, setHoveredVertex] = useState<Vertex | null>(null);
 
@@ -117,10 +107,10 @@ export const MainAppLayout: React.FC<MainAppLayoutProps> = ({ apiStatusResponse 
 
         {apiOffline && <ApiOfflineNotice {... { apiStatusResponse }} />}
         {apiOnline && <InitializeQuerySessionInputMain {...{ sessionSettingsState, setInitialQueryResponse }} />}
-        {activeQuerySession && <WikiverseSketchMemo {...{ initialQueryResponse, setWikiverseSketchData, setSelectedVertex, setHoveredVertex, setP5SketchRef, sessionSettingsState }} />}
+        {activeQuerySession && <WikiverseSketchMemo {...{ initialQueryResponse, setWikiverseGraphset, setSelectedVertex, setHoveredVertex, setP5SketchRef, sessionSettingsState }} />}
 
         <div id='sketch-overlay-bot'>
-          <SketchDataDebugSummary {...{ wikiverseSketchData, p5SketchRef, sessionSettingsState }} />
+          <GraphsetDetailsSummary {...{ wikiverseGraphset, p5SketchRef, sessionSettingsState }} />
           <SelectedVertexDetailsDisplay {...{ selectedVertex, sessionSettingsState }} />
         </div>
       </div>

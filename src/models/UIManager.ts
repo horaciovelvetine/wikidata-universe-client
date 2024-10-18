@@ -1,6 +1,7 @@
 import { P5CanvasInstance } from "@p5-wrapper/react";
-import { SessionSettingsState, SketchData } from "../interfaces";
-import { calcVertexSetMean, minMaxValuesInSet, MinMaxSet } from "../p5/functions";
+import { SessionSettingsState } from "../interfaces";
+import { calcVertexSetMean, minMaxValuesInSet, MinMaxSet } from "../utils";
+import { iGraphset } from "./Graphset";
 
 export const UI_BG = (opac: number = 1) => `rgba(1,1,14,${opac})`
 export const UI_FONT = (opac: number = 1) => `rgba(255,255,255, ${opac})`
@@ -21,7 +22,7 @@ export class UIManager {
   /**
    * @method draw() - Main call for all of the UI in the Session. Maitains state for what to display on-screen for a given frame to be able to draw elements of the sketch which are (potentially state dependant) constants.
    */
-  draw(data: SketchData) {
+  draw(data: iGraphset) {
     this.p5.background(UI_BG())
     this.p5.orbitControl(2, 2, 2); // sensitivity adjustments
 
