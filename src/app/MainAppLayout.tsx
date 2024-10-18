@@ -2,11 +2,13 @@ import './MainAppLayoutStyle.css'
 
 import React, { createRef, useEffect, useState, memo } from 'react';
 import { Dimensions, RequestResponse, SessionSettingsState } from '../interfaces';
-import { Footer, VerticalSiteTitle, ApiOfflineNotice, SessionSettings, LoadingBar, HoveredVertexDetailsDisplay, InitializeQuerySessionInputMain, GraphsetDetailsSummary, SelectedVertexDetailsDisplay, toggleElementOpacity, BackgroundSketch, WikiverseSketch } from '../components';
+import { Footer, VerticalSiteTitle, ApiOfflineNotice, SessionSettingsMenu, LoadingBar, HoveredVertexDetails, InitializeQuerySessionInput, GraphsetDetailsSummary, SelectedVertexDetails, toggleElementOpacity, BackgroundSketch, WikiverseSketch, RelatedEdgesDetails } from '../components';
 
 import { Vertex } from '../models/Vertex';
 import { SketchManager } from '../models/SketchManager';
 import { iGraphset } from '../models/Graphset';
+
+import OfflineRequestResponseBody from '../assets/data/client_request_1729218330942.json';
 
 interface MainAppLayoutProps {
   apiStatusResponse: RequestResponse
@@ -25,13 +27,13 @@ const calcInitLayoutDimensions = () => {
 }
 
 export const MainAppLayout: React.FC<MainAppLayoutProps> = ({ apiStatusResponse }) => {
-  const apiOnline = apiStatusResponse.status == 200;
-  const apiOffline = apiStatusResponse.status != 200;
   const bgSketchRef = createRef<HTMLDivElement>();
   const [containerDimensions, setContainerDimensions] = useState<Dimensions>(calcInitLayoutDimensions())
   const [initialQueryResponse, setInitialQueryResponse] = useState<RequestResponse | null>(null);
 
   // State-Settings:
+  const [apiOnline, setApiOnline] = useState(apiStatusResponse.status == 200)
+  const [useOfflineData, setUseOfflineData] = useState(false); // DEV...
   const [isLoading, setIsLoading] = useState(false);
   const [activeQuerySession, setActiveQuerySession] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
@@ -50,7 +52,9 @@ export const MainAppLayout: React.FC<MainAppLayoutProps> = ({ apiStatusResponse 
     showMedianAxis, setShowMedianAxis,
     showMedianBoundBox, setShowMedianBoundBox,
     showDimensionBoundBox, setShowDimensionBoundBox,
-    isLoading, setIsLoading
+    isLoading, setIsLoading,
+    useOfflineData, setUseOfflineData,
+    apiOnline, setApiOnline
   };
 
   // p5-Sketch Duplicative State
@@ -65,6 +69,14 @@ export const MainAppLayout: React.FC<MainAppLayoutProps> = ({ apiStatusResponse 
     window.addEventListener('resize', () => setContainerDimensions(calcInitLayoutDimensions()))
     return () => window.removeEventListener('resize', () => setContainerDimensions(calcInitLayoutDimensions()))
   }, [])
+
+  useEffect(() => {
+    if (useOfflineData) {
+      setActiveQuerySession(true)
+      setInitialQueryResponse({ status: 200, errMsg: '', data: OfflineRequestResponseBody });
+      setApiOnline(true)
+    }
+  }, [useOfflineData])
 
   useEffect(() => { // show the BG sketch when no initializeQueryResponse
     if (initialQueryResponse == null) {
@@ -101,17 +113,19 @@ export const MainAppLayout: React.FC<MainAppLayoutProps> = ({ apiStatusResponse 
       <div id='query-sketch' style={{ width: containerDimensions.width, height: containerDimensions.height }}>
 
         <div id='sketch-overlay-top'>
-          <HoveredVertexDetailsDisplay {...{ sessionSettingsState, hoveredVertex }} />
-          <SessionSettings {...{ sessionSettingsState }} />
+          <HoveredVertexDetails {...{ sessionSettingsState, hoveredVertex }} />
+          <SessionSettingsMenu {...{ sessionSettingsState }} />
         </div>
 
-        {apiOffline && <ApiOfflineNotice {... { apiStatusResponse }} />}
-        {apiOnline && <InitializeQuerySessionInputMain {...{ sessionSettingsState, setInitialQueryResponse }} />}
+        {!apiOnline && <ApiOfflineNotice {... { apiStatusResponse }} />}
+        <InitializeQuerySessionInput {...{ sessionSettingsState, setInitialQueryResponse }} />
+
         {activeQuerySession && <WikiverseSketchMemo {...{ initialQueryResponse, setWikiverseGraphset, setSelectedVertex, setHoveredVertex, setP5SketchRef, sessionSettingsState }} />}
 
         <div id='sketch-overlay-bot'>
+          <SelectedVertexDetails {...{ selectedVertex, sessionSettingsState }} />
           <GraphsetDetailsSummary {...{ wikiverseGraphset, p5SketchRef, sessionSettingsState }} />
-          <SelectedVertexDetailsDisplay {...{ selectedVertex, sessionSettingsState }} />
+          <RelatedEdgesDetails {...{ sessionSettingsState, selectedVertex }} />
         </div>
       </div>
       <div id='background-sketch' ref={bgSketchRef}>

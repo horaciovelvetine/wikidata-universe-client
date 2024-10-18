@@ -17,6 +17,7 @@ interface WikiverseProps {
 
 //! { note } - Y axis is reversed of natural expectation in P5.js
 export const WikiverseSketch: FC<WikiverseProps> = ({ initialQueryResponse, setWikiverseGraphset, setSelectedVertex, setHoveredVertex, setP5SketchRef, sessionSettingsState }) => {
+  const { useOfflineData } = sessionSettingsState;
 
   const sketch: Sketch = (p5) => { //SketchManager contains a lionshare of the p5 sketch specific details
     const SK = new SketchManager({ p5, initialQueryResponse, setWikiverseGraphset, setSelectedVertex, setHoveredVertex, setP5SketchRef, sessionSettingsState })
@@ -27,7 +28,9 @@ export const WikiverseSketch: FC<WikiverseProps> = ({ initialQueryResponse, setW
       SK.createCanvas()
       SK.setTextFont()
       SK.initCameraManaged();
-      SK.initPostRelatedDataRequest();
+      if (!useOfflineData) {
+        SK.initPostRelatedDataRequest();
+      }
     };
 
     //*/=> DRAW...
@@ -52,7 +55,7 @@ export const WikiverseSketch: FC<WikiverseProps> = ({ initialQueryResponse, setW
       }
       // New Selection Made...
       SK.handleClickTargetValid(mouseTarget);
-      
+
     };
 
     //*/=> HOVER...

@@ -17,4 +17,8 @@ export interface SessionSettingsState {
   setShowDimensionBoundBox: Dispatch<SetStateAction<boolean>>;
   isLoading: boolean;
   setIsLoading: Dispatch<SetStateAction<boolean>>;
+  useOfflineData: boolean;
+  setUseOfflineData: Dispatch<SetStateAction<boolean>>;
+  apiOnline: boolean;
+  setApiOnline: Dispatch<SetStateAction<boolean>>;
 }
