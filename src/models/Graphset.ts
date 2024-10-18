@@ -1,3 +1,4 @@
+import { Dimensions } from "../interfaces";
 import { iEdge } from "./Edge";
 import { iPoint3D } from "./Point3D";
 import { iProperty } from "./Property";
@@ -7,6 +8,7 @@ export interface iGraphset {
   vertices: iVertex[];
   properties: iProperty[];
   edges: iEdge[];
+  dimensions: Dimensions;
 }
 
 export interface MinMaxSet {
@@ -22,9 +24,17 @@ interface MinMax {
 }
 
 export class Graphset implements iGraphset {
-  vertices: iVertex[] = [];
-  properties: iProperty[] = [];
-  edges: iEdge[] = [];
+  vertices: iVertex[];
+  properties: iProperty[];
+  edges: iEdge[];
+  dimensions: Dimensions;
+
+  constructor(graph: iGraphset) {
+    this.vertices = graph.vertices;
+    this.edges = graph.edges;
+    this.properties = graph.properties;
+    this.dimensions = graph.dimensions;
+  }
 
   calcVertexSetMean(vertices: iVertex[]): iPoint3D {
     let x = 0, y = 0, z = 0;
