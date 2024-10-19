@@ -14,9 +14,7 @@
 
 #selected-vertex-details-none-selected-icon {}
 
-#selected-vertex-details-selected-icon {
-  position: fixed;
-}
+#selected-vertex-details-selected-icon {}
 
 #selected-vertex-details-text-cont {
   display: flex;
