@@ -7,7 +7,7 @@ export class CameraManager {
   cam: Camera | null;
   target: Point3D | null;
   currentKeyframe: number = 0;
-  duration: number = 120;
+  duration: number = 200;
 
   constructor(p5: P5CanvasInstance) {
     this.p5 = p5;

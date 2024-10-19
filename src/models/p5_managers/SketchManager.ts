@@ -159,20 +159,24 @@ export class SketchManager {
 
   /**
  * @method fetchClickTargetData - fetches the details related to the targeted (clicked) Vertex
- * //! HEREHEREHERE
- * //! HEREHEREHERE
- * //! HEREHEREHERE
- * //! HEREHEREHERE
- * //! HEREHEREHERE
- * //! HEREHEREHERE
- * //! HEREHEREHERE
  */
   async fetchClickTargetData(tgt: Vertex) {
     this.setReactIsLoading(true);
 
+    const initialCoords = this.graph.vertices.reduce((acc, vertex) => {
+      const { id, coords } = vertex;
+      acc[id] = coords;
+      return acc;
+    }, {} as { [key: string]: { x: number, y: number, z: number } });
+
     await postClickTargetData({ query: tgt.id, ...this.graph })
       .then(response => {
         this.graph = new Graphset(response.data);
+        this.graph.vertices.forEach(vert => {
+          if (initialCoords[vert.id]) {
+            vert.sketchCoords = initialCoords[vert.id];
+          }
+        });
         this.setReactGraphset(this.graph);
       })
       .catch(e => {
@@ -224,6 +228,8 @@ export class SketchManager {
       };
     })
   }
+
+  
   /**
    * @method stillHoveredLastVertex - Checks if the last hovered vertex is still hovered.
    */
