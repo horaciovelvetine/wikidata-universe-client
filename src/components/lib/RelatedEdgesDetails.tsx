@@ -2,11 +2,11 @@ import './RelatedEdgesDetails.css'
 import { createRef, FC } from 'react';
 
 import { Vertex } from '../../models';
-import { SessionSettingsState } from '../../app/MainAppLayout';
+import { MainAppLayoutSessionState } from '../../app/MainAppLayout';
 
 
 interface RelatedEdgesDetailsDisplayProps {
-  sessionSettingsState: SessionSettingsState;
+  sessionSettingsState: MainAppLayoutSessionState;
   selectedVertex: Vertex | null;
 }
 

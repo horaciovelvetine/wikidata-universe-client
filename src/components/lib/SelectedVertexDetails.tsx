@@ -3,10 +3,10 @@ import { VertexSel } from '../../assets/icons'
 
 import { createRef, FC, useEffect } from 'react';
 import { Vertex } from '../../models';
-import { SessionSettingsState } from '../../app/MainAppLayout';
+import { MainAppLayoutSessionState } from '../../app/MainAppLayout';
 
 interface SelectedVertexDetailsProps {
-  sessionSettingsState: SessionSettingsState;
+  sessionSettingsState: MainAppLayoutSessionState;
   selectedVertex: Vertex | null;
 }
 

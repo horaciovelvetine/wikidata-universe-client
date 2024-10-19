@@ -1,6 +1,6 @@
 import { P5CanvasInstance } from "@p5-wrapper/react";
 import { Graphset, iGraphset, MinMaxSet } from "../";
-import { SessionSettingsState } from "../../app/MainAppLayout";
+import { MainAppLayoutSessionState } from "../../app/MainAppLayout";
 
 export const UI_BG = (opac: number = 1) => `rgba(1,1,14,${opac})`
 export const UI_FONT = (opac: number = 1) => `rgba(255,255,255, ${opac})`
@@ -11,7 +11,7 @@ export class UIManager {
   showMedianBoundBox: boolean;
   showDimensionBoundBox: boolean;
 
-  constructor(p5: P5CanvasInstance, sessionSettings: SessionSettingsState) {
+  constructor(p5: P5CanvasInstance, sessionSettings: MainAppLayoutSessionState) {
     this.p5 = p5;
     this.showMedianAxis = sessionSettings.showMedianAxis;
     this.showMedianBoundBox = sessionSettings.showMedianBoundBox;

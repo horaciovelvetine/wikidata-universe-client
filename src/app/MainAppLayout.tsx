@@ -40,7 +40,7 @@ export const MainAppLayout: React.FC<MainAppLayoutProps> = ({ apiStatusResponse 
   const [showDimensionBoundBox, setShowDimensionBoundBox] = useState(false);
   const [p5SketchRef, setP5SketchRef] = useState<SketchManager | null>(null);
 
-  const sessionSettingsState: SessionSettingsState = {
+  const sessionSettingsState: MainAppLayoutSessionState = {
     showSettings, setShowSettings,
     activeQuerySession, setActiveQuerySession,
     showDebugDetails, setShowDebugDetails,
@@ -127,7 +127,7 @@ export const MainAppLayout: React.FC<MainAppLayoutProps> = ({ apiStatusResponse 
   );
 };
 
-export interface SessionSettingsState {
+export interface MainAppLayoutSessionState {
   showSettings: boolean;
   setShowSettings: Dispatch<SetStateAction<boolean>>;
   activeQuerySession: boolean;

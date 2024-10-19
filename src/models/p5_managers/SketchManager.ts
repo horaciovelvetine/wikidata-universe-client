@@ -7,7 +7,7 @@ import { P5CanvasInstance } from "@p5-wrapper/react";
 import { traceRay } from "../../utils";
 import { postClickTargetData, postRelatedDataQueue, RequestResponse } from "../../api";
 import { CameraManager, FetchManager, Graphset, iGraphset, UIManager, Vertex } from "..";
-import { SessionSettingsState } from "../../app/MainAppLayout";
+import { MainAppLayoutSessionState } from "../../app/MainAppLayout";
 
 interface CoordsSummary {
   id: string,
@@ -24,7 +24,7 @@ interface SketchManagerProps {
   setSelectedVertex: Dispatch<SetStateAction<Vertex | null>>;
   setHoveredVertex: Dispatch<SetStateAction<Vertex | null>>;
   setP5SketchRef: Dispatch<SetStateAction<SketchManager | null>>;
-  sessionSettingsState: SessionSettingsState;
+  sessionSettingsState: MainAppLayoutSessionState;
 }
 
 
@@ -159,13 +159,21 @@ export class SketchManager {
 
   /**
  * @method fetchClickTargetData - fetches the details related to the targeted (clicked) Vertex
+ * //! HEREHEREHERE
+ * //! HEREHEREHERE
+ * //! HEREHEREHERE
+ * //! HEREHEREHERE
+ * //! HEREHEREHERE
+ * //! HEREHEREHERE
+ * //! HEREHEREHERE
  */
   async fetchClickTargetData(tgt: Vertex) {
     this.setReactIsLoading(true);
 
     await postClickTargetData({ query: tgt.id, ...this.graph })
       .then(response => {
-        console.log(response);
+        this.graph = new Graphset(response.data);
+        this.setReactGraphset(this.graph);
       })
       .catch(e => {
         console.error(e);

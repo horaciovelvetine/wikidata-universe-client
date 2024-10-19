@@ -22,6 +22,7 @@ export { BackgroundSketch } from './p5/BackgroundSketch'
 
 //UTIL:
 export { edgeDirectionIcon } from './util/EdgeDirectionIcon'
+export { INPUT_STATE } from './util/InputState'
 
 //ANIMATION FUNCTIONS:
 export { errorShakeInvalidElement } from './animations/ErrorShakeInvalidElement'

@@ -4,15 +4,15 @@ import { Search } from '../../assets/icons'
 
 import { ChangeEvent, createRef, Dispatch, FC, FormEvent, SetStateAction, useEffect, useState } from 'react';
 
-import { getQueryData } from '../../api';
-import { INPUT_STATE, RequestResponse, SessionSettingsState } from '../../interfaces';
-import { errorShakeInvalidElement, toggleElementOpacity, fadeElementAndRemoveDisplay } from '../';
+import { getQueryData, RequestResponse } from '../../api';
+import { errorShakeInvalidElement, toggleElementOpacity, fadeElementAndRemoveDisplay, INPUT_STATE } from '../';
+import { MainAppLayoutSessionState } from '../../app/MainAppLayout';
 
 const wikidataHomepage = 'https://www.wikidata.org/wiki/Wikidata:Main_Page';
 const prfx = (suffix: string) => { return 'init-query-session-' + suffix };
 
 interface InitializeQuerySessionInputProps {
-  sessionSettingsState: SessionSettingsState
+  sessionSettingsState: MainAppLayoutSessionState
   setInitialQueryResponse: Dispatch<SetStateAction<RequestResponse | null>>;
 }
 

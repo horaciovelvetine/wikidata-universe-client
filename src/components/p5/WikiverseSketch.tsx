@@ -3,7 +3,7 @@ import { ReactP5Wrapper, Sketch } from '@p5-wrapper/react';
 
 import { iGraphset, SketchManager, Vertex } from '../../models';
 import { RequestResponse } from '../../api';
-import { SessionSettingsState } from '../../app/MainAppLayout';
+import { MainAppLayoutSessionState } from '../../app/MainAppLayout';
 
 
 interface WikiverseProps {
@@ -12,7 +12,7 @@ interface WikiverseProps {
   setSelectedVertex: Dispatch<SetStateAction<Vertex | null>>;
   setHoveredVertex: Dispatch<SetStateAction<Vertex | null>>;
   setP5SketchRef: Dispatch<SetStateAction<SketchManager | null>>; // to ref sketch details
-  sessionSettingsState: SessionSettingsState;
+  sessionSettingsState: MainAppLayoutSessionState;
 }
 
 //! { note } - Y axis is reversed of natural expectation in P5.js

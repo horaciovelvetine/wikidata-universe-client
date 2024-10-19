@@ -3,10 +3,10 @@ import React, { createRef, useEffect, useState } from 'react';
 
 import { SketchManager } from '../../models/p5_managers/SketchManager';
 import { iGraphset } from '../../models';
-import { SessionSettingsState } from '../../app/MainAppLayout';
+import { MainAppLayoutSessionState } from '../../app/MainAppLayout';
 
 interface GraphsetDetailsSummaryProps {
-  sessionSettingsState: SessionSettingsState;
+  sessionSettingsState: MainAppLayoutSessionState;
   wikiverseGraphset: iGraphset | null,
   p5SketchRef: SketchManager | null;
 }
