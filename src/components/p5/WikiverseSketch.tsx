@@ -78,7 +78,7 @@ export const WikiverseSketch: FC<WikiverseProps> = ({ initialQueryResponse, setW
       switch (p5.key) {
         case '?':
           console.log(SK.sketchDataCoordsSummary());
-          console.log('SketchData@', SK.data);
+          console.log('SketchData@', SK.graph);
           break;
         case ',':
         case '<':

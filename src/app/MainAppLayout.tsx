@@ -38,7 +38,6 @@ export const MainAppLayout: React.FC<MainAppLayoutProps> = ({ apiStatusResponse 
   const [activeQuerySession, setActiveQuerySession] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
   const [showDebugDetails, setShowDebugDetails] = useState(false);
-  const [showUnfetchedVertices, setShowUnfetchedVertices] = useState(false);
   const [showMedianAxis, setShowMedianAxis] = useState(false);
   const [showMedianBoundBox, setShowMedianBoundBox] = useState(false);
   const [showDimensionBoundBox, setShowDimensionBoundBox] = useState(false);
@@ -48,7 +47,6 @@ export const MainAppLayout: React.FC<MainAppLayoutProps> = ({ apiStatusResponse 
     showSettings, setShowSettings,
     activeQuerySession, setActiveQuerySession,
     showDebugDetails, setShowDebugDetails,
-    showUnfetchedVertices, setShowUnfetchedVertices,
     showMedianAxis, setShowMedianAxis,
     showMedianBoundBox, setShowMedianBoundBox,
     showDimensionBoundBox, setShowDimensionBoundBox,
@@ -100,11 +98,6 @@ export const MainAppLayout: React.FC<MainAppLayoutProps> = ({ apiStatusResponse 
     if (showSettings)
       p5SketchRef?.UI().toggleShowDimensionBoundBox()
   }, [showDimensionBoundBox])
-
-  useEffect(() => {
-    if (showSettings)
-      p5SketchRef?.toggleShowUnfetchedVertices()
-  }, [showUnfetchedVertices])
 
   return (
     <div id='wikiverse-main'>

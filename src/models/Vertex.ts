@@ -80,33 +80,24 @@ export class Vertex implements iVertex {
   /**
    * @method drawRelatedEdges() - draws any edge which mentions this Vertex (ingoing and outgoing) in the sketch
    */
-  drawRelatedEdges(p5: P5CanvasInstance, graph: Graphset, isHov: boolean = false) {
-    const edgesToDraw = this.getRelatedEdges(graph);
-    if (!edgesToDraw) return;
+  drawRelatedEdges(p5: P5CanvasInstance, graph: Graphset) {
+    const edgesToDraw = graph.getRelatedEdges(this);
+    if (edgesToDraw.length == 0) return;
 
     edgesToDraw.forEach(edge => {
       const vert2 = this.getAltVertex(graph, edge)!;
-      const isPara = this.parallelEdges(vert2, edge!, edgesToDraw)
-      const { x, y, z } = this.coords;
-      const { x: x2, y: y2, z: z2 } = vert2.coords;
+      if (vert2.fetched) {
+        const isPara = this.parallelEdges(vert2, edge!, edgesToDraw)
+        const { x, y, z } = this.coords;
+        const { x: x2, y: y2, z: z2 } = vert2.coords;
 
-      p5.push();
-      this.setEdgeStrokeColor(p5, edge!, isHov, (isPara.length > 0));
-      p5.line(x, y, z, x2, y2, z2);
-      p5.pop();
+        p5.push();
+        this.setEdgeStrokeColor(p5, edge!, true, (isPara.length > 0));
+        p5.line(x, y, z, x2, y2, z2);
+        p5.pop();
+      }
     });
 
-  }
-
-  /**
- * Gets a list of edges where this vertex's id is used (as either src || tgt), and excludes any edges which are missing some piece of the data.
- * 
- * @param {SketchData} session - Data structure containing the vertex, and to check against
- * @return {Edge[]} - Returns an array of data complete edges.
- */
-  getRelatedEdges(session: Graphset): Edge[] {
-
-    return [];
   }
 
   /**
@@ -116,11 +107,11 @@ export class Vertex implements iVertex {
   url() {
     const wdBaseURL = 'https://www.wikidata.org/wiki/';
     const enWikiBaseURL = 'https://en.wikipedia.org/wiki/';
-    if (this.label != null) {
-      return enWikiBaseURL + this.label.replace(" ", "_")
+    if (this.id != null) {
+      return /^P/.test(this.id) ?
+        wdBaseURL + `Property:${this.id}` : wdBaseURL + this.id;
     };
-    return /^P/.test(this.id) ?
-      wdBaseURL + `Property:${this.id}` : wdBaseURL + this.id;
+    return enWikiBaseURL + this.label?.replace(" ", "_")
   }
 
 

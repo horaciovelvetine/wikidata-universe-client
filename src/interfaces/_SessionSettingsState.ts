@@ -7,8 +7,6 @@ export interface SessionSettingsState {
   setActiveQuerySession: Dispatch<SetStateAction<boolean>>;
   showDebugDetails: boolean;
   setShowDebugDetails: Dispatch<SetStateAction<boolean>>;
-  showUnfetchedVertices: boolean;
-  setShowUnfetchedVertices: Dispatch<SetStateAction<boolean>>;
   showMedianAxis: boolean;
   setShowMedianAxis: Dispatch<SetStateAction<boolean>>;
   showMedianBoundBox: boolean;

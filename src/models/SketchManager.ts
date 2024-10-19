@@ -44,7 +44,6 @@ export class SketchManager {
   cam: Camera | undefined;
   camMngr: CameraManager;
   uiMngr: UIManager;
-  showUnfetchedVertex: boolean;
 
   //*/=> DATA STATE
   originalQuery: string;
@@ -67,7 +66,6 @@ export class SketchManager {
     this.p5 = p5;
     this.camMngr = new CameraManager(p5);
     this.uiMngr = new UIManager(p5, sessionSettingsState);
-    this.showUnfetchedVertex = sessionSettingsState.showUnfetchedVertices
 
     // DATA STATE
 
@@ -91,13 +89,6 @@ export class SketchManager {
    */
   CAM() {
     return this.camMngr;
-  }
-
-  /**
-   * @method toggleShowUnfetchedVertices() - Used as an external hatch to toggle the current value for showUnfetchedVertex being used when drawing the P5.js sketch itself. 
-   */
-  toggleShowUnfetchedVertices() {
-    this.showUnfetchedVertex = !this.showUnfetchedVertex;
   }
 
   /**
@@ -138,9 +129,10 @@ export class SketchManager {
     // setup cam frustum w/ closer min & further max render distances 
     const aspectRatio = (this.p5.width / this.p5.height);
     const fovRad = (2 * this.p5.atan(this.p5.height / 2 / 800))
+    const { x, y, z } = this.graph.getOriginVertex().xyz();
     this.p5.perspective(fovRad, aspectRatio, 1, 12000)
-    this.cam.setPosition(0, 0, (0 + 250)); // assumes origin is positioned @ (0,0,0)
-    this.cam.lookAt(0, (0 + 100), 0) // look slightly below vertex for init 'pan-up' effect
+    this.cam.setPosition(x, y, (z + 200)); // assumes origin is positioned @ (0,0,0)
+    this.cam.lookAt(z, (y + 100), z) // look slightly below vertex for init 'pan-up' effect
   }
 
   /**
@@ -182,11 +174,9 @@ export class SketchManager {
    */
   drawSelectedDetails() {
     if (this.selectedVertex == null) return;
-    if (this.cam == undefined) return;
-    if (this.wikiFont == undefined) return;
     if (this.selectedVertex.fetched == false) return;
-    this.selectedVertex.drawLabel(this.p5, this.cam, this.wikiFont)
-    // this.selectedVertex.drawRelatedEdges(this.p5, this.data, true)
+    this.selectedVertex.drawLabel(this.p5, this.cam!, this.wikiFont!)
+    this.selectedVertex.drawRelatedEdges(this.p5, this.graph)
   }
 
   /**
@@ -195,11 +185,9 @@ export class SketchManager {
    */
   drawHoveredDetails() {
     if (this.hoveredVertex == null) return;
-    if (this.cam == undefined) return;
-    if (this.wikiFont == undefined) return;
     if (this.hoveredVertex.fetched == false) return;
-    this.hoveredVertex.drawLabel(this.p5, this.cam, this.wikiFont)
-    // this.hoveredVertex.drawRelatedEdges(this.p5, this.data, true)
+    this.hoveredVertex.drawLabel(this.p5, this.cam!, this.wikiFont!)
+    this.hoveredVertex.drawRelatedEdges(this.p5, this.graph)
   }
 
   /**
@@ -207,8 +195,7 @@ export class SketchManager {
    */
   drawVertices() {
     this.graph.vertices.forEach(vData => {
-      // console.log(vData)
-      if (this.showUnfetchedVertex || vData.fetched != false) {
+      if (vData.fetched != false) {
         new Vertex(vData).draw(this.p5, this.selectedVertex);
       };
     })
@@ -232,6 +219,7 @@ export class SketchManager {
       if (traceRay(this.p5, this.cam!, checkVert)) {
         mouseTarget = checkVert;
       }
+
     })
     return mouseTarget;
   }
