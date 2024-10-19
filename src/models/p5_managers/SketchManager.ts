@@ -5,7 +5,7 @@ import { Camera, Font } from "p5";
 import { P5CanvasInstance } from "@p5-wrapper/react";
 
 import { traceRay } from "../../utils";
-import { postRelatedDataQueue, RequestResponse } from "../../api";
+import { postClickTargetData, postRelatedDataQueue, RequestResponse } from "../../api";
 import { CameraManager, FetchManager, Graphset, iGraphset, UIManager, Vertex } from "..";
 import { SessionSettingsState } from "../../app/MainAppLayout";
 
@@ -163,20 +163,17 @@ export class SketchManager {
   async fetchClickTargetData(tgt: Vertex) {
     this.setReactIsLoading(true);
 
-    //!TODO HERE YOU JABRONI
-    //!TODO HERE YOU JABRONI
-    //!TODO HERE YOU JABRONI
-    //!TODO HERE YOU JABRONI
-    //!TODO HERE YOU JABRONI
-    //!TODO HERE YOU JABRONI
-    //!TODO HERE YOU JABRONI
-    //!TODO HERE YOU JABRONI
-    //!TODO HERE YOU JABRONI
-    //!TODO HERE YOU JABRONI
-    //!TODO HERE YOU JABRONI
-    //!TODO HERE YOU JABRONI
-    //!TODO HERE YOU JABRONI
-
+    await postClickTargetData({ query: tgt.id, ...this.graph })
+      .then(response => {
+        console.log(response);
+      })
+      .catch(e => {
+        console.error(e);
+        debugger;
+      })
+      .finally(() => {
+        this.setReactIsLoading(false);
+      });
   }
 
 
