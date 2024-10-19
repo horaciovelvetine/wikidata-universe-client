@@ -1,8 +1,8 @@
 import { Dimensions } from "../interfaces";
-import { iEdge } from "./Edge";
+import { Edge, iEdge } from "./Edge";
 import { iPoint3D } from "./Point3D";
 import { iProperty } from "./Property";
-import { iVertex } from "./Vertex";
+import { iVertex, Vertex } from "./Vertex";
 
 export interface iGraphset {
   vertices: iVertex[];
@@ -65,5 +65,21 @@ export class Graphset implements iGraphset {
     return {
       x: { min: xMin, max: xMax, diff: xDiff }, y: { min: yMin, max: yMax, diff: yDiff }, z: { min: zMin, max: zMax, diff: zDiff }
     }
+  }
+
+  getRelatedEdges(vertex: Vertex): Edge[] {
+    return this.edges.filter(edge => {
+      const isSrcMatch = edge.srcId === vertex.id;
+      const isTgtMatch = edge.tgtId === vertex.id;
+      const isLabelMatch = edge.label === vertex.label;
+      return (isSrcMatch || isTgtMatch || isLabelMatch);
+    }).map(ed => {
+      return new Edge(ed);
+    });
+  }
+
+  getOriginVertex(): Vertex {
+    const originVertex = this.vertices.find(vertex => vertex.origin === true);
+    return new Vertex(originVertex!);
   }
 }
