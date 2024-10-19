@@ -8,7 +8,9 @@ export interface iVertex {
   id: string;
   label: string | null;
   description: string | null;
+  radius: number;
   coords: iPoint3D;
+  sketchCoords: Point3D | null;
   fetched: boolean;
   origin: boolean;
   locked: boolean;
@@ -18,8 +20,9 @@ export class Vertex implements iVertex {
   id: string;
   label: string | null;
   description: string | null;
+  radius: number;
   coords: Point3D;
-  radius: number = 20;
+  sketchCoords: Point3D | null = null; // cx side only 
   fetched: boolean;
   origin: boolean;
   locked: boolean;
@@ -28,6 +31,7 @@ export class Vertex implements iVertex {
     this.id = vertex.id;
     this.label = vertex.label;
     this.description = vertex.description;
+    this.radius = vertex.radius;
     this.coords = vertex.coords;
     this.fetched = vertex.fetched;
     this.origin = vertex.origin;
@@ -45,8 +49,9 @@ export class Vertex implements iVertex {
    * @method draw() - draws an in-sketch representation of the Vertex
    */
   draw(p5: P5CanvasInstance, curSelectedVert: Vertex | null) {
+    const { x, y, z } = this.sketchCoords ?? this.coords;
     p5.push();
-    p5.translate(this.coords.x, this.coords.y, this.coords.z);
+    p5.translate(x, y, z);
     p5.strokeWeight(1.2);
     p5.stroke(1, 1, 14);
     if (curSelectedVert?.id == this.id) {
