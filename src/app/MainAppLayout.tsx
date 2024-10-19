@@ -4,11 +4,8 @@ import React, { createRef, useEffect, useState, memo } from 'react';
 import { Dimensions, RequestResponse, SessionSettingsState } from '../interfaces';
 import { Footer, VerticalSiteTitle, ApiOfflineNotice, SessionSettingsMenu, LoadingBar, HoveredVertexDetails, InitializeQuerySessionInput, GraphsetDetailsSummary, SelectedVertexDetails, toggleElementOpacity, BackgroundSketch, WikiverseSketch, RelatedEdgesDetails } from '../components';
 
-import { Vertex } from '../models/Vertex';
-import { SketchManager } from '../models/SketchManager';
-import { iGraphset } from '../models/Graphset';
-
 import OfflineRequestResponseBody from '../assets/data/client_request_1729218330942.json';
+import { iGraphset, SketchManager, Vertex } from '../models';
 
 interface MainAppLayoutProps {
   apiStatusResponse: RequestResponse

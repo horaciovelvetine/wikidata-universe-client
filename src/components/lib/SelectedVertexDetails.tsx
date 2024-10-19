@@ -3,7 +3,7 @@ import { VertexSel } from '../../assets/icons'
 
 import { createRef, FC, useEffect } from 'react';
 import { SessionSettingsState } from '../../interfaces';
-import { Vertex } from '../../models/Vertex';
+import { Vertex } from '../../models';
 
 interface SelectedVertexDetailsProps {
   sessionSettingsState: SessionSettingsState;

@@ -2,9 +2,8 @@ import { Dispatch, FC, SetStateAction } from 'react';
 import { ReactP5Wrapper, Sketch } from '@p5-wrapper/react';
 
 import { RequestResponse, SessionSettingsState } from '../../interfaces';
-import { Vertex } from '../../models/Vertex';
-import { SketchManager } from '../../models/SketchManager';
-import { iGraphset } from '../../models/Graphset';
+import { iGraphset, SketchManager, Vertex } from '../../models';
+
 
 interface WikiverseProps {
   initialQueryResponse: RequestResponse | null; // only used to determine re-renders
@@ -48,13 +47,14 @@ export const WikiverseSketch: FC<WikiverseProps> = ({ initialQueryResponse, setW
       if (mouseTarget == null) return;
 
       // Deselect...
-      if (SK.targetAlreadySelected(mouseTarget)) {
+      if (SK.targetIsAlreadyCurSelected(mouseTarget)) {
         SK.selectedVertex = null;
         setSelectedVertex(null);
         return
       }
       // New Selection Made...
       SK.handleClickTargetValid(mouseTarget);
+      SK.fetchClickTargetData(mouseTarget);
 
     };
 
@@ -62,7 +62,7 @@ export const WikiverseSketch: FC<WikiverseProps> = ({ initialQueryResponse, setW
     p5.mouseMoved = () => {
       if (SK.stillHoveredLastVertex()) return; // change nothing
       const mouseTarget = SK.mousePositionIsOnAVertex(); // Vertex || null;
-      if (SK.targetAlreadySelected(mouseTarget)) return; // already selected, don't hover
+      if (SK.targetIsAlreadyCurSelected(mouseTarget)) return; // already selected, don't hover
 
       SK.hoveredVertex = mouseTarget;
       setHoveredVertex(mouseTarget)
@@ -83,10 +83,6 @@ export const WikiverseSketch: FC<WikiverseProps> = ({ initialQueryResponse, setW
         case ',':
         case '<':
           sessionSettingsState.setShowDebugDetails(prev => !prev);
-          break;
-        case '.':
-        case '>':
-          sessionSettingsState.setShowUnfetchedVertices(prev => !prev);
           break;
         default:
           break;

@@ -1,7 +1,7 @@
 import './RelatedEdgesDetails.css'
 import { createRef, FC } from 'react';
 
-import { Vertex } from '../../models/Vertex';
+import { Vertex } from '../../models';
 import { SessionSettingsState } from '../../interfaces';
 
 interface RelatedEdgesDetailsDisplayProps {

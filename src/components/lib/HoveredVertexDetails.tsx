@@ -3,7 +3,7 @@ import { Vertex as VertIcon } from '../../assets/icons';
 
 import React, { createRef, useEffect } from 'react';
 
-import { Vertex } from '../../models/Vertex';
+import { Vertex } from '../../models';
 import { toggleElementOpacity } from '../';
 
 interface HoveredVertexDetailsProps {
