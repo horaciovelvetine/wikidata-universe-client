@@ -4,13 +4,10 @@ import { Dispatch, SetStateAction } from "react";
 import { Camera, Font } from "p5";
 import { P5CanvasInstance } from "@p5-wrapper/react";
 
-import { RequestResponse, SessionSettingsState } from "../interfaces";
-import { traceRay } from "../utils";
-import { postRelatedDataQueue } from "../api";
-import { CameraManager, } from "./CameraManager";
-import { Graphset, iGraphset } from "./Graphset";
-import { Vertex } from "./Vertex";
-import { UIManager } from "./UIManager";
+import { RequestResponse, SessionSettingsState } from "../../interfaces";
+import { traceRay } from "../../utils";
+import { postRelatedDataQueue } from "../../api";
+import { CameraManager, FetchManager, Graphset, iGraphset, UIManager, Vertex } from "..";
 
 interface CoordsSummary {
   id: string,
@@ -44,6 +41,7 @@ export class SketchManager {
   cam: Camera | undefined;
   camMngr: CameraManager;
   uiMngr: UIManager;
+  fetchMngr: FetchManager = new FetchManager();
 
   //*/=> DATA STATE
   originalQuery: string;
@@ -72,7 +70,7 @@ export class SketchManager {
     this.graph = new Graphset(initialQueryResponse!.data);
     this.originalQuery = initialQueryResponse!.data.query;
 
-    this.selectedVertex = null;  //new Vertex(this.originVertex);
+    this.selectedVertex = new Vertex(this.graph.getOriginVertex());
     this.setReactSelVert(this.selectedVertex);
     setP5SketchRef(this);
   }
@@ -224,9 +222,9 @@ export class SketchManager {
     return mouseTarget;
   }
   /**
-   * @method targetAlreadySelected - Checks if the target vertex is already selected.
+   * @method targetIsAlreadyCurSelected - Checks if the target vertex is already selected.
    */
-  targetAlreadySelected(tgt: Vertex | null) {
+  targetIsAlreadyCurSelected(tgt: Vertex | null) {
     if (tgt == null) return false;
     return tgt.id == this.selectedVertex?.id;
   }
@@ -235,12 +233,18 @@ export class SketchManager {
    * @method handleClickTargetValid - Handles a valid click on a Vertex.
    */
   handleClickTargetValid(tgt: Vertex) {
-    if (tgt == null) return;
     this.hoveredVertex = null;
     this.setReactHovVert(null);
     this.selectedVertex = tgt;
     this.setReactSelVert(tgt);
     this.camMngr.setTarget(tgt.coords) // animate camera to new targets coordinates
+  }
+
+  /**
+   * @method fetchClickTargetData - fetches the details related to the targeted (clicked) Vertex
+   */
+  async fetchClickTargetData(vert: Vertex) {
+
   }
 
   /**

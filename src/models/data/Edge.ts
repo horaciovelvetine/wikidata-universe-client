@@ -1,4 +1,4 @@
-import { Vertex } from "./Vertex";
+import { Vertex } from "..";
 
 export enum EDGE_DIR { INCOMING, OUTGOING, PARALLEL }
 
