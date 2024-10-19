@@ -1,11 +1,11 @@
 import './MainAppLayoutStyle.css'
 
-import React, { createRef, useEffect, useState, memo } from 'react';
-import { Dimensions, RequestResponse, SessionSettingsState } from '../interfaces';
+import React, { Dispatch, SetStateAction, createRef, useEffect, useState, memo } from 'react';
 import { Footer, VerticalSiteTitle, ApiOfflineNotice, SessionSettingsMenu, LoadingBar, HoveredVertexDetails, InitializeQuerySessionInput, GraphsetDetailsSummary, SelectedVertexDetails, toggleElementOpacity, BackgroundSketch, WikiverseSketch, RelatedEdgesDetails } from '../components';
 
 import OfflineRequestResponseBody from '../assets/data/client_request_1729218330942.json';
-import { iGraphset, SketchManager, Vertex } from '../models';
+import { Dimensions, iGraphset, SketchManager, Vertex } from '../models';
+import { RequestResponse } from '../api';
 
 interface MainAppLayoutProps {
   apiStatusResponse: RequestResponse
@@ -65,6 +65,7 @@ export const MainAppLayout: React.FC<MainAppLayoutProps> = ({ apiStatusResponse 
     return () => window.removeEventListener('resize', () => setContainerDimensions(calcInitLayoutDimensions()))
   }, [])
 
+  //? To allow modifying UI w/o spamming requests
   useEffect(() => {
     if (useOfflineData) {
       setActiveQuerySession(true)
@@ -125,3 +126,24 @@ export const MainAppLayout: React.FC<MainAppLayoutProps> = ({ apiStatusResponse 
     </div>
   );
 };
+
+export interface SessionSettingsState {
+  showSettings: boolean;
+  setShowSettings: Dispatch<SetStateAction<boolean>>;
+  activeQuerySession: boolean;
+  setActiveQuerySession: Dispatch<SetStateAction<boolean>>;
+  showDebugDetails: boolean;
+  setShowDebugDetails: Dispatch<SetStateAction<boolean>>;
+  showMedianAxis: boolean;
+  setShowMedianAxis: Dispatch<SetStateAction<boolean>>;
+  showMedianBoundBox: boolean;
+  setShowMedianBoundBox: Dispatch<SetStateAction<boolean>>;
+  showDimensionBoundBox: boolean;
+  setShowDimensionBoundBox: Dispatch<SetStateAction<boolean>>;
+  isLoading: boolean;
+  setIsLoading: Dispatch<SetStateAction<boolean>>;
+  useOfflineData: boolean;
+  setUseOfflineData: Dispatch<SetStateAction<boolean>>;
+  apiOnline: boolean;
+  setApiOnline: Dispatch<SetStateAction<boolean>>;
+}

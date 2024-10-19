@@ -1,9 +1,8 @@
 import axios from "axios";
-import { API_URL } from "./_ApiUrl";
-import { RequestResponse } from "../interfaces";
+import { RequestResponse, apiURL } from "..";
 
 export async function getQueryData(query: string): Promise<RequestResponse> {
-  return await axios.get(API_URL('query-data'), { params: { query } })
+  return await axios.get(apiURL('query-data'), { params: { query } })
     .then(res => {
       console.log("getQueryData()", res)
       return { status: res.status, data: res.data, errMsg: undefined };

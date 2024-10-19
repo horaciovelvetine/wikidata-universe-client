@@ -1,9 +1,8 @@
 import axios from "axios";
-import { API_URL } from "./_ApiUrl";
-import { RequestPayload, RequestResponse } from "../interfaces";
+import { apiURL, RequestPayload, RequestResponse } from "../";
 
 export async function postRelatedDataQueue(payload: RequestPayload): Promise<RequestResponse> {
-  return await axios.post(API_URL('fetch-related'), payload)
+  return await axios.post(apiURL('fetch-related'), payload)
     .then(res => {
       console.log("postRelatedDataQueue()", res)
       return { status: res.status, data: res.data, errMsg: undefined };

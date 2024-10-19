@@ -2,7 +2,8 @@ import './RelatedEdgesDetails.css'
 import { createRef, FC } from 'react';
 
 import { Vertex } from '../../models';
-import { SessionSettingsState } from '../../interfaces';
+import { SessionSettingsState } from '../../app/MainAppLayout';
+
 
 interface RelatedEdgesDetailsDisplayProps {
   sessionSettingsState: SessionSettingsState;
@@ -15,8 +16,8 @@ const prfx = (sufx: string) => {
 
 export const RelatedEdgesDetails: FC<RelatedEdgesDetailsDisplayProps> = ({ }) => {
   const displayRef = createRef<HTMLDivElement>();
-  
-  
+
+
   return (
     <div id={prfx('display')}>
     </div>

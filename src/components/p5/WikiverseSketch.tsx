@@ -1,8 +1,9 @@
 import { Dispatch, FC, SetStateAction } from 'react';
 import { ReactP5Wrapper, Sketch } from '@p5-wrapper/react';
 
-import { RequestResponse, SessionSettingsState } from '../../interfaces';
 import { iGraphset, SketchManager, Vertex } from '../../models';
+import { RequestResponse } from '../../api';
+import { SessionSettingsState } from '../../app/MainAppLayout';
 
 
 interface WikiverseProps {

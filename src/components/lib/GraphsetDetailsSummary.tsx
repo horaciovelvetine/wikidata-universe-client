@@ -1,9 +1,9 @@
 import './GraphsetDetailsSummary.css'
 import React, { createRef, useEffect, useState } from 'react';
 
-import { SessionSettingsState, } from '../../interfaces';
 import { SketchManager } from '../../models/p5_managers/SketchManager';
 import { iGraphset } from '../../models';
+import { SessionSettingsState } from '../../app/MainAppLayout';
 
 interface GraphsetDetailsSummaryProps {
   sessionSettingsState: SessionSettingsState;

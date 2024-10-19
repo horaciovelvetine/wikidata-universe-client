@@ -2,8 +2,8 @@ import './SelectedVertexDetails.css'
 import { VertexSel } from '../../assets/icons'
 
 import { createRef, FC, useEffect } from 'react';
-import { SessionSettingsState } from '../../interfaces';
 import { Vertex } from '../../models';
+import { SessionSettingsState } from '../../app/MainAppLayout';
 
 interface SelectedVertexDetailsProps {
   sessionSettingsState: SessionSettingsState;

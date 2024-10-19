@@ -1,13 +1,13 @@
-import CharisTTF from "../assets/font/CharisSIL-Regular.ttf";
+import CharisTTF from "../../assets/font/CharisSIL-Regular.ttf";
 
 import { Dispatch, SetStateAction } from "react";
 import { Camera, Font } from "p5";
 import { P5CanvasInstance } from "@p5-wrapper/react";
 
-import { RequestResponse, SessionSettingsState } from "../../interfaces";
 import { traceRay } from "../../utils";
-import { postRelatedDataQueue } from "../../api";
+import { postRelatedDataQueue, RequestResponse } from "../../api";
 import { CameraManager, FetchManager, Graphset, iGraphset, UIManager, Vertex } from "..";
+import { SessionSettingsState } from "../../app/MainAppLayout";
 
 interface CoordsSummary {
   id: string,
@@ -115,8 +115,6 @@ export class SketchManager {
     return { width: Math.round(window.innerWidth * 0.8), height: Math.round(window.innerHeight * 0.85) };
   }
 
-
-
   /**
    * @method initCameraManaged - Initializes the camera and sets it looking at the origin, with a FOV which has modified
    * the FRUSTUM (sp?) to allow the minRender & maxRender to be moved in & out.
@@ -158,6 +156,29 @@ export class SketchManager {
         this.setReactIsLoading(false);
       });
   }
+
+  /**
+ * @method fetchClickTargetData - fetches the details related to the targeted (clicked) Vertex
+ */
+  async fetchClickTargetData(tgt: Vertex) {
+    this.setReactIsLoading(true);
+
+    //!TODO HERE YOU JABRONI
+    //!TODO HERE YOU JABRONI
+    //!TODO HERE YOU JABRONI
+    //!TODO HERE YOU JABRONI
+    //!TODO HERE YOU JABRONI
+    //!TODO HERE YOU JABRONI
+    //!TODO HERE YOU JABRONI
+    //!TODO HERE YOU JABRONI
+    //!TODO HERE YOU JABRONI
+    //!TODO HERE YOU JABRONI
+    //!TODO HERE YOU JABRONI
+    //!TODO HERE YOU JABRONI
+    //!TODO HERE YOU JABRONI
+
+  }
+
 
   /**
     * @method drawUI - Draws the UI elements.
@@ -238,13 +259,6 @@ export class SketchManager {
     this.selectedVertex = tgt;
     this.setReactSelVert(tgt);
     this.camMngr.setTarget(tgt.coords) // animate camera to new targets coordinates
-  }
-
-  /**
-   * @method fetchClickTargetData - fetches the details related to the targeted (clicked) Vertex
-   */
-  async fetchClickTargetData(vert: Vertex) {
-
   }
 
   /**

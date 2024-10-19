@@ -1,4 +1,4 @@
-import { RequestPayload } from "./_RequestPayload";
+import { RequestPayload } from "./RequestPayload";
 
 export interface RequestResponse {
   status: number;
