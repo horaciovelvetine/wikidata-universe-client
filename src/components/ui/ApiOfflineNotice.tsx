@@ -3,9 +3,8 @@ import { Exclaims, Question } from "../../assets/icons";
 import GlobeLogo from '../../assets/imgs/globe-outline-no-bg-white.svg'
 
 import { createRef, useEffect } from "react";
-
-import { RequestResponse } from '../../interfaces';
 import { toggleElementOpacity } from '../';
+import { RequestResponse } from '../../api';
 
 interface ApiOfflineProps {
   apiStatusResponse: RequestResponse;
@@ -30,7 +29,6 @@ export const ApiOfflineNotice: React.FC<ApiOfflineProps> = ({ apiStatusResponse 
       <div id={prfx('cont')} ref={containerRef}>
         <div id={prfx('text-cont')}>
           <h1 id={prfx('title')}>{apiStatusResponse.status} Unavailable</h1>
-          <p id={prfx('notice-msg')}>{apiStatusResponse.errMsg}</p>
         </div>
         <div id={prfx('globe-cont')}>
           <img src={GlobeLogo} alt="Wikipedia globe logo" id={prfx('globe-logo')} />

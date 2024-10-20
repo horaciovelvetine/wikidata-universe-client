@@ -40,6 +40,11 @@ export const MainAppLayout: React.FC<MainAppLayoutProps> = ({ apiStatusResponse 
   const [showDimensionBoundBox, setShowDimensionBoundBox] = useState(false);
   const [p5SketchRef, setP5SketchRef] = useState<SketchManager | null>(null);
 
+  // Layout-Settings: (initializes w/ the layout)
+  const [dataDensity, setDataDensity] = useState(0);
+  const [attractionMult, setAttractionMult] = useState(0);
+  const [repulsionMult, setRepulsionMult] = useState(0);
+
   const sessionSettingsState: MainAppLayoutSessionState = {
     showSettings, setShowSettings,
     activeQuerySession, setActiveQuerySession,
@@ -49,7 +54,10 @@ export const MainAppLayout: React.FC<MainAppLayoutProps> = ({ apiStatusResponse 
     showDimensionBoundBox, setShowDimensionBoundBox,
     isLoading, setIsLoading,
     useOfflineData, setUseOfflineData,
-    apiOnline, setApiOnline
+    apiOnline, setApiOnline,
+    dataDensity, setDataDensity,
+    attractionMult, setAttractionMult,
+    repulsionMult, setRepulsionMult
   };
 
   // p5-Sketch Duplicative State
@@ -66,13 +74,13 @@ export const MainAppLayout: React.FC<MainAppLayoutProps> = ({ apiStatusResponse 
   }, [])
 
   //? To allow modifying UI w/o spamming requests
-  useEffect(() => {
-    if (useOfflineData) {
-      setActiveQuerySession(true)
-      setInitialQueryResponse({ status: 200, errMsg: '', data: OfflineRequestResponseBody });
-      setApiOnline(true)
-    }
-  }, [useOfflineData])
+  // useEffect(() => {
+  //   if (useOfflineData) {
+  //     setActiveQuerySession(true)
+  //     setInitialQueryResponse({ status: 200, errMsg: '', data: OfflineRequestResponseBody });
+  //     setApiOnline(true)
+  //   }
+  // }, [useOfflineData])
 
   useEffect(() => { // show the BG sketch when no initializeQueryResponse
     if (initialQueryResponse == null) {
@@ -146,4 +154,10 @@ export interface MainAppLayoutSessionState {
   setUseOfflineData: Dispatch<SetStateAction<boolean>>;
   apiOnline: boolean;
   setApiOnline: Dispatch<SetStateAction<boolean>>;
+  dataDensity: number;
+  setDataDensity: Dispatch<SetStateAction<number>>;
+  attractionMult: number;
+  setAttractionMult: Dispatch<SetStateAction<number>>;
+  repulsionMult: number;
+  setRepulsionMult: Dispatch<SetStateAction<number>>;
 }

@@ -48,10 +48,18 @@ export class SketchManager {
   graph: Graphset;
   selectedVertex: Vertex | null = null;
   hoveredVertex: Vertex | null = null;
+  dataDensity: number;
+  attractionMult: number;
+  repulsionMult: number;
 
 
   //*/=> CONSTRUCTOR
   constructor({ p5, initialQueryResponse, setWikiverseGraphset, setSelectedVertex, setHoveredVertex, sessionSettingsState, setP5SketchRef }: SketchManagerProps) {
+
+    // SKETCH STATE
+    this.p5 = p5;
+    this.camMngr = new CameraManager(p5);
+    this.uiMngr = new UIManager(p5, sessionSettingsState);
 
     // REACT STATE
     this.setReactGraphset = setWikiverseGraphset;
@@ -59,19 +67,23 @@ export class SketchManager {
     this.setReactHovVert = setHoveredVertex;
     this.setReactIsLoading = sessionSettingsState.setIsLoading;
 
-
-    // SKETCH STATE
-    this.p5 = p5;
-    this.camMngr = new CameraManager(p5);
-    this.uiMngr = new UIManager(p5, sessionSettingsState);
-
     // DATA STATE
-
-    this.graph = new Graphset(initialQueryResponse!.data);
     this.originalQuery = initialQueryResponse!.data.query;
-
+    this.graph = new Graphset(initialQueryResponse!.data);
     this.selectedVertex = new Vertex(this.graph.getOriginVertex());
     this.setReactSelVert(this.selectedVertex);
+
+    // Layout Settings
+    this.dataDensity = initialQueryResponse!.data.layoutConfig.dataDensity
+    this.attractionMult = initialQueryResponse!.data.layoutConfig.attrMult;
+    this.repulsionMult = initialQueryResponse!.data.layoutConfig.repMult;
+    sessionSettingsState.setDataDensity(this.dataDensity);
+    sessionSettingsState.setAttractionMult(this.attractionMult);
+    sessionSettingsState.setRepulsionMult(this.repulsionMult);
+
+
+
+    // Pass React back this ref
     setP5SketchRef(this);
   }
 
@@ -87,6 +99,22 @@ export class SketchManager {
    */
   CAM() {
     return this.camMngr;
+  }
+
+  updateDataDensity(dens: number) {
+    this.dataDensity = dens;
+  }
+
+  updateAttractionMult(attr: number) {
+    this.attractionMult = attr;
+  }
+
+  updateRepulsionMult(rep: number) {
+    this.repulsionMult = rep;
+  }
+
+  buildCurLayoutConfig() {
+    return { ...{ dataDensity: this.dataDensity, attrMult: this.attractionMult, repMult: this.repulsionMult } }
   }
 
   /**
@@ -145,7 +173,7 @@ export class SketchManager {
   async initPostRelatedDataRequest() {
     this.setReactIsLoading(true); //==> in-case were here on reload.
 
-    await postRelatedDataQueue({ query: this.originalQuery, ...this.graph })
+    await postRelatedDataQueue({ query: this.originalQuery, ...this.graph, layoutConfig: this.buildCurLayoutConfig() })
       .then(response => {
         this.graph = new Graphset(response.data);
         this.setReactGraphset(this.graph)
@@ -163,20 +191,9 @@ export class SketchManager {
   async fetchClickTargetData(tgt: Vertex) {
     this.setReactIsLoading(true);
 
-    const initialCoords = this.graph.vertices.reduce((acc, vertex) => {
-      const { id, coords } = vertex;
-      acc[id] = coords;
-      return acc;
-    }, {} as { [key: string]: { x: number, y: number, z: number } });
-
-    await postClickTargetData({ query: tgt.id, ...this.graph })
+    await postClickTargetData({ query: tgt.id, ...this.graph, layoutConfig: this.buildCurLayoutConfig() })
       .then(response => {
         this.graph = new Graphset(response.data);
-        this.graph.vertices.forEach(vert => {
-          if (initialCoords[vert.id]) {
-            vert.sketchCoords = initialCoords[vert.id];
-          }
-        });
         this.setReactGraphset(this.graph);
       })
       .catch(e => {
@@ -229,7 +246,7 @@ export class SketchManager {
     })
   }
 
-  
+
   /**
    * @method stillHoveredLastVertex - Checks if the last hovered vertex is still hovered.
    */

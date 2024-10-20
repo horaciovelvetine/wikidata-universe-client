@@ -3,6 +3,8 @@ export { Vertex } from './data/Vertex';
 export type { iVertex } from './data/Vertex';
 export { Edge, EDGE_DIR } from './data/Edge';
 export type { iEdge } from './data/Edge';
+export { FR3DConfig } from './data/FR3DConfig'
+export type { iFR3DConfig } from './data/FR3DConfig'
 export { Property } from './data/Property';
 export type { iProperty } from './data/Property';
 export { Point3D } from './data/Point3D';
