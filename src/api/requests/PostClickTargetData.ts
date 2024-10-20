@@ -5,6 +5,6 @@ export async function postClickTargetData(payload: RequestPayload): Promise<Requ
   return await axios.post(apiURL('click-target'), payload)
     .then(res => {
       console.log("postClickTargetData()", res.data)
-      return { status: res.status, data: res.data, errMsg: undefined };
+      return { status: res.status, data: res.data };
     });
 }

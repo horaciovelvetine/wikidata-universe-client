@@ -1,7 +1,4 @@
-import { Dimensions } from "../../interfaces";
-import { iVertex } from "../models/Vertex";
-import { iEdge } from "../models/Edge";
-import { iProperty } from "../models/Property";
+import { Dimensions, iEdge, iFR3DConfig, iProperty, iVertex } from "../../models";
 
 export interface RequestPayload {
   query: string;
@@ -9,4 +6,5 @@ export interface RequestPayload {
   vertices: iVertex[];
   edges: iEdge[];
   properties: iProperty[];
+  layoutConfig: iFR3DConfig;
 }
