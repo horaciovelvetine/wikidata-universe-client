@@ -38,11 +38,11 @@
 
 #selected-vertex-details-label {
   font-size: 1.65rem;
+  overflow-wrap: break-word;
   color: rgba(var(--font));
   font-family: 'CharisSIL-Regular', sans-serif;
   transition: font-size 235ms, text-decoration 235ms;
   text-shadow: 0px 1px 1px black;
-  text-wrap: nowrap;
 }
 
 #selected-vertex-details-label:hover {
@@ -58,7 +58,7 @@
 
 #selected-vertex-details-description {
   font-size: 1.3rem;
-  color: rgba(var(--font), 0.4);
+  color: rgba(var(--font), 0.5);
   display: inline-flex;
   padding-right: 0.3rem;
   text-overflow: ellipsis;

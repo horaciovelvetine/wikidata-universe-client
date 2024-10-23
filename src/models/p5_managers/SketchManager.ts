@@ -5,8 +5,8 @@ import { Camera, Font } from "p5";
 import { P5CanvasInstance } from "@p5-wrapper/react";
 
 import { traceRay } from "../../utils";
-import { postClickTargetData, postRelatedDataQueue, RequestResponse } from "../../api";
-import { CameraManager, FetchManager, Graphset, iGraphset, UIManager, Vertex } from "..";
+import { postClickTargetData, postRefreshLayout, postRelatedDataQueue, RequestResponse } from "../../api";
+import { CameraManager, FetchManager, Graphset, UIManager, Vertex } from "..";
 import { MainAppLayoutSessionState } from "../../app/MainAppLayout";
 
 interface CoordsSummary {
@@ -20,7 +20,7 @@ interface CoordsSummary {
 interface SketchManagerProps {
   p5: P5CanvasInstance;
   initialQueryResponse: RequestResponse | null;
-  setWikiverseGraphset: Dispatch<SetStateAction<iGraphset | null>>;
+  setGraphset: Dispatch<SetStateAction<Graphset | null>>;
   setSelectedVertex: Dispatch<SetStateAction<Vertex | null>>;
   setHoveredVertex: Dispatch<SetStateAction<Vertex | null>>;
   setP5SketchRef: Dispatch<SetStateAction<SketchManager | null>>;
@@ -30,7 +30,7 @@ interface SketchManagerProps {
 
 export class SketchManager {
   //*/=> REACT STATE
-  setReactGraphset: Dispatch<SetStateAction<iGraphset | null>>;
+  setReactGraphset: Dispatch<SetStateAction<Graphset | null>>;
   setReactSelVert: Dispatch<SetStateAction<Vertex | null>>;
   setReactHovVert: Dispatch<SetStateAction<Vertex | null>>;
   setReactIsLoading: Dispatch<SetStateAction<boolean>>;
@@ -54,7 +54,7 @@ export class SketchManager {
 
 
   //*/=> CONSTRUCTOR
-  constructor({ p5, initialQueryResponse, setWikiverseGraphset, setSelectedVertex, setHoveredVertex, sessionSettingsState, setP5SketchRef }: SketchManagerProps) {
+  constructor({ p5, initialQueryResponse, setGraphset, setSelectedVertex, setHoveredVertex, sessionSettingsState, setP5SketchRef }: SketchManagerProps) {
 
     // SKETCH STATE
     this.p5 = p5;
@@ -62,7 +62,7 @@ export class SketchManager {
     this.uiMngr = new UIManager(p5, sessionSettingsState);
 
     // REACT STATE
-    this.setReactGraphset = setWikiverseGraphset;
+    this.setReactGraphset = setGraphset;
     this.setReactSelVert = setSelectedVertex;
     this.setReactHovVert = setHoveredVertex;
     this.setReactIsLoading = sessionSettingsState.setIsLoading;
@@ -177,8 +177,8 @@ export class SketchManager {
       .then(response => {
         this.graph = new Graphset(response.data);
         this.setReactGraphset(this.graph)
-      }).catch(e => {
-        console.error(e);
+      }).catch(err => {
+        console.error(err);
         debugger;
       }).finally(() => {
         this.setReactIsLoading(false);
@@ -196,13 +196,35 @@ export class SketchManager {
         this.graph = new Graphset(response.data);
         this.setReactGraphset(this.graph);
       })
-      .catch(e => {
-        console.error(e);
+      .catch(err => {
+        console.error(err);
         debugger;
       })
       .finally(() => {
         this.setReactIsLoading(false);
       });
+  }
+
+  /**
+   * @method refreshLayoutPositions - unlocks and re-rolls the the layout algorithm with the current Graphset
+   */
+  async refreshLayoutPositions() {
+    this.setReactIsLoading(true);
+
+    await postRefreshLayout({ query: this.originalQuery, ...this.graph, layoutConfig: this.buildCurLayoutConfig() })
+      .then(response => {
+        this.selectedVertex = null;
+        this.setReactSelVert(null);
+        this.graph = new Graphset(response.data);
+        this.setReactGraphset(this.graph);
+      })
+      .catch(err => {
+        console.error(err);
+        debugger;
+      })
+      .finally(() => {
+        this.setReactIsLoading(false);
+      })
   }
 
 
@@ -246,7 +268,6 @@ export class SketchManager {
     })
   }
 
-
   /**
    * @method stillHoveredLastVertex - Checks if the last hovered vertex is still hovered.
    */
@@ -255,18 +276,17 @@ export class SketchManager {
     return traceRay(this.p5, this.cam!, this.hoveredVertex)
   }
 
-
   /**
    * @method mousePositionIsOnAVertex - Checks if the mouse position is on a vertex.
    */
   mousePositionIsOnAVertex() {
     let mouseTarget: Vertex | null = null;
+
     this.graph.vertices.forEach(vert => {
       const checkVert = new Vertex(vert);
       if (traceRay(this.p5, this.cam!, checkVert)) {
         mouseTarget = checkVert;
       }
-
     })
     return mouseTarget;
   }

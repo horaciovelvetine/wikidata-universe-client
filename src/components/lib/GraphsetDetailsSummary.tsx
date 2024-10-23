@@ -2,16 +2,16 @@ import './GraphsetDetailsSummary.css'
 import React, { createRef, useEffect, useState } from 'react';
 
 import { SketchManager } from '../../models/p5_managers/SketchManager';
-import { iGraphset } from '../../models';
+import { Graphset } from '../../models';
 import { MainAppLayoutSessionState } from '../../app/MainAppLayout';
 
 interface GraphsetDetailsSummaryProps {
   sessionSettingsState: MainAppLayoutSessionState;
-  wikiverseGraphset: iGraphset | null,
+  graphset: Graphset | null,
   p5SketchRef: SketchManager | null;
 }
 
-export const GraphsetDetailsSummary: React.FC<GraphsetDetailsSummaryProps> = ({ wikiverseGraphset, p5SketchRef, sessionSettingsState }) => {
+export const GraphsetDetailsSummary: React.FC<GraphsetDetailsSummaryProps> = ({ graphset, p5SketchRef, sessionSettingsState }) => {
   const { showDebugDetails } = sessionSettingsState;
   const [curCamLookAt, setCurCamLookAt] = useState({ x: 0, y: 0, z: 0 });
   const [curCamPos, setCurCamPos] = useState({ x: 0, y: 0, z: 0 });
@@ -35,9 +35,9 @@ export const GraphsetDetailsSummary: React.FC<GraphsetDetailsSummaryProps> = ({ 
         z: Math.round((p5SketchRef?.CAM().cam?.eyeZ ?? 0))
       });
 
-      setVertCount(wikiverseGraphset?.vertices?.length ?? 0)
-      setEdgeCount(wikiverseGraphset?.edges?.length ?? 0)
-      setPropCount(wikiverseGraphset?.properties?.length ?? 0)
+      setVertCount(graphset?.vertices?.length ?? 0)
+      setEdgeCount(graphset?.edges?.length ?? 0)
+      setPropCount(graphset?.properties?.length ?? 0)
     };
 
     updateCameraValues();
@@ -45,7 +45,7 @@ export const GraphsetDetailsSummary: React.FC<GraphsetDetailsSummaryProps> = ({ 
     const intervalId = setInterval(updateCameraValues, 100); // Update every 100ms
 
     return () => clearInterval(intervalId); // Cleanup interval on component unmount
-  }, [wikiverseGraphset, p5SketchRef]);
+  }, [graphset, p5SketchRef]);
 
   useEffect(() => {
     if (!debugRef.current) return;

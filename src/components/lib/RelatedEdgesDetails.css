@@ -1,1 +1,102 @@
-#related-edges-details-display {}
+#related-edges-details-display {
+  width: 100%;
+  display: flex;
+  justify-self: flex-end;
+  grid-column: 2;
+  grid-row: 2;
+  border-radius: 0.5rem;
+  background-color: rgb(var(--font), 0.05);
+  backdrop-filter: blur(0.5rem);
+  margin-bottom: 0.25rem;
+}
+
+#related-edges-details-cont {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  overflow-y: auto;
+  scrollbar-color: rgba(var(--font), 25%) transparent;
+  transition: scrollbar-color 0.2s ease-in-out;
+  border-radius: 0.5rem;
+}
+
+#related-edges-details-cont:not(:hover) {
+  transition: scrollbar-color 0.2s ease-in-out;
+  scrollbar-color: rgba(var(--font), 0%) transparent;
+}
+
+#related-edges-details-list {
+  width: 100%;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  gap: 0.1rem
+}
+
+#related-edges-details-edge {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#related-edges-details-cur-sel-vert {
+  /* display: inline-flex; */
+  cursor: pointer;
+}
+
+#related-edges-details-cur-sel-vert-icon {
+  height: 2rem;
+}
+
+#related-edges-details-prop-cont {
+  display: inline-flex;
+  cursor: pointer;
+}
+
+#related-edges-details-property {
+  font-size: 1.2rem;
+  padding-inline: 0.2rem;
+  color: rgb(var(--font));
+  text-shadow: 1px 1px 1px black;
+}
+
+#related-edges-details-dir-icon {
+  height: 2rem;
+}
+
+#related-edges-details-alt-vert-cont {
+  display: inline-flex;
+  cursor: pointer;
+}
+
+#related-edges-details-alt-vert-icon {
+  height: 2rem;
+}
+
+#related-edges-details-alt-vert-lbl {
+  font-size: 1.2rem;
+  padding-inline: 0.2rem;
+  color: rgb(var(--font), 0.65);
+  text-shadow: 1px 1px 1px black;
+}
+
+.incoming {
+  /* border-bottom: 2px solid; */
+  border-radius: 0.25rem;
+  border-color: rgb(var(--edge-in));
+  background-color: rgba(var(--edge-in), 45%);
+}
+
+.outgoing {
+  /* border-bottom: 2px solid; */
+  border-radius: 0.25rem;
+  border-color: rgb(var(--edge-out));
+  background-color: rgba(var(--edge-out), 25%);
+}
+
+.parallel {
+  /* border-bottom: 2px solid; */
+  border-radius: 0.25rem;
+  border-color: rgb(var(--edge-para));
+  background-color: rgba(var(--edge-para), 45%);
+}

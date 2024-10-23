@@ -14,4 +14,9 @@ export class Property implements iProperty {
     this.label = property.label;
     this.description = property.description;
   }
+
+
+  url() {
+    return `https://www.wikidata.org/wiki/Property:${this.id}`;
+  }
 }

@@ -1,8 +1,4 @@
-import { Dimensions } from "../interfaces";
-import { Edge, iEdge } from "./Edge";
-import { iPoint3D } from "./Point3D";
-import { iProperty } from "./Property";
-import { iVertex, Vertex } from "./Vertex";
+import { Dimensions, Edge, iEdge, iPoint3D, iProperty, iVertex, Vertex, Property } from "..";
 
 export interface iGraphset {
   vertices: iVertex[];
@@ -81,5 +77,15 @@ export class Graphset implements iGraphset {
   getOriginVertex(): Vertex {
     const originVertex = this.vertices.find(vertex => vertex.origin === true);
     return new Vertex(originVertex!);
+  }
+
+  getProperty(propertyId: String): Property {
+    const property = this.properties.find(property => property.id === propertyId);
+    return new Property(property!)
+  }
+
+  getVertex(vertexId: String): Vertex {
+    const vertex = this.vertices.find(vertex => vertex.id === vertexId)!;
+    return new Vertex(vertex);
   }
 }

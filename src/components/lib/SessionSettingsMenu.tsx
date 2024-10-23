@@ -1,5 +1,5 @@
 import './SessionSettingsMenu.css'
-import { Settings as SettingsIcon } from '../../assets/icons';
+import { Settings as SettingsIcon, Fetch } from '../../assets/icons';
 
 import { ChangeEvent, createRef, Dispatch, FC, SetStateAction, useEffect, } from 'react';
 
@@ -8,13 +8,14 @@ import { MainAppLayoutSessionState } from '../../app/MainAppLayout';
 
 interface SessionSettingsMenuProps {
   sessionSettingsState: MainAppLayoutSessionState;
+  refreshLayoutHandler: () => void;
 }
 
 const prfx = (sufx: string) => {
   return 'session-settings-' + sufx;
 }
 
-export const SessionSettingsMenu: FC<SessionSettingsMenuProps> = ({ sessionSettingsState }) => {
+export const SessionSettingsMenu: FC<SessionSettingsMenuProps> = ({ sessionSettingsState, refreshLayoutHandler }) => {
   const { showSettings, setShowSettings,
     showDebugDetails, setShowDebugDetails,
     showMedianAxis, setShowMedianAxis,
@@ -22,7 +23,8 @@ export const SessionSettingsMenu: FC<SessionSettingsMenuProps> = ({ sessionSetti
     showDimensionBoundBox, setShowDimensionBoundBox,
     dataDensity, setDataDensity,
     attractionMult, setAttractionMult,
-    repulsionMult, setRepulsionMult
+    repulsionMult, setRepulsionMult,
+    activeQuerySession
   } = sessionSettingsState;
 
   const menuContainerRef = createRef<HTMLDivElement>();
@@ -43,34 +45,46 @@ export const SessionSettingsMenu: FC<SessionSettingsMenuProps> = ({ sessionSetti
   ]
 
   const LayoutSettings = [
-    { key: dataDensity, action: setDataDensity, label: "Vertex Density", desc: "effects the overall size of the layout" },
-    { key: attractionMult, action: setAttractionMult, label: "Attraction Multiplier", desc: "Tendency of related Vertices to clump together" },
-    { key: repulsionMult, action: setRepulsionMult, label: "Push Multiplier", desc: "Tendency of UN-related Vertices to push away from each other" }
+    { key: dataDensity, action: setDataDensity, label: "Vertex Density", desc: "effects the overall size of the layout", step: '0.00001' },
+    { key: attractionMult, action: setAttractionMult, label: "Attraction Multiplier", desc: "Tendency of related Vertices to clump together", step: '0.05' },
+    { key: repulsionMult, action: setRepulsionMult, label: "Push Multiplier", desc: "Tendency of UN-related Vertices to push away from each other", step: '0.05' }
   ]
 
   return (
     <div id={prfx('container')} onClick={(e) => { e.stopPropagation() }}>
       <img id={prfx('icon')} src={SettingsIcon} alt='gear to toggle displaying current settings menu' onClick={() => setShowSettings(prev => !prev)} ref={iconRef} />
-      <div id={prfx('menu-container')} ref={menuContainerRef}>
-        <h3 id={prfx('menu-header')}>on-screen:</h3>
+
+      <div id={prfx('menu-container')} ref={menuContainerRef} onClick={(e) => { e.stopPropagation() }}>
+        <h3 id={prfx('menu-header')} onClick={(e) => { e.stopPropagation() }}>on-screen:</h3>
         {ToggleSettings.map((setting, index) => (
           <ToggleOption
             key={index}
             isEnabled={setting.key}
             onToggle={setting.action}
+            activeSession={!activeQuerySession}
             label={setting.label}
             shortcut={setting.shortcut}
           />
         ))}
-        <h3 id={prfx('menu-header')}>layout:</h3>
+        <h3 id={prfx('menu-header')} onClick={(e) => { e.stopPropagation() }}>layout:</h3>
         {LayoutSettings.map((setting, index) => (
           <LayoutOption
             key={index}
+            step={setting.step}
             curValue={setting.key}
+            activeSession={activeQuerySession}
             setNumberVal={setting.action}
             label={setting.label}
             desc={setting.desc} />
         ))}
+        <div id={prfx('refresh-layout-cont')} onClick={(e) => { e.stopPropagation() }}>
+          <p id={prfx('refresh-layout-text')} onClick={(e) => { e.stopPropagation() }}>
+            Refresh Layout
+          </p>
+          <button id={prfx('refresh-layout-btn')} onClick={refreshLayoutHandler} disabled={!activeQuerySession}>
+            <img id={prfx('refresh-layout-icon')} src={Fetch} />
+          </button>
+        </div>
       </div>
     </div>
   );
@@ -81,25 +95,28 @@ interface ToggleOptionProps {
   onToggle: Dispatch<SetStateAction<boolean>>;
   label: string;
   shortcut: string | null;
+  activeSession: boolean;
 }
 
-const ToggleOption: FC<ToggleOptionProps> = ({ isEnabled, onToggle, label, shortcut }) => {
+const ToggleOption: FC<ToggleOptionProps> = ({ isEnabled, onToggle, label, shortcut, activeSession }) => {
   return (
-    <div id={prfx('toggle-contents')}>
+    <div id={prfx('toggle-contents')} onClick={(e) => { e.stopPropagation() }}>
       {shortcut && (
         <span id='setting-toggle-shortcut'>
           [{shortcut}]{" "}
         </span>
       )}
-      <label id={prfx('toggle-label')}>
+      <label id={prfx('toggle-label')} onClick={(e) => { e.stopPropagation() }}>
         {label}
       </label>
       <div>
         <input
+          disabled={activeSession}
           id='setting-toggle-input'
           type="checkbox"
           checked={isEnabled}
           onChange={() => onToggle(prev => !prev)}
+          onClick={(e) => { e.stopPropagation() }}
         />
       </div>
     </div>
@@ -111,9 +128,11 @@ interface LayoutOptionProps {
   setNumberVal: Dispatch<SetStateAction<number>>;
   label: string;
   desc: string;
+  step: string;
+  activeSession: boolean;
 }
 
-const LayoutOption: FC<LayoutOptionProps> = ({ curValue, setNumberVal, label, desc }) => {
+const LayoutOption: FC<LayoutOptionProps> = ({ curValue, setNumberVal, label, desc, step, activeSession }) => {
   const onChangeNumConversionHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const newValue = parseFloat(e.target.value);
     if (!isNaN(newValue)) {
@@ -122,19 +141,22 @@ const LayoutOption: FC<LayoutOptionProps> = ({ curValue, setNumberVal, label, de
   }
 
   return (
-    <div id={prfx('layout-contents')}>
-      <div id={prfx('layout-text-cont')}>
-        <label id={prfx('layout-label')}>
+    <div id={prfx('layout-contents')} onClick={(e) => { e.stopPropagation() }}>
+      <div id={prfx('layout-text-cont')} onClick={(e) => { e.stopPropagation() }}>
+        <label id={prfx('layout-label')} onClick={(e) => { e.stopPropagation() }}>
           {label}
         </label>
-        <div id={prfx('layout-dsc')}>
+        <div id={prfx('layout-dsc')} onClick={(e) => { e.stopPropagation() }}>
           {desc}
         </div>
       </div>
       <input
+        disabled={!activeSession}
+        step={step}
         id={prfx('layout-inp')}
         type='number'
         value={curValue}
+        onClick={(e) => { e.stopPropagation() }}
         onChange={onChangeNumConversionHandler} />
     </div>
   )

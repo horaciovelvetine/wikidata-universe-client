@@ -4,7 +4,7 @@ import React, { Dispatch, SetStateAction, createRef, useEffect, useState, memo }
 import { Footer, VerticalSiteTitle, ApiOfflineNotice, SessionSettingsMenu, LoadingBar, HoveredVertexDetails, InitializeQuerySessionInput, GraphsetDetailsSummary, SelectedVertexDetails, toggleElementOpacity, BackgroundSketch, WikiverseSketch, RelatedEdgesDetails } from '../components';
 
 import OfflineRequestResponseBody from '../assets/data/client_request_1729218330942.json';
-import { Dimensions, iGraphset, SketchManager, Vertex } from '../models';
+import { Dimensions, Graphset, Point3D, SketchManager, Vertex } from '../models';
 import { RequestResponse } from '../api';
 
 interface MainAppLayoutProps {
@@ -29,7 +29,9 @@ export const MainAppLayout: React.FC<MainAppLayoutProps> = ({ apiStatusResponse 
   const [initialQueryResponse, setInitialQueryResponse] = useState<RequestResponse | null>(null);
 
   // State-Settings:
+  const [p5SketchRef, setP5SketchRef] = useState<SketchManager | null>(null);
   const [apiOnline, setApiOnline] = useState(apiStatusResponse.status == 200)
+
   const [useOfflineData, setUseOfflineData] = useState(false); // DEV...
   const [isLoading, setIsLoading] = useState(false);
   const [activeQuerySession, setActiveQuerySession] = useState(false);
@@ -38,7 +40,6 @@ export const MainAppLayout: React.FC<MainAppLayoutProps> = ({ apiStatusResponse 
   const [showMedianAxis, setShowMedianAxis] = useState(false);
   const [showMedianBoundBox, setShowMedianBoundBox] = useState(false);
   const [showDimensionBoundBox, setShowDimensionBoundBox] = useState(false);
-  const [p5SketchRef, setP5SketchRef] = useState<SketchManager | null>(null);
 
   // Layout-Settings: (initializes w/ the layout)
   const [dataDensity, setDataDensity] = useState(0);
@@ -61,13 +62,10 @@ export const MainAppLayout: React.FC<MainAppLayoutProps> = ({ apiStatusResponse 
   };
 
   // p5-Sketch Duplicative State
-  const [wikiverseGraphset, setWikiverseGraphset] = useState<iGraphset | null>(null);
+  const [graphset, setGraphset] = useState<Graphset | null>(null);
   const [selectedVertex, setSelectedVertex] = useState<Vertex | null>(null);
   const [hoveredVertex, setHoveredVertex] = useState<Vertex | null>(null);
 
-  //
-  //** REACT EFFECTS */
-  //
   useEffect(() => {
     window.addEventListener('resize', () => setContainerDimensions(calcInitLayoutDimensions()))
     return () => window.removeEventListener('resize', () => setContainerDimensions(calcInitLayoutDimensions()))
@@ -91,19 +89,36 @@ export const MainAppLayout: React.FC<MainAppLayoutProps> = ({ apiStatusResponse 
   }, [initialQueryResponse])
 
   useEffect(() => {
-    if (showSettings)
-      p5SketchRef?.UI().toggleShowMedianAxis()
+    p5SketchRef?.UI().toggleShowMedianAxis()
   }, [showMedianAxis])
 
   useEffect(() => {
-    if (showSettings)
-      p5SketchRef?.UI().toggleShowMedianBoundBox()
+    p5SketchRef?.UI().toggleShowMedianBoundBox()
   }, [showMedianBoundBox])
 
   useEffect(() => {
-    if (showSettings)
-      p5SketchRef?.UI().toggleShowDimensionBoundBox()
+    p5SketchRef?.UI().toggleShowDimensionBoundBox()
   }, [showDimensionBoundBox])
+
+  useEffect(() => {
+    p5SketchRef?.updateDataDensity(dataDensity);
+  }, [dataDensity])
+
+  useEffect(() => {
+    p5SketchRef?.updateRepulsionMult(repulsionMult);
+  }, [repulsionMult])
+
+  useEffect(() => {
+    p5SketchRef?.updateAttractionMult(attractionMult);
+  }, [attractionMult])
+
+  const refreshLayoutHandler = () => {
+    p5SketchRef?.refreshLayoutPositions()
+  }
+
+  const refocusCameraHandler = (coords: Point3D) => {
+    p5SketchRef?.CAM().setTarget(coords);
+  }
 
   return (
     <div id='wikiverse-main'>
@@ -112,19 +127,19 @@ export const MainAppLayout: React.FC<MainAppLayoutProps> = ({ apiStatusResponse 
       <div id='query-sketch' style={{ width: containerDimensions.width, height: containerDimensions.height }}>
 
         <div id='sketch-overlay-top'>
-          <HoveredVertexDetails {...{ sessionSettingsState, hoveredVertex }} />
-          <SessionSettingsMenu {...{ sessionSettingsState }} />
+          <HoveredVertexDetails {...{ hoveredVertex }} />
+          <SessionSettingsMenu {...{ sessionSettingsState, refreshLayoutHandler }} />
         </div>
 
         {!apiOnline && <ApiOfflineNotice {... { apiStatusResponse }} />}
         <InitializeQuerySessionInput {...{ sessionSettingsState, setInitialQueryResponse }} />
 
-        {activeQuerySession && <WikiverseSketchMemo {...{ initialQueryResponse, setWikiverseGraphset, setSelectedVertex, setHoveredVertex, setP5SketchRef, sessionSettingsState }} />}
+        {activeQuerySession && <WikiverseSketchMemo {...{ initialQueryResponse, setGraphset, setSelectedVertex, setHoveredVertex, setP5SketchRef, sessionSettingsState }} />}
 
         <div id='sketch-overlay-bot'>
-          <SelectedVertexDetails {...{ selectedVertex, sessionSettingsState }} />
-          <GraphsetDetailsSummary {...{ wikiverseGraphset, p5SketchRef, sessionSettingsState }} />
-          <RelatedEdgesDetails {...{ sessionSettingsState, selectedVertex }} />
+          <SelectedVertexDetails {...{ selectedVertex }} />
+          <GraphsetDetailsSummary {...{ graphset, p5SketchRef, sessionSettingsState }} />
+          <RelatedEdgesDetails {...{ selectedVertex, graphset, refocusCameraHandler, }} />
         </div>
       </div>
       <div id='background-sketch' ref={bgSketchRef}>
