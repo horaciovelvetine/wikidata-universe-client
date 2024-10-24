@@ -20,6 +20,7 @@ export { WikiverseSketch } from './p5/WikiverseSketch'
 export { BackgroundSketch } from './p5/BackgroundSketch'
 
 //UTIL:
+export { calcSafeSketchWindowSize } from './util/CalcSafeSketchWindowSize'
 export { edgeDirectionIcon } from './util/EdgeDirectionIcon'
 export { INPUT_STATE } from './util/InputState'
 

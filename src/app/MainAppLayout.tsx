@@ -1,9 +1,8 @@
 import './MainAppLayoutStyle.css'
+import OfflineRequestResponseBody from '../assets/data/client_request_1729218330942.json';
 
 import React, { Dispatch, SetStateAction, createRef, useEffect, useState, memo } from 'react';
-import { Footer, VerticalSiteTitle, ApiOfflineNotice, SessionSettingsMenu, LoadingBar, HoveredVertexDetails, InitializeQuerySessionInput, GraphsetDetailsSummary, SelectedVertexDetails, toggleElementOpacity, BackgroundSketch, WikiverseSketch, RelatedEdgesDetails } from '../components';
-
-import OfflineRequestResponseBody from '../assets/data/client_request_1729218330942.json';
+import { Footer, VerticalSiteTitle, ApiOfflineNotice, SessionSettingsMenu, LoadingBar, HoveredVertexDetails, InitializeQuerySessionInput, GraphsetDetailsSummary, SelectedVertexDetails, toggleElementOpacity, BackgroundSketch, WikiverseSketch, RelatedEdgesDetails, calcSafeSketchWindowSize } from '../components';
 import { Dimensions, Graphset, Point3D, SketchManager, Vertex } from '../models';
 import { RequestResponse } from '../api';
 
@@ -19,22 +18,18 @@ const WikiverseSketchMemo = memo(WikiverseSketch, (prevProps, nextProps) => {
   return prevProps.initialQueryResponse == nextProps.initialQueryResponse;
 })
 
-const calcInitLayoutDimensions = () => {
-  return { width: Math.round(window.innerWidth * 0.8), height: Math.round(window.innerHeight * 0.85) };
-}
-
 export const MainAppLayout: React.FC<MainAppLayoutProps> = ({ apiStatusResponse }) => {
   const bgSketchRef = createRef<HTMLDivElement>();
-  const [containerDimensions, setContainerDimensions] = useState<Dimensions>(calcInitLayoutDimensions())
+  const [containerDimensions, setContainerDimensions] = useState<Dimensions>(calcSafeSketchWindowSize())
   const [initialQueryResponse, setInitialQueryResponse] = useState<RequestResponse | null>(null);
 
   // State-Settings:
   const [p5SketchRef, setP5SketchRef] = useState<SketchManager | null>(null);
   const [apiOnline, setApiOnline] = useState(apiStatusResponse.status == 200)
-
   const [useOfflineData, setUseOfflineData] = useState(false); // DEV...
   const [isLoading, setIsLoading] = useState(false);
   const [activeQuerySession, setActiveQuerySession] = useState(false);
+  const [showAboutInfo, setShowAboutInfo] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
   const [showDebugDetails, setShowDebugDetails] = useState(false);
   const [showMedianAxis, setShowMedianAxis] = useState(false);
@@ -67,8 +62,8 @@ export const MainAppLayout: React.FC<MainAppLayoutProps> = ({ apiStatusResponse 
   const [hoveredVertex, setHoveredVertex] = useState<Vertex | null>(null);
 
   useEffect(() => {
-    window.addEventListener('resize', () => setContainerDimensions(calcInitLayoutDimensions()))
-    return () => window.removeEventListener('resize', () => setContainerDimensions(calcInitLayoutDimensions()))
+    window.addEventListener('resize', () => setContainerDimensions(calcSafeSketchWindowSize()))
+    return () => window.removeEventListener('resize', () => setContainerDimensions(calcSafeSketchWindowSize()))
   }, [])
 
   //? To allow modifying UI w/o spamming requests

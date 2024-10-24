@@ -78,7 +78,7 @@ export const SessionSettingsMenu: FC<SessionSettingsMenuProps> = ({ sessionSetti
             desc={setting.desc} />
         ))}
         <div id={prfx('refresh-layout-cont')} onClick={(e) => { e.stopPropagation() }}>
-          <p id={prfx('refresh-layout-text')} onClick={(e) => { e.stopPropagation() }}>
+          <p id={prfx('refresh-layout-text')}>
             Refresh Layout
           </p>
           <button id={prfx('refresh-layout-btn')} onClick={refreshLayoutHandler} disabled={!activeQuerySession}>
@@ -142,11 +142,11 @@ const LayoutOption: FC<LayoutOptionProps> = ({ curValue, setNumberVal, label, de
 
   return (
     <div id={prfx('layout-contents')} onClick={(e) => { e.stopPropagation() }}>
-      <div id={prfx('layout-text-cont')} onClick={(e) => { e.stopPropagation() }}>
-        <label id={prfx('layout-label')} onClick={(e) => { e.stopPropagation() }}>
+      <div id={prfx('layout-text-cont')}>
+        <label id={prfx('layout-label')}>
           {label}
         </label>
-        <div id={prfx('layout-dsc')} onClick={(e) => { e.stopPropagation() }}>
+        <div id={prfx('layout-dsc')}>
           {desc}
         </div>
       </div>

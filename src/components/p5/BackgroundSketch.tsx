@@ -1,12 +1,9 @@
-import { Dimensions, SessionSettingsState } from '../../interfaces';
 import { ReactP5Wrapper, P5CanvasInstance, Sketch } from '@p5-wrapper/react';
+import { calcSafeSketchWindowSize } from '..';
+import { Dimensions } from '../../models';
 
 interface ErrorSketchProps {
   containerDimensions: Dimensions
-}
-
-export const calcInitLayoutDimensions = () => {
-  return { width: Math.round(window.innerWidth * 0.8), height: Math.round(window.innerHeight * 0.85) };
 }
 
 export const BackgroundSketch: React.FC<ErrorSketchProps> = ({ containerDimensions }) => {
@@ -29,7 +26,7 @@ export const BackgroundSketch: React.FC<ErrorSketchProps> = ({ containerDimensio
     }
 
     p5.windowResized = () => {
-      const { width, height } = calcInitLayoutDimensions();
+      const { width, height } = calcSafeSketchWindowSize();
       p5.resizeCanvas(width, height)
     }
   }
@@ -38,7 +35,7 @@ export const BackgroundSketch: React.FC<ErrorSketchProps> = ({ containerDimensio
 }
 
 // Credit for this sketch goes to @ Sagar Arora
-// Which you can find here: https://archive.p5js.org/examples/simulate-particles.html
+// https://archive.p5js.org/examples/simulate-particles.html
 class Particle {
   p5: P5CanvasInstance
   dimensions: Dimensions
