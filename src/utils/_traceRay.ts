@@ -1,13 +1,34 @@
 import { multiply, inv } from "mathjs";
 import { P5CanvasInstance, SketchProps } from "@p5-wrapper/react";
 import { Camera } from "p5";
+import { Vertex } from "../models";
 
-import { Vertex } from "../models/Vertex";
-
-// Credit to @camelCaseSensitive on {github} & @morejpeg on {youtube}
-// For the original code, npm package, and tutorial on so many things p5.js
-// Adapted slightly for React/TS and use outside of a p5.js sketch instance
-// https://github.com/camelCaseSensitive/p5-raycast/blob/main/p5-raycast.js
+/**
+ * Traces a ray from the camera through the mouse position on the canvas and checks if it intersects with a given vertex.
+ * 
+ * @param p5 - The p5.js canvas instance.
+ * @param cam - The camera object from p5.js.
+ * @param vert - The vertex to check for intersection with the ray.
+ * @returns An array containing the intersection point [x, y, z] if the ray intersects with the vertex, otherwise false.
+ * 
+ * @remarks
+ * This function uses the projection and model-view matrices from the p5.js renderer to transform the mouse coordinates
+ * into world coordinates and then checks if the ray intersects with the given vertex.
+ * 
+ * @example
+ * ```typescript
+ * const intersection = traceRay(p5Instance, camera, vertex);
+ * if (intersection) {
+ *   console.log(`Intersection at: ${intersection}`);
+ * } else {
+ *   console.log('No intersection');
+ * }
+ * ```
+ * Credit to @camelCaseSensitive on {github} & @morejpeg on {youtube}
+ * For the original code, npm package, and tutorial on so many things p5.js
+ * Adapted slightly for React/TS and use outside of a p5.js sketch instance
+ * @see {@link https://github.com/camelCaseSensitive/p5-raycast/blob/main/p5-raycast.js} for the original implementation.
+ */
 export function traceRay(p5: P5CanvasInstance<SketchProps>, cam: Camera, vert: Vertex) {
   const ndcX = (p5.mouseX - p5.width / 2) / p5.width * 2;
   const ndcY = (p5.mouseY - p5.height / 2) / p5.height * 2;
