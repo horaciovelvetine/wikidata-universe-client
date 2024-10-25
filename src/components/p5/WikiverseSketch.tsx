@@ -1,39 +1,36 @@
 import { Dispatch, FC, SetStateAction } from 'react';
 import { ReactP5Wrapper, Sketch } from '@p5-wrapper/react';
 
-import { Graphset, SketchManager, Vertex } from '../../models';
+import { SketchManager, Vertex } from '../../models';
 import { RequestResponse } from '../../api';
-import { MainAppLayoutSessionState } from '../../app/MainAppLayout';
+import { MainAppLayoutState } from '../../app/MainAppLayoutState';
 
 
 interface WikiverseProps {
-  initialQueryResponse: RequestResponse | null; // only used to determine re-renders
-  setGraphset: Dispatch<SetStateAction<Graphset | null>>;
+  mainAppLayoutState: MainAppLayoutState;
+  initialQueryResponse: RequestResponse;
   setSelectedVertex: Dispatch<SetStateAction<Vertex | null>>;
   setHoveredVertex: Dispatch<SetStateAction<Vertex | null>>;
-  setP5SketchRef: Dispatch<SetStateAction<SketchManager | null>>; // to ref sketch details
-  sessionSettingsState: MainAppLayoutSessionState;
+  setWikiverseSketchRef: Dispatch<SetStateAction<SketchManager | null>>;
 }
 
 //! { note } - Y axis is reversed of natural expectation in P5.js
-export const WikiverseSketch: FC<WikiverseProps> = ({ initialQueryResponse, setGraphset, setSelectedVertex, setHoveredVertex, setP5SketchRef, sessionSettingsState }) => {
-  const { useOfflineData } = sessionSettingsState;
+export const WikiverseSketch: FC<WikiverseProps> = ({ mainAppLayoutState, initialQueryResponse, setSelectedVertex, setHoveredVertex, setWikiverseSketchRef }) => {
 
   const sketch: Sketch = (p5) => { //SketchManager contains a lionshare of the p5 sketch specific details
-    const SK = new SketchManager({ p5, initialQueryResponse, setGraphset, setSelectedVertex, setHoveredVertex, setP5SketchRef, sessionSettingsState })
+    const SK = new SketchManager({ p5, initialQueryResponse, mainAppLayoutState, setSelectedVertex, setHoveredVertex, setWikiverseSketchRef })
 
-    //*/=> SETUP...
+    //*/=> SETUP
     p5.preload = () => { SK.preloadFont() }
     p5.setup = async () => {
       SK.createCanvas()
       SK.setTextFont()
-      SK.initCameraManaged();
-      if (!useOfflineData) {
-        SK.initPostRelatedDataRequest();
-      }
+      SK.initManagedCamera();
+      SK.initCameraPositionAtOriginVertex();
+      SK.initPostRelatedDataRequest();
     };
 
-    //*/=> DRAW...
+    //*/=> DRAW
     p5.draw = () => {
       SK.drawUI();
       SK.drawVertices();
@@ -42,15 +39,14 @@ export const WikiverseSketch: FC<WikiverseProps> = ({ initialQueryResponse, setG
       SK.advanceCanimations()
     };
 
-    //*/=> MOUSE PRESS...
+    //*/=> MOUSE PRESS (BOTH L & R)
     p5.mousePressed = () => {
       const mouseTarget = SK.mousePositionIsOnAVertex();
       if (mouseTarget == null) return;
 
       // Deselect...
       if (SK.targetIsAlreadyCurSelected(mouseTarget)) {
-        SK.selectedVertex = null;
-        setSelectedVertex(null);
+        SK.updateSelectedVertex(null); // none selected is null
         return
       }
       // New Selection Made...
@@ -59,31 +55,29 @@ export const WikiverseSketch: FC<WikiverseProps> = ({ initialQueryResponse, setG
 
     };
 
-    //*/=> HOVER...
+    //*/=> HOVER
     p5.mouseMoved = () => {
       if (SK.stillHoveredLastVertex()) return; // change nothing
       const mouseTarget = SK.mousePositionIsOnAVertex(); // Vertex || null;
       if (SK.targetIsAlreadyCurSelected(mouseTarget)) return; // already selected, don't hover
 
-      SK.hoveredVertex = mouseTarget;
-      setHoveredVertex(mouseTarget)
+      SK.updateHoveredVertex(mouseTarget);
     };
 
-    //*/=> RESIZE...
+    //*/=> RESIZE
     p5.windowResized = () => {
       SK.handleResize()
     };
 
-    //*/=> KEYPRESS...
+    //*/=> KEYPRESS
     p5.keyPressed = () => {
       switch (p5.key) {
         case '?':
-          console.log(SK.sketchDataCoordsSummary());
-          console.log('SketchData@', SK.graph);
+          console.log('SketchData@', SK.GRAPH());
           break;
         case ',':
         case '<':
-          sessionSettingsState.setShowDebugDetails(prev => !prev);
+          mainAppLayoutState.setShowDebugDetails(prev => !prev);
           break;
         default:
           break;

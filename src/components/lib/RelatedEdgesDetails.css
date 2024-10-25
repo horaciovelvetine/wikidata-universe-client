@@ -1,7 +1,10 @@
 #related-edges-details-display {
   width: 100%;
+  height: fit-content;
+  max-height: 100%;
   display: flex;
   justify-self: flex-end;
+  align-self: flex-end;
   grid-column: 2;
   grid-row: 2;
   border-radius: 0.5rem;

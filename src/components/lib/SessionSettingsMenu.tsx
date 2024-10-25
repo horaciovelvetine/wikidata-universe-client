@@ -1,34 +1,31 @@
 import './SessionSettingsMenu.css'
 import { Settings as SettingsIcon, Fetch } from '../../assets/icons';
 
-import { ChangeEvent, createRef, Dispatch, FC, SetStateAction, useEffect, } from 'react';
+import { ChangeEvent, createRef, Dispatch, FC, MouseEvent, SetStateAction, useEffect, useState } from 'react';
 
 import { toggleElementOpacity, toggleDisplayVisibility, changeFocusOpacity } from '..';
-import { MainAppLayoutSessionState } from '../../app/MainAppLayout';
+import { SketchManager } from '../../models';
+import { MainAppLayoutState } from '../../app/MainAppLayoutState';
 
 interface SessionSettingsMenuProps {
-  sessionSettingsState: MainAppLayoutSessionState;
-  refreshLayoutHandler: () => void;
+  mainAppLayoutState: MainAppLayoutState;
+  wikiverseSketchRef: SketchManager | null;
 }
 
 const prfx = (sufx: string) => {
   return 'session-settings-' + sufx;
 }
 
-export const SessionSettingsMenu: FC<SessionSettingsMenuProps> = ({ sessionSettingsState, refreshLayoutHandler }) => {
-  const { showSettings, setShowSettings,
-    showDebugDetails, setShowDebugDetails,
-    showMedianAxis, setShowMedianAxis,
-    showMedianBoundBox, setShowMedianBoundBox,
-    showDimensionBoundBox, setShowDimensionBoundBox,
-    dataDensity, setDataDensity,
-    attractionMult, setAttractionMult,
-    repulsionMult, setRepulsionMult,
-    activeQuerySession
-  } = sessionSettingsState;
-
+export const SessionSettingsMenu: FC<SessionSettingsMenuProps> = ({ mainAppLayoutState, wikiverseSketchRef }) => {
   const menuContainerRef = createRef<HTMLDivElement>();
   const iconRef = createRef<HTMLImageElement>();
+  const { showSettings, setShowSettings, showDebugDetails, setShowDebugDetails } = mainAppLayoutState;
+
+  const [dataDensityInp, setDataDensityInp] = useState(wikiverseSketchRef ? wikiverseSketchRef.LAYOUT_CONFIG().dataDensity : null);
+  const [attractionMultInp, setAttractionMultInp] = useState(wikiverseSketchRef ? wikiverseSketchRef.LAYOUT_CONFIG().attractionMult : null)
+  const [repulsioMultInp, setRepulsionMultInp] = useState(wikiverseSketchRef ? wikiverseSketchRef.LAYOUT_CONFIG().repulsionMult : null)
+  const [showAxisInp, setShowAxisInp] = useState(wikiverseSketchRef ? wikiverseSketchRef.UI().getShowAxis() : false);
+  const [showBoundingInp, setShowBoundingInp] = useState(wikiverseSketchRef ? wikiverseSketchRef.UI().getShowBoundingBox() : false);
 
   useEffect(() => {
     toggleElementOpacity(menuContainerRef.current!, showSettings);
@@ -36,52 +33,72 @@ export const SessionSettingsMenu: FC<SessionSettingsMenuProps> = ({ sessionSetti
     changeFocusOpacity(iconRef.current!, showSettings, '0.25s', '60%')
   }, [showSettings])
 
-  const ToggleSettings = [
-    { key: showDebugDetails, action: setShowDebugDetails, label: "Sketch Details", shortcut: "," },
-    //! { key: useOfflineData, action: setUseOfflineData, label: "Use Offline API data", shortcut: null },
-    { key: showMedianAxis, action: setShowMedianAxis, label: "Axis orientation", shortcut: null },
-    { key: showMedianBoundBox, action: setShowMedianBoundBox, label: "Bounding Box (median)", shortcut: null },
-    { key: showDimensionBoundBox, action: setShowDimensionBoundBox, label: "Bounding Box (dimensions)", shortcut: null }
-  ]
+  useEffect(() => {
+    if (!wikiverseSketchRef) return;
+    setDataDensityInp(wikiverseSketchRef.LAYOUT_CONFIG().dataDensity)
+    setAttractionMultInp(wikiverseSketchRef.LAYOUT_CONFIG().attractionMult)
+    setRepulsionMultInp(wikiverseSketchRef.LAYOUT_CONFIG().repulsionMult)
+  }, [wikiverseSketchRef])
 
-  const LayoutSettings = [
-    { key: dataDensity, action: setDataDensity, label: "Vertex Density", desc: "effects the overall size of the layout", step: '0.00001' },
-    { key: attractionMult, action: setAttractionMult, label: "Attraction Multiplier", desc: "Tendency of related Vertices to clump together", step: '0.05' },
-    { key: repulsionMult, action: setRepulsionMult, label: "Push Multiplier", desc: "Tendency of UN-related Vertices to push away from each other", step: '0.05' }
-  ]
+  useEffect(() => {
+    if (!wikiverseSketchRef) return;
+    wikiverseSketchRef.UI().toggleShowAxis();
+  }, [showAxisInp])
+
+  useEffect(() => {
+    if (!wikiverseSketchRef) return;
+    wikiverseSketchRef.UI().toggleShowBoundingBox
+  }, [showBoundingInp])
+
+  const ToggleSettings = wikiverseSketchRef ? [
+    { key: showDebugDetails, action: setShowDebugDetails, label: "Graph Details", shortcut: "," },
+    { key: showAxisInp, action: setShowAxisInp, label: "Axis Orientation", shortcut: null },
+    { key: showBoundingInp, action: setShowBoundingInp, label: "Bounding Box", shortcut: null },
+  ] : [];
+
+  const LayoutSettings = wikiverseSketchRef ? [
+    { key: dataDensityInp, action: setDataDensityInp, label: "Density", desc: "Effects the overall size of the Graph's layout", step: '0.00001' },
+    { key: attractionMultInp, action: setAttractionMultInp, label: "Attraction Force", desc: "The tendency of related Vertices to clump together", step: '0.05' },
+    { key: repulsioMultInp, action: setRepulsionMultInp, label: "Repulsion Force", desc: "The tendency of un-related Vertices to push away from eachother ", step: '0.05' },
+  ] : [];
+
+  const handleRefreshLayoutPositionClick = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    if (wikiverseSketchRef == null) return;
+    wikiverseSketchRef.LAYOUT_CONFIG().updateConfigValues(dataDensityInp!, attractionMultInp!, repulsioMultInp!);
+    wikiverseSketchRef.refreshLayoutPositions();
+  }
 
   return (
     <div id={prfx('container')} onClick={(e) => { e.stopPropagation() }}>
       <img id={prfx('icon')} src={SettingsIcon} alt='gear to toggle displaying current settings menu' onClick={() => setShowSettings(prev => !prev)} ref={iconRef} />
 
-      <div id={prfx('menu-container')} ref={menuContainerRef} onClick={(e) => { e.stopPropagation() }}>
-        <h3 id={prfx('menu-header')} onClick={(e) => { e.stopPropagation() }}>on-screen:</h3>
+      <div id={prfx('menu-container')} ref={menuContainerRef}>
+        <h3 id={prfx('menu-header')}>on-screen:</h3>
         {ToggleSettings.map((setting, index) => (
           <ToggleOption
             key={index}
             isEnabled={setting.key}
             onToggle={setting.action}
-            activeSession={!activeQuerySession}
             label={setting.label}
             shortcut={setting.shortcut}
           />
         ))}
-        <h3 id={prfx('menu-header')} onClick={(e) => { e.stopPropagation() }}>layout:</h3>
+        <h3 id={prfx('menu-header')}>layout:</h3>
         {LayoutSettings.map((setting, index) => (
           <LayoutOption
             key={index}
             step={setting.step}
             curValue={setting.key}
-            activeSession={activeQuerySession}
             setNumberVal={setting.action}
             label={setting.label}
             desc={setting.desc} />
         ))}
-        <div id={prfx('refresh-layout-cont')} onClick={(e) => { e.stopPropagation() }}>
+        <div id={prfx('refresh-layout-cont')}>
           <p id={prfx('refresh-layout-text')}>
             Refresh Layout
           </p>
-          <button id={prfx('refresh-layout-btn')} onClick={refreshLayoutHandler} disabled={!activeQuerySession}>
+          <button id={prfx('refresh-layout-btn')} onClick={handleRefreshLayoutPositionClick}>
             <img id={prfx('refresh-layout-icon')} src={Fetch} />
           </button>
         </div>
@@ -95,10 +112,9 @@ interface ToggleOptionProps {
   onToggle: Dispatch<SetStateAction<boolean>>;
   label: string;
   shortcut: string | null;
-  activeSession: boolean;
 }
 
-const ToggleOption: FC<ToggleOptionProps> = ({ isEnabled, onToggle, label, shortcut, activeSession }) => {
+const ToggleOption: FC<ToggleOptionProps> = ({ isEnabled, onToggle, label, shortcut }) => {
   return (
     <div id={prfx('toggle-contents')} onClick={(e) => { e.stopPropagation() }}>
       {shortcut && (
@@ -111,7 +127,6 @@ const ToggleOption: FC<ToggleOptionProps> = ({ isEnabled, onToggle, label, short
       </label>
       <div>
         <input
-          disabled={activeSession}
           id='setting-toggle-input'
           type="checkbox"
           checked={isEnabled}
@@ -124,15 +139,14 @@ const ToggleOption: FC<ToggleOptionProps> = ({ isEnabled, onToggle, label, short
 };
 
 interface LayoutOptionProps {
-  curValue: number;
-  setNumberVal: Dispatch<SetStateAction<number>>;
+  curValue: number | null;
+  setNumberVal: Dispatch<SetStateAction<number | null>>;
   label: string;
   desc: string;
   step: string;
-  activeSession: boolean;
 }
 
-const LayoutOption: FC<LayoutOptionProps> = ({ curValue, setNumberVal, label, desc, step, activeSession }) => {
+const LayoutOption: FC<LayoutOptionProps> = ({ curValue, setNumberVal, label, desc, step }) => {
   const onChangeNumConversionHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const newValue = parseFloat(e.target.value);
     if (!isNaN(newValue)) {
@@ -151,11 +165,10 @@ const LayoutOption: FC<LayoutOptionProps> = ({ curValue, setNumberVal, label, de
         </div>
       </div>
       <input
-        disabled={!activeSession}
         step={step}
         id={prfx('layout-inp')}
         type='number'
-        value={curValue}
+        value={curValue ? curValue : 0}
         onClick={(e) => { e.stopPropagation() }}
         onChange={onChangeNumConversionHandler} />
     </div>

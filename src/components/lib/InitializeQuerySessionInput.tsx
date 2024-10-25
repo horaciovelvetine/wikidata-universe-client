@@ -6,18 +6,18 @@ import { ChangeEvent, createRef, Dispatch, FC, FormEvent, SetStateAction, useEff
 
 import { getQueryData, RequestResponse } from '../../api';
 import { errorShakeInvalidElement, toggleElementOpacity, fadeElementAndRemoveDisplay, INPUT_STATE } from '../';
-import { MainAppLayoutSessionState } from '../../app/MainAppLayout';
+import { MainAppLayoutState } from '../../app/MainAppLayoutState';
 
 const wikidataHomepage = 'https://www.wikidata.org/wiki/Wikidata:Main_Page';
 const prfx = (suffix: string) => { return 'init-query-session-' + suffix };
 
 interface InitializeQuerySessionInputProps {
-  sessionSettingsState: MainAppLayoutSessionState
+  mainAppLayoutState: MainAppLayoutState
   setInitialQueryResponse: Dispatch<SetStateAction<RequestResponse | null>>;
 }
 
-export const InitializeQuerySessionInput: FC<InitializeQuerySessionInputProps> = ({ sessionSettingsState, setInitialQueryResponse }) => {
-  const { setIsLoading, setActiveQuerySession, useOfflineData, apiOnline } = sessionSettingsState;
+export const InitializeQuerySessionInput: FC<InitializeQuerySessionInputProps> = ({ mainAppLayoutState, setInitialQueryResponse }) => {
+  const { setIsLoading, apiOnline } = mainAppLayoutState;
   const [localInput, setLocalInput] = useState<string>('');
   const [locInpValid, setLocInpValid] = useState<INPUT_STATE>(INPUT_STATE.PLACEHOLDER);
 
@@ -29,7 +29,7 @@ export const InitializeQuerySessionInput: FC<InitializeQuerySessionInputProps> =
   const curElRefs = () => { return { container: contRef.current!, invalidCont: invalidContRef.current!, submit: submitRef.current!, input: inputRef.current! } }
 
   useEffect(() => { // fade the element in on render...
-    if (!useOfflineData && apiOnline) {
+    if (apiOnline) {
       toggleElementOpacity(contRef.current!, true, '400ms')
     } else if (!apiOnline) {
       fadeElementAndRemoveDisplay(contRef.current!, '1ms')
@@ -50,7 +50,6 @@ export const InitializeQuerySessionInput: FC<InitializeQuerySessionInputProps> =
     await getQueryData(localInput).then(res => {
 
       if (res.status === 200) {
-        setActiveQuerySession(true);
         setInitialQueryResponse(res);
         fadeElementAndRemoveDisplay(container, '250ms')
       } else {

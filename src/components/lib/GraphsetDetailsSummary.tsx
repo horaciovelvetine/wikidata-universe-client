@@ -2,17 +2,15 @@ import './GraphsetDetailsSummary.css'
 import React, { createRef, useEffect, useState } from 'react';
 
 import { SketchManager } from '../../models/p5_managers/SketchManager';
-import { Graphset } from '../../models';
-import { MainAppLayoutSessionState } from '../../app/MainAppLayout';
+import { MainAppLayoutState } from '../../app/MainAppLayoutState';
 
 interface GraphsetDetailsSummaryProps {
-  sessionSettingsState: MainAppLayoutSessionState;
-  graphset: Graphset | null,
-  p5SketchRef: SketchManager | null;
+  mainAppLayoutState: MainAppLayoutState;
+  sketchRef: SketchManager | null;
 }
 
-export const GraphsetDetailsSummary: React.FC<GraphsetDetailsSummaryProps> = ({ graphset, p5SketchRef, sessionSettingsState }) => {
-  const { showDebugDetails } = sessionSettingsState;
+export const GraphsetDetailsSummary: React.FC<GraphsetDetailsSummaryProps> = ({ sketchRef, mainAppLayoutState }) => {
+  const { showDebugDetails } = mainAppLayoutState;
   const [curCamLookAt, setCurCamLookAt] = useState({ x: 0, y: 0, z: 0 });
   const [curCamPos, setCurCamPos] = useState({ x: 0, y: 0, z: 0 });
   const [vertCount, setVertCount] = useState(0);
@@ -24,20 +22,20 @@ export const GraphsetDetailsSummary: React.FC<GraphsetDetailsSummaryProps> = ({ 
   useEffect(() => {
     const updateCameraValues = () => {
       setCurCamLookAt({
-        x: Math.round((p5SketchRef?.CAM().cam?.centerX ?? 0)),
-        y: Math.round((p5SketchRef?.CAM().cam?.centerY ?? 0)),
-        z: Math.round((p5SketchRef?.CAM().cam?.centerZ ?? 0))
+        x: Math.round((sketchRef?.CAM().getP5Cam()?.centerX ?? 0)),
+        y: Math.round((sketchRef?.CAM().getP5Cam()?.centerY ?? 0)),
+        z: Math.round((sketchRef?.CAM().getP5Cam()?.centerZ ?? 0))
       });
 
       setCurCamPos({
-        y: Math.round((p5SketchRef?.CAM().cam?.eyeY ?? 0)),
-        x: Math.round((p5SketchRef?.CAM().cam?.eyeX ?? 0)),
-        z: Math.round((p5SketchRef?.CAM().cam?.eyeZ ?? 0))
+        y: Math.round((sketchRef?.CAM().getP5Cam()?.eyeY ?? 0)),
+        x: Math.round((sketchRef?.CAM().getP5Cam()?.eyeX ?? 0)),
+        z: Math.round((sketchRef?.CAM().getP5Cam()?.eyeZ ?? 0))
       });
 
-      setVertCount(graphset?.vertices?.length ?? 0)
-      setEdgeCount(graphset?.edges?.length ?? 0)
-      setPropCount(graphset?.properties?.length ?? 0)
+      setVertCount(sketchRef?.GRAPH()?.vertices?.length ?? 0)
+      setEdgeCount(sketchRef?.GRAPH()?.edges?.length ?? 0)
+      setPropCount(sketchRef?.GRAPH()?.properties?.length ?? 0)
     };
 
     updateCameraValues();
@@ -45,7 +43,7 @@ export const GraphsetDetailsSummary: React.FC<GraphsetDetailsSummaryProps> = ({ 
     const intervalId = setInterval(updateCameraValues, 100); // Update every 100ms
 
     return () => clearInterval(intervalId); // Cleanup interval on component unmount
-  }, [graphset, p5SketchRef]);
+  }, [sketchRef, sketchRef?.GRAPH()]);
 
   useEffect(() => {
     if (!debugRef.current) return;
