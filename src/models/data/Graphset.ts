@@ -74,18 +74,24 @@ export class Graphset implements iGraphset {
     });
   }
 
-  getOriginVertex(): Vertex {
+  getOriginVertex(): Vertex | null {
     const originVertex = this.vertices.find(vertex => vertex.origin === true);
-    return new Vertex(originVertex!);
+    if (originVertex)
+      return new Vertex(originVertex);
+    return null;
   }
 
-  getProperty(propertyId: String): Property {
+  getProperty(propertyId: String): Property | null {
     const property = this.properties.find(property => property.id === propertyId);
-    return new Property(property!)
+    if (property)
+      return new Property(property);
+    return null;
   }
 
-  getVertex(vertexId: String): Vertex {
-    const vertex = this.vertices.find(vertex => vertex.id === vertexId)!;
-    return new Vertex(vertex);
+  getVertex(vertexId: String): Vertex | null {
+    const vertex = this.vertices.find(vertex => vertex.id === vertexId);
+    if (vertex)
+      return new Vertex(vertex);
+    return null;
   }
 }
