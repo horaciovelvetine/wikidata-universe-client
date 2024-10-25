@@ -1,13 +1,16 @@
 import { P5CanvasInstance } from "@p5-wrapper/react";
-import { Camera } from "p5";
+import { Camera, Vector } from "p5";
 import { Point3D } from "../";
 
+/**
+ * Manages the camera in a p5.js environment, allowing for smooth transitions and animations.
+ */
 export class CameraManager {
-  p5: P5CanvasInstance;
-  cam: Camera | null;
-  target: Point3D | null;
-  currentKeyframe: number = 0;
-  duration: number = 200;
+  private p5: P5CanvasInstance;
+  private cam: Camera | null;
+  private target: Point3D | null; // new lookAt target for the Camera
+  private currentKeyframe: number = 0;
+  private duration: number = 200; // frame animation duration for camera
 
   constructor(p5: P5CanvasInstance) {
     this.p5 = p5;
@@ -15,7 +18,18 @@ export class CameraManager {
     this.cam = null;
   }
 
-  advance() {
+  /**
+   * Gets the current camera instance.
+   * @returns The current camera instance.
+   */
+  getP5Cam(): Camera | null {
+    return this.cam;
+  }
+
+  /**
+   * Advances the camera animation by one frame.
+   */
+  advance(): void {
     if (this.cam == null) return;
     const { x, y, z } = this.changeVec();
     this.cam.lookAt(x, y, z);
@@ -28,32 +42,49 @@ export class CameraManager {
     this.currentKeyframe += 1;
   }
 
-  animInProgress() {
+  /**
+   * Checks if an animation is in progress.
+   * @returns True if an animation is in progress, false otherwise.
+   */
+  animInProgress(): boolean {
     return this.hasTarget() && this.currentKeyframe <= this.duration;
   }
 
-  setTarget(point: Point3D) {
+  /**
+   * Sets the target point for the camera to look at.
+   * @param point - The target point.
+   */
+  setTarget(point: Point3D): void {
     this.target = point;
     this.currentKeyframe = 0;
   }
 
-  setCamera(cam: Camera) {
+  /**
+   * Sets the camera instance.
+   * @param cam - The camera instance.
+   */
+  setCamera(cam: Camera): void {
     this.cam = cam;
   }
 
-  private hasTarget() {
+  /**
+   * Checks if there is a target point set.
+   * @returns True if there is a target point, false otherwise.
+   */
+  private hasTarget(): boolean {
     return !!this.target;
   }
 
-  private changeVec() {
-    // checks null.cam? above in @advance()
-    const mult = this.currentKeyframe * 1.001 / this.duration // mult prevents rnd bad  calcs for whole ints
+  /**
+   * Calculates the vector for the camera to look at based on the current keyframe.
+   * @returns The vector for the camera to look at.
+   */
+  private changeVec(): Vector {
+    const mult = this.currentKeyframe * 1.001 / this.duration; // mult prevents rnd bad calcs for whole ints
     return this.p5.createVector(
       this.p5.lerp(this.cam!.centerX, this.target!.x, mult),
       this.p5.lerp(this.cam!.centerY, this.target!.y, mult),
       this.p5.lerp(this.cam!.centerZ, this.target!.z, mult),
-    )
+    );
   }
-
-
 }

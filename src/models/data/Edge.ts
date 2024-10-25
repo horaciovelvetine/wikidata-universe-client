@@ -14,6 +14,7 @@ export class Edge implements iEdge {
   tgtId: string | null;
   propertyId: string;
   label: string | null;
+
   constructor(edgeData: iEdge) {
     this.srcId = edgeData.srcId;
     this.tgtId = edgeData.tgtId;

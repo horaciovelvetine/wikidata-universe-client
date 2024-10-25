@@ -6,85 +6,67 @@ import { P5CanvasInstance } from "@p5-wrapper/react";
 
 import { traceRay } from "../../utils";
 import { postClickTargetData, postRefreshLayout, postRelatedDataQueue, RequestResponse } from "../../api";
-import { CameraManager, FetchManager, Graphset, UIManager, Vertex } from "..";
-import { MainAppLayoutSessionState } from "../../app/MainAppLayout";
-
-interface CoordsSummary {
-  id: string,
-  label: string | null,
-  x: number,
-  y: number,
-  z: number
-}
+import { CameraManager, Graphset, iLayoutConfig, LayoutConfig, UIManager, Vertex } from "..";
+import { calcSafeSketchWindowSize } from "../../components";
+import { MainAppLayoutState } from "../../app/MainAppLayoutState";
 
 interface SketchManagerProps {
   p5: P5CanvasInstance;
-  initialQueryResponse: RequestResponse | null;
-  setGraphset: Dispatch<SetStateAction<Graphset | null>>;
+  initialQueryResponse: RequestResponse;
+  mainAppLayoutState: MainAppLayoutState;
   setSelectedVertex: Dispatch<SetStateAction<Vertex | null>>;
   setHoveredVertex: Dispatch<SetStateAction<Vertex | null>>;
-  setP5SketchRef: Dispatch<SetStateAction<SketchManager | null>>;
-  sessionSettingsState: MainAppLayoutSessionState;
+  setWikiverseSketchRef: Dispatch<SetStateAction<SketchManager | null>>;
 }
 
 
 export class SketchManager {
   //*/=> REACT STATE
-  setReactGraphset: Dispatch<SetStateAction<Graphset | null>>;
-  setReactSelVert: Dispatch<SetStateAction<Vertex | null>>;
-  setReactHovVert: Dispatch<SetStateAction<Vertex | null>>;
-  setReactIsLoading: Dispatch<SetStateAction<boolean>>;
+  private setReactSelVert: Dispatch<SetStateAction<Vertex | null>>;
+  private setReactHovVert: Dispatch<SetStateAction<Vertex | null>>;
+  private setReactIsLoading: Dispatch<SetStateAction<boolean>>;
 
   //*/=> SKETCH STATE
-  p5: P5CanvasInstance
-  wikiFont: Font | undefined;
-  cam: Camera | undefined;
-  camMngr: CameraManager;
-  uiMngr: UIManager;
-  fetchMngr: FetchManager = new FetchManager();
+  private p5: P5CanvasInstance
+  private wikiFont: Font | undefined;
+  private cam: Camera | undefined;
+
+  //*/==> SUB-MANAGER
+  private camMngr: CameraManager;
+  private uiMngr: UIManager;
 
   //*/=> DATA STATE
-  originalQuery: string;
-  graph: Graphset;
-  selectedVertex: Vertex | null = null;
-  hoveredVertex: Vertex | null = null;
-  dataDensity: number;
-  attractionMult: number;
-  repulsionMult: number;
+  private originalQuery: string;
+  private graph: Graphset;
+  private selectedVertex: Vertex | null = null;
+  private hoveredVertex: Vertex | null = null;
+  private layoutConfig: LayoutConfig;
 
-
+  //
   //*/=> CONSTRUCTOR
-  constructor({ p5, initialQueryResponse, setGraphset, setSelectedVertex, setHoveredVertex, sessionSettingsState, setP5SketchRef }: SketchManagerProps) {
+  //*/=> CONSTRUCTOR
+  //*/=> CONSTRUCTOR
+  //
+  constructor({ p5, initialQueryResponse, mainAppLayoutState, setSelectedVertex, setHoveredVertex, setWikiverseSketchRef }: SketchManagerProps) {
 
     // SKETCH STATE
     this.p5 = p5;
     this.camMngr = new CameraManager(p5);
-    this.uiMngr = new UIManager(p5, sessionSettingsState);
+    this.uiMngr = new UIManager(p5);
 
     // REACT STATE
-    this.setReactGraphset = setGraphset;
     this.setReactSelVert = setSelectedVertex;
     this.setReactHovVert = setHoveredVertex;
-    this.setReactIsLoading = sessionSettingsState.setIsLoading;
+    this.setReactIsLoading = mainAppLayoutState.setIsLoading;
 
     // DATA STATE
-    this.originalQuery = initialQueryResponse!.data.query;
-    this.graph = new Graphset(initialQueryResponse!.data);
-    this.selectedVertex = new Vertex(this.graph.getOriginVertex());
-    this.setReactSelVert(this.selectedVertex);
-
-    // Layout Settings
-    this.dataDensity = initialQueryResponse!.data.layoutConfig.dataDensity
-    this.attractionMult = initialQueryResponse!.data.layoutConfig.attrMult;
-    this.repulsionMult = initialQueryResponse!.data.layoutConfig.repMult;
-    sessionSettingsState.setDataDensity(this.dataDensity);
-    sessionSettingsState.setAttractionMult(this.attractionMult);
-    sessionSettingsState.setRepulsionMult(this.repulsionMult);
-
-
+    this.originalQuery = initialQueryResponse.data.query;
+    this.graph = new Graphset(initialQueryResponse.data);
+    this.layoutConfig = new LayoutConfig(initialQueryResponse.data.layoutConfig);
+    this.updateSelectedVertex(this.graph.getOriginVertex());
 
     // Pass React back this ref
-    setP5SketchRef(this);
+    setWikiverseSketchRef(this);
   }
 
   /**
@@ -101,20 +83,34 @@ export class SketchManager {
     return this.camMngr;
   }
 
-  updateDataDensity(dens: number) {
-    this.dataDensity = dens;
+  /**
+   * @method LAYOUT_CONFIG - gets the stored instance of the LayoutConfig
+   */
+  LAYOUT_CONFIG() {
+    return this.layoutConfig;
   }
 
-  updateAttractionMult(attr: number) {
-    this.attractionMult = attr;
+  /**
+   * @method GRAPH - gets the stored instance of the Graphset
+   */
+  GRAPH() {
+    return this.graph;
   }
 
-  updateRepulsionMult(rep: number) {
-    this.repulsionMult = rep;
+  /**
+   * @method updateSelectedVertexUpdates - Updates both the sketches internal value, and Reacts state value for the currently selected Vertex state
+   */
+  updateSelectedVertex(vert: Vertex | null) {
+    this.selectedVertex = vert;
+    this.setReactSelVert(vert);
   }
 
-  buildCurLayoutConfig() {
-    return { ...{ dataDensity: this.dataDensity, attrMult: this.attractionMult, repMult: this.repulsionMult } }
+  /**
+   * @method updateHoveredVertex - Updates both the sketches internal value, and Reacts state value for the currently hovered Vertex state
+   */
+  updateHoveredVertex(vert: Vertex | null) {
+    this.hoveredVertex = vert;
+    this.setReactHovVert(vert);
   }
 
   /**
@@ -135,28 +131,32 @@ export class SketchManager {
   * @method createCanvas - Creates the p5 canvas with initial dimensions.
    */
   createCanvas() {
-    const { width, height } = this.calcInitLayoutDimensions();
+    const { width, height } = calcSafeSketchWindowSize();
     this.p5.createCanvas(width, height, this.p5.WEBGL)
   }
 
-  calcInitLayoutDimensions() {
-    return { width: Math.round(window.innerWidth * 0.8), height: Math.round(window.innerHeight * 0.85) };
-  }
-
   /**
-   * @method initCameraManaged - Initializes the camera and sets it looking at the origin, with a FOV which has modified
+   * @method initManagedCamera - Initializes the camera and sets it looking at the origin, with a FOV which has modified
    * the FRUSTUM (sp?) to allow the minRender & maxRender to be moved in & out.
    */
-  initCameraManaged() {
+  initManagedCamera() {
     this.cam = this.p5.createCamera();
     this.camMngr.setCamera(this.cam);
     // setup cam frustum w/ closer min & further max render distances 
     const aspectRatio = (this.p5.width / this.p5.height);
     const fovRad = (2 * this.p5.atan(this.p5.height / 2 / 800))
-    const { x, y, z } = this.graph.getOriginVertex().xyz();
     this.p5.perspective(fovRad, aspectRatio, 1, 12000)
-    this.cam.setPosition(x, y, (z + 200)); // assumes origin is positioned @ (0,0,0)
-    this.cam.lookAt(z, (y + 100), z) // look slightly below vertex for init 'pan-up' effect
+  }
+
+  /**
+   * @method initCameraPositionAtOriginVertex - Positions the managed camera based on the position of the Vertex marked as the origin, or (0,0,0) if that Vertex could not be found
+   */
+  initCameraPositionAtOriginVertex() {
+    if (this.cam === undefined) return;
+    const origin = this.graph.getOriginVertex();
+    const { x, y, z } = origin ? origin.xyz() : { x: 0, y: 0, z: 0 };
+    this.cam.setPosition(x, y, (z + 200));
+    this.cam.lookAt(z, (y + 300), z) // look below vertex for init 'pan-up' effect
   }
 
   /**
@@ -168,15 +168,24 @@ export class SketchManager {
   }
 
   /**
+   * @method requestPayload() - helper shorthands building a payload for a request to the API
+   * @apiNote - the QueryVal is inputted since it is used differently per request...
+   */
+  private requestPayload(queryVal: string) {
+    return {
+      query: queryVal, ...this.graph, layoutConfig: this.layoutConfig
+    }
+  }
+
+  /**
    * @method initPostRelatedDataRequest - Fetches related data and updates the sketch data.
    */
   async initPostRelatedDataRequest() {
     this.setReactIsLoading(true); //==> in-case were here on reload.
 
-    await postRelatedDataQueue({ query: this.originalQuery, ...this.graph, layoutConfig: this.buildCurLayoutConfig() })
+    await postRelatedDataQueue(this.requestPayload(this.originalQuery))
       .then(response => {
         this.graph = new Graphset(response.data);
-        this.setReactGraphset(this.graph)
       }).catch(err => {
         console.error(err);
         debugger;
@@ -186,15 +195,14 @@ export class SketchManager {
   }
 
   /**
- * @method fetchClickTargetData - fetches the details related to the targeted (clicked) Vertex
- */
+   * @method fetchClickTargetData - fetches the details related to the targeted (clicked) Vertex
+   */
   async fetchClickTargetData(tgt: Vertex) {
     this.setReactIsLoading(true);
 
-    await postClickTargetData({ query: tgt.id, ...this.graph, layoutConfig: this.buildCurLayoutConfig() })
+    await postClickTargetData(this.requestPayload(tgt.id))
       .then(response => {
         this.graph = new Graphset(response.data);
-        this.setReactGraphset(this.graph);
       })
       .catch(err => {
         console.error(err);
@@ -211,12 +219,11 @@ export class SketchManager {
   async refreshLayoutPositions() {
     this.setReactIsLoading(true);
 
-    await postRefreshLayout({ query: this.originalQuery, ...this.graph, layoutConfig: this.buildCurLayoutConfig() })
+    await postRefreshLayout(this.requestPayload(this.originalQuery))
       .then(response => {
         this.selectedVertex = null;
         this.setReactSelVert(null);
         this.graph = new Graphset(response.data);
-        this.setReactGraphset(this.graph);
       })
       .catch(err => {
         console.error(err);
@@ -226,7 +233,6 @@ export class SketchManager {
         this.setReactIsLoading(false);
       })
   }
-
 
   /**
     * @method drawUI - Draws the UI elements.
@@ -313,18 +319,7 @@ export class SketchManager {
    * @method handleResize - Handles resizing of the canvas.
    */
   handleResize() {
-    const { width, height } = this.calcInitLayoutDimensions();
+    const { width, height } = calcSafeSketchWindowSize();
     this.p5.resizeCanvas(width, height)
-  }
-
-  /**
-   * @method sketchDataCoordsSummary - Helper to print sketchData details to the console
-   */
-  sketchDataCoordsSummary(): CoordsSummary[] {
-    return this.graph.vertices.map(vertex => ({
-      id: vertex.id,
-      label: vertex.label,
-      ...vertex.coords
-    }));
   }
 }
