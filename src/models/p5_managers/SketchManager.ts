@@ -4,7 +4,6 @@ import { Dispatch, SetStateAction } from "react";
 import { Camera, Font } from "p5";
 import { P5CanvasInstance } from "@p5-wrapper/react";
 
-import { traceRay } from "../../utils";
 import { postClickTargetData, postRefreshLayout, postRelatedDataQueue, RequestResponse } from "../../api";
 import { CameraManager, Graphset, LayoutConfig, UIManager, Vertex } from "..";
 import { calcSafeSketchWindowSize } from "../../components";
@@ -286,7 +285,7 @@ export class SketchManager {
    */
   stillHoveredLastVertex(): false | number[] {
     if (this.hoveredVertex == null) return false;
-    return traceRay(this.p5, this.cam!, this.hoveredVertex)
+    return this.hoveredVertex.traceRay(this.p5, this.cam!)
   }
 
   /**
@@ -297,7 +296,7 @@ export class SketchManager {
 
     this.graph.vertices.forEach(vert => {
       const checkVert = new Vertex(vert);
-      if (traceRay(this.p5, this.cam!, checkVert)) {
+      if (checkVert.traceRay(this.p5, this.cam!)) {
         mouseTarget = checkVert;
       }
     })
