@@ -6,17 +6,17 @@ import { P5CanvasInstance } from "@p5-wrapper/react";
 
 import { traceRay } from "../../utils";
 import { postClickTargetData, postRefreshLayout, postRelatedDataQueue, RequestResponse } from "../../api";
-import { CameraManager, Graphset, iLayoutConfig, LayoutConfig, UIManager, Vertex } from "..";
+import { CameraManager, Graphset, LayoutConfig, UIManager, Vertex } from "..";
 import { calcSafeSketchWindowSize } from "../../components";
 import { MainAppLayoutState } from "../../app/MainAppLayoutState";
 
 interface SketchManagerProps {
   p5: P5CanvasInstance;
-  initialQueryResponse: RequestResponse;
+  initSketchAPIRes: RequestResponse | null;
   mainAppLayoutState: MainAppLayoutState;
   setSelectedVertex: Dispatch<SetStateAction<Vertex | null>>;
   setHoveredVertex: Dispatch<SetStateAction<Vertex | null>>;
-  setWikiverseSketchRef: Dispatch<SetStateAction<SketchManager | null>>;
+  setSketchRef: Dispatch<SetStateAction<SketchManager | null>>;
 }
 
 
@@ -29,7 +29,7 @@ export class SketchManager {
   //*/=> SKETCH STATE
   private p5: P5CanvasInstance
   private wikiFont: Font | undefined;
-  private cam: Camera | undefined;
+  private cam: Camera | null = null;
 
   //*/==> SUB-MANAGER
   private camMngr: CameraManager;
@@ -47,7 +47,7 @@ export class SketchManager {
   //*/=> CONSTRUCTOR
   //*/=> CONSTRUCTOR
   //
-  constructor({ p5, initialQueryResponse, mainAppLayoutState, setSelectedVertex, setHoveredVertex, setWikiverseSketchRef }: SketchManagerProps) {
+  constructor({ p5, initSketchAPIRes, mainAppLayoutState, setSelectedVertex, setHoveredVertex, setSketchRef }: SketchManagerProps) {
 
     // SKETCH STATE
     this.p5 = p5;
@@ -60,13 +60,19 @@ export class SketchManager {
     this.setReactIsLoading = mainAppLayoutState.setIsLoading;
 
     // DATA STATE
-    this.originalQuery = initialQueryResponse.data.query;
-    this.graph = new Graphset(initialQueryResponse.data);
-    this.layoutConfig = new LayoutConfig(initialQueryResponse.data.layoutConfig);
-    this.updateSelectedVertex(this.graph.getOriginVertex());
+    if (initSketchAPIRes != null) {
+      this.originalQuery = initSketchAPIRes.data.query;
+      this.graph = new Graphset(initSketchAPIRes.data);
+      this.layoutConfig = new LayoutConfig(initSketchAPIRes.data.layoutConfig);
+      this.updateSelectedVertex(this.graph.getOriginVertex());
+    } else {
+      this.originalQuery = "No Query Value Provided"
+      this.layoutConfig = new LayoutConfig({ dataDensity: 0, attractionMult: 0, repulsionMult: 0 });
+      this.graph = new Graphset({ vertices: [], edges: [], properties: [], dimensions: { width: 0, height: 0 } })
+    }
 
     // Pass React back this ref
-    setWikiverseSketchRef(this);
+    setSketchRef(this);
   }
 
   /**
@@ -152,7 +158,8 @@ export class SketchManager {
    * @method initCameraPositionAtOriginVertex - Positions the managed camera based on the position of the Vertex marked as the origin, or (0,0,0) if that Vertex could not be found
    */
   initCameraPositionAtOriginVertex() {
-    if (this.cam === undefined) return;
+    if (this.cam === null) return;
+    if (this.graph === null) return;
     const origin = this.graph.getOriginVertex();
     const { x, y, z } = origin ? origin.xyz() : { x: 0, y: 0, z: 0 };
     this.cam.setPosition(x, y, (z + 200));

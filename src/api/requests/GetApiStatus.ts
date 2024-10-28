@@ -3,7 +3,7 @@ import { apiURL, RequestResponse } from "../";
 
 export async function getApiStatus(): Promise<RequestResponse> {
   return await axios
-    .get(apiURL("status"))
+    .get(apiURL("current-status"))
     .then((res) => {
       console.log("getApiStatus()", res)
       return { status: res.status, data: res.data, errMsg: undefined };

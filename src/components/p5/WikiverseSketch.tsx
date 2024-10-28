@@ -8,17 +8,17 @@ import { MainAppLayoutState } from '../../app/MainAppLayoutState';
 
 interface WikiverseProps {
   mainAppLayoutState: MainAppLayoutState;
-  initialQueryResponse: RequestResponse;
+  initSketchAPIRes: RequestResponse | null;
   setSelectedVertex: Dispatch<SetStateAction<Vertex | null>>;
   setHoveredVertex: Dispatch<SetStateAction<Vertex | null>>;
-  setWikiverseSketchRef: Dispatch<SetStateAction<SketchManager | null>>;
+  setP5SketchRef: Dispatch<SetStateAction<SketchManager | null>>;
 }
 
 //! { note } - Y axis is reversed of natural expectation in P5.js
-export const WikiverseSketch: FC<WikiverseProps> = ({ mainAppLayoutState, initialQueryResponse, setSelectedVertex, setHoveredVertex, setWikiverseSketchRef }) => {
+export const WikiverseSketch: FC<WikiverseProps> = ({ mainAppLayoutState, initSketchAPIRes, setSelectedVertex, setHoveredVertex, setP5SketchRef }) => {
 
   const sketch: Sketch = (p5) => { //SketchManager contains a lionshare of the p5 sketch specific details
-    const SK = new SketchManager({ p5, initialQueryResponse, mainAppLayoutState, setSelectedVertex, setHoveredVertex, setWikiverseSketchRef })
+    const SK = new SketchManager({ p5, initSketchAPIRes, mainAppLayoutState, setSelectedVertex, setHoveredVertex, setSketchRef: setP5SketchRef })
 
     //*/=> SETUP
     p5.preload = () => { SK.preloadFont() }

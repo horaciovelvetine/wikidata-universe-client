@@ -18,7 +18,7 @@ export class UIManager {
    */
   draw(data: iGraphset) {
     this.p5.background(UI_BG())
-    this.p5.orbitControl(2, 2, 2); // sensitivity adjustments
+    this.p5.orbitControl(2, 2, 1); // sensitivity adjustments
 
     const graph = new Graphset(data);
 

@@ -1,5 +1,6 @@
 export { getApiStatus } from './requests/GetApiStatus';
 export { getQueryData } from './requests/GetQueryData';
+export { getAboutData} from './requests/GetAboutData'
 export { postRelatedDataQueue } from './requests/PostRelatedDataQueue';
 export { postClickTargetData } from './requests/PostClickTargetData'
 export { postRefreshLayout } from './requests/PostRefreshLayout';

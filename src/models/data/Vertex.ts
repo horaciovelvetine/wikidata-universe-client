@@ -137,8 +137,9 @@ export class Vertex implements iVertex {
   parallelEdges(vert2: iVertex, edge: iEdge, edgesToDraw: iEdge[]): Edge[] {
     const isTarget = edge.tgtId === vert2.id; //determine which is which src||tgt
 
+    //todo this is where paralell edges happens - this behavior needs refined
     const parallelEdges = edgesToDraw.filter(e =>
-      isTarget ? e.srcId === vert2.id : e.tgtId === vert2.id
+      isTarget ? (e.srcId === vert2.id && e.propertyId === edge.propertyId) : (e.tgtId === vert2.id && e.propertyId === edge.propertyId)
     );
 
     return parallelEdges.map(edgeDat => { return new Edge(edgeDat) }); //true if found
@@ -213,7 +214,7 @@ export class Vertex implements iVertex {
    */
   private setEdgeStrokeColor(p5: P5CanvasInstance, edge: iEdge, isHov: boolean, isParallel: boolean) {
     const opacity = isHov ? 0.4 : 1;
-    const blueOpacity = 1.5 * opacity
+    const blueOpacity = isHov ? 0.6 : 1;
     const incomingColor = `rgba(30,0,255,${blueOpacity})`;
     const outgoingColor = `rgba(255,50,80,${opacity})`;
     const bothColor = `rgba(135,20,255,${opacity})`;

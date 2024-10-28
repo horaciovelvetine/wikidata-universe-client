@@ -13,10 +13,11 @@ const prfx = (suffix: string) => { return 'init-query-session-' + suffix };
 
 interface InitializeQuerySessionInputProps {
   mainAppLayoutState: MainAppLayoutState
-  setInitialQueryResponse: Dispatch<SetStateAction<RequestResponse | null>>;
+  setInitSketchAPIRes: Dispatch<SetStateAction<RequestResponse | null>>;
+  setShowWikiverseSketch: Dispatch<SetStateAction<boolean>>;
 }
 
-export const InitializeQuerySessionInput: FC<InitializeQuerySessionInputProps> = ({ mainAppLayoutState, setInitialQueryResponse }) => {
+export const InitializeQuerySessionInput: FC<InitializeQuerySessionInputProps> = ({ mainAppLayoutState, setInitSketchAPIRes, setShowWikiverseSketch }) => {
   const { setIsLoading, apiOnline } = mainAppLayoutState;
   const [localInput, setLocalInput] = useState<string>('');
   const [locInpValid, setLocInpValid] = useState<INPUT_STATE>(INPUT_STATE.PLACEHOLDER);
@@ -31,7 +32,7 @@ export const InitializeQuerySessionInput: FC<InitializeQuerySessionInputProps> =
   useEffect(() => { // fade the element in on render...
     if (apiOnline) {
       toggleElementOpacity(contRef.current!, true, '400ms')
-    } else if (!apiOnline) {
+    } else {
       fadeElementAndRemoveDisplay(contRef.current!, '1ms')
     }
   }, [])
@@ -48,10 +49,10 @@ export const InitializeQuerySessionInput: FC<InitializeQuerySessionInputProps> =
 
     setIsLoading(true);
     await getQueryData(localInput).then(res => {
-
       if (res.status === 200) {
-        setInitialQueryResponse(res);
-        fadeElementAndRemoveDisplay(container, '250ms')
+        setShowWikiverseSketch(true);
+        setInitSketchAPIRes(res);
+        fadeElementAndRemoveDisplay(container, '1500ms')
       } else {
         toggleElementOpacity(invalidCont, true, '150ms')
         setTimeout(() => {
@@ -95,7 +96,7 @@ export const InitializeQuerySessionInput: FC<InitializeQuerySessionInputProps> =
 
       <div id={prfx('form-cont')}>
         <form id={prfx('form')} onSubmit={submitInitQueryRequestHandler}>
-          <input id={prfx('input')} ref={inputRef} type='text' placeholder='Search...' onChange={initQueryInputChangeHandler} />
+          <input id={prfx('input')} ref={inputRef} type='text' placeholder='Search...' onChange={initQueryInputChangeHandler} autoFocus={true}/>
           <button id={prfx('submit-btn')} ref={submitRef} type='submit'>
             <div id='icon-adjustment-layer'>
               < img id={prfx('search-icon')} src={Search} />

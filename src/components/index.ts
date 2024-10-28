@@ -18,6 +18,7 @@ export { VerticalSiteTitle } from './ui/VerticalSiteTitle';
 //p5.Sketches
 export { WikiverseSketch } from './p5/WikiverseSketch'
 export { BackgroundSketch } from './p5/BackgroundSketch'
+export { AboutSketch } from './p5/AboutSketch'
 
 //UTIL:
 export { calcSafeSketchWindowSize } from './util/CalcSafeSketchWindowSize'

@@ -9,23 +9,23 @@ import { MainAppLayoutState } from '../../app/MainAppLayoutState';
 
 interface SessionSettingsMenuProps {
   mainAppLayoutState: MainAppLayoutState;
-  wikiverseSketchRef: SketchManager | null;
+  p5SketchRef: SketchManager | null;
 }
 
 const prfx = (sufx: string) => {
   return 'session-settings-' + sufx;
 }
 
-export const SessionSettingsMenu: FC<SessionSettingsMenuProps> = ({ mainAppLayoutState, wikiverseSketchRef }) => {
+export const SessionSettingsMenu: FC<SessionSettingsMenuProps> = ({ mainAppLayoutState, p5SketchRef }) => {
   const menuContainerRef = createRef<HTMLDivElement>();
   const iconRef = createRef<HTMLImageElement>();
   const { showSettings, setShowSettings, showDebugDetails, setShowDebugDetails } = mainAppLayoutState;
 
-  const [dataDensityInp, setDataDensityInp] = useState(wikiverseSketchRef ? wikiverseSketchRef.LAYOUT_CONFIG().dataDensity : null);
-  const [attractionMultInp, setAttractionMultInp] = useState(wikiverseSketchRef ? wikiverseSketchRef.LAYOUT_CONFIG().attractionMult : null)
-  const [repulsioMultInp, setRepulsionMultInp] = useState(wikiverseSketchRef ? wikiverseSketchRef.LAYOUT_CONFIG().repulsionMult : null)
-  const [showAxisInp, setShowAxisInp] = useState(wikiverseSketchRef ? wikiverseSketchRef.UI().getShowAxis() : false);
-  const [showBoundingInp, setShowBoundingInp] = useState(wikiverseSketchRef ? wikiverseSketchRef.UI().getShowBoundingBox() : false);
+  const [dataDensityInp, setDataDensityInp] = useState(p5SketchRef ? p5SketchRef.LAYOUT_CONFIG().dataDensity : null);
+  const [attractionMultInp, setAttractionMultInp] = useState(p5SketchRef ? p5SketchRef.LAYOUT_CONFIG().attractionMult : null)
+  const [repulsioMultInp, setRepulsionMultInp] = useState(p5SketchRef ? p5SketchRef.LAYOUT_CONFIG().repulsionMult : null)
+  const [showAxisInp, setShowAxisInp] = useState(p5SketchRef ? p5SketchRef.UI().getShowAxis() : false);
+  const [showBoundingInp, setShowBoundingInp] = useState(p5SketchRef ? p5SketchRef.UI().getShowBoundingBox() : false);
 
   useEffect(() => {
     toggleElementOpacity(menuContainerRef.current!, showSettings);
@@ -34,29 +34,29 @@ export const SessionSettingsMenu: FC<SessionSettingsMenuProps> = ({ mainAppLayou
   }, [showSettings])
 
   useEffect(() => {
-    if (!wikiverseSketchRef) return;
-    setDataDensityInp(wikiverseSketchRef.LAYOUT_CONFIG().dataDensity)
-    setAttractionMultInp(wikiverseSketchRef.LAYOUT_CONFIG().attractionMult)
-    setRepulsionMultInp(wikiverseSketchRef.LAYOUT_CONFIG().repulsionMult)
-  }, [wikiverseSketchRef])
+    if (!p5SketchRef) return;
+    setDataDensityInp(p5SketchRef.LAYOUT_CONFIG().dataDensity)
+    setAttractionMultInp(p5SketchRef.LAYOUT_CONFIG().attractionMult)
+    setRepulsionMultInp(p5SketchRef.LAYOUT_CONFIG().repulsionMult)
+  }, [p5SketchRef])
 
   useEffect(() => {
-    if (!wikiverseSketchRef) return;
-    wikiverseSketchRef.UI().toggleShowAxis();
+    if (!p5SketchRef) return;
+    p5SketchRef.UI().toggleShowAxis();
   }, [showAxisInp])
 
   useEffect(() => {
-    if (!wikiverseSketchRef) return;
-    wikiverseSketchRef.UI().toggleShowBoundingBox
+    if (!p5SketchRef) return;
+    p5SketchRef.UI().toggleShowBoundingBox
   }, [showBoundingInp])
 
-  const ToggleSettings = wikiverseSketchRef ? [
+  const ToggleSettings = p5SketchRef ? [
     { key: showDebugDetails, action: setShowDebugDetails, label: "Graph Details", shortcut: "," },
     { key: showAxisInp, action: setShowAxisInp, label: "Axis Orientation", shortcut: null },
     { key: showBoundingInp, action: setShowBoundingInp, label: "Bounding Box", shortcut: null },
   ] : [];
 
-  const LayoutSettings = wikiverseSketchRef ? [
+  const LayoutSettings = p5SketchRef ? [
     { key: dataDensityInp, action: setDataDensityInp, label: "Density", desc: "Effects the overall size of the Graph's layout", step: '0.00001' },
     { key: attractionMultInp, action: setAttractionMultInp, label: "Attraction Force", desc: "The tendency of related Vertices to clump together", step: '0.05' },
     { key: repulsioMultInp, action: setRepulsionMultInp, label: "Repulsion Force", desc: "The tendency of un-related Vertices to push away from eachother ", step: '0.05' },
@@ -64,9 +64,10 @@ export const SessionSettingsMenu: FC<SessionSettingsMenuProps> = ({ mainAppLayou
 
   const handleRefreshLayoutPositionClick = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    if (wikiverseSketchRef == null) return;
-    wikiverseSketchRef.LAYOUT_CONFIG().updateConfigValues(dataDensityInp!, attractionMultInp!, repulsioMultInp!);
-    wikiverseSketchRef.refreshLayoutPositions();
+    if (p5SketchRef == null) return;
+    p5SketchRef.LAYOUT_CONFIG().updateConfigValues(dataDensityInp!, attractionMultInp!, repulsioMultInp!);
+    p5SketchRef.refreshLayoutPositions();
+    setShowSettings(false);
   }
 
   return (
