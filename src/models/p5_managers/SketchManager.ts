@@ -69,9 +69,8 @@ export class SketchManager {
       this.layoutConfig = new LayoutConfig({ dataDensity: 0, attractionMult: 0, repulsionMult: 0 });
       this.graph = new Graphset({ vertices: [], edges: [], properties: [], dimensions: { width: 0, height: 0 } })
     }
-
     // Pass React back this ref
-    setSketchRef(this);
+    setSketchRef(this); 
   }
 
   /**

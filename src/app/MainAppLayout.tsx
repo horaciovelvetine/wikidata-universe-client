@@ -30,26 +30,29 @@ export const MainAppLayout: React.FC<MainAppLayoutProps> = ({ apiStatusResponse 
   const apiOnline = apiStatusResponse.status == 200;
   const [containerDimensions, setContainerDimensions] = useState<Dimensions>(calcSafeSketchWindowSize())
 
-  // MAIN (REACT) APP LAYOUT STATE
+  // REACT APP LAYOUT STATE
   const [isLoading, setIsLoading] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
   const [showDebugDetails, setShowDebugDetails] = useState(false);
   const [showAboutSketch, setShowAboutSketch] = useState(false);
   const [showWikiverseSketch, setShowWikiverseSketch] = useState(false);
+  // WIKIVERSE SKETCH STATE
+  const [initSketchAPIRes, setInitSketchAPIRes] = useState<RequestResponse | null>(null);
+  const [p5SketchRef, setP5SketchRef] = useState<SketchManager | null>(null);
+  const [selectedVertex, setSelectedVertex] = useState<Vertex | null>(null);
+  const [hoveredVertex, setHoveredVertex] = useState<Vertex | null>(null);
 
   const mainAppLayoutState: MainAppLayoutState = {
     apiOnline, apiOffline,
     isLoading, setIsLoading,
     showSettings, setShowSettings,
     showDebugDetails, setShowDebugDetails,
-    showAboutSketch, setShowAboutSketch
+    showAboutSketch, setShowAboutSketch,
+    selectedVertex, setSelectedVertex,
+    hoveredVertex, setHoveredVertex,
+    p5SketchRef, setP5SketchRef
   }
 
-  // WIKIVERSE SKETCH STATE
-  const [initSketchAPIRes, setInitSketchAPIRes] = useState<RequestResponse | null>(null);
-  const [p5SketchRef, setP5SketchRef] = useState<SketchManager | null>(null);
-  const [selectedVertex, setSelectedVertex] = useState<Vertex | null>(null);
-  const [hoveredVertex, setHoveredVertex] = useState<Vertex | null>(null);
 
   useEffect(() => {
     window.addEventListener('resize', () => setContainerDimensions(calcSafeSketchWindowSize()))
@@ -83,7 +86,7 @@ export const MainAppLayout: React.FC<MainAppLayoutProps> = ({ apiStatusResponse 
         {!initSketchAPIRes && <InitializeQuerySessionInput {...{ mainAppLayoutState, setInitSketchAPIRes, setShowWikiverseSketch }} />}
 
         {showWikiverseSketch && <WikiverseSketchMemo {...{ initSketchAPIRes, setSelectedVertex, setHoveredVertex, mainAppLayoutState, setP5SketchRef }} />}
-        {showAboutSketch && <AboutSketchMemo {...{ mainAppLayoutState, setSelectedVertex, setHoveredVertex, setP5SketchRef }} />}
+        {showAboutSketch && <AboutSketchMemo {...{ initSketchAPIRes, setSelectedVertex, setHoveredVertex, mainAppLayoutState, setP5SketchRef }} />}
 
         <div id='sketch-overlay-bot'>
           <SelectedVertexDetails {...{ selectedVertex }} />
@@ -95,7 +98,7 @@ export const MainAppLayout: React.FC<MainAppLayoutProps> = ({ apiStatusResponse 
       <div id='background-sketch' ref={bgSketchRef}>
         <BackgroundSketchMemo {...{ containerDimensions }} />
       </div>
-      <Footer {...{ setShowAboutSketch, setInitSketchAPIRes }} />
+      <Footer {...{ mainAppLayoutState, setInitSketchAPIRes }} />
     </div >
   );
 };

@@ -1,13 +1,13 @@
 //UNUSED UNFACTORED
 export { HorizonSiteTitle } from './ui/HorizonSiteTitle';
 
-//LIB COMPONENTS:
-export { GraphsetDetailsSummary } from './lib/GraphsetDetailsSummary'
-export { HoveredVertexDetails } from './lib/HoveredVertexDetails'
-export { InitializeQuerySessionInput } from './lib/InitializeQuerySessionInput'
-export { SessionSettingsMenu } from './lib/SessionSettingsMenu'
-export { SelectedVertexDetails } from './lib/SelectedVertexDetails'
-export { RelatedEdgesDetails } from './lib/RelatedEdgesDetails'
+//QUERY UI COMPONENTS:
+export { GraphsetDetailsSummary } from './query_ui/GraphsetDetailsSummary'
+export { HoveredVertexDetails } from './query_ui/HoveredVertexDetails'
+export { InitializeQuerySessionInput } from './query_ui/InitializeQuerySessionInput'
+export { SessionSettingsMenu } from './query_ui/SessionSettingsMenu'
+export { SelectedVertexDetails } from './query_ui/SelectedVertexDetails'
+export { RelatedEdgesDetails } from './query_ui/RelatedEdgesDetails'
 
 //UI:
 export { LoadingBar } from './ui/LoadingBar'

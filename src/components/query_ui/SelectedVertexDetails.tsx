@@ -19,8 +19,6 @@ export const SelectedVertexDetails: FC<SelectedVertexDetailsProps> = ({ selected
 
   useEffect(() => {
     if (!displayRef.current) return;
-    const transition = 'transform 200ms cubic-bezier(0.4, 0.0, 0.2, 1)';
-    displayRef.current.style.transition = transition;
     if (selectedVertex == null) {
       displayRef.current.style.transform = 'translateY(100%)';
     } else {

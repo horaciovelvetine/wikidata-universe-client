@@ -1,28 +1,30 @@
 import { getAboutData, RequestResponse } from '../../api';
+import { MainAppLayoutState } from '../../app/MainAppLayoutState';
 import './Footer.css';
 import { Dispatch, FC, SetStateAction } from 'react';
 
 interface FooterProps {
-  setShowAboutSketch: Dispatch<SetStateAction<boolean>>;
+  mainAppLayoutState: MainAppLayoutState;
   setInitSketchAPIRes: Dispatch<SetStateAction<RequestResponse | null>>
 }
 
-export const Footer: FC<FooterProps> = ({ setShowAboutSketch, setInitSketchAPIRes }) => {
+export const Footer: FC<FooterProps> = ({ mainAppLayoutState, setInitSketchAPIRes }) => {
   const bl = "_blank";
   const githubUrl = "https://github.com/horaciovelvetine";
   const frontendUrl = githubUrl + "/wikidata-universe-client";
   const backendUrl = githubUrl + "/wikidata-universe-api";
 
   const handleAboutClick = async () => {
-    let prevState
-    setShowAboutSketch(prev => {
-      prevState = prev;
-      return !prev
-    })
-
-    if (!prevState) {
+    if (mainAppLayoutState.showAboutSketch) {
+      setInitSketchAPIRes(null);
+      mainAppLayoutState.setP5SketchRef(null);
+      mainAppLayoutState.setSelectedVertex(null);
+      mainAppLayoutState.setShowAboutSketch(false);
+    } else {
       await getAboutData().then(res => {
         setInitSketchAPIRes(res);
+      }).finally(() => {
+        mainAppLayoutState.setShowAboutSketch(true);
       })
     }
   }

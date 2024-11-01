@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
+import { SketchManager, Vertex } from "../models";
 
 export interface MainAppLayoutState {
   apiOnline: boolean;
@@ -11,4 +12,10 @@ export interface MainAppLayoutState {
   setShowDebugDetails: Dispatch<SetStateAction<boolean>>;
   showAboutSketch: boolean;
   setShowAboutSketch: Dispatch<SetStateAction<boolean>>;
+  selectedVertex: Vertex | null;
+  setSelectedVertex: Dispatch<SetStateAction<Vertex | null>>;
+  hoveredVertex: Vertex | null;
+  setHoveredVertex: Dispatch<SetStateAction<Vertex | null>>;
+  p5SketchRef: SketchManager | null;
+  setP5SketchRef: Dispatch<SetStateAction<SketchManager | null>>;
 }

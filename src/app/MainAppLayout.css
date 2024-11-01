@@ -85,7 +85,7 @@ body {
 #sketch-overlay-bot {
   position: absolute;
   display: grid;
-  grid-template-rows: auto 10rem;
+  grid-template-rows: auto auto;
   grid-template-columns: 60% 40%;
   bottom: 0%;
   width: 100%;

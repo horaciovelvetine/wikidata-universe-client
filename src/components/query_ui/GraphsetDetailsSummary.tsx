@@ -47,8 +47,6 @@ export const GraphsetDetailsSummary: React.FC<GraphsetDetailsSummaryProps> = ({ 
 
   useEffect(() => {
     if (!debugRef.current) return;
-    const transition = 'transform 250ms cubic-bezier(0.4, 0.0, 0.2, 1)';
-    debugRef.current.style.transition = transition;
     if (showDebugDetails) {
       debugRef.current.style.transform = 'translateX(0)';
     } else {
