@@ -1,7 +1,7 @@
 import axios from "axios";
 import { RequestResponse, apiURL } from "..";
 
-export async function getAboutData(): Promise<RequestResponse> {
+export async function getAboutDetails(): Promise<RequestResponse> {
   return await axios.get(apiURL('about-details'))
     .then(res => {
       console.log("getAboutData()", res)
