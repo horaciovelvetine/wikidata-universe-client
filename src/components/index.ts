@@ -10,6 +10,7 @@ export { SelectedVertexDetails } from './query_ui/SelectedVertexDetails'
 export { RelatedEdgesDetails } from './query_ui/RelatedEdgesDetails'
 
 //UI:
+export { NavStatusMsg } from './ui/NavStatusMsg'
 export { AboutOnScreenMsg } from './ui/AboutOnScreenMsg'
 export { LoadingBar } from './ui/LoadingBar'
 export { ApiOfflineNotice } from './ui/ApiOfflineNotice'

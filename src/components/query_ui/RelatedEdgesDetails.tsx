@@ -21,13 +21,15 @@ export const RelatedEdgesDetails: FC<RelatedEdgesDetailsDisplayProps> = ({ selec
   const displayRef = createRef<HTMLDivElement>();
 
   useEffect(() => {
-    if (!displayRef.current) return;
     if (!selectedVertex || !sketchRef) {
       setRelatedEdges([]);
-      displayRef.current.style.transform = 'translateY(200%)';
+      displayRef.current!.style.transform = 'translateY(200%)';
     } else {
-      displayRef.current.style.transform = 'translateY(0)';
       setRelatedEdges(sketchRef.GRAPH().getRelatedEdges(selectedVertex))
+      if (relatedEdges.length != 0) {
+        displayRef.current!.style.transform = 'translateY(0)';
+      }
+      displayRef.current!.style.transform = 'translateY(200%)'; //catches swap between sketch and about sketch
     }
   }, [selectedVertex, sketchRef?.GRAPH()])
 
