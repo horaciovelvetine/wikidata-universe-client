@@ -14,7 +14,7 @@ interface AboutSketchProps {
 
 export const AboutSketch: FC<AboutSketchProps> = ({ initSketchAPIRes, mainAppLayoutState, setSelectedVertex, setHoveredVertex, setP5SketchRef }) => {
   const sketch = (p5: P5CanvasInstance) => {
-    const SK = new SketchManager({ p5, initSketchAPIRes, mainAppLayoutState, setSelectedVertex, setHoveredVertex, setSketchRef: setP5SketchRef })
+    const SK = new SketchManager({ p5, initSketchAPIRes, mainAppLayoutState, setSelectedVertex, setHoveredVertex, setSketchRef: setP5SketchRef, isAboutSketch: true })
 
     //*/==> SETUP
     p5.preload = () => { SK.preloadFont() };
@@ -22,7 +22,7 @@ export const AboutSketch: FC<AboutSketchProps> = ({ initSketchAPIRes, mainAppLay
       SK.createCanvas();
       SK.setTextFont();
       SK.initManagedCamera();
-      SK.initCameraPositionAtOriginVertex();
+      SK.initCameraPositionAtAboutStart();
     };
 
     //*/==> DRAW
@@ -38,6 +38,19 @@ export const AboutSketch: FC<AboutSketchProps> = ({ initSketchAPIRes, mainAppLay
     p5.windowResized = () => {
       SK.handleResize();
     }
+
+    p5.mousePressed = () => {
+      const mouseTarget = SK.mousePositionIsOnAVertex();
+      if (mouseTarget == null) return;
+
+      // Deselect...
+      if (SK.targetIsAlreadyCurSelected(mouseTarget)) {
+        SK.updateSelectedVertex(null); // none selected is null
+        return
+      }
+      // New Selection Made...
+      SK.handleClickTargetValid(mouseTarget);
+    };
 
     p5.keyPressed = () => {
       switch (p5.key) {

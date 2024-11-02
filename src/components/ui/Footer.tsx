@@ -1,4 +1,4 @@
-import { getAboutData, RequestResponse } from '../../api';
+import { getAboutDetails, RequestResponse } from '../../api';
 import { MainAppLayoutState } from '../../app/MainAppLayoutState';
 import './Footer.css';
 import { Dispatch, FC, SetStateAction } from 'react';
@@ -16,12 +16,12 @@ export const Footer: FC<FooterProps> = ({ mainAppLayoutState, setInitSketchAPIRe
 
   const handleAboutClick = async () => {
     if (mainAppLayoutState.showAboutSketch) {
-      setInitSketchAPIRes(null);
       mainAppLayoutState.setP5SketchRef(null);
+      setInitSketchAPIRes(null);
       mainAppLayoutState.setSelectedVertex(null);
       mainAppLayoutState.setShowAboutSketch(false);
     } else {
-      await getAboutData().then(res => {
+      await getAboutDetails().then(res => {
         setInitSketchAPIRes(res);
       }).finally(() => {
         mainAppLayoutState.setShowAboutSketch(true);

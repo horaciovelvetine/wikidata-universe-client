@@ -16,6 +16,7 @@ interface SketchManagerProps {
   setSelectedVertex: Dispatch<SetStateAction<Vertex | null>>;
   setHoveredVertex: Dispatch<SetStateAction<Vertex | null>>;
   setSketchRef: Dispatch<SetStateAction<SketchManager | null>>;
+  isAboutSketch: boolean;
 }
 
 
@@ -46,7 +47,7 @@ export class SketchManager {
   //*/=> CONSTRUCTOR
   //*/=> CONSTRUCTOR
   //
-  constructor({ p5, initSketchAPIRes, mainAppLayoutState, setSelectedVertex, setHoveredVertex, setSketchRef }: SketchManagerProps) {
+  constructor({ p5, initSketchAPIRes, mainAppLayoutState, setSelectedVertex, setHoveredVertex, setSketchRef, isAboutSketch }: SketchManagerProps) {
 
     // SKETCH STATE
     this.p5 = p5;
@@ -59,18 +60,15 @@ export class SketchManager {
     this.setReactIsLoading = mainAppLayoutState.setIsLoading;
 
     // DATA STATE
-    if (initSketchAPIRes != null) {
-      this.originalQuery = initSketchAPIRes.data.query;
-      this.graph = new Graphset(initSketchAPIRes.data);
-      this.layoutConfig = new LayoutConfig(initSketchAPIRes.data.layoutConfig);
+    this.originalQuery = initSketchAPIRes!.data.query;
+    this.graph = new Graphset(initSketchAPIRes!.data);
+    this.layoutConfig = new LayoutConfig(initSketchAPIRes!.data.layoutConfig);
+    if (!isAboutSketch) {
       this.updateSelectedVertex(this.graph.getOriginVertex());
-    } else {
-      this.originalQuery = "No Query Value Provided"
-      this.layoutConfig = new LayoutConfig({ dataDensity: 0, attractionMult: 0, repulsionMult: 0 });
-      this.graph = new Graphset({ vertices: [], edges: [], properties: [], dimensions: { width: 0, height: 0 } })
     }
+
     // Pass React back this ref
-    setSketchRef(this); 
+    setSketchRef(this);
   }
 
   /**
@@ -156,20 +154,31 @@ export class SketchManager {
    * @method initCameraPositionAtOriginVertex - Positions the managed camera based on the position of the Vertex marked as the origin, or (0,0,0) if that Vertex could not be found
    */
   initCameraPositionAtOriginVertex() {
-    if (this.cam === null) return;
-    if (this.graph === null) return;
+    if (!this.cam || !this.graph) return;
+
     const origin = this.graph.getOriginVertex();
     const { x, y, z } = origin ? origin.xyz() : { x: 0, y: 0, z: 0 };
-    this.cam.setPosition(x, y, (z + 200));
-    this.cam.lookAt(z, (y + 300), z) // look below vertex for init 'pan-up' effect
+
+    this.cam.setPosition(x, y, z + 200);
+    this.cam.lookAt(x, y + 300, z); // look below vertex for init 'pan-up' effect
+    this.camMngr.setLookAtTgt({ x, y, z });
+  }
+
+  /**
+   * @method initCameraPositionAtAboutStart - Positions the managed camera at the needed position to properly initialize the AboutSketch
+   */
+  initCameraPositionAtAboutStart() {
+    if (!this.cam || !this.graph) return;
+
+    this.cam.setPosition(0, 0, 200);
+    this.cam.lookAt(0, 0, 0);
   }
 
   /**
  * @method advanceCanimations - Advances camera animations if in progress.
  */
   advanceCanimations() {
-    if (this.camMngr.animInProgress())
-      this.camMngr.advance()
+    this.camMngr.advanceAnimations()
   }
 
   /**
@@ -317,7 +326,7 @@ export class SketchManager {
     this.setReactHovVert(null);
     this.selectedVertex = tgt;
     this.setReactSelVert(tgt);
-    this.camMngr.setTarget(tgt.coords) // animate camera to new targets coordinates
+    this.camMngr.setLookAtTgt(tgt.coords) // animate camera to new targets coordinates
   }
 
   /**

@@ -18,7 +18,7 @@ interface WikiverseProps {
 export const WikiverseSketch: FC<WikiverseProps> = ({ mainAppLayoutState, initSketchAPIRes, setSelectedVertex, setHoveredVertex, setP5SketchRef }) => {
 
   const sketch: Sketch = (p5) => { //SketchManager contains a lionshare of the p5 sketch specific details
-    const SK = new SketchManager({ p5, initSketchAPIRes, mainAppLayoutState, setSelectedVertex, setHoveredVertex, setSketchRef: setP5SketchRef })
+    const SK = new SketchManager({ p5, initSketchAPIRes, mainAppLayoutState, setSelectedVertex, setHoveredVertex, setSketchRef: setP5SketchRef, isAboutSketch: false })
 
     //*/=> SETUP
     p5.preload = () => { SK.preloadFont() }
@@ -52,7 +52,6 @@ export const WikiverseSketch: FC<WikiverseProps> = ({ mainAppLayoutState, initSk
       // New Selection Made...
       SK.handleClickTargetValid(mouseTarget);
       SK.fetchClickTargetData(mouseTarget);
-
     };
 
     //*/=> HOVER

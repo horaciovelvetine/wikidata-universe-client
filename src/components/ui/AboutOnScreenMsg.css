@@ -1,0 +1,17 @@
+#about-display {
+  position: absolute;
+  top: -20%;
+  width: 100%;
+  height: 100%;
+  /* left: 0%; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#about-heading {
+  text-align: center;
+  font-family: "CharisSIL-Regular", serif !important;
+  font-size: 2.5rem;
+}

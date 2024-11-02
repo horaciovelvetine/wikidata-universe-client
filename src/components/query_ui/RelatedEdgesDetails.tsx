@@ -82,14 +82,14 @@ const EdgeDetail: FC<EdgeDetailProps> = ({ edge, sketchRef, selectedVertex, rela
   }
   return (
     <li id={prfx('edge')} onWheel={(e) => { e.stopPropagation() }}>
-      <a id={prfx('cur-sel-vert')} onClick={() => sketchRef.CAM().setTarget(selectedVertex.coords)}>
+      <a id={prfx('cur-sel-vert')} onClick={() => sketchRef.CAM().setLookAtTgt(selectedVertex.coords)}>
         <img id={prfx('cur-sel-vert-icon')} src={VertexSel} alt='represents current selected vertex' />
       </a>
       <a id={prfx('prop-cont')} href={property.url()} target='_blank'>
         <p id={prfx('property')} className={propertyTextColor()}>{property.label}</p>
         <img id={prfx('dir-icon')} src={icon} alt='edge type icon indication' />
       </a>
-      <a id={prfx('alt-vert-cont')} onClick={() => sketchRef.CAM().setTarget(altVertex.coords)}>
+      <a id={prfx('alt-vert-cont')} onClick={() => sketchRef.CAM().setLookAtTgt(altVertex.coords)}>
         <img id={prfx('alt-vert-icon')} src={VertIcon} alt='represents alternate vertex' />
         <p id={prfx('alt-vert-lbl')}>{altVertex.label}</p>
       </a>
