@@ -58,8 +58,25 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   overflow: clip;
-  background-color: transparent;
   box-shadow: 0rem 0rem 2rem 1rem rgba(0, 0, 0, 0.22);
+}
+
+#unclipped-query-sketch {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -10;
+}
+
+#unclipped-query-mask {
+    position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: -8;
+      background-color: rgb(var(--sketch-bg));
+    
 }
 
 #background-sketch {
