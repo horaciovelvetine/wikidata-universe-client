@@ -28,6 +28,7 @@ export const RelatedEdgesDetails: FC<RelatedEdgesDetailsDisplayProps> = ({ selec
       setRelatedEdges(sketchRef.GRAPH().getRelatedEdges(selectedVertex))
       if (relatedEdges.length != 0) {
         displayRef.current!.style.transform = 'translateY(0)';
+        return;
       }
       displayRef.current!.style.transform = 'translateY(200%)'; //catches swap between sketch and about sketch
     }
