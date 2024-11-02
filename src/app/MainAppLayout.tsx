@@ -3,7 +3,7 @@ import { MainAppLayoutState } from './MainAppLayoutState';
 
 import React, { createRef, useEffect, useState, memo } from 'react';
 
-import { Footer, VerticalSiteTitle, ApiOfflineNotice, SessionSettingsMenu, LoadingBar, HoveredVertexDetails, InitializeQuerySessionInput, GraphsetDetailsSummary, SelectedVertexDetails, toggleElementOpacity, BackgroundSketch, WikiverseSketch, RelatedEdgesDetails, calcSafeSketchWindowSize, AboutSketch, AboutOnScreenMsg } from '../components';
+import { Footer, VerticalSiteTitle, ApiOfflineNotice, SessionSettingsMenu, LoadingBar, HoveredVertexDetails, InitializeQuerySessionInput, GraphsetDetailsSummary, SelectedVertexDetails, toggleElementOpacity, BackgroundSketch, WikiverseSketch, RelatedEdgesDetails, calcSafeSketchWindowSize, AboutSketch, AboutOnScreenMsg, NavStatusMsg } from '../components';
 import { Dimensions, SketchManager, Vertex } from '../models';
 import { RequestResponse } from '../api';
 
@@ -74,8 +74,15 @@ export const MainAppLayout: React.FC<MainAppLayoutProps> = ({ apiStatusResponse 
 
   return (
     <div id='wikiverse-main'>
-      <VerticalSiteTitle />
       <LoadingBar isLoading={isLoading} />
+
+      <div id='unclipped-query-sketch' style={{ width: containerDimensions.width, height: containerDimensions.height }}>
+        <VerticalSiteTitle />
+        <NavStatusMsg {...{ mainAppLayoutState, initSketchAPIRes }} />
+      </div>
+      <div id='unclipped-query-mask' style={{ width: containerDimensions.width, height: containerDimensions.height }}>
+
+      </div>
       <div id='query-sketch' style={{ width: containerDimensions.width, height: containerDimensions.height }}>
 
         <div id='sketch-overlay-top'>
