@@ -3,9 +3,10 @@ import { MainAppLayoutState } from './MainAppLayoutState';
 
 import React, { createRef, useEffect, useState, memo } from 'react';
 
-import { Footer, VerticalSiteTitle, ApiOfflineNotice, SessionSettingsMenu, LoadingBar, HoveredVertexDetails, InitializeQuerySessionInput, GraphsetDetailsSummary, SelectedVertexDetails, toggleElementOpacity, BackgroundSketch, WikiverseSketch, RelatedEdgesDetails, calcSafeSketchWindowSize, AboutSketch } from '../components';
+import { Footer, VerticalSiteTitle, ApiOfflineNotice, SessionSettingsMenu, LoadingBar, HoveredVertexDetails, InitializeQuerySessionInput, GraphsetDetailsSummary, SelectedVertexDetails, toggleElementOpacity, BackgroundSketch, WikiverseSketch, RelatedEdgesDetails, calcSafeSketchWindowSize, AboutSketch, AboutOnScreenMsg } from '../components';
 import { Dimensions, SketchManager, Vertex } from '../models';
 import { RequestResponse } from '../api';
+
 
 interface MainAppLayoutProps {
   apiStatusResponse: RequestResponse
@@ -33,7 +34,7 @@ export const MainAppLayout: React.FC<MainAppLayoutProps> = ({ apiStatusResponse 
   // REACT APP LAYOUT STATE
   const [isLoading, setIsLoading] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
-  const [showDebugDetails, setShowDebugDetails] = useState(false);
+  const [showDebugDetails, setShowDebugDetails] = useState(true);
   const [showAboutSketch, setShowAboutSketch] = useState(false);
   const [showWikiverseSketch, setShowWikiverseSketch] = useState(false);
   // WIKIVERSE SKETCH STATE
@@ -87,6 +88,7 @@ export const MainAppLayout: React.FC<MainAppLayoutProps> = ({ apiStatusResponse 
 
         {showWikiverseSketch && <WikiverseSketchMemo {...{ initSketchAPIRes, setSelectedVertex, setHoveredVertex, mainAppLayoutState, setP5SketchRef }} />}
         {showAboutSketch && <AboutSketchMemo {...{ initSketchAPIRes, setSelectedVertex, setHoveredVertex, mainAppLayoutState, setP5SketchRef }} />}
+        {showAboutSketch && <AboutOnScreenMsg {...{ initSketchAPIRes, mainAppLayoutState }} />}
 
         <div id='sketch-overlay-bot'>
           <SelectedVertexDetails {...{ selectedVertex }} />
