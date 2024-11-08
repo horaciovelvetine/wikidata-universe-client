@@ -4,46 +4,46 @@ import { createRef, FC, useEffect, useState } from 'react';
 
 import { Edge, EDGE_DIR, SketchManager, Vertex } from '../../models';
 import { edgeDirectionIcon } from '..';
+import { MainAppLayoutState } from '../../app/MainAppLayoutState';
 
 
 interface RelatedEdgesDetailsDisplayProps {
-  selectedVertex: Vertex | null;
-  sketchRef: SketchManager | null;
+  mainAppLayoutState: MainAppLayoutState;
 }
 
 const prfx = (sufx: string) => {
   return 'related-edges-details-' + sufx;
 }
 
-export const RelatedEdgesDetails: FC<RelatedEdgesDetailsDisplayProps> = ({ selectedVertex, sketchRef }) => {
+export const RelatedEdgesDetails: FC<RelatedEdgesDetailsDisplayProps> = ({ mainAppLayoutState }) => {
   const [relatedEdges, setRelatedEdges] = useState<Edge[]>([]);
 
   const displayRef = createRef<HTMLDivElement>();
 
   useEffect(() => {
-    if (!selectedVertex || !sketchRef) {
+    if (!mainAppLayoutState.selectedVertex || !mainAppLayoutState.p5SketchRef) {
       setRelatedEdges([]);
       displayRef.current!.style.transform = 'translateY(200%)';
-    } else {
-      setRelatedEdges(sketchRef.GRAPH().getRelatedEdges(selectedVertex))
-      if (relatedEdges.length != 0) {
-        displayRef.current!.style.transform = 'translateY(0)';
-        return;
-      }
-      displayRef.current!.style.transform = 'translateY(200%)'; //catches swap between sketch and about sketch
+      return;
     }
-  }, [selectedVertex, sketchRef?.GRAPH()])
+    const relatedEdgeGet = mainAppLayoutState.p5SketchRef.GRAPH().getRelatedEdges(mainAppLayoutState.selectedVertex)
+    setRelatedEdges(relatedEdgeGet)
+    // displayRef.current!.style.transform = 'translateY(200%)'; //catches swap between sketch and about sketch
+    if (relatedEdgeGet.length > 0) {
+      displayRef.current!.style.transform = 'translateY(0)';
+      return;
+    }
+  }, [mainAppLayoutState.selectedVertex, mainAppLayoutState.p5SketchRef?.GRAPH()])
 
   return (
     <div id={prfx('display')} ref={displayRef} onWheel={(e) => { e.stopPropagation() }}>
       <div id={prfx('cont')} onWheel={(e) => { e.stopPropagation() }}>
         <ul id={prfx('list')} onWheel={(e) => { e.stopPropagation() }}>
-          {selectedVertex &&
-            relatedEdges.map((edge, index) =>
-            (<EdgeDetail
-              key={index}
-              {...{ edge, sketchRef, selectedVertex, relatedEdges }}
-            />))}
+          {mainAppLayoutState.selectedVertex && relatedEdges.map((edge, index) =>
+          (<EdgeDetail
+            key={index}
+            {...{ edge, sketchRef: mainAppLayoutState.p5SketchRef!, selectedVertex: mainAppLayoutState.selectedVertex!, relatedEdges }}
+          />))}
         </ul>
       </div>
     </div>

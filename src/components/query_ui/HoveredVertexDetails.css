@@ -26,16 +26,15 @@
 
 #hovered-vertex-label {
   font-size: 1.5rem;
-  color: rgb(var(--font));
-
+  color: rgb(var(--font), 0.85);
 }
 
 #hovered-vertex-description {
   font-size: 1.2rem;
-  color: rgb(var(--font));
+  color: rgb(var(--font), 0.5);
 }
 
 #hovered-vertex-coords {
   font-size: 1rem;
-  color: rgb(var(--font));
+  color: rgb(var(--font), 0.5);
 }
