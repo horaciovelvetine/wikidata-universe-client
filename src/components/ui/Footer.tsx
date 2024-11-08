@@ -15,16 +15,22 @@ export const Footer: FC<FooterProps> = ({ mainAppLayoutState, setInitSketchAPIRe
   const backendUrl = githubUrl + "/wikidata-universe-api";
 
   const handleAboutClick = async () => {
-    if (mainAppLayoutState.showAboutSketch) {
-      mainAppLayoutState.setP5SketchRef(null);
+    if (mainAppLayoutState.showAboutSketch) { // if already showing, hide everything
       setInitSketchAPIRes(null);
+      mainAppLayoutState.setP5SketchRef(null);
+      mainAppLayoutState.setNavStatusMessage(null);
       mainAppLayoutState.setSelectedVertex(null);
       mainAppLayoutState.setShowAboutSketch(false);
-    } else {
+      mainAppLayoutState.setShowAboutSketchText(false);
+    } else { // make needed requests and update using response
       await getAboutDetails().then(res => {
         setInitSketchAPIRes(res);
+        mainAppLayoutState.setAboutSketchText(res.data.query);
+        mainAppLayoutState.setNavStatusMessage(res.data.query.split('::').at(0)!)
       }).finally(() => {
+        mainAppLayoutState.setShowWikiverseSketch(false);
         mainAppLayoutState.setShowAboutSketch(true);
+        mainAppLayoutState.setShowAboutSketchText(true);
       })
     }
   }
