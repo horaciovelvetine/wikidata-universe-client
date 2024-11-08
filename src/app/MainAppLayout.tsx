@@ -3,7 +3,7 @@ import { MainAppLayoutState } from './MainAppLayoutState';
 
 import React, { createRef, useEffect, useState, memo } from 'react';
 
-import { Footer, VerticalSiteTitle, ApiOfflineNotice, SessionSettingsMenu, LoadingBar, HoveredVertexDetails, InitializeQuerySessionInput, GraphsetDetailsSummary, SelectedVertexDetails, toggleElementOpacity, BackgroundSketch, WikiverseSketch, RelatedEdgesDetails, calcSafeSketchWindowSize, AboutSketch, AboutOnScreenMsg, NavStatusMsg } from '../components';
+import { Footer, VerticalSiteTitle, ApiOfflineNotice, SessionSettingsMenu, LoadingBar, HoveredVertexDetails, InitializeQuerySessionInput, GraphsetDetailsSummary, SelectedVertexDetails, toggleElementOpacity, BackgroundSketch, WikiverseSketch, RelatedEdgesDetails, calcSafeSketchWindowSize, AboutSketch, AboutSketchTextDisplay, NavMenuStatusDisplay } from '../components';
 import { Dimensions, SketchManager, Vertex } from '../models';
 import { RequestResponse } from '../api';
 
@@ -34,8 +34,11 @@ export const MainAppLayout: React.FC<MainAppLayoutProps> = ({ apiStatusResponse 
   // REACT APP LAYOUT STATE
   const [isLoading, setIsLoading] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
-  const [showDebugDetails, setShowDebugDetails] = useState(true);
+  const [showDebugDetails, setShowDebugDetails] = useState(false);
   const [showAboutSketch, setShowAboutSketch] = useState(false);
+  const [aboutSketchText, setAboutSketchText] = useState<string | null>(null);
+  const [showAboutSketchText, setShowAboutSketchText] = useState(false);
+  const [navStatusMessage, setNavStatusMessage] = useState<string | null>(null)
   const [showWikiverseSketch, setShowWikiverseSketch] = useState(false);
   // WIKIVERSE SKETCH STATE
   const [initSketchAPIRes, setInitSketchAPIRes] = useState<RequestResponse | null>(null);
@@ -49,11 +52,14 @@ export const MainAppLayout: React.FC<MainAppLayoutProps> = ({ apiStatusResponse 
     showSettings, setShowSettings,
     showDebugDetails, setShowDebugDetails,
     showAboutSketch, setShowAboutSketch,
+    aboutSketchText, setAboutSketchText,
     selectedVertex, setSelectedVertex,
     hoveredVertex, setHoveredVertex,
-    p5SketchRef, setP5SketchRef
+    p5SketchRef, setP5SketchRef,
+    showWikiverseSketch, setShowWikiverseSketch,
+    navStatusMessage, setNavStatusMessage,
+    showAboutSketchText, setShowAboutSketchText
   }
-
 
   useEffect(() => {
     window.addEventListener('resize', () => setContainerDimensions(calcSafeSketchWindowSize()))
@@ -68,42 +74,44 @@ export const MainAppLayout: React.FC<MainAppLayoutProps> = ({ apiStatusResponse 
     }
   }, [initSketchAPIRes]);
 
-  useEffect(() => {
-    if (showAboutSketch) { }
-  }, [showAboutSketch])
-
   return (
     <div id='wikiverse-main'>
       <LoadingBar isLoading={isLoading} />
-
+      {/* SITE UI UNCLIPPED DIV */}
       <div id='unclipped-query-sketch' style={{ width: containerDimensions.width, height: containerDimensions.height }}>
         <VerticalSiteTitle />
-        <NavStatusMsg {...{ mainAppLayoutState, initSketchAPIRes }} />
+        <NavMenuStatusDisplay {...{ mainAppLayoutState, initSketchAPIRes }} />
       </div>
+
       <div id='unclipped-query-mask' style={{ width: containerDimensions.width, height: containerDimensions.height }}>
-
+        {/* Dark BG DIV contains no elements */}
       </div>
-      <div id='query-sketch' style={{ width: containerDimensions.width, height: containerDimensions.height }}>
 
+      <div id='query-sketch' style={{ width: containerDimensions.width, height: containerDimensions.height }}>
+        {/* QUERY SKETCH OVERLAY TOP */}
         <div id='sketch-overlay-top'>
           <HoveredVertexDetails {...{ hoveredVertex }} />
           <SessionSettingsMenu {...{ p5SketchRef, mainAppLayoutState }} />
         </div>
 
+        {/* QUERY SKETCH MAIN OVERLAYS */}
         {apiOffline && <ApiOfflineNotice {... { apiStatusResponse }} />}
         {!initSketchAPIRes && <InitializeQuerySessionInput {...{ mainAppLayoutState, setInitSketchAPIRes, setShowWikiverseSketch }} />}
+        {showAboutSketchText && <AboutSketchTextDisplay {...{ initSketchAPIRes, mainAppLayoutState }} />}
 
-        {showWikiverseSketch && <WikiverseSketchMemo {...{ initSketchAPIRes, setSelectedVertex, setHoveredVertex, mainAppLayoutState, setP5SketchRef }} />}
-        {showAboutSketch && <AboutSketchMemo {...{ initSketchAPIRes, setSelectedVertex, setHoveredVertex, mainAppLayoutState, setP5SketchRef }} />}
-        {showAboutSketch && <AboutOnScreenMsg {...{ initSketchAPIRes, mainAppLayoutState }} />}
+        {/* p5 SKETCH CONTAINERS */}
+        {showWikiverseSketch && <WikiverseSketchMemo {...{ initSketchAPIRes, mainAppLayoutState }} />}
+        {showAboutSketch && <AboutSketchMemo {...{ initSketchAPIRes, mainAppLayoutState }} />}
 
+        {/* QUERY SKETCH OVERLAY BOTTOM */}
         <div id='sketch-overlay-bot'>
           <SelectedVertexDetails {...{ selectedVertex }} />
           <GraphsetDetailsSummary {...{ sketchRef: p5SketchRef, mainAppLayoutState }} />
-          <RelatedEdgesDetails {...{ sketchRef: p5SketchRef, selectedVertex }} />
+          <RelatedEdgesDetails {...{ mainAppLayoutState }} />
         </div>
-
       </div>
+
+      {/* BACKGROUND SKETCH DIV */}
       <div id='background-sketch' ref={bgSketchRef}>
         <BackgroundSketchMemo {...{ containerDimensions }} />
       </div>
