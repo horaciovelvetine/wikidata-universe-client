@@ -10,15 +10,17 @@ export class CameraManager {
   private cam: Camera | null;
   private lookAtTgt: Point3D | null; // new lookAt target for the Camera
   private curLookAtKeyFrm: number = 0;
-  private lookAtDuration: number = 240; // in frames
+  private lookAtDuration: number = 200; // in frames
 
+  private positionStart: Point3D | null; // where it came from
   private positionTgt: Point3D | null; // new position for the Camera to 'get to'
   private curPosKeyFrm: number = 0;
-  private curPosDuration: number = 240;
+  private curPosDuration: number = 160;
 
   constructor(p5: P5CanvasInstance) {
     this.p5 = p5;
     this.lookAtTgt = null;
+    this.positionStart = null;
     this.positionTgt = null;
     this.cam = null;
   }
@@ -60,7 +62,7 @@ export class CameraManager {
    * @method advanceCamMove() - calculate the shift in where the camera is positioned needed in order to move towards a new position smoothly, move the camera, then check if the animation is over to reset
    */
   private advanceCamMove(): void {
-    if (this.positionTgt === null) return;
+    if (!this.positionTgt || !this.positionStart) return;
 
     // remember original lookAt to correct post cam.move();
     const LAX = this.cam!.centerX;
@@ -93,6 +95,16 @@ export class CameraManager {
    * @method setPositionTgt - Sets the new position target point for the camera to ultimately move to
    */
   setPositionTgt(point: Point3D): void {
+    if (!this.cam) return;
+    const sX = this.cam.eyeX
+    const sY = this.cam.eyeY
+    const sZ = this.cam.eyeZ
+    const curPnt = new Point3D({ x: sX, y: sY, z: sZ });
+
+    //skip if already located here
+    if (curPnt.x == point.x && curPnt.y == point.y && curPnt.z == point.z) return;
+
+    this.positionStart = curPnt;
     this.positionTgt = point;
     this.curPosKeyFrm = 0;
   }
@@ -138,9 +150,9 @@ export class CameraManager {
   private newPosChangeVec(): Vector {
     const mult = this.curPosKeyFrm * 1.0001 / this.curPosDuration;
     return this.p5.createVector(
-      this.p5.lerp(this.cam!.eyeX, this.positionTgt!.x, mult),
-      this.p5.lerp(this.cam!.eyeY, this.positionTgt!.y, mult),
-      this.p5.lerp(this.cam!.eyeZ, this.positionTgt!.z, mult),
+      this.p5.lerp(this.positionStart!.x, this.positionTgt!.x, mult),
+      this.p5.lerp(this.positionStart!.y, this.positionTgt!.y, mult),
+      this.p5.lerp(this.positionStart!.z, this.positionTgt!.z, mult),
     );
   }
 }
