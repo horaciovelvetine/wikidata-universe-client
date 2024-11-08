@@ -32,6 +32,9 @@ export class Graphset implements iGraphset {
     this.dimensions = graph.dimensions;
   }
 
+  /**
+   * @method calcVertexSetMean() - find the approximate center coords for the Mean of the Graphset's Vertices
+   */
   calcVertexSetMean(vertices: iVertex[]): iPoint3D {
     let x = 0, y = 0, z = 0;
     vertices.forEach((vertex) => {
@@ -42,6 +45,9 @@ export class Graphset implements iGraphset {
     return { x: x / vertices.length, y: y / vertices.length, z: z / vertices.length };
   }
 
+  /**
+   * @method minMaxValuesInSet - provides bounding dimensions used to draw UI around the graphset
+   */
   minMaxValuesInSet(vertices: iVertex[]): MinMaxSet {
     let xMin = Infinity, xMax = -Infinity;
     let yMin = Infinity, yMax = -Infinity;
@@ -63,6 +69,9 @@ export class Graphset implements iGraphset {
     }
   }
 
+  /**
+   * @method getRelatedEdges() - returns any Edge in the set which references the provided Vertex
+   */
   getRelatedEdges(vertex: Vertex): Edge[] {
     return this.edges.filter(edge => {
       const isSrcMatch = edge.srcId === vertex.id;
@@ -74,6 +83,9 @@ export class Graphset implements iGraphset {
     });
   }
 
+  /**
+   * @method getOriginVertex() - returns whichever Vertex is marked as.origin true in the current .vertices
+   */
   getOriginVertex(): Vertex | null {
     const originVertex = this.vertices.find(vertex => vertex.origin === true);
     if (originVertex)
@@ -81,6 +93,9 @@ export class Graphset implements iGraphset {
     return null;
   }
 
+  /**
+   * @method getProperty() - returns a Property with the provided ID value or null
+   */
   getProperty(propertyId: String): Property | null {
     const property = this.properties.find(property => property.id === propertyId);
     if (property)
@@ -88,10 +103,34 @@ export class Graphset implements iGraphset {
     return null;
   }
 
+  /**
+   * @method getVertex() - returns a Vertex with the provided ID value or null
+   */
   getVertex(vertexId: String): Vertex | null {
     const vertex = this.vertices.find(vertex => vertex.id === vertexId);
     if (vertex)
       return new Vertex(vertex);
     return null;
+  }
+
+  /**
+   * @method addVertex() - used in the AboutSketch to include new Vertices in the set w/o resetting
+   */
+  addVertex(aboutVert: iVertex): void {
+    this.vertices.push(aboutVert);
+  }
+
+  /**
+   * @method addEdge() - used in the AboutSketch to include new Edges in the set w/o resetting
+   */
+  addEdge(aboutEdge: iEdge): void {
+    this.edges.push(aboutEdge);
+  }
+
+  /**
+   * @method addProperty() - used in the About Sketch to include new Properties in the set w/o resetting
+   */
+  addProperty(aboutProp: iProperty): void {
+    this.properties.push(aboutProp);
   }
 }
