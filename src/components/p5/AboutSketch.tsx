@@ -1,20 +1,19 @@
-import { Dispatch, FC, SetStateAction } from "react"
+import { FC } from "react"
 import { P5CanvasInstance, ReactP5Wrapper } from "@p5-wrapper/react"
-import { SketchManager, Vertex } from "../../models";
+import { SketchManager, } from "../../models";
 import { MainAppLayoutState } from "../../app/MainAppLayoutState";
 import { RequestResponse } from "../../api";
 
 interface AboutSketchProps {
   mainAppLayoutState: MainAppLayoutState;
   initSketchAPIRes: RequestResponse | null;
-  setSelectedVertex: Dispatch<SetStateAction<Vertex | null>>;
-  setHoveredVertex: Dispatch<SetStateAction<Vertex | null>>;
-  setP5SketchRef: Dispatch<SetStateAction<SketchManager | null>>;
 }
 
-export const AboutSketch: FC<AboutSketchProps> = ({ initSketchAPIRes, mainAppLayoutState, setSelectedVertex, setHoveredVertex, setP5SketchRef }) => {
+export const AboutSketch: FC<AboutSketchProps> = ({ initSketchAPIRes, mainAppLayoutState }) => {
+
+
   const sketch = (p5: P5CanvasInstance) => {
-    const SK = new SketchManager({ p5, initSketchAPIRes, mainAppLayoutState, setSelectedVertex, setHoveredVertex, setSketchRef: setP5SketchRef, isAboutSketch: true })
+    const SK = new SketchManager({ p5, initSketchAPIRes, mainAppLayoutState, isAboutSketch: true })
 
     //*/==> SETUP
     p5.preload = () => { SK.preloadFont() };
@@ -39,6 +38,7 @@ export const AboutSketch: FC<AboutSketchProps> = ({ initSketchAPIRes, mainAppLay
       SK.handleResize();
     }
 
+    //*/==> CLICK R & L
     p5.mousePressed = () => {
       const mouseTarget = SK.mousePositionIsOnAVertex();
       if (mouseTarget == null) return;
@@ -47,11 +47,26 @@ export const AboutSketch: FC<AboutSketchProps> = ({ initSketchAPIRes, mainAppLay
       if (SK.targetIsAlreadyCurSelected(mouseTarget)) {
         SK.updateSelectedVertex(null); // none selected is null
         return
+      } else {
+        // New Selection Made...
+        SK.handleClickTargetValid(mouseTarget);
+        if (SK.aboutSketchHasClickToFetchEnabled()) { // enables feature past slide10
+          SK.fetchClickTargetData(mouseTarget);
+        }
+        SK.getNextAboutTarget(mouseTarget);
       }
-      // New Selection Made...
-      SK.handleClickTargetValid(mouseTarget);
     };
 
+    //*/=> HOVER
+    p5.mouseMoved = () => {
+      if (SK.stillHoveredLastVertex()) return; // change nothing
+      const mouseTarget = SK.mousePositionIsOnAVertex(); // Vertex || null;
+      if (SK.targetIsAlreadyCurSelected(mouseTarget)) return; // already selected, don't hover
+
+      SK.updateHoveredVertex(mouseTarget);
+    };
+
+    //*/==> KEY PRESS
     p5.keyPressed = () => {
       switch (p5.key) {
         case '?':
@@ -60,6 +75,9 @@ export const AboutSketch: FC<AboutSketchProps> = ({ initSketchAPIRes, mainAppLay
         case ',':
         case '<':
           mainAppLayoutState.setShowDebugDetails(prev => !prev);
+          break;
+        case ' ':
+          SK.getNextAboutTargetKeyAdvance();
           break;
         default:
           break;
