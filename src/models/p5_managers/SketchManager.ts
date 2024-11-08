@@ -4,8 +4,8 @@ import { Dispatch, SetStateAction } from "react";
 import { Camera, Font } from "p5";
 import { P5CanvasInstance } from "@p5-wrapper/react";
 
-import { postClickTargetData, postRefreshLayout, postRelatedDataQueue, RequestResponse } from "../../api";
-import { CameraManager, Graphset, LayoutConfig, UIManager, Vertex } from "..";
+import { getAboutTarget, postClickTargetData, postRefreshLayout, postRelatedDataQueue, RequestResponse } from "../../api";
+import { CameraManager, Graphset, LayoutConfig, Point3D, UIManager, Vertex } from "..";
 import { calcSafeSketchWindowSize } from "../../components";
 import { MainAppLayoutState } from "../../app/MainAppLayoutState";
 
@@ -13,9 +13,6 @@ interface SketchManagerProps {
   p5: P5CanvasInstance;
   initSketchAPIRes: RequestResponse | null;
   mainAppLayoutState: MainAppLayoutState;
-  setSelectedVertex: Dispatch<SetStateAction<Vertex | null>>;
-  setHoveredVertex: Dispatch<SetStateAction<Vertex | null>>;
-  setSketchRef: Dispatch<SetStateAction<SketchManager | null>>;
   isAboutSketch: boolean;
 }
 
@@ -25,17 +22,21 @@ export class SketchManager {
   private setReactSelVert: Dispatch<SetStateAction<Vertex | null>>;
   private setReactHovVert: Dispatch<SetStateAction<Vertex | null>>;
   private setReactIsLoading: Dispatch<SetStateAction<boolean>>;
+  private setReactAboutText: Dispatch<SetStateAction<string | null>>;
+  private setReactNavMsg: Dispatch<SetStateAction<string | null>>;
+  private setReactShowAboutSketchText: Dispatch<SetStateAction<boolean>>;
 
   //*/=> SKETCH STATE
   private p5: P5CanvasInstance
   private wikiFont: Font | undefined;
   private cam: Camera | null = null;
 
-  //*/==> SUB-MANAGER
+  //*/==> DELEGATE-TASK-MANAGER
   private camMngr: CameraManager;
   private uiMngr: UIManager;
 
   //*/=> DATA STATE
+  private curAboutSlide: number = 1;
   private originalQuery: string;
   private graph: Graphset;
   private selectedVertex: Vertex | null = null;
@@ -47,7 +48,7 @@ export class SketchManager {
   //*/=> CONSTRUCTOR
   //*/=> CONSTRUCTOR
   //
-  constructor({ p5, initSketchAPIRes, mainAppLayoutState, setSelectedVertex, setHoveredVertex, setSketchRef, isAboutSketch }: SketchManagerProps) {
+  constructor({ p5, initSketchAPIRes, mainAppLayoutState, isAboutSketch }: SketchManagerProps) {
 
     // SKETCH STATE
     this.p5 = p5;
@@ -55,9 +56,12 @@ export class SketchManager {
     this.uiMngr = new UIManager(p5);
 
     // REACT STATE
-    this.setReactSelVert = setSelectedVertex;
-    this.setReactHovVert = setHoveredVertex;
+    this.setReactSelVert = mainAppLayoutState.setSelectedVertex;
+    this.setReactHovVert = mainAppLayoutState.setHoveredVertex;
     this.setReactIsLoading = mainAppLayoutState.setIsLoading;
+    this.setReactAboutText = mainAppLayoutState.setAboutSketchText;
+    this.setReactNavMsg = mainAppLayoutState.setNavStatusMessage
+    this.setReactShowAboutSketchText = mainAppLayoutState.setShowAboutSketchText;
 
     // DATA STATE
     this.originalQuery = initSketchAPIRes!.data.query;
@@ -68,7 +72,7 @@ export class SketchManager {
     }
 
     // Pass React back this ref
-    setSketchRef(this);
+    mainAppLayoutState.setP5SketchRef(this);
   }
 
   /**
@@ -170,13 +174,13 @@ export class SketchManager {
   initCameraPositionAtAboutStart() {
     if (!this.cam || !this.graph) return;
 
-    this.cam.setPosition(0, 0, 200);
+    this.cam.setPosition(0, 0, 350);
     this.cam.lookAt(0, 0, 0);
   }
 
   /**
- * @method advanceCanimations - Advances camera animations if in progress.
- */
+  * @method advanceCanimations - Advances camera animations if in progress.
+  */
   advanceCanimations() {
     this.camMngr.advanceAnimations()
   }
@@ -223,6 +227,7 @@ export class SketchManager {
         debugger;
       })
       .finally(() => {
+        this.updateSelectedVertex(tgt);
         this.setReactIsLoading(false);
       });
   }
@@ -246,6 +251,227 @@ export class SketchManager {
       .finally(() => {
         this.setReactIsLoading(false);
       })
+  }
+
+  /**
+   * @method getNextAboutTarget - called inside of the AboutSketch when user asks to advance to the next slide when the instruction is a click on a Vertex target.
+   */
+  async getNextAboutTarget(tgtVert: Vertex) {
+    if (this.isValidAdvanceCombination(tgtVert)) {
+      this.setReactIsLoading(true);
+      await getAboutTarget(`${this.curAboutSlide + 1}`)
+        .then(res => {
+          this.updateAboutNavReactStateMessage(res);
+          // update adds data to graphset...
+          res.data.vertices.forEach(vert => this.graph.addVertex(vert));
+          res.data.properties.forEach(prop => this.graph.addProperty(prop));
+          res.data.edges.forEach(edge => this.graph.addEdge(edge));
+        })
+        .catch(err => {
+          console.error(err);
+          debugger;
+        })
+        .finally(() => {
+          this.setReactIsLoading(false);
+          this.curAboutSlide += 1;
+        });
+    } else if (this.isValidGetSlide6Request(tgtVert)) {
+      this.getAboutSlide6RequestHandler();
+    } else if (this.isValidGetSlide10Request(tgtVert)) {
+      this.getAboutSlide10RequestHandler();
+    }
+  }
+
+  aboutSketchHasClickToFetchEnabled(): boolean {
+    return this.curAboutSlide >= 10;
+  }
+
+  /**
+   * @method getNextAboutTargetKeyAdvance() - called inside of the AboutSketch to advance to next slide on slides which don't have a Vertex for the Client to click on which might advance the slide.
+   */
+  async getNextAboutTargetKeyAdvance() {
+    // gets the next slide in the series (i.e. + 1)
+    switch (this.curAboutSlide) {
+      case 4:
+        this.getAboutSlide5RequestHandler();
+        break;
+      case 6:
+        this.getAboutSlide7RequestHandler();
+        break;
+      case 8:
+        this.getAboutSlide9RequestHandler();
+        break;
+      case 10:
+        this.getAboutSlide11RequestHandler(); // final msg for v1
+        break;
+      case 11:
+        this.setReactShowAboutSketchText(false);
+        break;
+      default:
+        break;
+    }
+  }
+
+  private async getAboutSlide9RequestHandler() {
+    this.setReactIsLoading(true);
+    await getAboutTarget(`${this.curAboutSlide + 1}`)
+      .then(res => {
+        this.updateAboutNavReactStateMessage(res);
+        this.graph = new Graphset(res.data);
+      }).catch(err => {
+        console.error(err);
+        debugger;
+      }).finally(() => {
+        this.setReactIsLoading(false);
+        this.curAboutSlide += 1;
+        this.updateSelectedVertex(null);
+        this.camMngr.setLookAtTgt(new Point3D({ x: 0, y: 0, z: 0 }))
+      })
+  }
+
+  private async getAboutSlide10RequestHandler() {
+    this.setReactIsLoading(true);
+    await getAboutTarget(`${this.curAboutSlide + 1}`)
+      .then(res => {
+        this.updateAboutNavReactStateMessage(res);
+        // update adds data to graphset...
+        res.data.vertices.forEach(vert => this.graph.addVertex(vert));
+        res.data.properties.forEach(prop => this.graph.addProperty(prop));
+        res.data.edges.forEach(edge => this.graph.addEdge(edge));
+      })
+      .catch(err => {
+        console.error(err);
+        debugger;
+      }).finally(() => {
+        this.setReactIsLoading(false)
+        this.curAboutSlide += 1;
+        this.updateSelectedVertex(this.graph.getOriginVertex());
+      })
+  }
+
+  /**
+   * @method getAboutSlide11RequestHandler() - simplest version of the specialized requests just updating message here, allow the monster behind us to grow.
+   */
+  private async getAboutSlide11RequestHandler() {
+    this.setReactIsLoading(true);
+    await getAboutTarget(`${this.curAboutSlide + 1}`)
+      .then(res => {
+        this.updateAboutNavReactStateMessage(res);
+      }).catch(err => {
+        console.error(err)
+        debugger;
+      }).finally(() => {
+        this.setReactIsLoading(false);
+        this.curAboutSlide += 1;
+      })
+  }
+
+  /**
+   * @method getAboutSlide7RequestHandler - called to reqeust AboutSlide7 details to simplify the Graphset to focus on specific details of edges
+   */
+  private async getAboutSlide7RequestHandler() {
+    this.setReactIsLoading(true)
+    this.updateSelectedVertex(null);
+    await getAboutTarget(`${this.curAboutSlide + 1}`)
+      .then(res => {
+        this.updateAboutNavReactStateMessage(res);
+        this.graph = new Graphset(res.data);
+      }).catch(err => {
+        console.error(err);
+        debugger;
+      }).finally(() => {
+        this.setReactIsLoading(false);
+        this.curAboutSlide += 1;
+        this.camMngr.setLookAtTgt(new Point3D({ x: 0, y: 0, z: 0 }))
+        this.updateSelectedVertex(this.graph.getOriginVertex());
+        this.camMngr.setPositionTgt(new Point3D({ x: 0, y: 0, z: 350 }))
+      });
+  }
+
+  /**
+   * @method getAboutSlide5RequestHandler - called to request AboutSlide5 details to clean up the dataset and move the cam to reset for the user
+   */
+  private async getAboutSlide5RequestHandler() {
+    this.setReactIsLoading(true)
+    this.updateSelectedVertex(null);
+    await getAboutTarget(`${this.curAboutSlide + 1}`)
+      .then(res => {
+        this.updateAboutNavReactStateMessage(res);
+        this.graph.vertices = res.data.vertices; //reset to new data
+      })
+      .catch(err => {
+        console.error(err);
+        debugger;
+      })
+      .finally(() => {
+        this.camMngr.setLookAtTgt(new Point3D({ x: 0, y: 0, z: 0 }))
+        this.camMngr.setPositionTgt(new Point3D({ x: 0, y: 0, z: 350 }))
+        this.setReactIsLoading(false);
+        this.curAboutSlide += 1;
+      });
+  }
+
+  private async getAboutSlide6RequestHandler() {
+    this.setReactIsLoading(true);
+    this.camMngr.setPositionTgt(new Point3D({ x: 50, y: -100, z: 560 }))
+    this.updateSelectedVertex(null);
+    await getAboutTarget(`${this.curAboutSlide + 1}`)
+      .then(res => {
+        this.graph = new Graphset(res.data);
+        this.updateAboutNavReactStateMessage(res);
+      })
+      .catch(e => {
+        console.error(e);
+        debugger;
+      }).finally(() => {
+        this.setReactIsLoading(false)
+        this.curAboutSlide += 1;
+        //! enable to setup sketch to see related edges on slide 6
+        // this.updateSelectedVertex(this.graph.getOriginVertex());
+      })
+  }
+  /**
+   * @method updateAboutNavReactStateMessage() - updates the two related react state values for the navigation @ the top of the page. Uses the split(::) to pull out the title...
+   */
+  private updateAboutNavReactStateMessage(res: RequestResponse) {
+    this.setReactAboutText(res.data.query);
+    this.setReactNavMsg(res.data.query.split('::').at(0)!)
+  }
+
+  /**
+   * @method isValidAdvanceCombination() - Inside the AboutSketch this method checks for any of the combination of known valid click tartet and slide requests to check if the click was asking to continue in the tutorial or was other
+   */
+  private isValidAdvanceCombination(tgtVertex: Vertex): boolean {
+    const isGetSlide2Request = tgtVertex.id == 'Q405' && this.curAboutSlide === 1;
+    const isGetSlide3Request = tgtVertex.id == 'Q238651' && this.curAboutSlide === 2
+    const isGetSlide4Request = tgtVertex.id == 'Q3454165' && this.curAboutSlide === 3;
+    const isGetSlide8Request = tgtVertex.id == 'Q33999' && this.curAboutSlide === 7;
+    if (isGetSlide2Request) { // small transition back and up right
+      this.camMngr.setPositionTgt(new Point3D({ x: 175, y: -100, z: 350 }))
+    }
+
+    if (isGetSlide3Request) { // move in direction of selections
+      this.camMngr.setPositionTgt(new Point3D({ x: 0, y: -100, z: 350 }))
+    }
+
+    if (isGetSlide4Request) { // continues to follow selection
+      this.camMngr.setPositionTgt(new Point3D({ x: -100, y: -150, z: 400 }))
+    }
+    return (isGetSlide2Request || isGetSlide3Request || isGetSlide4Request || isGetSlide8Request);
+  }
+
+  /**
+   * @method isValidGetSlide6Request() - Inside the AboutSketch this method checks for known combinations of valid slides and targets, to check if the client wants to request the data to advance the AboutSketch to the next slide
+   */
+  private isValidGetSlide6Request(tgtVertex: Vertex): boolean {
+    return ((tgtVertex.id == 'Q3454165' && this.curAboutSlide === 5));
+  }
+
+  /**
+   * @method isValidGetSlide10Request() - Inside the AboutSketch this method checks for the correct variable presence to request slide10 in the series
+   */
+  private isValidGetSlide10Request(tgtVertex: Vertex): boolean {
+    return ((tgtVertex.id == 'Q3454165' && this.curAboutSlide === 9));
   }
 
   /**
