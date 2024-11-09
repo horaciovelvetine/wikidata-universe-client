@@ -5,7 +5,7 @@ import { Camera, Font } from "p5";
 import { P5CanvasInstance } from "@p5-wrapper/react";
 
 import { getAboutTarget, postClickTargetData, postRefreshLayout, postRelatedDataQueue, RequestResponse } from "../../api";
-import { CameraManager, Graphset, LayoutConfig, Point3D, UIManager, Vertex } from "..";
+import { CameraManager, Graphset, iGraphset, iLayoutConfig, LayoutConfig, Point3D, UIManager, Vertex } from "..";
 import { calcSafeSketchWindowSize } from "../../components";
 import { MainAppLayoutState } from "../../app/MainAppLayoutState";
 
@@ -76,35 +76,54 @@ export class SketchManager {
   }
 
   /**
-   * @method UI - gets the stored instance of the UIManager
+   * @method UI() - gets the stored instance of the UIManager
    */
   UI() {
     return this.uiMngr;
   }
 
   /**
-   * @method CAM - gets the stored instance of the CameraManager
+   * @method CAM() - gets the stored instance of the CameraManager
    */
   CAM() {
     return this.camMngr;
   }
 
   /**
-   * @method LAYOUT_CONFIG - gets the stored instance of the LayoutConfig
+   * @method LAYOUT_CONFIG() - gets the stored instance of the LayoutConfig
    */
   LAYOUT_CONFIG() {
     return this.layoutConfig;
   }
 
+  SET_LAYOUT_CONFIG(config: iLayoutConfig) {
+    this.layoutConfig = new LayoutConfig(config);
+  }
+
   /**
-   * @method GRAPH - gets the stored instance of the Graphset
+   * @method GRAPH() - gets the stored instance of the Graphset
    */
   GRAPH() {
     return this.graph;
   }
 
+  SET_GRAPH(graphData: iGraphset) {
+    this.graph = new Graphset(graphData);
+  }
+
   /**
-   * @method updateSelectedVertexUpdates - Updates both the sketches internal value, and Reacts state value for the currently selected Vertex state
+   * @method QUERY() - gets the originalQuery value passed into the sketchManager when the sketch was initialized
+   */
+  QUERY() {
+    return this.originalQuery;
+  }
+
+  SET_QUERY(query: string) {
+    this.originalQuery = query;
+  }
+
+  /**
+   * @method updateSelectedVertexUpdates() - Updates both the sketches internal value, and Reacts state value for the currently selected Vertex state
    */
   updateSelectedVertex(vert: Vertex | null) {
     this.selectedVertex = vert;
@@ -112,7 +131,7 @@ export class SketchManager {
   }
 
   /**
-   * @method updateHoveredVertex - Updates both the sketches internal value, and Reacts state value for the currently hovered Vertex state
+   * @method updateHoveredVertex() - Updates both the sketches internal value, and Reacts state value for the currently hovered Vertex state
    */
   updateHoveredVertex(vert: Vertex | null) {
     this.hoveredVertex = vert;
@@ -120,21 +139,21 @@ export class SketchManager {
   }
 
   /**
-   * @method preloadFont - Loads the font used for rendering text, called before setup in preload.
+   * @method preloadFont() - Loads the font used for rendering text, called before setup in preload.
    */
   preloadFont() {
     this.wikiFont = this.p5.loadFont(CharisTTF)
   }
 
   /**
-   * @method setTextFont - Sets the loaded font for rendering text, subsequently called in setup.
+   * @method setTextFont() - Sets the loaded font for rendering text, subsequently called in setup.
    */
   setTextFont() {
     this.p5.textFont(this.wikiFont!);
   }
 
   /**
-  * @method createCanvas - Creates the p5 canvas with initial dimensions.
+  * @method createCanvas() - Creates the p5 canvas with initial dimensions.
    */
   createCanvas() {
     const { width, height } = calcSafeSketchWindowSize();
@@ -142,7 +161,7 @@ export class SketchManager {
   }
 
   /**
-   * @method initManagedCamera - Initializes the camera and sets it looking at the origin, with a FOV which has modified
+   * @method initManagedCamera() - Initializes the camera and sets it looking at the origin, with a FOV which has modified
    * the FRUSTUM (sp?) to allow the minRender & maxRender to be moved in & out.
    */
   initManagedCamera() {
@@ -155,7 +174,7 @@ export class SketchManager {
   }
 
   /**
-   * @method initCameraPositionAtOriginVertex - Positions the managed camera based on the position of the Vertex marked as the origin, or (0,0,0) if that Vertex could not be found
+   * @method initCameraPositionAtOriginVertex() - Positions the managed camera based on the position of the Vertex marked as the origin, or (0,0,0) if that Vertex could not be found
    */
   initCameraPositionAtOriginVertex() {
     if (!this.cam || !this.graph) return;
@@ -169,7 +188,7 @@ export class SketchManager {
   }
 
   /**
-   * @method initCameraPositionAtAboutStart - Positions the managed camera at the needed position to properly initialize the AboutSketch
+   * @method initCameraPositionAtAboutStart() - Positions the managed camera at the needed position to properly initialize the AboutSketch
    */
   initCameraPositionAtAboutStart() {
     if (!this.cam || !this.graph) return;
@@ -179,7 +198,7 @@ export class SketchManager {
   }
 
   /**
-  * @method advanceCanimations - Advances camera animations if in progress.
+  * @method advanceCanimations() - Advances camera animations if in progress.
   */
   advanceCanimations() {
     this.camMngr.advanceAnimations()
@@ -196,7 +215,7 @@ export class SketchManager {
   }
 
   /**
-   * @method initPostRelatedDataRequest - Fetches related data and updates the sketch data.
+   * @method initPostRelatedDataRequest() - Fetches related data and updates the sketch data.
    */
   async initPostRelatedDataRequest() {
     this.setReactIsLoading(true); //==> in-case were here on reload.
@@ -213,7 +232,7 @@ export class SketchManager {
   }
 
   /**
-   * @method fetchClickTargetData - fetches the details related to the targeted (clicked) Vertex
+   * @method fetchClickTargetData() - fetches the details related to the targeted (clicked) Vertex
    */
   async fetchClickTargetData(tgt: Vertex) {
     this.setReactIsLoading(true);
@@ -233,7 +252,7 @@ export class SketchManager {
   }
 
   /**
-   * @method refreshLayoutPositions - unlocks and re-rolls the the layout algorithm with the current Graphset
+   * @method refreshLayoutPositions() - unlocks and re-rolls the the layout algorithm with the current Graphset
    */
   async refreshLayoutPositions() {
     this.setReactIsLoading(true);
@@ -254,7 +273,7 @@ export class SketchManager {
   }
 
   /**
-   * @method getNextAboutTarget - called inside of the AboutSketch when user asks to advance to the next slide when the instruction is a click on a Vertex target.
+   * @method getNextAboutTarget() - called inside of the AboutSketch when user asks to advance to the next slide when the instruction is a click on a Vertex target.
    */
   async getNextAboutTarget(tgtVert: Vertex) {
     if (this.isValidAdvanceCombination(tgtVert)) {
@@ -349,9 +368,6 @@ export class SketchManager {
       })
   }
 
-  /**
-   * @method getAboutSlide11RequestHandler() - simplest version of the specialized requests just updating message here, allow the monster behind us to grow.
-   */
   private async getAboutSlide11RequestHandler() {
     this.setReactIsLoading(true);
     await getAboutTarget(`${this.curAboutSlide + 1}`)
@@ -366,9 +382,6 @@ export class SketchManager {
       })
   }
 
-  /**
-   * @method getAboutSlide7RequestHandler - called to reqeust AboutSlide7 details to simplify the Graphset to focus on specific details of edges
-   */
   private async getAboutSlide7RequestHandler() {
     this.setReactIsLoading(true)
     this.updateSelectedVertex(null);
@@ -388,9 +401,6 @@ export class SketchManager {
       });
   }
 
-  /**
-   * @method getAboutSlide5RequestHandler - called to request AboutSlide5 details to clean up the dataset and move the cam to reset for the user
-   */
   private async getAboutSlide5RequestHandler() {
     this.setReactIsLoading(true)
     this.updateSelectedVertex(null);
@@ -475,14 +485,14 @@ export class SketchManager {
   }
 
   /**
-    * @method drawUI - Draws the UI elements.
+    * @method drawUI() - Draws the UI elements.
    */
   drawUI() {
     this.uiMngr.draw(this.graph);
   }
 
   /**
-   * @method drawSelectedDetails - Checks if this Vertex belongs to any of the other specially drawn vertices already,
+   * @method drawSelectedDetails() - Checks if this Vertex belongs to any of the other specially drawn vertices already,
    * then if not draws the label for this Vertex and all of its connecting edges.
    */
   drawSelectedDetails() {
@@ -493,7 +503,7 @@ export class SketchManager {
   }
 
   /**
-   * @method drawHoveredDetails - Checks if this Vertex belongs to any of the other specially drawn vertices already,
+   * @method drawHoveredDetails() - Checks if this Vertex belongs to any of the other specially drawn vertices already,
    * then if not draws the label for this Vertex and all of its connecting edges.
    */
   drawHoveredDetails() {
@@ -504,7 +514,7 @@ export class SketchManager {
   }
 
   /**
-   * @method drawVertices - Draws all vertices in the sketch.
+   * @method drawVertices() - Draws all vertices in the sketch.
    */
   drawVertices() {
     this.graph.vertices.forEach(vData => {
@@ -515,7 +525,7 @@ export class SketchManager {
   }
 
   /**
-   * @method stillHoveredLastVertex - Checks if the last hovered vertex is still hovered.
+   * @method stillHoveredLastVertex() - Checks if the last hovered vertex is still hovered.
    */
   stillHoveredLastVertex(): false | number[] {
     if (this.hoveredVertex == null) return false;
@@ -537,7 +547,7 @@ export class SketchManager {
     return mouseTarget;
   }
   /**
-   * @method targetIsAlreadyCurSelected - Checks if the target vertex is already selected.
+   * @method targetIsAlreadyCurSelected() - Checks if the target vertex is already selected.
    */
   targetIsAlreadyCurSelected(tgt: Vertex | null) {
     if (tgt == null) return false;
@@ -545,7 +555,7 @@ export class SketchManager {
   }
 
   /**
-   * @method handleClickTargetValid - Handles a valid click on a Vertex.
+   * @method handleClickTargetValid() - Handles a valid click on a Vertex.
    */
   handleClickTargetValid(tgt: Vertex) {
     this.hoveredVertex = null;
@@ -556,7 +566,7 @@ export class SketchManager {
   }
 
   /**
-   * @method handleResize - Handles resizing of the canvas.
+   * @method handleResize() - Handles resizing of the canvas.
    */
   handleResize() {
     const { width, height } = calcSafeSketchWindowSize();

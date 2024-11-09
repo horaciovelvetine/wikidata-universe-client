@@ -1,26 +1,31 @@
 import './SessionSettingsMenu.css'
-import { Settings as SettingsIcon, Fetch } from '../../assets/icons';
+import { Settings as SettingsIcon, Fetch, Search } from '../../assets/icons';
 
-import { ChangeEvent, createRef, Dispatch, FC, MouseEvent, SetStateAction, useEffect, useState } from 'react';
+import { ChangeEvent, createRef, Dispatch, FC, FormEvent, MouseEvent, SetStateAction, useEffect, useState } from 'react';
 
 import { toggleElementOpacity, toggleDisplayVisibility, changeFocusOpacity } from '..';
-import { SketchManager } from '../../models';
 import { MainAppLayoutState } from '../../app/MainAppLayoutState';
+import { getQueryData, RequestResponse } from '../../api';
 
 interface SessionSettingsMenuProps {
-  mainAppLayoutState: MainAppLayoutState;
-  p5SketchRef: SketchManager | null;
+  mainAppLayoutState: MainAppLayoutState
+  setInitSketchAPIRes: Dispatch<SetStateAction<RequestResponse | null>>
 }
 
 const prfx = (sufx: string) => {
   return 'session-settings-' + sufx;
 }
 
-export const SessionSettingsMenu: FC<SessionSettingsMenuProps> = ({ mainAppLayoutState, p5SketchRef }) => {
+export const SessionSettingsMenu: FC<SessionSettingsMenuProps> = ({ mainAppLayoutState, setInitSketchAPIRes }) => {
   const menuContainerRef = createRef<HTMLDivElement>();
-  const iconRef = createRef<HTMLImageElement>();
-  const { showSettings, setShowSettings, showDebugDetails, setShowDebugDetails } = mainAppLayoutState;
+  const gearIconRef = createRef<HTMLImageElement>();
+  const searchIconRef = createRef<HTMLImageElement>();
+  const searchInputRef = createRef<HTMLInputElement>();
 
+  const { showSettings, setShowSettings, showDebugDetails, setShowDebugDetails, p5SketchRef, setIsLoading, showWikiverseSketch } = mainAppLayoutState;
+
+  const [searchInpActive, setSearchInpActive] = useState(false);
+  const [searchInp, setSearchInp] = useState(p5SketchRef ? p5SketchRef.QUERY() : undefined);
   const [dataDensityInp, setDataDensityInp] = useState(p5SketchRef ? p5SketchRef.LAYOUT_CONFIG().dataDensity : null);
   const [attractionMultInp, setAttractionMultInp] = useState(p5SketchRef ? p5SketchRef.LAYOUT_CONFIG().attractionMult : null)
   const [repulsioMultInp, setRepulsionMultInp] = useState(p5SketchRef ? p5SketchRef.LAYOUT_CONFIG().repulsionMult : null)
@@ -30,7 +35,7 @@ export const SessionSettingsMenu: FC<SessionSettingsMenuProps> = ({ mainAppLayou
   useEffect(() => {
     toggleElementOpacity(menuContainerRef.current!, showSettings);
     toggleDisplayVisibility(menuContainerRef.current!, showSettings, 'grid')
-    changeFocusOpacity(iconRef.current!, showSettings, '0.25s', '60%')
+    changeFocusOpacity(gearIconRef.current!, showSettings, '0.25s', '70%')
   }, [showSettings])
 
   useEffect(() => {
@@ -47,8 +52,21 @@ export const SessionSettingsMenu: FC<SessionSettingsMenuProps> = ({ mainAppLayou
 
   useEffect(() => {
     if (!p5SketchRef) return;
-    p5SketchRef.UI().toggleShowBoundingBox
+    p5SketchRef.UI().toggleShowBoundingBox();
   }, [showBoundingInp])
+
+  useEffect(() => {
+    changeFocusOpacity(searchIconRef.current!, searchInpActive, '0.25s', '70%')
+    if (searchInpActive) {
+      searchInputRef.current!.style.opacity = '100%';
+    } else {
+      searchInputRef.current!.style.opacity = '0';
+    }
+  }, [searchInpActive])
+
+  useEffect(() => {
+    setSearchInp(p5SketchRef?.QUERY());
+  }, [p5SketchRef?.QUERY()])
 
   const ToggleSettings = p5SketchRef ? [
     { key: showDebugDetails, action: setShowDebugDetails, label: "Graph Details", shortcut: "," },
@@ -70,9 +88,50 @@ export const SessionSettingsMenu: FC<SessionSettingsMenuProps> = ({ mainAppLayou
     setShowSettings(false);
   }
 
+  const handleSearchInputChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    setSearchInp(e.target.value);
+  }
+
+  const handleSearchInputSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (searchInp == undefined) return;
+    setIsLoading(true);
+    await getQueryData(searchInp)
+      .then(res => {
+        setInitSketchAPIRes(res);
+      })
+      .catch(err => {
+        console.error(err);
+        debugger;
+      })
+    //loading state removed by new sketch...
+  };
+
+  const handleSearchIconClick = () => {
+    if (showWikiverseSketch) {
+      setSearchInpActive(prev => !prev);
+    }
+  };
+
+
   return (
-    <div id={prfx('container')} onClick={(e) => { e.stopPropagation() }}>
-      <img id={prfx('icon')} src={SettingsIcon} alt='gear to toggle displaying current settings menu' onClick={() => setShowSettings(prev => !prev)} ref={iconRef} />
+    <div id={prfx('display')} onClick={(e) => { e.stopPropagation() }}>
+      <div id={prfx('icon-container')}>
+        <form onSubmit={handleSearchInputSubmit}>
+          <input
+            id={prfx('search-input')}
+            ref={searchInputRef}
+            value={searchInp}
+            type='text'
+            placeholder='Search...'
+            onChange={handleSearchInputChange}
+          />
+        </form>
+        <img id={prfx('search-icon')} src={Search} ref={searchIconRef} onClick={handleSearchIconClick} />
+        <img id={prfx('gear-icon')} src={SettingsIcon} ref={gearIconRef} onClick={() => setShowSettings(prev => !prev)} />
+      </div>
+
 
       <div id={prfx('menu-container')} ref={menuContainerRef}>
         <h3 id={prfx('menu-header')}>on-screen:</h3>

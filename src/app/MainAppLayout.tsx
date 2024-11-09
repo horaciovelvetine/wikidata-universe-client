@@ -91,12 +91,12 @@ export const MainAppLayout: React.FC<MainAppLayoutProps> = ({ apiStatusResponse 
         {/* QUERY SKETCH OVERLAY TOP */}
         <div id='sketch-overlay-top'>
           <HoveredVertexDetails {...{ hoveredVertex }} />
-          <SessionSettingsMenu {...{ p5SketchRef, mainAppLayoutState }} />
+          <SessionSettingsMenu {...{ mainAppLayoutState, setInitSketchAPIRes }} />
         </div>
 
         {/* QUERY SKETCH MAIN OVERLAYS */}
         {apiOffline && <ApiOfflineNotice {... { apiStatusResponse }} />}
-        {!initSketchAPIRes && <InitializeQuerySessionInput {...{ mainAppLayoutState, setInitSketchAPIRes, setShowWikiverseSketch }} />}
+        {!initSketchAPIRes && <InitializeQuerySessionInput {...{ mainAppLayoutState, setInitSketchAPIRes}} />}
         {showAboutSketchText && <AboutSketchTextDisplay {...{ initSketchAPIRes, mainAppLayoutState }} />}
 
         {/* p5 SKETCH CONTAINERS */}
@@ -106,7 +106,7 @@ export const MainAppLayout: React.FC<MainAppLayoutProps> = ({ apiStatusResponse 
         {/* QUERY SKETCH OVERLAY BOTTOM */}
         <div id='sketch-overlay-bot'>
           <SelectedVertexDetails {...{ selectedVertex }} />
-          <GraphsetDetailsSummary {...{ sketchRef: p5SketchRef, mainAppLayoutState }} />
+          <GraphsetDetailsSummary {...{ mainAppLayoutState }} />
           <RelatedEdgesDetails {...{ mainAppLayoutState }} />
         </div>
       </div>

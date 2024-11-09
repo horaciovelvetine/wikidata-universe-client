@@ -44,7 +44,7 @@ export const Footer: FC<FooterProps> = ({ mainAppLayoutState, setInitSketchAPIRe
             <a href={backendUrl} target={bl}>backend</a>
           </li>
           <li id='ftr-item'>©2024 by <a href={githubUrl} target={bl}>@horaciovelvetine</a></li>
-          <li id='ftr-item'>about <a onClick={handleAboutClick}>wikiverse</a></li>
+          <li id='ftr-item'><a onClick={handleAboutClick}>help</a></li>
         </ul>
       </div>
     </footer>

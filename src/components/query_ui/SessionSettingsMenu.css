@@ -1,21 +1,41 @@
-#session-settings-container {
+#session-settings-display {
   position: absolute;
   display: grid;
   width: 100%;
   z-index: 1;
+  /* occupies, but absolute position for full width settings menu as needed */
+  /* grid-column: 2; */
+  padding-right: 0.5rem;
 }
 
-#session-settings-container input:disabled {
-  cursor: not-allowed;
+#session-settings-icon-container {
+  justify-self: flex-end;
+  display: inline-flex;
+  gap: 0.5rem;
 }
 
-#session-settings-container button:disabled {
-  cursor: not-allowed;
+#session-settings-search-input {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  transition: opacity 0.23s ease;
+  font-size: 1.4rem;
+  padding: 0.25rem 0.25rem;
+  opacity: 0;
+  border-bottom: 1px solid rgb(var(--font), 0.3);
+}
+
+
+#session-settings-gear-icon {}
+
+#session-settings-search-icon {
+  opacity: 35%;
 }
 
 #session-settings-menu-container {
   display: none;
   padding: 0.35rem 1rem;
+  /* display: inline-flex; */
   justify-self: flex-end;
   border-radius: 0.5rem;
   margin-right: 1rem;
@@ -24,7 +44,6 @@
   box-shadow: 0 0 2px rgba(var(--font), 0.07);
   text-shadow: 0 1px 1px black;
   backdrop-filter: blur(5px);
-  /* Add this line to blur the background */
 }
 
 #session-settings-menu-header {
@@ -45,11 +64,6 @@
   margin-right: 0.25rem;
 }
 
-#session-settings-icon {
-  height: 2.25rem;
-  padding-right: 0.5rem;
-  justify-self: flex-end;
-}
 
 #session-settings-toggle-contents {
   display: flex;
