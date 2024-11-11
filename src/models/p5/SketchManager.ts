@@ -35,13 +35,15 @@ export class SketchManager {
   private camMngr: CameraManager;
   private uiMngr: UIManager;
 
-  //*/=> DATA STATE
+  //*/==> DATA STATE
   private curAboutSlide: number = 1;
   private originalQuery: string;
   private graph: Graphset;
+  private layoutConfig: LayoutConfig;
+
+  //*/==> REACT STATE
   private selectedVertex: Vertex | null = null;
   private hoveredVertex: Vertex | null = null;
-  private layoutConfig: LayoutConfig;
 
   //
   //*/=> CONSTRUCTOR
@@ -121,6 +123,8 @@ export class SketchManager {
   SET_QUERY(query: string) {
     this.originalQuery = query;
   }
+
+
 
   /**
    * @method updateSelectedVertexUpdates() - Updates both the sketches internal value, and Reacts state value for the currently selected Vertex state
@@ -205,6 +209,107 @@ export class SketchManager {
   }
 
   /**
+  * @method drawUI() - Draws the UI elements.
+ */
+  drawUI() {
+    this.uiMngr.draw(this.graph);
+  }
+
+  /**
+   * @method drawSelectedDetails() - Checks if this Vertex belongs to any of the other specially drawn vertices already,
+   * then if not draws the label for this Vertex and all of its connecting edges.
+   */
+  drawSelectedDetails() {
+    if (this.selectedVertex == null) return;
+    if (this.selectedVertex.fetched == false) return;
+    this.selectedVertex.drawLabel(this.p5, this.cam!, this.wikiFont!)
+    this.selectedVertex.drawRelatedEdges(this.p5, this.graph)
+  }
+
+  /**
+   * @method drawHoveredDetails() - Checks if this Vertex belongs to any of the other specially drawn vertices already,
+   * then if not draws the label for this Vertex and all of its connecting edges.
+   */
+  drawHoveredDetails() {
+    if (this.hoveredVertex == null) return;
+    if (this.hoveredVertex.fetched == false) return;
+    this.hoveredVertex.drawLabel(this.p5, this.cam!, this.wikiFont!)
+    this.hoveredVertex.drawRelatedEdges(this.p5, this.graph)
+  }
+
+  /**
+   * @method drawVertices() - Draws all vertices in the sketch.
+   */
+  drawVertices() {
+    this.graph.vertices.forEach(vData => {
+      if (vData.fetched != false) {
+        new Vertex(vData).draw(this.p5, this.selectedVertex);
+      };
+    })
+  }
+
+  /**
+   * @method stillHoveredLastVertex() - Checks if the last hovered vertex is still hovered.
+   */
+  stillHoveredLastVertex(): false | number[] {
+    if (this.hoveredVertex == null) return false;
+    return this.hoveredVertex.traceRay(this.p5, this.cam!)
+  }
+
+  /**
+   * @method mousePositionIsOnAVertex - Checks if the mouse position is on a vertex.
+   */
+  mousePositionIsOnAVertex() {
+    let mouseTarget: Vertex | null = null;
+
+    this.graph.vertices.forEach(vert => {
+      const checkVert = new Vertex(vert);
+      if (checkVert.traceRay(this.p5, this.cam!)) {
+        mouseTarget = checkVert;
+      }
+    })
+    return mouseTarget;
+  }
+  /**
+   * @method targetIsAlreadyCurSelected() - Checks if the target vertex is already selected.
+   */
+  targetIsAlreadyCurSelected(tgt: Vertex | null) {
+    if (tgt == null) return false;
+    return tgt.id == this.selectedVertex?.id;
+  }
+
+  /**
+   * @method handleClickTargetValid() - Handles a valid click on a Vertex.
+   */
+  handleClickTargetValid(tgt: Vertex) {
+    this.hoveredVertex = null;
+    this.setReactHovVert(null);
+    this.selectedVertex = tgt;
+    this.setReactSelVert(tgt);
+    this.camMngr.setLookAtTgt(tgt.coords) // animate camera to new targets coordinates
+  }
+
+  /**
+   * @method handleResize() - Handles resizing of the canvas.
+   */
+  handleResize() {
+    const { width, height } = calcSafeSketchWindowSize();
+    this.p5.resizeCanvas(width, height)
+  }
+
+  //!===================================================================================================
+  //!===================================================================================================
+  //!===================================================================================================
+  //!===================================================================================================
+  //!===================================================================================================
+  //!===================================================================================================
+  //!===================================================================================================
+  //!===================================================================================================
+  //!===================================================================================================
+  //!===================================================================================================
+  //!===================================================================================================
+  //!===================================================================================================
+  /**
    * @method requestPayload() - helper shorthands building a payload for a request to the API
    * @apiNote - the QueryVal is inputted since it is used differently per request...
    */
@@ -268,6 +373,12 @@ export class SketchManager {
         this.setReactIsLoading(false);
       })
   }
+
+  //! ABOUT ============================================================================================
+  //! ABOUT ============================================================================================
+  //! ABOUT ============================================================================================
+  //! ABOUT ============================================================================================
+  //! ABOUT ============================================================================================
 
   /**
    * @method getNextAboutTarget() - called inside of the AboutSketch when user asks to advance to the next slide when the instruction is a click on a Vertex target.
@@ -481,92 +592,4 @@ export class SketchManager {
     return ((tgtVertex.id == 'Q3454165' && this.curAboutSlide === 9));
   }
 
-  /**
-    * @method drawUI() - Draws the UI elements.
-   */
-  drawUI() {
-    this.uiMngr.draw(this.graph);
-  }
-
-  /**
-   * @method drawSelectedDetails() - Checks if this Vertex belongs to any of the other specially drawn vertices already,
-   * then if not draws the label for this Vertex and all of its connecting edges.
-   */
-  drawSelectedDetails() {
-    if (this.selectedVertex == null) return;
-    if (this.selectedVertex.fetched == false) return;
-    this.selectedVertex.drawLabel(this.p5, this.cam!, this.wikiFont!)
-    this.selectedVertex.drawRelatedEdges(this.p5, this.graph)
-  }
-
-  /**
-   * @method drawHoveredDetails() - Checks if this Vertex belongs to any of the other specially drawn vertices already,
-   * then if not draws the label for this Vertex and all of its connecting edges.
-   */
-  drawHoveredDetails() {
-    if (this.hoveredVertex == null) return;
-    if (this.hoveredVertex.fetched == false) return;
-    this.hoveredVertex.drawLabel(this.p5, this.cam!, this.wikiFont!)
-    this.hoveredVertex.drawRelatedEdges(this.p5, this.graph)
-  }
-
-  /**
-   * @method drawVertices() - Draws all vertices in the sketch.
-   */
-  drawVertices() {
-    this.graph.vertices.forEach(vData => {
-      if (vData.fetched != false) {
-        new Vertex(vData).draw(this.p5, this.selectedVertex);
-      };
-    })
-  }
-
-  /**
-   * @method stillHoveredLastVertex() - Checks if the last hovered vertex is still hovered.
-   */
-  stillHoveredLastVertex(): false | number[] {
-    if (this.hoveredVertex == null) return false;
-    return this.hoveredVertex.traceRay(this.p5, this.cam!)
-  }
-
-  /**
-   * @method mousePositionIsOnAVertex - Checks if the mouse position is on a vertex.
-   */
-  mousePositionIsOnAVertex() {
-    let mouseTarget: Vertex | null = null;
-
-    this.graph.vertices.forEach(vert => {
-      const checkVert = new Vertex(vert);
-      if (checkVert.traceRay(this.p5, this.cam!)) {
-        mouseTarget = checkVert;
-      }
-    })
-    return mouseTarget;
-  }
-  /**
-   * @method targetIsAlreadyCurSelected() - Checks if the target vertex is already selected.
-   */
-  targetIsAlreadyCurSelected(tgt: Vertex | null) {
-    if (tgt == null) return false;
-    return tgt.id == this.selectedVertex?.id;
-  }
-
-  /**
-   * @method handleClickTargetValid() - Handles a valid click on a Vertex.
-   */
-  handleClickTargetValid(tgt: Vertex) {
-    this.hoveredVertex = null;
-    this.setReactHovVert(null);
-    this.selectedVertex = tgt;
-    this.setReactSelVert(tgt);
-    this.camMngr.setLookAtTgt(tgt.coords) // animate camera to new targets coordinates
-  }
-
-  /**
-   * @method handleResize() - Handles resizing of the canvas.
-   */
-  handleResize() {
-    const { width, height } = calcSafeSketchWindowSize();
-    this.p5.resizeCanvas(width, height)
-  }
 }
