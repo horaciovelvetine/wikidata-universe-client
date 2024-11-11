@@ -1,4 +1,4 @@
-import { getAboutDetails, RequestResponse } from '../../api';
+import { getTutorialSlideData, RequestResponse } from '../../api';
 import { MainAppLayoutState } from '../../app/MainAppLayoutState';
 import './Footer.css';
 import { Dispatch, FC, SetStateAction } from 'react';
@@ -23,7 +23,7 @@ export const Footer: FC<FooterProps> = ({ mainAppLayoutState, setInitSketchAPIRe
       mainAppLayoutState.setShowAboutSketch(false);
       mainAppLayoutState.setShowAboutSketchText(false);
     } else { // make needed requests and update using response
-      await getAboutDetails().then(res => {
+      await getTutorialSlideData("1").then(res => {
         setInitSketchAPIRes(res);
         mainAppLayoutState.setAboutSketchText(res.data.query);
         mainAppLayoutState.setNavStatusMessage(res.data.query.split('::').at(0)!)
@@ -44,7 +44,7 @@ export const Footer: FC<FooterProps> = ({ mainAppLayoutState, setInitSketchAPIRe
             <a href={backendUrl} target={bl}>backend</a>
           </li>
           <li id='ftr-item'>©2024 by <a href={githubUrl} target={bl}>@horaciovelvetine</a></li>
-          <li id='ftr-item'><a onClick={handleAboutClick}>help</a></li>
+          <li id='ftr-item'>New here? <a onClick={handleAboutClick}>Click for a tutorial</a></li>
         </ul>
       </div>
     </footer>

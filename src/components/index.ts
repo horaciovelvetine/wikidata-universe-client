@@ -1,6 +1,3 @@
-//UNUSED UNFACTORED
-export { HorizonSiteTitle } from './ui/HorizonSiteTitle';
-
 //QUERY UI COMPONENTS:
 export { GraphsetDetailsSummary } from './query_ui/GraphsetDetailsSummary'
 export { HoveredVertexDetails } from './query_ui/HoveredVertexDetails'
