@@ -5,10 +5,10 @@ export { InitializeQuerySessionInput } from './query_ui/InitializeQuerySessionIn
 export { SessionSettingsMenu } from './query_ui/SessionSettingsMenu'
 export { SelectedVertexDetails } from './query_ui/SelectedVertexDetails'
 export { RelatedEdgesDetails } from './query_ui/RelatedEdgesDetails'
+export { AboutSketchTextDisplay } from './query_ui/AboutSketchTextDisplay'
 
 //UI:
 export { NavMenuStatusDisplay } from './ui/NavMenuStatusDisplay'
-export { AboutSketchTextDisplay } from './ui/AboutSketchTextDisplay'
 export { LoadingBar } from './ui/LoadingBar'
 export { ApiOfflineNotice } from './ui/ApiOfflineNotice'
 export { Footer } from './ui/Footer';
