@@ -4,7 +4,7 @@ import { Dispatch, SetStateAction } from "react";
 import { Camera, Font } from "p5";
 import { P5CanvasInstance } from "@p5-wrapper/react";
 
-import { getAboutTarget, postClickTargetData, postRefreshLayout, postRelatedDataQueue, RequestResponse } from "../../api";
+import { getTutorialSlideData, postClickTargetData, postRefreshLayout, postRelatedDataQueue, RequestResponse } from "../../api";
 import { CameraManager, Graphset, iGraphset, iLayoutConfig, LayoutConfig, Point3D, UIManager, Vertex } from "..";
 import { calcSafeSketchWindowSize } from "../../components";
 import { MainAppLayoutState } from "../../app/MainAppLayoutState";
@@ -219,7 +219,6 @@ export class SketchManager {
    */
   async initPostRelatedDataRequest() {
     this.setReactIsLoading(true); //==> in-case were here on reload.
-
     await postRelatedDataQueue(this.requestPayload(this.originalQuery))
       .then(response => {
         this.graph = new Graphset(response.data);
@@ -236,7 +235,6 @@ export class SketchManager {
    */
   async fetchClickTargetData(tgt: Vertex) {
     this.setReactIsLoading(true);
-
     await postClickTargetData(this.requestPayload(tgt.id))
       .then(response => {
         this.graph = new Graphset(response.data);
@@ -256,7 +254,6 @@ export class SketchManager {
    */
   async refreshLayoutPositions() {
     this.setReactIsLoading(true);
-
     await postRefreshLayout(this.requestPayload(this.originalQuery))
       .then(response => {
         this.selectedVertex = null;
@@ -278,7 +275,7 @@ export class SketchManager {
   async getNextAboutTarget(tgtVert: Vertex) {
     if (this.isValidAdvanceCombination(tgtVert)) {
       this.setReactIsLoading(true);
-      await getAboutTarget(`${this.curAboutSlide + 1}`)
+      await getTutorialSlideData(`${this.curAboutSlide + 1}`)
         .then(res => {
           this.updateAboutNavReactStateMessage(res);
           // update adds data to graphset...
@@ -333,7 +330,7 @@ export class SketchManager {
 
   private async getAboutSlide9RequestHandler() {
     this.setReactIsLoading(true);
-    await getAboutTarget(`${this.curAboutSlide + 1}`)
+    await getTutorialSlideData(`${this.curAboutSlide + 1}`)
       .then(res => {
         this.updateAboutNavReactStateMessage(res);
         this.graph = new Graphset(res.data);
@@ -350,7 +347,7 @@ export class SketchManager {
 
   private async getAboutSlide10RequestHandler() {
     this.setReactIsLoading(true);
-    await getAboutTarget(`${this.curAboutSlide + 1}`)
+    await getTutorialSlideData(`${this.curAboutSlide + 1}`)
       .then(res => {
         this.updateAboutNavReactStateMessage(res);
         // update adds data to graphset...
@@ -370,7 +367,7 @@ export class SketchManager {
 
   private async getAboutSlide11RequestHandler() {
     this.setReactIsLoading(true);
-    await getAboutTarget(`${this.curAboutSlide + 1}`)
+    await getTutorialSlideData(`${this.curAboutSlide + 1}`)
       .then(res => {
         this.updateAboutNavReactStateMessage(res);
       }).catch(err => {
@@ -385,7 +382,7 @@ export class SketchManager {
   private async getAboutSlide7RequestHandler() {
     this.setReactIsLoading(true)
     this.updateSelectedVertex(null);
-    await getAboutTarget(`${this.curAboutSlide + 1}`)
+    await getTutorialSlideData(`${this.curAboutSlide + 1}`)
       .then(res => {
         this.updateAboutNavReactStateMessage(res);
         this.graph = new Graphset(res.data);
@@ -404,7 +401,7 @@ export class SketchManager {
   private async getAboutSlide5RequestHandler() {
     this.setReactIsLoading(true)
     this.updateSelectedVertex(null);
-    await getAboutTarget(`${this.curAboutSlide + 1}`)
+    await getTutorialSlideData(`${this.curAboutSlide + 1}`)
       .then(res => {
         this.updateAboutNavReactStateMessage(res);
         this.graph.vertices = res.data.vertices; //reset to new data
@@ -425,7 +422,7 @@ export class SketchManager {
     this.setReactIsLoading(true);
     this.camMngr.setPositionTgt(new Point3D({ x: 50, y: -100, z: 560 }))
     this.updateSelectedVertex(null);
-    await getAboutTarget(`${this.curAboutSlide + 1}`)
+    await getTutorialSlideData(`${this.curAboutSlide + 1}`)
       .then(res => {
         this.graph = new Graphset(res.data);
         this.updateAboutNavReactStateMessage(res);
