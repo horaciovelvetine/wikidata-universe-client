@@ -65,7 +65,7 @@ export class UIManager {
   private drawBoundingBox(minMax: MinMaxSet) {
     if (!this.showMedianBoundingBox) return;
     this.p5.noFill();
-    this.p5.strokeWeight(1);
+    this.p5.strokeWeight(5);
     this.p5.stroke(UI_FONT(0.3))
     this.p5.box(minMax.x.diff, minMax.y.diff, minMax.z.diff)
   }
