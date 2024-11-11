@@ -14,6 +14,6 @@ export type { iGraphset, MinMaxSet } from './data/Graphset';
 export type { Dimensions } from './data/Dimensions'
 
 //p5_MANAGEMENT
-export { CameraManager } from './p5_managers/CameraManager';
-export { SketchManager } from './p5_managers/SketchManager'
-export { UIManager } from './p5_managers/UIManager'
+export { CameraManager } from './p5/CameraManager';
+export { SketchManager } from './p5/SketchManager'
+export { UIManager } from './p5/UIManager'
