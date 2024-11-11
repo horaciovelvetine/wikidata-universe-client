@@ -1,10 +1,10 @@
 import './HoveredVertexDetails.css'
-import { Vertex as VertIcon } from '../../assets/icons';
+import { Vertex as VertIcon } from '../../../assets/icons';
 
 import React, { createRef, useEffect } from 'react';
 
-import { Vertex } from '../../models';
-import { toggleElementOpacity } from '../';
+import { Vertex } from '../../../models';
+import { toggleElementOpacity } from '../../';
 
 interface HoveredVertexDetailsProps {
   hoveredVertex: Vertex | null;

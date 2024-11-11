@@ -1,6 +1,6 @@
 import './GraphsetDetailsSummary.css'
 import React, { createRef, useEffect, useState } from 'react';
-import { MainAppLayoutState } from '../../app/MainAppLayoutState';
+import { MainAppLayoutState } from '../../../app/MainAppLayoutState';
 
 interface GraphsetDetailsSummaryProps {
   mainAppLayoutState: MainAppLayoutState;

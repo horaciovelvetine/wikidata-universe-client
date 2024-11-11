@@ -55,10 +55,12 @@ footer #list {
   transition: font-size 235ms, text-decoration 235ms;
   font-size: 1.6rem;
   text-decoration: underline;
+  cursor: pointer;
 }
 
 #ftr-item a:not(:hover) {
   transition: font-size 235ms, text-decoration 235ms;
   font-size: 1.4rem;
   text-decoration: none;
+
 }

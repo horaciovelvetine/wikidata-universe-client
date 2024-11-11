@@ -2,8 +2,8 @@ import './AboutSketchTextDisplay.css'
 
 import { createRef, FC, useEffect, useState } from 'react';
 
-import { RequestResponse } from '../../api';
-import { MainAppLayoutState } from '../../app/MainAppLayoutState';
+import { RequestResponse } from '../../../api';
+import { MainAppLayoutState } from '../../../app/MainAppLayoutState';
 
 const prfx = (sufx: string) => {
   return `about-${sufx}`;

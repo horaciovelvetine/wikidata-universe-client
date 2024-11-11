@@ -1,12 +1,12 @@
 import './InitializeQuerySessionInput.css'
-import GlobeLogo from '../../assets/imgs/globe-outline-no-bg-white.svg'
-import { Search } from '../../assets/icons'
+import GlobeLogo from '../../../assets/imgs/globe-outline-no-bg-white.svg'
+import { Search } from '../../../assets/icons'
 
 import { ChangeEvent, createRef, Dispatch, FC, FormEvent, SetStateAction, useEffect, useState } from 'react';
 
-import { getQueryData, RequestResponse } from '../../api';
-import { errorShakeInvalidElement, toggleElementOpacity, fadeElementAndRemoveDisplay, INPUT_STATE } from '../';
-import { MainAppLayoutState } from '../../app/MainAppLayoutState';
+import { getQueryData, RequestResponse } from '../../../api';
+import { errorShakeInvalidElement, toggleElementOpacity, fadeElementAndRemoveDisplay, INPUT_STATE } from '../../';
+import { MainAppLayoutState } from '../../../app/MainAppLayoutState';
 
 const wikidataHomepage = 'https://www.wikidata.org/wiki/Wikidata:Main_Page';
 const prfx = (suffix: string) => { return 'init-query-session-' + suffix };
@@ -91,7 +91,7 @@ export const InitializeQuerySessionInput: FC<InitializeQuerySessionInputProps> =
       </div >
 
       <div id={prfx('heading-cont')}>
-        <h1 id={prfx('title')} >Explore <a id={prfx('wm-homepage-link')} href={wikidataHomepage} target='_blank' >Wikipedia</a> in 3D</h1>
+        <h1 id={prfx('title')} >Search <a id={prfx('wm-homepage-link')} href={wikidataHomepage} target='_blank' >Wikipedia</a> in 3D</h1>
       </div >
 
       <div id={prfx('form-cont')}>

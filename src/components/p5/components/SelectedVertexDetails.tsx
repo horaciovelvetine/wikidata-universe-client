@@ -1,8 +1,8 @@
 import './SelectedVertexDetails.css'
-import { VertexSel } from '../../assets/icons'
+import { VertexSel } from '../../../assets/icons'
 
 import { createRef, FC, useEffect } from 'react';
-import { Vertex } from '../../models';
+import { Vertex } from '../../../models';
 
 interface SelectedVertexDetailsProps {
   selectedVertex: Vertex | null;
