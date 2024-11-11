@@ -1,11 +1,16 @@
+//p5.Sketches
+export { WikiverseSketch } from './p5/WikiverseSketch'
+export { BackgroundSketch } from './p5/BackgroundSketch'
+export { AboutSketch } from './p5/AboutSketch'
+
 //QUERY UI COMPONENTS:
-export { GraphsetDetailsSummary } from './query_ui/GraphsetDetailsSummary'
-export { HoveredVertexDetails } from './query_ui/HoveredVertexDetails'
-export { InitializeQuerySessionInput } from './query_ui/InitializeQuerySessionInput'
-export { SessionSettingsMenu } from './query_ui/SessionSettingsMenu'
-export { SelectedVertexDetails } from './query_ui/SelectedVertexDetails'
-export { RelatedEdgesDetails } from './query_ui/RelatedEdgesDetails'
-export { AboutSketchTextDisplay } from './query_ui/AboutSketchTextDisplay'
+export { GraphsetDetailsSummary } from './p5/components/GraphsetDetailsSummary'
+export { HoveredVertexDetails } from './p5/components/HoveredVertexDetails'
+export { InitializeQuerySessionInput } from './p5/components/InitializeQuerySessionInput'
+export { SessionSettingsMenu } from './p5/components/SessionSettingsMenu'
+export { SelectedVertexDetails } from './p5/components/SelectedVertexDetails'
+export { RelatedEdgesDetails } from './p5/components/RelatedEdgesDetails'
+export { AboutSketchTextDisplay } from './p5/components/AboutSketchTextDisplay'
 
 //UI:
 export { NavMenuStatusDisplay } from './ui/NavMenuStatusDisplay'
@@ -13,11 +18,6 @@ export { LoadingBar } from './ui/LoadingBar'
 export { ApiOfflineNotice } from './ui/ApiOfflineNotice'
 export { Footer } from './ui/Footer';
 export { VerticalSiteTitle } from './ui/VerticalSiteTitle';
-
-//p5.Sketches
-export { WikiverseSketch } from './p5/WikiverseSketch'
-export { BackgroundSketch } from './p5/BackgroundSketch'
-export { AboutSketch } from './p5/AboutSketch'
 
 //UTIL:
 export { calcSafeSketchWindowSize } from './util/CalcSafeSketchWindowSize'
