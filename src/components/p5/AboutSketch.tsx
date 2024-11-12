@@ -11,7 +11,6 @@ interface AboutSketchProps {
 
 export const AboutSketch: FC<AboutSketchProps> = ({ initSketchAPIRes, mainAppLayoutState }) => {
 
-
   const sketch = (p5: P5CanvasInstance) => {
     const SK = new SketchManager({ p5, initSketchAPIRes, mainAppLayoutState, isAboutSketch: true })
 
@@ -45,16 +44,18 @@ export const AboutSketch: FC<AboutSketchProps> = ({ initSketchAPIRes, mainAppLay
 
       // Deselect...
       if (SK.targetIsAlreadyCurSelected(mouseTarget)) {
+        SK.getNextTutorialSlide(mouseTarget);
         SK.updateSelectedVertex(null); // none selected is null
         return
-      } else {
-        // New Selection Made...
-        SK.handleClickTargetValid(mouseTarget);
-        if (SK.aboutSketchHasClickToFetchEnabled()) { // enables feature past slide10
-          SK.fetchClickTargetData(mouseTarget);
-        }
-        SK.getNextAboutTarget(mouseTarget);
       }
+      // New Selection...
+      SK.handleClickTargetValid(mouseTarget);
+      if (SK.aboutSketchHasClickToFetchEnabled()) { // enables feature past slide10
+        SK.fetchClickTargetData(mouseTarget);
+      }
+      SK.getNextTutorialSlide(mouseTarget);
+      
+
     };
 
     //*/=> HOVER
@@ -77,7 +78,7 @@ export const AboutSketch: FC<AboutSketchProps> = ({ initSketchAPIRes, mainAppLay
           mainAppLayoutState.setShowDebugDetails(prev => !prev);
           break;
         case ' ':
-          SK.getNextAboutTargetKeyAdvance();
+          SK.getNextTutorialSlide(null);
           break;
         default:
           break;

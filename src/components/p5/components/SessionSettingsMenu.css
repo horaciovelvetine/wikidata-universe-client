@@ -15,9 +15,9 @@
 }
 
 #session-settings-search-input {
-  background-color: transparent;
   border: none;
   outline: none;
+  background-color: transparent;
   transition: opacity 0.23s ease;
   font-size: 1.4rem;
   padding: 0.25rem 0.25rem;
@@ -35,7 +35,6 @@
 #session-settings-menu-container {
   display: none;
   padding: 0.35rem 1rem;
-  /* display: inline-flex; */
   justify-self: flex-end;
   border-radius: 0.5rem;
   margin-right: 1rem;

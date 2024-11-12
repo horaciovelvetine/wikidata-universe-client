@@ -28,4 +28,16 @@ export class Edge implements iEdge {
     }
     return EDGE_DIR.INCOMING;
   }
+
+  isSource(vert: Vertex) {
+    return this.srcId == vert.id;
+  }
+
+  isTarget(vert: Vertex) {
+    return this.tgtId == vert.id;
+  }
+
+  isLabelMatch(vert: Vertex) {
+    return this.label == vert.label;
+  }
 }

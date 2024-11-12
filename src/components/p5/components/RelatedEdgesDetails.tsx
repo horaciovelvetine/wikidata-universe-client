@@ -69,10 +69,12 @@ const EdgeDetail: FC<EdgeDetailProps> = ({ edge, sketchRef, selectedVertex, rela
 
   const altVertexId = edge.srcId == selectedVertex.id ? edge.tgtId : edge.srcId;
   const property = sketchRef.GRAPH().getProperty(edge.propertyId);
+  if (property == null) return <></>;
   const altVertex = sketchRef.GRAPH().getVertex(altVertexId)
-  
+  if (altVertex == null) return <></>;
+
   //! assertions as any missing values are caught in the getRelated filtering process previous to this
-  const isParalellEdge = selectedVertex.parallelEdges(altVertex!, edge, relatedEdges);
+  const isParalellEdge = selectedVertex.parallelEdges(altVertex, edge, relatedEdges);
   const edgeDirection = isParalellEdge!.length > 0 ? EDGE_DIR.PARALLEL : edge.getEdgeDirection(selectedVertex!);
   const icon = edgeDirectionIcon(edgeDirection);
 

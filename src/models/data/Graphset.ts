@@ -75,13 +75,15 @@ export class Graphset implements iGraphset {
   getRelatedEdges(vertex: Vertex): Edge[] {
     return this.edges.filter(edge => {
       if (!edge.srcId || !edge.propertyId || !edge.tgtId) return false; // check edge has needed values
-
-
-      const property = this.getProperty(edge.propertyId);
-      const source = this.getVertex(edge.srcId);
-      const target = this.getVertex(edge.tgtId);
-      if (!property || !source || !target) return false; // if can't find source ent, skip!
-      return property.fetched && source.fetched && target.fetched; // only return edges where all are fetched
+      const ed = new Edge(edge);
+      if (ed.isSource(vertex) || ed.isTarget(vertex) || ed.isLabelMatch(vertex)) {
+        const property = this.getProperty(edge.propertyId);
+        const source = this.getVertex(edge.srcId);
+        const target = this.getVertex(edge.tgtId);
+        if (!property || !source || !target) return false; // if can't find source ent, skip!
+        return property.fetched && source.fetched && target.fetched; // only return edges where all are fetched
+      }
+      return false;
     }).map(edge => {
       return new Edge(edge); // map to real edge objects
     })

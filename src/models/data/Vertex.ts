@@ -89,17 +89,16 @@ export class Vertex implements iVertex {
     if (edgesToDraw.length == 0) return;
 
     edgesToDraw.forEach(edge => {
-      const vert2 = this.getAltVertex(graph, edge)!;
-      if (vert2 && vert2.fetched) {
-        const isPara = this.parallelEdges(vert2, edge, edgesToDraw)
-        const { x, y, z } = this.coords;
-        const { x: x2, y: y2, z: z2 } = vert2.coords;
+      const vert2 = this.getAltVertex(graph, edge);
+      if (!vert2) return;
+      const isPara = this.parallelEdges(vert2, edge, edgesToDraw)
+      const { x, y, z } = this.coords;
+      const { x: x2, y: y2, z: z2 } = vert2.coords;
 
-        p5.push();
-        this.setEdgeStrokeColor(p5, edge!, true, (isPara.length > 0));
-        p5.line(x, y, z, x2, y2, z2);
-        p5.pop();
-      }
+      p5.push();
+      this.setEdgeStrokeColor(p5, edge, true, (isPara.length > 0));
+      p5.line(x, y, z, x2, y2, z2);
+      p5.pop();
     });
 
   }
@@ -214,11 +213,9 @@ export class Vertex implements iVertex {
    * Applies the color transformation used to draw an Edge based on its direction.
    */
   private setEdgeStrokeColor(p5: P5CanvasInstance, edge: iEdge, isHov: boolean, isParallel: boolean) {
-    const opacity = isHov ? 0.4 : 1;
-    const blueOpacity = isHov ? 0.6 : 1;
-    const incomingColor = `rgba(30,0,255,${blueOpacity})`;
-    const outgoingColor = `rgba(255,50,80,${opacity})`;
-    const bothColor = `rgba(135,20,255,${opacity})`;
+    const incomingColor = `rgba(3,0,255,0.8)`;
+    const outgoingColor = `rgba(255,45,60, 0.8)`;
+    const bothColor = `rgb(135,20,255)`;
 
     if (isParallel) {
       p5.stroke(bothColor);

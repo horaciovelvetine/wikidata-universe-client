@@ -1,5 +1,4 @@
 import './NavMenuStatusDisplay.css'
-import { Search } from '../../assets/icons';
 
 import { createRef, FC, useEffect, useState } from 'react';
 
@@ -21,7 +20,6 @@ export const NavMenuStatusDisplay: FC<NavMenuStatusDisplayProps> = ({ mainAppLay
   const settingsRef = createRef<HTMLLIElement>();
   const exploreMsgRef = createRef<HTMLSpanElement>();
   const aboutMsgRef = createRef<HTMLSpanElement>();
-  const inputRef = createRef<HTMLInputElement>();
 
   const [navMsg, setNavMsg] = useState<string | null>();
   const [exploreMsg, setExploreMsg] = useState<string | null>();
@@ -97,7 +95,7 @@ export const NavMenuStatusDisplay: FC<NavMenuStatusDisplayProps> = ({ mainAppLay
         </li>
         <li ref={aboutRef} id={prfx('about-nav')}>
           <h2 id={prfx('about')}>
-            about<span ref={aboutMsgRef}>: {navMsg}</span>
+            tutorial<span ref={aboutMsgRef}>: {navMsg}</span>
           </h2>
         </li>
         <li ref={settingsRef} id={prfx('settings-nav')}>

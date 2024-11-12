@@ -78,7 +78,7 @@ export class UIManager {
     const xLen = minMax.x.diff / 2;
     const yLen = minMax.y.diff / 2;
     const zLen = minMax.z.diff / 2;
-    this.p5.strokeWeight(1);
+    this.p5.strokeWeight(3);
     this.p5.stroke(255, 0, 0);
     this.p5.line(-xLen, 0, 0, xLen, 0, 0);
     this.p5.stroke(0, 255, 0);
