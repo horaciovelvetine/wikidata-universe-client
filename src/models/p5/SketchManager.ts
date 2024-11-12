@@ -544,8 +544,6 @@ export class SketchManager {
       }).finally(() => {
         this.setReactIsLoading(false)
         this.curAboutSlide += 1;
-        //! enable to setup sketch to see related edges on slide 6
-        // this.updateSelectedVertex(this.graph.getOriginVertex());
       })
   }
   /**

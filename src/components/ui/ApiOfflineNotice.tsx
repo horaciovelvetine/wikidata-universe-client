@@ -31,10 +31,10 @@ export const ApiOfflineNotice: React.FC<ApiOfflineProps> = ({ apiStatusResponse 
           <h1 id={prfx('title')}>{apiStatusResponse.status} Unavailable</h1>
         </div>
         <div id={prfx('globe-cont')}>
-          <img src={GlobeLogo} alt="Wikipedia globe logo" id={prfx('globe-logo')} />
+          <img src={GlobeLogo} id={prfx('globe-logo')} />
         </div>
-        <img src={Question} alt="Big ol' question mark" id={prfx('question-icon')} />
-        <img src={Exclaims} alt="Big ol' exclamation point (this error must be a problem)" id={prfx('exclaims-icon')} />
+        <img src={Question} id={prfx('question-icon')} />
+        <img src={Exclaims} id={prfx('exclaims-icon')} />
       </div>
     </>
   );

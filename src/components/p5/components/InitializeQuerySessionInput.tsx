@@ -87,7 +87,7 @@ export const InitializeQuerySessionInput: FC<InitializeQuerySessionInputProps> =
       </div >
 
       <div id={prfx('globe-logo-cont')} >
-        <img id={prfx('globe-logo-img')} src={GlobeLogo} alt='Wikipedia Globe Logo' />
+        <img id={prfx('globe-logo-img')} src={GlobeLogo} />
       </div >
 
       <div id={prfx('heading-cont')}>

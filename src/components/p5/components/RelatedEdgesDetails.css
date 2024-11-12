@@ -12,7 +12,17 @@
   margin-bottom: 0.25rem;
   /* position off screen on-mount */
   transition: transform 200ms cubic-bezier(0.4, 0.0, 0.2, 1);
-  transform: translateY(200%);
+  transform: translateY(400%);
+}
+
+#related-edges-details-header {
+  position: fixed;
+  margin: 0rem 0rem 0rem 1rem;
+  font-family: "CharisSIL-Regular", serif !important;
+  color: rgb(var(--font), 1);
+  text-shadow: 1px 1px 0px black;
+  transform: translateY(-90%);
+  font-size: 1.25rem;
 }
 
 #related-edges-details-cont {
