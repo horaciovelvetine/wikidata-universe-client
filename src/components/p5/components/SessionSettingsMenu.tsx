@@ -43,17 +43,17 @@ export const SessionSettingsMenu: FC<SessionSettingsMenuProps> = ({ mainAppLayou
     setDataDensityInp(p5SketchRef.LAYOUT_CONFIG().dataDensity)
     setAttractionMultInp(p5SketchRef.LAYOUT_CONFIG().attractionMult)
     setRepulsionMultInp(p5SketchRef.LAYOUT_CONFIG().repulsionMult)
-  }, [p5SketchRef])
+  })
 
   useEffect(() => {
     if (!p5SketchRef) return;
     p5SketchRef.UI().toggleShowAxis();
-  }, [showAxisInp, p5SketchRef])
+  }, [showAxisInp])
 
   useEffect(() => {
     if (!p5SketchRef) return;
     p5SketchRef.UI().toggleShowBoundingBox();
-  }, [showBoundingInp, p5SketchRef])
+  }, [showBoundingInp])
 
   useEffect(() => {
     changeFocusOpacity(searchIconRef.current!, searchInpActive, '0.25s', '70%')
@@ -62,7 +62,7 @@ export const SessionSettingsMenu: FC<SessionSettingsMenuProps> = ({ mainAppLayou
     } else {
       searchInputRef.current!.style.opacity = '0';
     }
-  }, [searchInpActive, searchIconRef, searchInputRef])
+  }, [searchInpActive])
 
   useEffect(() => {
     setSearchInp(p5SketchRef?.QUERY());

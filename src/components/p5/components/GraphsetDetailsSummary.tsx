@@ -38,7 +38,7 @@ export const GraphsetDetailsSummary: React.FC<GraphsetDetailsSummaryProps> = ({ 
     const intervalId = setInterval(updateCameraValues, 100); // Update every 100ms
 
     return () => clearInterval(intervalId); // Cleanup interval on component unmount
-  }, [p5SketchRef, p5SketchRef?.GRAPH(), debugRef]);
+  }, [p5SketchRef, p5SketchRef?.GRAPH()]);
 
   useEffect(() => {
     if (!debugRef.current) return;
@@ -48,7 +48,7 @@ export const GraphsetDetailsSummary: React.FC<GraphsetDetailsSummaryProps> = ({ 
       debugRef.current.style.transform = 'translateX(100%)';
     }
 
-  }, [showDebugDetails, debugRef])
+  }, [showDebugDetails])
 
   return (
     <div id="sketch-data-summary-container" ref={debugRef}>
