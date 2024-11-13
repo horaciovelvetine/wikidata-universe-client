@@ -36,7 +36,7 @@ export const SessionSettingsMenu: FC<SessionSettingsMenuProps> = ({ mainAppLayou
     toggleElementOpacity(menuContainerRef.current!, showSettings);
     toggleDisplayVisibility(menuContainerRef.current!, showSettings, 'grid')
     changeFocusOpacity(gearIconRef.current!, showSettings, '0.25s', '70%')
-  }, [showSettings])
+  })
 
   useEffect(() => {
     if (!p5SketchRef) return;
@@ -48,12 +48,12 @@ export const SessionSettingsMenu: FC<SessionSettingsMenuProps> = ({ mainAppLayou
   useEffect(() => {
     if (!p5SketchRef) return;
     p5SketchRef.UI().toggleShowAxis();
-  }, [showAxisInp])
+  }, [showAxisInp, p5SketchRef])
 
   useEffect(() => {
     if (!p5SketchRef) return;
     p5SketchRef.UI().toggleShowBoundingBox();
-  }, [showBoundingInp])
+  }, [showBoundingInp, p5SketchRef])
 
   useEffect(() => {
     changeFocusOpacity(searchIconRef.current!, searchInpActive, '0.25s', '70%')
@@ -62,7 +62,7 @@ export const SessionSettingsMenu: FC<SessionSettingsMenuProps> = ({ mainAppLayou
     } else {
       searchInputRef.current!.style.opacity = '0';
     }
-  }, [searchInpActive])
+  }, [searchInpActive, searchIconRef, searchInputRef])
 
   useEffect(() => {
     setSearchInp(p5SketchRef?.QUERY());
@@ -103,7 +103,6 @@ export const SessionSettingsMenu: FC<SessionSettingsMenuProps> = ({ mainAppLayou
       })
       .catch(err => {
         console.error(err);
-        debugger;
       })
     //loading state removed by new sketch...
   };

@@ -19,7 +19,7 @@ export const HoveredVertexDetails: React.FC<HoveredVertexDetailsProps> = ({ hove
 
   useEffect(() => {
     toggleElementOpacity(hoveredDetailsEleRef.current!, !!hoveredVertex, '150ms')
-  }, [hoveredVertex])
+  })
 
   const label = hoveredVertex ? hoveredVertex?.label : "";
   const description = hoveredVertex ? hoveredVertex?.description : "";

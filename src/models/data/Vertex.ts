@@ -96,7 +96,7 @@ export class Vertex implements iVertex {
       const { x: x2, y: y2, z: z2 } = vert2.coords;
 
       p5.push();
-      this.setEdgeStrokeColor(p5, edge, true, (isPara.length > 0));
+      this.setEdgeStrokeColor(p5, edge, (isPara.length > 0));
       p5.line(x, y, z, x2, y2, z2);
       p5.pop();
     });
@@ -113,7 +113,7 @@ export class Vertex implements iVertex {
     if (this.id != null) {
       return /^P/.test(this.id) ?
         wdBaseURL + `Property:${this.id}` : wdBaseURL + this.id;
-    };
+    }
     return enWikiBaseURL + this.label?.replace(" ", "_")
   }
 
@@ -212,7 +212,7 @@ export class Vertex implements iVertex {
   /**
    * Applies the color transformation used to draw an Edge based on its direction.
    */
-  private setEdgeStrokeColor(p5: P5CanvasInstance, edge: iEdge, isHov: boolean, isParallel: boolean) {
+  private setEdgeStrokeColor(p5: P5CanvasInstance, edge: iEdge, isParallel: boolean) {
     const incomingColor = `rgba(3,0,255,0.8)`;
     const outgoingColor = `rgba(255,45,60, 0.8)`;
     const bothColor = `rgb(135,20,255)`;

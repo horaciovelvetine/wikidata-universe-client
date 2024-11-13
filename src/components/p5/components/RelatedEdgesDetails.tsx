@@ -36,7 +36,7 @@ export const RelatedEdgesDetails: FC<RelatedEdgesDetailsDisplayProps> = ({ mainA
       displayRef.current!.style.transform = 'translateY(0)';
     }
 
-  }, [selectedVertex, p5SketchRef?.GRAPH()])
+  }, [selectedVertex, p5SketchRef?.GRAPH(), displayRef])
 
   return (
     <div id={prfx('display')} ref={displayRef} onWheel={(e) => { e.stopPropagation() }}>

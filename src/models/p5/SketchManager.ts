@@ -244,7 +244,7 @@ export class SketchManager {
     this.graph.vertices.forEach(vData => {
       if (vData.fetched != false) {
         new Vertex(vData).draw(this.p5, this.selectedVertex);
-      };
+      }
     })
   }
 
@@ -321,7 +321,6 @@ export class SketchManager {
         this.graph = new Graphset(response.data);
       }).catch(err => {
         console.error(err);
-        debugger;
       }).finally(() => {
         this.setReactIsLoading(false);
       });
@@ -338,7 +337,6 @@ export class SketchManager {
       })
       .catch(err => {
         console.error(err);
-        debugger;
       })
       .finally(() => {
         this.updateSelectedVertex(tgt);
@@ -359,7 +357,6 @@ export class SketchManager {
       })
       .catch(err => {
         console.error(err);
-        debugger;
       })
       .finally(() => {
         this.setReactIsLoading(false);

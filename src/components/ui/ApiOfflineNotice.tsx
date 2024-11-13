@@ -22,7 +22,7 @@ export const ApiOfflineNotice: React.FC<ApiOfflineProps> = ({ apiStatusResponse 
     setTimeout(() => {
       toggleElementOpacity(containerRef.current!, true, '400ms');
     }, 1)
-  }, []);
+  });
 
   return (
     <>

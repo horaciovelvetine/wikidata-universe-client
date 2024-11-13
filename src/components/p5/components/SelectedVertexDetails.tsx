@@ -24,7 +24,7 @@ export const SelectedVertexDetails: FC<SelectedVertexDetailsProps> = ({ selected
     } else {
       displayRef.current.style.transform = 'translateY(0)';
     }
-  }, [selectedVertex])
+  }, [selectedVertex, displayRef])
 
   const label = selectedVertex ? (selectedVertex.label || selectedVertex.id) : '';
   const coords = selectedVertex ? selectedVertex.coordsStr() : '';

@@ -1,4 +1,4 @@
-import { Dimensions, iEdge, iLayoutConfig, iProperty, iVertex, LayoutConfig } from "../../models";
+import { Dimensions, iEdge, iLayoutConfig, iProperty, iVertex } from "../../models";
 
 export interface RequestPayload {
   query: string;

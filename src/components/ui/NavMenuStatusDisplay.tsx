@@ -39,7 +39,7 @@ export const NavMenuStatusDisplay: FC<NavMenuStatusDisplayProps> = ({ mainAppLay
       return;
     }
     showHideNavListItem(false, aboutRef.current!)
-  }, [mainAppLayoutState.showAboutSketch])
+  }, [mainAppLayoutState.showAboutSketch, aboutRef])
 
   //* SHOW SETTINGS
   useEffect(() => {
@@ -48,7 +48,7 @@ export const NavMenuStatusDisplay: FC<NavMenuStatusDisplayProps> = ({ mainAppLay
       return;
     }
     showHideNavListItem(false, settingsRef.current!)
-  }, [mainAppLayoutState.showSettings])
+  }, [mainAppLayoutState.showSettings, settingsRef])
 
   //*MAIN APP 'EXPLORE'
   useEffect(() => {
@@ -57,7 +57,7 @@ export const NavMenuStatusDisplay: FC<NavMenuStatusDisplayProps> = ({ mainAppLay
       return;
     }
     showHideNavListItem(false, exploreRef.current!)
-  }, [mainAppLayoutState])
+  }, [mainAppLayoutState, exploreRef])
 
   //* NAV STATUS MSG VALUE STATE VALUE
   useEffect(() => {
@@ -66,7 +66,7 @@ export const NavMenuStatusDisplay: FC<NavMenuStatusDisplayProps> = ({ mainAppLay
     if (mainAppLayoutState.navStatusMessage) {
       aboutMsgRef.current!.style.opacity = '100%';
     }
-  }, [mainAppLayoutState.navStatusMessage])
+  }, [mainAppLayoutState.navStatusMessage, aboutMsgRef])
 
   //* CURRENT QUERY EXPLORE TEXT VALUE
   useEffect(() => {
@@ -80,7 +80,7 @@ export const NavMenuStatusDisplay: FC<NavMenuStatusDisplayProps> = ({ mainAppLay
     if (curQueryVal) {
       exploreMsgRef.current!.style.opacity = '100%';
     }
-  }, [initSketchAPIRes, mainAppLayoutState])
+  }, [initSketchAPIRes, mainAppLayoutState, exploreMsgRef])
 
   return (
     <div id={prfx('display')} >

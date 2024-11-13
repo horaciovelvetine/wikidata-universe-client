@@ -25,7 +25,7 @@ export const AboutSketchTextDisplay: FC<AboutOnScreenMsgProps> = ({ mainAppLayou
     setTimeout(() => {
       ref.style.opacity = '100%';
     }, 15)
-  }, [])
+  }, [displayRef])
 
   useEffect(() => {
     if (mainAppLayoutState.aboutSketchText) {

@@ -102,7 +102,7 @@ export class Graphset implements iGraphset {
   /**
    * @method getProperty() - returns a Property with the provided ID value or null
    */
-  getProperty(propertyId: String): Property | null {
+  getProperty(propertyId: string): Property | null {
     const property = this.properties.find(property => property.id === propertyId);
     if (property)
       return new Property(property);
@@ -112,7 +112,7 @@ export class Graphset implements iGraphset {
   /**
    * @method getVertex() - returns a Vertex with the provided ID value or null
    */
-  getVertex(vertexId: String | null): Vertex | null {
+  getVertex(vertexId: string | null): Vertex | null {
     const vertex = this.vertices.find(vertex => vertex.id === vertexId);
     if (vertex)
       return new Vertex(vertex);

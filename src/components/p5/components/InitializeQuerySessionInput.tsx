@@ -34,7 +34,7 @@ export const InitializeQuerySessionInput: FC<InitializeQuerySessionInputProps> =
     } else {
       fadeElementAndRemoveDisplay(contRef.current!, '1ms')
     }
-  }, [])
+  })
 
   const submitInitQueryRequestHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();

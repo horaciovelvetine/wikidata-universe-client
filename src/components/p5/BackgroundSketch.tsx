@@ -7,7 +7,7 @@ interface ErrorSketchProps {
 }
 
 export const BackgroundSketch: React.FC<ErrorSketchProps> = ({ containerDimensions }) => {
-  let particles: Particle[] = [];
+  const particles: Particle[] = [];
   const sketch: Sketch = (p5: P5CanvasInstance) => {
     p5.setup = () => {
       p5.createCanvas(containerDimensions.width, containerDimensions.height);
@@ -63,7 +63,7 @@ class Particle {
 
   joinNearby(particlesArr: Particle[]) {
     particlesArr.forEach(particle => {
-      let distance = this.p5.dist(this.x, this.y, particle.x, particle.y)
+      const distance = this.p5.dist(this.x, this.y, particle.x, particle.y)
       if (distance < 100) {
         this.p5.stroke('rgba(16, 84, 136, 0.3)');
         this.p5.line(this.x, this.y, particle.x, particle.y);

@@ -72,7 +72,7 @@ export const MainAppLayout: React.FC<MainAppLayoutProps> = ({ apiStatusResponse 
     } else {
       toggleElementOpacity(bgSketchRef.current!, true, '250ms');
     }
-  }, [initSketchAPIRes]);
+  }, [initSketchAPIRes, bgSketchRef]);
 
   return (
     <div id='wikiverse-main'>
