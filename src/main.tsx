@@ -1,12 +1,9 @@
-import './styles/index.css'
-import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
+import { getApiStatus } from './api'
+import { MainAppLayout } from './app/MainAppLayout'
 
-import { getApiStatusRequest } from './api' // status check message for connection to API
-
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <App apiStatus={await getApiStatusRequest()} />
-  </React.StrictMode>,
-)
+getApiStatus().then(apiStatusResponse => {
+  ReactDOM.createRoot(document.getElementById('root')!).render(
+    <MainAppLayout apiStatusResponse={apiStatusResponse} />
+  );
+});

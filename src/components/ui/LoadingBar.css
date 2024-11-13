@@ -1,0 +1,41 @@
+#loading-bar-container {
+  width: 100%;
+  height: 4px;
+  overflow: hidden;
+}
+
+#gradient-loading-bar {
+  width: 100%;
+  animation-duration: 3s;
+  animation-name: loading;
+  animation-iteration-count: infinite;
+  background-image: linear-gradient(to right, #4cd964, #5ac8fa, #007aff, #34aadc, #5856d6, #ff2d55);
+  block-size: 100%;
+  position: relative;
+}
+
+#gradient-shadow-progress {
+  background-image: linear-gradient(to bottom, rgba(var(--font), 0.12), transparent);
+  block-size: 20em;
+  inline-size: 100%;
+  position: absolute;
+  top: 75%;
+  transform: skewX(-45deg);
+  transform-origin: 0px -4px;
+}
+
+@keyframes loading {
+
+  0%,
+  100% {
+    transition-timing-function: cubic-bezier(1, 0, 0.65, 0.85);
+  }
+
+  0% {
+    inline-size: 0;
+  }
+
+  100% {
+    inline-size: 100%;
+  }
+}

@@ -1,0 +1,9 @@
+#vertical-site-title {
+  position: fixed;
+  top: 50%;
+  transform: translateX(-59.25%) translateY(-50%) rotate(-90deg);
+  z-index: -10;
+  font-size: calc(0.2*100vh);
+  color: rgb(var(--font));
+  text-shadow: 3px 3px 3px black;
+}

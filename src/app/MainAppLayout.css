@@ -1,0 +1,136 @@
+@import url('../assets/Palette.css');
+
+@font-face {
+  font-family: 'CharisSIL-Regular';
+  src: url('../assets/font/CharisSIL-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'CharisSIL-Bold';
+  src: url('../assets/font/CharisSIL-Bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'CharisSIL-Italic';
+  src: url('../assets/font/CharisSIL-Italic.ttf') format('truetype');
+}
+
+* {
+  box-sizing: border-box;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color-scheme: dark;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: rgb(var(--hyperlink));
+  background-color: transparent;
+  text-decoration: none;
+}
+
+body {
+  height: 100vh;
+  width: 100vw;
+  overflow: clip;
+  background-color: rgb(var(--body-bg));
+}
+
+#root {
+  height: 100vh;
+  width: 100vw;
+}
+
+#wikiverse-main {
+  height: 100%;
+  width: 100%;
+  display: block;
+  overflow: hidden;
+}
+
+#query-sketch {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  overflow: clip;
+  box-shadow: 0rem 0rem 2rem 1rem rgba(0, 0, 0, 0.22);
+}
+
+#unclipped-query-sketch {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -10;
+}
+
+#unclipped-query-mask {
+    position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: -8;
+      background-color: rgb(var(--sketch-bg));
+    
+}
+
+#background-sketch {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  overflow: clip;
+  z-index: -3;
+}
+
+#sketch-overlay-top {
+  position: absolute;
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr 1fr;
+  top: 0%;
+  width: 100%;
+  margin-top: 0.5rem;
+  background-color: transparent;
+}
+
+#sketch-overlay-bot {
+  position: absolute;
+  display: grid;
+  grid-template-rows: auto 10rem;
+  grid-template-columns: 60% 40%;
+  bottom: 0%;
+  width: 100%;
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+  background-color: transparent;
+}
+
+@keyframes horizontal-shake {
+
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%,
+  80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%,
+  60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
