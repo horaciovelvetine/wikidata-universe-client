@@ -53,16 +53,17 @@ export const InitializeQuerySessionInput: FC<InitializeQuerySessionInputProps> =
         setInitSketchAPIRes(res);
         setNavStatusMessage(res.data.query);
         fadeElementAndRemoveDisplay(container, '1500ms')
-      } else {
-        toggleElementOpacity(invalidCont, true, '150ms')
-        setTimeout(() => {
-          toggleElementOpacity(invalidCont, false, '150ms')
-        }, 2000)
-        setIsLoading(false);
-        setLocInpValid(INPUT_STATE.INVALID);
-        errorShakeInvalidElement(input);
-        errorShakeInvalidElement(submit);
       }
+    }).catch(e => {
+      toggleElementOpacity(invalidCont, true, '150ms')
+      setTimeout(() => {
+        toggleElementOpacity(invalidCont, false, '150ms')
+      }, 2000)
+      setLocInpValid(INPUT_STATE.INVALID);
+      errorShakeInvalidElement(input);
+      errorShakeInvalidElement(submit);
+    }).finally(() => {
+      setIsLoading(false);
     })
   }
 
