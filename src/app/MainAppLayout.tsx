@@ -91,12 +91,12 @@ export const MainAppLayout: React.FC<MainAppLayoutProps> = ({ apiStatusResponse 
         {/* QUERY SKETCH OVERLAY TOP */}
         <div id='sketch-overlay-top'>
           <HoveredVertexDetails {...{ hoveredVertex }} />
-          <SessionSettingsMenu {...{ mainAppLayoutState, setInitSketchAPIRes }} />
+          <SessionSettingsMenu {...{ mainAppLayoutState, initSketchAPIRes, setInitSketchAPIRes }} />
         </div>
 
         {/* QUERY SKETCH MAIN OVERLAYS */}
         {apiOffline && <ApiOfflineNotice {... { apiStatusResponse }} />}
-        {!initSketchAPIRes && <InitializeQuerySessionInput {...{ mainAppLayoutState, setInitSketchAPIRes}} />}
+        {!initSketchAPIRes && <InitializeQuerySessionInput {...{ mainAppLayoutState, setInitSketchAPIRes }} />}
         {showAboutSketchText && <AboutSketchTextDisplay {...{ initSketchAPIRes, mainAppLayoutState }} />}
 
         {/* p5 SKETCH CONTAINERS */}

@@ -19,7 +19,6 @@ interface InitializeQuerySessionInputProps {
 export const InitializeQuerySessionInput: FC<InitializeQuerySessionInputProps> = ({ mainAppLayoutState, setInitSketchAPIRes }) => {
   const { setIsLoading, apiOnline, setShowWikiverseSketch, setNavStatusMessage } = mainAppLayoutState;
   const [localInput, setLocalInput] = useState<string>('');
-  const [locInpValid, setLocInpValid] = useState<INPUT_STATE>(INPUT_STATE.PLACEHOLDER);
 
   const contRef = createRef<HTMLDivElement>();
   const invalidContRef = createRef<HTMLDivElement>();
@@ -40,50 +39,42 @@ export const InitializeQuerySessionInput: FC<InitializeQuerySessionInputProps> =
     e.preventDefault();
     const { container, invalidCont, submit, input } = curElRefs();
 
-    if (locInpValid !== INPUT_STATE.VALID) {
+    if (localInput.length === 0) {
       errorShakeInvalidElement(input);
       errorShakeInvalidElement(submit);
       return;
     }
 
     setIsLoading(true);
+
     await getQueryData(localInput).then(res => {
       if (res.status === 200) {
         setShowWikiverseSketch(true);
         setInitSketchAPIRes(res);
         setNavStatusMessage(res.data.query);
         fadeElementAndRemoveDisplay(container, '1500ms')
-      } else {
-        toggleElementOpacity(invalidCont, true, '150ms')
-        setTimeout(() => {
-          toggleElementOpacity(invalidCont, false, '150ms')
-        }, 2000)
-        setIsLoading(false);
-        setLocInpValid(INPUT_STATE.INVALID);
-        errorShakeInvalidElement(input);
-        errorShakeInvalidElement(submit);
       }
+    }).catch(e => {
+      toggleElementOpacity(invalidCont, true, '150ms')
+      setTimeout(() => {
+        toggleElementOpacity(invalidCont, false, '150ms')
+      }, 2000)
+      errorShakeInvalidElement(input);
+      errorShakeInvalidElement(submit);
+    }).finally(() => {
+      setIsLoading(false);
     })
   }
 
   const initQueryInputChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     setLocalInput(e.target.value);
-    const alphanumericRegex = /^[a-z0-9\s]+$/i;
-
-    if (localInput.length === 0) {
-      setLocInpValid(INPUT_STATE.EMPTY);
-    } else if (alphanumericRegex.test(localInput)) {
-      setLocInpValid(INPUT_STATE.VALID);
-    } else {
-      setLocInpValid(INPUT_STATE.INVALID);
-    }
   }
 
   return (
     <div id={prfx('input-main-cont')} ref={contRef} >
       <div id={prfx('invalid-cont')} ref={invalidContRef} >
-        <p id={prfx('invalid-msg')} > Unable to find any results for: "{localInput}".</p >
+        <p id={prfx('invalid-msg')}> Unable to find any results for: "{localInput}".</p >
       </div >
 
       <div id={prfx('globe-logo-cont')} >

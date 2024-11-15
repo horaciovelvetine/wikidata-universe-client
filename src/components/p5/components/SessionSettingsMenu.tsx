@@ -3,11 +3,12 @@ import { Settings as SettingsIcon, Fetch, Search } from '../../../assets/icons';
 
 import { ChangeEvent, createRef, Dispatch, FC, FormEvent, MouseEvent, SetStateAction, useEffect, useState } from 'react';
 
-import { toggleElementOpacity, toggleDisplayVisibility, changeFocusOpacity } from '../..';
+import { toggleElementOpacity, toggleDisplayVisibility, changeFocusOpacity, errorShakeInvalidElement } from '../..';
 import { MainAppLayoutState } from '../../../app/MainAppLayoutState';
 import { getQueryData, RequestResponse } from '../../../api';
 
 interface SessionSettingsMenuProps {
+  initSketchAPIRes: RequestResponse | null;
   mainAppLayoutState: MainAppLayoutState
   setInitSketchAPIRes: Dispatch<SetStateAction<RequestResponse | null>>
 }
@@ -16,7 +17,7 @@ const prfx = (sufx: string) => {
   return 'session-settings-' + sufx;
 }
 
-export const SessionSettingsMenu: FC<SessionSettingsMenuProps> = ({ mainAppLayoutState, setInitSketchAPIRes }) => {
+export const SessionSettingsMenu: FC<SessionSettingsMenuProps> = ({ initSketchAPIRes, mainAppLayoutState, setInitSketchAPIRes }) => {
   const menuContainerRef = createRef<HTMLDivElement>();
   const gearIconRef = createRef<HTMLImageElement>();
   const searchIconRef = createRef<HTMLImageElement>();
@@ -25,24 +26,18 @@ export const SessionSettingsMenu: FC<SessionSettingsMenuProps> = ({ mainAppLayou
   const { showSettings, setShowSettings, showDebugDetails, setShowDebugDetails, p5SketchRef, setIsLoading, showWikiverseSketch } = mainAppLayoutState;
 
   const [searchInpActive, setSearchInpActive] = useState(false);
-  const [searchInp, setSearchInp] = useState(p5SketchRef ? p5SketchRef.QUERY() : undefined);
-  const [dataDensityInp, setDataDensityInp] = useState(p5SketchRef ? p5SketchRef.LAYOUT_CONFIG().dataDensity : null);
-  const [attractionMultInp, setAttractionMultInp] = useState(p5SketchRef ? p5SketchRef.LAYOUT_CONFIG().attractionMult : null)
-  const [repulsioMultInp, setRepulsionMultInp] = useState(p5SketchRef ? p5SketchRef.LAYOUT_CONFIG().repulsionMult : null)
-  const [showAxisInp, setShowAxisInp] = useState(p5SketchRef ? p5SketchRef.UI().getShowAxis() : false);
-  const [showBoundingInp, setShowBoundingInp] = useState(p5SketchRef ? p5SketchRef.UI().getShowBoundingBox() : false);
+  const [searchInp, setSearchInp] = useState(initSketchAPIRes?.data.query || undefined);
+
+  const [dataDensityInp, setDataDensityInp] = useState(initSketchAPIRes?.data.layoutConfig.dataDensity || null);
+  const [attractionMultInp, setAttractionMultInp] = useState(initSketchAPIRes?.data.layoutConfig.attractionMult || null)
+  const [repulsioMultInp, setRepulsionMultInp] = useState(initSketchAPIRes?.data.layoutConfig.repulsionMult || null)
+  const [showAxisInp, setShowAxisInp] = useState(false);
+  const [showBoundingInp, setShowBoundingInp] = useState(false);
 
   useEffect(() => {
     toggleElementOpacity(menuContainerRef.current!, showSettings);
     toggleDisplayVisibility(menuContainerRef.current!, showSettings, 'grid')
     changeFocusOpacity(gearIconRef.current!, showSettings, '0.25s', '70%')
-  })
-
-  useEffect(() => {
-    if (!p5SketchRef) return;
-    setDataDensityInp(p5SketchRef.LAYOUT_CONFIG().dataDensity)
-    setAttractionMultInp(p5SketchRef.LAYOUT_CONFIG().attractionMult)
-    setRepulsionMultInp(p5SketchRef.LAYOUT_CONFIG().repulsionMult)
   })
 
   useEffect(() => {
@@ -65,8 +60,14 @@ export const SessionSettingsMenu: FC<SessionSettingsMenuProps> = ({ mainAppLayou
   }, [searchInpActive])
 
   useEffect(() => {
-    setSearchInp(p5SketchRef?.QUERY());
-  }, [p5SketchRef?.QUERY()])
+    setSearchInp(initSketchAPIRes?.data.query || undefined);
+  }, [initSketchAPIRes])
+
+  useEffect(() => {
+    setDataDensityInp(initSketchAPIRes?.data.layoutConfig.dataDensity || null)
+    setAttractionMultInp(initSketchAPIRes?.data.layoutConfig.attractionMult || null)
+    setRepulsionMultInp(initSketchAPIRes?.data.layoutConfig.repulsionMult || null)
+  }, [initSketchAPIRes])
 
   const ToggleSettings = p5SketchRef ? [
     { key: showDebugDetails, action: setShowDebugDetails, label: "Graph Details", shortcut: "," },
@@ -88,23 +89,30 @@ export const SessionSettingsMenu: FC<SessionSettingsMenuProps> = ({ mainAppLayou
     setShowSettings(false);
   }
 
-  const handleSearchInputChange = async (e: ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    setSearchInp(e.target.value);
-  }
-
   const handleSearchInputSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (searchInp == undefined) return;
+    const searchInput = searchInputRef.current!
+    const searchIcon = searchIconRef.current!
+
+    if (!searchInp || !searchInp.length) {
+      errorShakeInvalidElement(searchInput);
+      errorShakeInvalidElement(searchIcon);
+      return;
+    }
+
+
     setIsLoading(true);
     await getQueryData(searchInp)
       .then(res => {
         setInitSketchAPIRes(res);
+        //loading state removed by new sketch...
       })
       .catch(err => {
         console.error(err);
+        errorShakeInvalidElement(searchInput);
+        errorShakeInvalidElement(searchIcon);
+        setIsLoading(false);
       })
-    //loading state removed by new sketch...
   };
 
   const handleSearchIconClick = () => {
@@ -112,7 +120,6 @@ export const SessionSettingsMenu: FC<SessionSettingsMenuProps> = ({ mainAppLayou
       setSearchInpActive(prev => !prev);
     }
   };
-
 
   return (
     <div id={prfx('display')} onClick={(e) => { e.stopPropagation() }}>
@@ -124,7 +131,7 @@ export const SessionSettingsMenu: FC<SessionSettingsMenuProps> = ({ mainAppLayou
             value={searchInp}
             type='text'
             placeholder='Search...'
-            onChange={handleSearchInputChange}
+            onChange={(e) => { setSearchInp(e.target.value) }}
           />
         </form>
         <img id={prfx('search-icon')} src={Search} ref={searchIconRef} onClick={handleSearchIconClick} />
