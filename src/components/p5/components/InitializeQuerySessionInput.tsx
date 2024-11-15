@@ -5,7 +5,7 @@ import { Search } from '../../../assets/icons'
 import { ChangeEvent, createRef, Dispatch, FC, FormEvent, SetStateAction, useEffect, useState } from 'react';
 
 import { getQueryData, RequestResponse } from '../../../api';
-import { errorShakeInvalidElement, toggleElementOpacity, fadeElementAndRemoveDisplay, INPUT_STATE } from '../../';
+import { errorShakeInvalidElement, toggleElementOpacity, fadeElementAndRemoveDisplay } from '../../';
 import { MainAppLayoutState } from '../../../app/MainAppLayoutState';
 
 const wikidataHomepage = 'https://www.wikidata.org/wiki/Wikidata:Main_Page';
@@ -54,7 +54,7 @@ export const InitializeQuerySessionInput: FC<InitializeQuerySessionInputProps> =
         setNavStatusMessage(res.data.query);
         fadeElementAndRemoveDisplay(container, '1500ms')
       }
-    }).catch(e => {
+    }).catch(() => {
       toggleElementOpacity(invalidCont, true, '150ms')
       setTimeout(() => {
         toggleElementOpacity(invalidCont, false, '150ms')
