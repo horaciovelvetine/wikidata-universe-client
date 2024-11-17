@@ -22,7 +22,6 @@ export { VerticalSiteTitle } from './ui/VerticalSiteTitle';
 //UTIL:
 export { calcSafeSketchWindowSize } from './util/CalcSafeSketchWindowSize'
 export { edgeDirectionIcon } from './util/EdgeDirectionIcon'
-export { INPUT_STATE } from './util/InputState'
 
 //ANIMATION FUNCTIONS:
 export { errorShakeInvalidElement } from './animations/ErrorShakeInvalidElement'
@@ -30,4 +29,5 @@ export { toggleElementOpacity } from './animations/ToggleElementOpacity'
 export { fadeElementAndRemoveDisplay } from './animations/FadeElementAndRemoveDisplay'
 export { toggleDisplayVisibility } from './animations/ToggleDisplayVisibility'
 export { changeFocusOpacity } from './animations/ChangeFocusOpacity'
+export { flashOverlayElement } from './animations/FlashOverlayElement'
 
