@@ -9,7 +9,7 @@
 
 <h2 align=center>The Wikiverse is a web app (and API) that allows you to search Wikidata and explore topics in 3D space. Leveraging Wikidata's publically available tools and api for data, the Wikiverse dynamically generates a graph of the result and it's related topics. This project is currently in Alpha and serves exclusively as an educational project started by the question 'What would wikipedia look like in 3D space?'</h2>
 
-<img align=center src=.github/readme_assests/wikipedia_in3D_v0.0.1.png>
+<img align=center src=.github/readme_assets/wikipedia_in3D_v0.0.1.png>
 <p align=center>This is what Wikipedia looks like in 3D space, just to get that answer out of the way</p>  
 
 <h4>Special attention has been taken throughout the development process to ensure any learning opportunity encountered was well documented. The <a href=#Documentation-&-Resources>Documentation & Resources</a> section includes links to additional write-ups, copies of reference material, links to code, sample & pseudo code, and a record of the complete prototyping process from question to deploy</h4>
@@ -33,7 +33,7 @@
 
 ## `v0.0.1` (Current) Alpha
 
-<img align=center src=.github/readme_assests/kb_ver0.0.1_demo.png>
+<img align=center src=.github/readme_assets/kb_ver0.0.1_demo.png>
 
 <h3>Goal: Present a simple and intuitive UI which allows the User to search existing Wikidata and explore the results in a liminal 3D space using a Mouse and Keyboard. Display identifying information about a given topic in a meaningful way which encourages exploring a topic in a wider context and fosters natural discovery.</h3>
 
