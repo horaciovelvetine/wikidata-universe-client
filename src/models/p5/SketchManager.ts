@@ -324,6 +324,7 @@ export class SketchManager {
    */
   async refreshLayoutPositions() {
     this.mainAppState.setIsLoading(true);
+
     await postRefreshLayout(this.requestPayload(this.originalQuery))
       .then(response => {
         this.GRAPH().updateVertexPositions(response)
@@ -333,6 +334,14 @@ export class SketchManager {
       })
       .finally(() => {
         this.mainAppState.setIsLoading(false);
+        this.mainAppState.setShowSettings(false); // prevent spamming this request
+
+        if (this.selectedVertex) { // check if a stale selected vertex value might exist internally and update
+          const updatedVertex = this.GRAPH().getVertex(this.selectedVertex.id)
+          if (!updatedVertex) return; // only update if we can find updated values
+          this.updateSelectedVertex(updatedVertex);
+          this.CAM().setLookAtTgt(updatedVertex.coords)
+        }
       })
   }
 
