@@ -5,7 +5,7 @@ import { Camera, Font } from "p5";
 import { P5CanvasInstance } from "@p5-wrapper/react";
 
 import { getTutorialSlideData, postClickTargetData, postRefreshLayout, postRelatedDataQueue, RequestResponse } from "../../api";
-import { CameraManager, Graphset, iGraphset, iLayoutConfig, LayoutConfig, Point3D, UIManager, Vertex } from "..";
+import { CameraManager, Graphset, iLayoutConfig, LayoutConfig, Point3D, UIManager, Vertex } from "..";
 import { calcSafeSketchWindowSize } from "../../components";
 import { MainAppLayoutState } from "../../app/MainAppLayoutState";
 
@@ -18,38 +18,27 @@ interface SketchManagerProps {
 
 
 export class SketchManager {
-  //*/=> REACT STATE
-  private setReactSelVert: Dispatch<SetStateAction<Vertex | null>>;
-  private setReactHovVert: Dispatch<SetStateAction<Vertex | null>>;
-  private setReactIsLoading: Dispatch<SetStateAction<boolean>>;
-  private setReactTutorialText: Dispatch<SetStateAction<string | null>>;
-  private setReactNavMsg: Dispatch<SetStateAction<string | null>>;
-  private setReactShowAboutSketchText: Dispatch<SetStateAction<boolean>>;
-
-  //*/=> SKETCH STATE
+  //*/=> p5.js
   private p5: P5CanvasInstance
   private wikiFont: Font | undefined;
   private cam: Camera | null = null;
-
-  //*/==> DELEGATE-TASK-MANAGER
   private camMngr: CameraManager;
   private uiMngr: UIManager;
 
-  //*/==> DATA STATE
+  //*/==> SKETCH & DATA STATE
   private curAboutSlide: number = 1;
   private originalQuery: string;
   private graph: Graphset;
   private layoutConfig: LayoutConfig;
 
   //*/==> REACT STATE
+  private mainAppState: MainAppLayoutState;
   private selectedVertex: Vertex | null = null;
   private hoveredVertex: Vertex | null = null;
 
-  //
   //*/=> CONSTRUCTOR
   //*/=> CONSTRUCTOR
   //*/=> CONSTRUCTOR
-  //
   constructor({ p5, initSketchAPIRes, mainAppLayoutState, isAboutSketch }: SketchManagerProps) {
 
     // SKETCH STATE
@@ -58,12 +47,7 @@ export class SketchManager {
     this.uiMngr = new UIManager(p5);
 
     // REACT STATE
-    this.setReactSelVert = mainAppLayoutState.setSelectedVertex;
-    this.setReactHovVert = mainAppLayoutState.setHoveredVertex;
-    this.setReactIsLoading = mainAppLayoutState.setIsLoading;
-    this.setReactTutorialText = mainAppLayoutState.setAboutSketchText;
-    this.setReactNavMsg = mainAppLayoutState.setNavStatusMessage
-    this.setReactShowAboutSketchText = mainAppLayoutState.setShowAboutSketchText;
+    this.mainAppState = mainAppLayoutState;
 
     // DATA STATE
     this.originalQuery = initSketchAPIRes!.data.query;
@@ -72,7 +56,6 @@ export class SketchManager {
     if (!isAboutSketch) {
       this.updateSelectedVertex(this.graph.getOriginVertex());
     }
-
     // Pass React back this ref
     mainAppLayoutState.setP5SketchRef(this);
   }
@@ -109,10 +92,6 @@ export class SketchManager {
     return this.graph;
   }
 
-  SET_GRAPH(graphData: iGraphset) {
-    this.graph = new Graphset(graphData);
-  }
-
   /**
    * @method QUERY() - gets the originalQuery value passed into the sketchManager when the sketch was initialized
    */
@@ -124,14 +103,12 @@ export class SketchManager {
     this.originalQuery = query;
   }
 
-
-
   /**
    * @method updateSelectedVertexUpdates() - Updates both the sketches internal value, and Reacts state value for the currently selected Vertex state
    */
   updateSelectedVertex(vert: Vertex | null) {
     this.selectedVertex = vert;
-    this.setReactSelVert(vert);
+    this.mainAppState.setSelectedVertex(vert);
   }
 
   /**
@@ -139,7 +116,7 @@ export class SketchManager {
    */
   updateHoveredVertex(vert: Vertex | null) {
     this.hoveredVertex = vert;
-    this.setReactHovVert(vert);
+    this.mainAppState.setHoveredVertex(vert);
   }
 
   /**
@@ -242,8 +219,8 @@ export class SketchManager {
    */
   drawVertices() {
     this.graph.vertices.forEach(vData => {
-      if (vData.fetched != false) {
-        new Vertex(vData).draw(this.p5, this.selectedVertex);
+      if (vData.fetched) {
+        vData.draw(this.p5, this.selectedVertex);
       }
     })
   }
@@ -263,9 +240,8 @@ export class SketchManager {
     let mouseTarget: Vertex | null = null;
 
     this.graph.vertices.forEach(vert => {
-      const checkVert = new Vertex(vert);
-      if (checkVert.traceRay(this.p5, this.cam!)) {
-        mouseTarget = checkVert;
+      if (vert.traceRay(this.p5, this.cam!)) {
+        mouseTarget = vert;
       }
     })
     return mouseTarget;
@@ -283,9 +259,9 @@ export class SketchManager {
    */
   handleClickTargetValid(tgt: Vertex) {
     this.hoveredVertex = null;
-    this.setReactHovVert(null);
+    this.mainAppState.setHoveredVertex(null);
     this.selectedVertex = tgt;
-    this.setReactSelVert(tgt);
+    this.mainAppState.setSelectedVertex(tgt);
     this.camMngr.setLookAtTgt(tgt.coords) // animate camera to new targets coordinates
   }
 
@@ -315,14 +291,14 @@ export class SketchManager {
    * @method initPostRelatedDataRequest() - Fetches related data and updates the sketch data.
    */
   async initPostRelatedDataRequest() {
-    this.setReactIsLoading(true); //==> in-case were here on reload.
+    this.mainAppState.setIsLoading(true); //==> in-case were here on reload.
     await postRelatedDataQueue(this.requestPayload(this.originalQuery))
       .then(response => {
         this.graph = new Graphset(response.data);
       }).catch(err => {
         console.error(err);
       }).finally(() => {
-        this.setReactIsLoading(false);
+        this.mainAppState.setIsLoading(false);
       });
   }
 
@@ -330,7 +306,7 @@ export class SketchManager {
    * @method fetchClickTargetData() - fetches the details related to the targeted (clicked) Vertex
    */
   async fetchClickTargetData(tgt: Vertex) {
-    this.setReactIsLoading(true);
+    this.mainAppState.setIsLoading(true);
     await postClickTargetData(this.requestPayload(tgt.id))
       .then(response => {
         this.graph = new Graphset(response.data);
@@ -340,7 +316,7 @@ export class SketchManager {
       })
       .finally(() => {
         this.updateSelectedVertex(tgt);
-        this.setReactIsLoading(false);
+        this.mainAppState.setIsLoading(false);
       });
   }
 
@@ -348,18 +324,16 @@ export class SketchManager {
    * @method refreshLayoutPositions() - unlocks and re-rolls the the layout algorithm with the current Graphset
    */
   async refreshLayoutPositions() {
-    this.setReactIsLoading(true);
+    this.mainAppState.setIsLoading(true);
     await postRefreshLayout(this.requestPayload(this.originalQuery))
       .then(response => {
-        this.selectedVertex = null;
-        this.setReactSelVert(null);
-        this.graph = new Graphset(response.data);
+        this.GRAPH().updateVertexPositions(response)
       })
       .catch(err => {
         console.error(err);
       })
       .finally(() => {
-        this.setReactIsLoading(false);
+        this.mainAppState.setIsLoading(false);
       })
   }
 
@@ -413,13 +387,13 @@ export class SketchManager {
       case 11:
       case 12:
         if (tgtVert) return;
-        this.setReactIsLoading(true);
+        this.mainAppState.setIsLoading(true);
         this.simpleTutorialSlideUpdate();
         break;
       case 13:
         if (tgtVert) return;
-        this.setReactNavMsg('explore');
-        this.setReactShowAboutSketchText(false);
+        this.mainAppState.setNavStatusMessage('explore');
+        this.mainAppState.setShowAboutSketchText(false);
         break;
       default:
         break;
@@ -431,7 +405,7 @@ export class SketchManager {
   }
 
   private async getSlide2Handler() {
-    this.setReactIsLoading(true);
+    this.mainAppState.setIsLoading(true);
     this.camMngr.setPositionTgt(new Point3D({ x: 300, y: -100, z: 275 }));
     this.simpleTutorialSlideUpdate();
   }
@@ -441,7 +415,7 @@ export class SketchManager {
   }
 
   private async getSlide3Handler() {
-    this.setReactIsLoading(true);
+    this.mainAppState.setIsLoading(true);
     this.camMngr.setPositionTgt(new Point3D({ x: 0, y: -100, z: 350 }));
     this.simpleTutorialSlideUpdate();
   }
@@ -451,13 +425,13 @@ export class SketchManager {
   }
 
   private async getSlide4Handler() {
-    this.setReactIsLoading(true)
+    this.mainAppState.setIsLoading(true)
     this.camMngr.setPositionTgt(new Point3D({ x: -100, y: -150, z: 400 }));
     this.simpleTutorialSlideUpdate();
   }
 
   private async getSlide5Handler() {
-    this.setReactIsLoading(true);
+    this.mainAppState.setIsLoading(true);
     this.updateSelectedVertex(null);
     this.camMngr.setPositionTgt(new Point3D({ x: 0, y: -100, z: 350 }))
     this.camMngr.setLookAtTgt(new Point3D({ x: 0, y: 0, z: 0 }))
@@ -465,20 +439,20 @@ export class SketchManager {
   }
 
   private async getSlide6Handler() {
-    this.setReactIsLoading(true);
+    this.mainAppState.setIsLoading(true);
     this.camMngr.setPositionTgt(new Point3D({ x: 250, y: -100, z: 500 }))
     this.resetTutorialSlideUpdate();
   }
 
   private async getSlide7Handler(tgtVert: Vertex | null) {
     if (tgtVert) return; // should be null called using space bar
-    this.setReactIsLoading(true);
+    this.mainAppState.setIsLoading(true);
     this.simpleTutorialSlideUpdate(); // no actual data, just new text content
   }
 
   private async getSlide810Handler(tgtVert: Vertex | null) {
     if (tgtVert) return; // should be null called using space bar
-    this.setReactIsLoading(true);
+    this.mainAppState.setIsLoading(true);
     this.camMngr.setPositionTgt(new Point3D({ x: 0, y: 0, z: 350 }))
     this.camMngr.setLookAtTgt(new Point3D({ x: 0, y: 0, z: 0 }))
     await getTutorialSlideData(this.nextSlideStr())
@@ -487,7 +461,7 @@ export class SketchManager {
         this.updateNavReactStateMessage(res)
         this.curAboutSlide += 1;
       }).finally(() => {
-        this.setReactIsLoading(false);
+        this.mainAppState.setIsLoading(false);
         this.updateSelectedVertex(this.graph.getOriginVertex());
       })
   }
@@ -497,12 +471,12 @@ export class SketchManager {
   }
 
   private async getSlide9Handler() {
-    this.setReactIsLoading(true);
+    this.mainAppState.setIsLoading(true);
     this.simpleTutorialSlideUpdate(); // no actual data, just new text content
   }
 
   private async getSlide11Handler() {
-    this.setReactIsLoading(true);
+    this.mainAppState.setIsLoading(true);
     this.simpleTutorialSlideUpdate();
   }
 
@@ -530,8 +504,8 @@ export class SketchManager {
    * @method updateNavReactStateMessage() - updates the associate pieces of React's state using the request responses query value where the string is passed
    */
   private updateNavReactStateMessage(res: RequestResponse) {
-    this.setReactTutorialText(res.data.query);
-    this.setReactNavMsg(res.data.query.split('::').at(0)!)
+    this.mainAppState.setAboutSketchText(res.data.query);
+    this.mainAppState.setNavStatusMessage(res.data.query.split('::').at(0)!)
   }
 
   /**
@@ -552,7 +526,7 @@ export class SketchManager {
         this.curAboutSlide += 1;
       })
       .finally(() => {
-        this.setReactIsLoading(false);
+        this.mainAppState.setIsLoading(false);
       })
   }
 
@@ -566,7 +540,7 @@ export class SketchManager {
         this.updateNavReactStateMessage(res);
         this.curAboutSlide += 1;
       }).finally(() => {
-        this.setReactIsLoading(false);
+        this.mainAppState.setIsLoading(false);
       })
   }
 }
