@@ -29,6 +29,7 @@ export const ApiOfflineNotice: React.FC<ApiOfflineProps> = ({ apiStatusResponse 
       <div id={prfx('cont')} ref={containerRef}>
         <div id={prfx('text-cont')}>
           <h1 id={prfx('title')}>{apiStatusResponse.status} Unavailable</h1>
+          <p id={prfx('body')}>The API is currently offline, refresh the page or try again later.</p>
         </div>
         <div id={prfx('globe-cont')}>
           <img src={GlobeLogo} id={prfx('globe-logo')} />
