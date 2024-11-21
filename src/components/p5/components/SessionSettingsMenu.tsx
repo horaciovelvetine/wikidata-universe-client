@@ -86,7 +86,6 @@ export const SessionSettingsMenu: FC<SessionSettingsMenuProps> = ({ initSketchAP
     if (p5SketchRef == null) return;
     p5SketchRef.LAYOUT_CONFIG().updateConfigValues(dataDensityInp!, attractionMultInp!, repulsioMultInp!);
     p5SketchRef.refreshLayoutPositions();
-    setShowSettings(false);
   }
 
   const handleSearchInputSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -161,12 +160,19 @@ export const SessionSettingsMenu: FC<SessionSettingsMenuProps> = ({ initSketchAP
             desc={setting.desc} />
         ))}
         <div id={prfx('refresh-layout-cont')}>
-          <p id={prfx('refresh-layout-text')}>
-            Refresh Layout
-          </p>
-          <button id={prfx('refresh-layout-btn')} onClick={handleRefreshLayoutPositionClick}>
-            <img id={prfx('refresh-layout-icon')} src={Fetch} />
-          </button>
+          <div id={prfx('refresh-layout-text-cont')}>
+            <label id={prfx('refresh-layout-label')}>
+              Refresh Layout
+            </label>
+            <p id={prfx('refresh-layout-desc')}>
+              Re-position's topics to based on the current known edgeset (experimental)
+            </p>
+          </div>
+          <div id={prfx('refresh-layout-btn-cont')}>
+            <button id={prfx('refresh-layout-btn')} onClick={handleRefreshLayoutPositionClick}>
+              <img id={prfx('refresh-layout-icon')} src={Fetch} />
+            </button>
+          </div>
         </div>
       </div>
     </div>
