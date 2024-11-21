@@ -33,6 +33,7 @@ export const SessionSettingsMenu: FC<SessionSettingsMenuProps> = ({ initSketchAP
   const [repulsioMultInp, setRepulsionMultInp] = useState(initSketchAPIRes?.data.layoutConfig.repulsionMult || null)
   const [showAxisInp, setShowAxisInp] = useState(false);
   const [showBoundingInp, setShowBoundingInp] = useState(false);
+  const [clickToFetchInp, setClicktoFetchInp] = useState(true);
 
   useEffect(() => {
     toggleElementOpacity(menuContainerRef.current!, showSettings);
@@ -59,6 +60,11 @@ export const SessionSettingsMenu: FC<SessionSettingsMenuProps> = ({ initSketchAP
     }
   }, [searchInpActive])
 
+  useEffect(() => { 
+    if (!p5SketchRef) return;
+    p5SketchRef.CLICK_TO_FETCH(clickToFetchInp);
+  }, [clickToFetchInp])
+
   useEffect(() => {
     setSearchInp(initSketchAPIRes?.data.query || undefined);
   }, [initSketchAPIRes])
@@ -73,6 +79,7 @@ export const SessionSettingsMenu: FC<SessionSettingsMenuProps> = ({ initSketchAP
     { key: showDebugDetails, action: setShowDebugDetails, label: "Graph Details", shortcut: "," },
     { key: showAxisInp, action: setShowAxisInp, label: "Axis Orientation", shortcut: null },
     { key: showBoundingInp, action: setShowBoundingInp, label: "Bounding Box", shortcut: null },
+    { key: clickToFetchInp, action: setClicktoFetchInp, label: "Click to fetch", shortcut: "." }
   ] : [];
 
   const LayoutSettings = p5SketchRef ? [

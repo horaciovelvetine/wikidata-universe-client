@@ -48,7 +48,9 @@ export const WikiverseSketch: FC<WikiverseProps> = ({ mainAppLayoutState, initSk
       }
       // New Selection Made...
       SK.handleClickTargetValid(mouseTarget);
-      SK.fetchClickTargetData(mouseTarget);
+      if (SK.CLICK_TO_FETCH_ACTIVE()) {
+        SK.fetchClickTargetData(mouseTarget);
+      }
     };
 
     //*/=> HOVER
