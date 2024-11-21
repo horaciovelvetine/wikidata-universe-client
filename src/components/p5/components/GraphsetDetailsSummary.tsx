@@ -53,10 +53,10 @@ export const GraphsetDetailsSummary: React.FC<GraphsetDetailsSummaryProps> = ({ 
   return (
     <div id="sketch-data-summary-container" ref={debugRef}>
       <div id='sketch-data-summary-entities'>
+        <p>Topics: {vertCount}</p>
         <p>Statements: {edgeCount}</p>
-        <p>Vertices: {vertCount}</p>
-        <p>Camera Focus @ {`(${curCamLookAt.x}, ${curCamLookAt.y}, ${curCamLookAt.z})`}</p>
-        <p>Camera Position @ {`(${curCamPos.x}, ${curCamPos.y}, ${curCamPos.z})`}</p>
+        <p>Camera Focus {`(${curCamLookAt.x}, ${curCamLookAt.y}, ${curCamLookAt.z})`}</p>
+        <p>Camera Position {`(${curCamPos.x}, ${curCamPos.y}, ${curCamPos.z})`}</p>
       </div>
     </div>
   );
