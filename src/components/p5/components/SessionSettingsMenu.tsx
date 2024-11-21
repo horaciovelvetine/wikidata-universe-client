@@ -42,12 +42,12 @@ export const SessionSettingsMenu: FC<SessionSettingsMenuProps> = ({ initSketchAP
 
   useEffect(() => {
     if (!p5SketchRef) return;
-    p5SketchRef.UI().toggleShowAxis();
+    p5SketchRef.UI().toggleShowAxis(showAxisInp);
   }, [showAxisInp])
 
   useEffect(() => {
     if (!p5SketchRef) return;
-    p5SketchRef.UI().toggleShowBoundingBox();
+    p5SketchRef.UI().toggleShowBoundingBox(showBoundingInp);
   }, [showBoundingInp])
 
   useEffect(() => {

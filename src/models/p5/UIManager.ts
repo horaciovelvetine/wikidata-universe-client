@@ -6,8 +6,8 @@ export const UI_FONT = (opac: number = 1) => `rgba(255,255,255, ${opac})`
 
 export class UIManager {
   private p5: P5CanvasInstance
-  private showMedianAxis: boolean = false;
-  private showMedianBoundingBox: boolean = false;
+  private showMedianAxis: boolean | undefined;
+  private showMedianBoundingBox: boolean | undefined;
 
   constructor(p5: P5CanvasInstance) {
     this.p5 = p5;
@@ -34,15 +34,15 @@ export class UIManager {
   /**
    * @method toggleShowMedianAxis() - Used as an external hatch to toggle the current value for showMedianAxis being used when drawing the P5.js sketch itself. 
    */
-  toggleShowAxis() {
-    this.showMedianAxis = !this.showMedianAxis;
+  toggleShowAxis(show: boolean) {
+    this.showMedianAxis = show;
   }
 
   /**
    * @method toggleShowMedianBoundBox() - Used as an external hatch to toggle the current value for showMedianBoundBox being used when drawing the P5.js sketch itself. 
    */
-  toggleShowBoundingBox() {
-    this.showMedianBoundingBox = !this.showMedianBoundingBox;
+  toggleShowBoundingBox(show: boolean) {
+    this.showMedianBoundingBox = show;
   }
 
   /**
@@ -86,5 +86,6 @@ export class UIManager {
     this.p5.stroke(0, 0, 255);
     this.p5.line(0, 0, -zLen, 0, 0, zLen);
     this.p5.noStroke();
+
   }
 }
