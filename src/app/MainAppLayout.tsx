@@ -13,7 +13,7 @@ interface MainAppLayoutProps {
 }
 
 // Ignore-rerenders, handlesResize() => { }
-const BackgroundSketchMemo = memo(BackgroundSketch, () => { return true; });
+const BackgroundSketchMemo = memo(BackgroundSketch);
 
 // locks re-render only on resetting of initResponse...
 const WikiverseSketchMemo = memo(WikiverseSketch, (prevProps, nextProps) => {

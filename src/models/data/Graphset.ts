@@ -1,4 +1,5 @@
 import { Dimensions, Edge, iEdge, iPoint3D, iProperty, iVertex, Vertex, Property } from "..";
+import { RequestResponse } from "../../api";
 
 export interface iGraphset {
   vertices: iVertex[];
@@ -20,15 +21,15 @@ interface MinMax {
 }
 
 export class Graphset implements iGraphset {
-  vertices: iVertex[];
-  properties: iProperty[];
-  edges: iEdge[];
+  vertices: Vertex[];
+  properties: Property[];
+  edges: Edge[];
   dimensions: Dimensions;
 
   constructor(graph: iGraphset) {
-    this.vertices = graph.vertices;
-    this.edges = graph.edges;
-    this.properties = graph.properties;
+    this.vertices = graph.vertices.map(v => { return new Vertex(v) });
+    this.edges = graph.edges.map(e => { return new Edge(e) });
+    this.properties = graph.properties.map(p => { return new Property(p) });
     this.dimensions = graph.dimensions;
   }
 
@@ -75,8 +76,7 @@ export class Graphset implements iGraphset {
   getRelatedEdges(vertex: Vertex): Edge[] {
     return this.edges.filter(edge => {
       if (!edge.srcId || !edge.propertyId || !edge.tgtId) return false; // check edge has needed values
-      const ed = new Edge(edge);
-      if (ed.isSource(vertex) || ed.isTarget(vertex) || ed.isLabelMatch(vertex)) {
+      if (edge.isSource(vertex) || edge.isTarget(vertex) || edge.isLabelMatch(vertex)) {
         const property = this.getProperty(edge.propertyId);
         const source = this.getVertex(edge.srcId);
         const target = this.getVertex(edge.tgtId);
@@ -84,8 +84,6 @@ export class Graphset implements iGraphset {
         return property.fetched && source.fetched && target.fetched; // only return edges where all are fetched
       }
       return false;
-    }).map(edge => {
-      return new Edge(edge); // map to real edge objects
     })
   }
 
@@ -93,50 +91,54 @@ export class Graphset implements iGraphset {
    * @method getOriginVertex() - returns whichever Vertex is marked as.origin true in the current .vertices
    */
   getOriginVertex(): Vertex | null {
-    const originVertex = this.vertices.find(vertex => vertex.origin === true);
-    if (originVertex)
-      return new Vertex(originVertex);
-    return null;
+    return this.vertices.find(vertex => vertex.origin === true) || null;
   }
 
   /**
    * @method getProperty() - returns a Property with the provided ID value or null
    */
   getProperty(propertyId: string): Property | null {
-    const property = this.properties.find(property => property.id === propertyId);
-    if (property)
-      return new Property(property);
-    return null;
+    return this.properties.find(property => property.id === propertyId) || null;
   }
 
   /**
    * @method getVertex() - returns a Vertex with the provided ID value or null
    */
   getVertex(vertexId: string | null): Vertex | null {
-    const vertex = this.vertices.find(vertex => vertex.id === vertexId);
-    if (vertex)
-      return new Vertex(vertex);
-    return null;
+    return this.vertices.find(vertex => vertex.id === vertexId) || null;
   }
 
   /**
    * @method addVertex() - used in the AboutSketch to include new Vertices in the set w/o resetting
    */
   addVertex(aboutVert: iVertex): void {
-    this.vertices.push(aboutVert);
+    this.vertices.push(new Vertex(aboutVert));
   }
 
   /**
    * @method addEdge() - used in the AboutSketch to include new Edges in the set w/o resetting
    */
   addEdge(aboutEdge: iEdge): void {
-    this.edges.push(aboutEdge);
+    this.edges.push(new Edge(aboutEdge));
   }
 
   /**
    * @method addProperty() - used in the About Sketch to include new Properties in the set w/o resetting
    */
   addProperty(aboutProp: iProperty): void {
-    this.properties.push(aboutProp);
+    this.properties.push(new Property(aboutProp));
+  }
+
+  /**
+   * @method updateVertexPositions() - use the provided RequestResponse and update the vertices with their new positions
+   */
+  updateVertexPositions(request: RequestResponse): void {
+    request.data.vertices.forEach(update => {
+      const exisVert = this.getVertex(update.id);
+      if (!exisVert) return;
+
+      exisVert.prevCoords = exisVert.coords;
+      exisVert.coords = update.coords;
+    })
   }
 }

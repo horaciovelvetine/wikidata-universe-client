@@ -1,6 +1,6 @@
 import { multiply, inv } from "mathjs";
 import { P5CanvasInstance, SketchProps } from "@p5-wrapper/react";
-import { Camera, Font } from "p5";
+import { Camera, Font, Vector } from "p5";
 import { iPoint3D, Point3D } from "./Point3D";
 import { Edge, iEdge } from "./Edge";
 import { Graphset } from "./Graphset";
@@ -16,15 +16,22 @@ export interface iVertex {
   locked: boolean;
 }
 
+// Number of frames for any vertex which is currently moving to a new position
+const COORD_TRANSITION_DURATION = 65;
+
+
 export class Vertex implements iVertex {
   id: string;
   label: string | null;
   description: string | null;
   radius: number;
-  coords: Point3D;
   fetched: boolean;
   origin: boolean;
   locked: boolean;
+  coords: Point3D;
+  prevCoords: Point3D | null = null;
+  coordTransitionKeyFrm = 1;
+
 
   constructor(vertex: iVertex) {
     this.id = vertex.id;
@@ -47,13 +54,24 @@ export class Vertex implements iVertex {
   /**
    * @method draw() - draws an in-sketch representation of the Vertex
    */
-  draw(p5: P5CanvasInstance, curSelectedVert: Vertex | null) {
-    const { x, y, z } = this.coords;
+  draw(p5: P5CanvasInstance, vertIsCurSelected: boolean) {
     p5.push();
-    p5.translate(x, y, z);
+    if (this.prevCoords) { // vertices is currently in motion to a new position
+      const drawCoords = this.calcCoordUpdateVectorPosition(p5);
+      p5.translate(drawCoords.x, drawCoords.y, drawCoords.z);
+      this.coordTransitionKeyFrm += 1;
+      if (this.coordTransitionKeyFrm == COORD_TRANSITION_DURATION) {
+        this.coordTransitionKeyFrm = 1;
+        this.prevCoords = null;
+      }
+    } else { // vertex is stationary
+      p5.translate(this.coords.x, this.coords.y, this.coords.z)
+    }
+
+
     p5.strokeWeight(1.2);
     p5.stroke(1, 1, 14);
-    if (curSelectedVert?.id == this.id) {
+    if (vertIsCurSelected) {
       p5.fill("rgba(252 , 220 , 18, 0.9)");
     } else {
       p5.fill("rgba(205, 205, 205, 0.8)");
@@ -137,7 +155,7 @@ export class Vertex implements iVertex {
   parallelEdges(vert2: iVertex, edge: iEdge, edgesToDraw: iEdge[]): Edge[] {
     const isTarget = edge.tgtId === vert2.id; //determine which is which src||tgt
 
-    //todo this is where paralell edges happens - this behavior needs refined
+    //todo - paralell Edge behavior needs refined
     const parallelEdges = edgesToDraw.filter(e =>
       isTarget ? (e.srcId === vert2.id && e.propertyId === edge.propertyId) : (e.tgtId === vert2.id && e.propertyId === edge.propertyId)
     );
@@ -146,9 +164,13 @@ export class Vertex implements iVertex {
   }
 
   /**
-   * The way that text & p5.js intertact when using WEBGL leaves a bit to be desired
-   * (another) Thank you to @camelCaseSensitive on {github} & @morejpeg on {youtube}
+   * 
+   * @method applyLabelPositionTransforms() - The way that text & p5.js intertact when using WEBGL
+   * leaves a bit to be desired. The applied translations face a Vertices label to the camera legibly.
+   * Thank you to @camelCaseSensitive on {github} & @morejpeg on {youtube}
    * Excellent tutorial for this approach ==> (https://www.youtube.com/watch?v=kJMx0F7e9QU)
+   * 
+   * @apiNote - these translations are called deliberately in order, accumulating these in singular calls breaks the positioning.
    */
   private applyLabelPositionTransforms(p5: P5CanvasInstance<SketchProps>, cam: Camera) {
     const { pan, tilt } = this.calcCamerasAngles(p5, cam);
@@ -159,7 +181,7 @@ export class Vertex implements iVertex {
     p5.rotateZ(p5.PI); // flip around to face (scenes) up
   }
   /**
-   * Applies text formatting calls before drawing text to screen.
+   * @method applyLabelTextSetup() - helper applies text formatting calls before drawing text to screen.
    */
   private applyLabelTextSetup(p5: P5CanvasInstance<SketchProps>, font: Font) {
     p5.textSize(8);
@@ -170,12 +192,12 @@ export class Vertex implements iVertex {
   }
 
   /**
-   * Determine the pan and tilt of the current @Camera in relation to where it is currently focused.
+   * @method calcCamerasAngles() - Determine the pan and tilt of the current @Camera in relation to where it is currently focused.
    * @returns - an object containing the pan & tilt {number} values.
    */
   private calcCamerasAngles(p5: P5CanvasInstance<SketchProps>, cam: Camera) {
-    const { ex, ey, ez } = { ...this.eye(cam) }
-    const { fx, fy, fz } = { ...this.focal(cam) }
+    const { ex, ey, ez } = { ...{ ex: cam.eyeX, ey: cam.eyeY, ez: cam.eyeZ } }
+    const { fx, fy, fz } = { ... { fx: cam.centerX, fy: cam.centerY, fz: cam.centerZ } }
 
     const pan = p5.atan2(ez - fz, ex - fx)
     const tilt = p5.atan2(ey - fy, p5.dist(ex, ez, fx, fz))
@@ -183,34 +205,15 @@ export class Vertex implements iVertex {
   }
 
   /**
-   * The given Cameras eye positions - this is where it is located in space 
-   */
-  private eye(cam: Camera) {
-    return { ex: cam.eyeX, ey: cam.eyeY, ez: cam.eyeZ }
-  }
-
-  /**
-   * The given Cameras center positions - this is where it is looking in space
-   */
-  private focal(cam: Camera) {
-    return { fx: cam.centerX, fy: cam.centerY, fz: cam.centerZ }
-  }
-
-  /**
-   * @return - The @Vertex object on the other end of the given @Edge 
+   * @method getAltVertex - returns the other @Vertex object of the given @Edge 
    */
   private getAltVertex(session: Graphset, edge: iEdge): Vertex | null {
     const altVertexId = edge.srcId === this.id ? edge.tgtId : edge.srcId;
-    const altVertexData = session.vertices.find(v => v.id === altVertexId);
-
-    if (altVertexData) {
-      return new Vertex(altVertexData);
-    }
-    return null;
+    return session.vertices.find(v => v.id === altVertexId) || null;
   }
 
   /**
-   * Applies the color transformation used to draw an Edge based on its direction.
+   * @method setEdgeStrokeColor() - Applies the color transformation used to draw an Edge based on its direction.
    */
   private setEdgeStrokeColor(p5: P5CanvasInstance, edge: iEdge, isParallel: boolean) {
     const incomingColor = `rgba(3,0,255,0.8)`;
@@ -227,6 +230,18 @@ export class Vertex implements iVertex {
   }
 
   /**
+   * @method calcCoordUpdateVectorPosition() - provide a coordinate position to move the vertex to if it is currently moving positions
+   */
+  private calcCoordUpdateVectorPosition(p5: P5CanvasInstance): Vector {
+    const mult = this.coordTransitionKeyFrm * 1.0001 / COORD_TRANSITION_DURATION;
+    return p5.createVector(
+      p5.lerp(this.prevCoords!.x, this.coords.x, mult),
+      p5.lerp(this.prevCoords!.y, this.coords.y, mult),
+      p5.lerp(this.prevCoords!.z, this.coords.z, mult),
+    )
+  }
+
+  /**
    * Traces a ray from the camera through the mouse position on the canvas and checks if it intersects with a given vertex.
    * 
    * @param p5 - The p5.js canvas instance.
@@ -240,11 +255,7 @@ export class Vertex implements iVertex {
    * @example
    * ```typescript
    * const intersection = traceRay(p5Instance, camera, vertex);
-   * if (intersection) {
-   *   console.log(`Intersection at: ${intersection}`);
-   * } else {
-   *   console.log('No intersection');
-   * }
+   * return intersection ? [x, y, z] : false;
    * ```
    * 
    * Credit to @camelCaseSensitive on {github} & @morejpeg on {youtube}
