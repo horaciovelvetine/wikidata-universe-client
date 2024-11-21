@@ -33,6 +33,7 @@ export class SketchManager {
   private mainAppState: MainAppLayoutState;
   private selectedVertex: Vertex | null = null;
   private hoveredVertex: Vertex | null = null;
+  private clickToFetchEnabled = true;
 
   //*/=> CONSTRUCTOR
   //*/=> CONSTRUCTOR
@@ -99,6 +100,14 @@ export class SketchManager {
 
   SET_QUERY(query: string) {
     this.originalQuery = query;
+  }
+
+  CLICK_TO_FETCH(enabled: boolean) {
+    this.clickToFetchEnabled = enabled;
+  }
+
+  CLICK_TO_FETCH_ACTIVE(): boolean {
+    return this.clickToFetchEnabled;
   }
 
   /**
