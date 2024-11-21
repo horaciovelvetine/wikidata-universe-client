@@ -1,6 +1,5 @@
 import CharisTTF from "../../assets/font/CharisSIL-Regular.ttf";
 
-import { Dispatch, SetStateAction } from "react";
 import { Camera, Font } from "p5";
 import { P5CanvasInstance } from "@p5-wrapper/react";
 
@@ -15,7 +14,6 @@ interface SketchManagerProps {
   mainAppLayoutState: MainAppLayoutState;
   isAboutSketch: boolean;
 }
-
 
 export class SketchManager {
   //*/=> p5.js
@@ -219,9 +217,10 @@ export class SketchManager {
    */
   drawVertices() {
     this.graph.vertices.forEach(vData => {
-      if (vData.fetched) {
-        vData.draw(this.p5, this.selectedVertex);
-      }
+      if (!vData.fetched) return;
+      const vertIsCurSelected = vData.id == this.selectedVertex?.id;
+      vData.draw(this.p5, vertIsCurSelected);
+
     })
   }
 

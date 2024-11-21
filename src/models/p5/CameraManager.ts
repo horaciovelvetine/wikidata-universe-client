@@ -9,13 +9,13 @@ export class CameraManager {
   private p5: P5CanvasInstance;
   private cam: Camera | null;
   private lookAtTgt: Point3D | null; // new lookAt target for the Camera
-  private curLookAtKeyFrm: number = 0;
-  private lookAtDuration: number = 200; // in frames
+  private curLookAtKeyFrm = 0;
+  private lookAtDuration = 200; // in frames
 
   private positionStart: Point3D | null; // where it came from
   private positionTgt: Point3D | null; // new position for the Camera to 'get to'
-  private curPosKeyFrm: number = 0;
-  private curPosDuration: number = 160;
+  private curPosKeyFrm = 0;
+  private curPosDuration = 160;
 
   constructor(p5: P5CanvasInstance) {
     this.p5 = p5;
