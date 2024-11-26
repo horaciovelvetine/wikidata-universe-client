@@ -1,5 +1,5 @@
 import axios from "axios";
-import { apiURL, RequestPayload, RequestResponse } from "../";
+import { apiURL, RequestPayload, RequestResponse } from "..";
 
 export async function postClickTargetData(payload: RequestPayload): Promise<RequestResponse> {
   return await axios.post(apiURL('click-target'), payload)

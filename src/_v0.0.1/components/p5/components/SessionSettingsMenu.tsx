@@ -60,7 +60,7 @@ export const SessionSettingsMenu: FC<SessionSettingsMenuProps> = ({ initSketchAP
     }
   }, [searchInpActive])
 
-  useEffect(() => { 
+  useEffect(() => {
     if (!p5SketchRef) return;
     p5SketchRef.CLICK_TO_FETCH(clickToFetchInp);
   }, [clickToFetchInp])

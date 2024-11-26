@@ -1,5 +1,5 @@
 import axios from "axios";
-import { apiURL, RequestPayload, RequestResponse } from "../";
+import { apiURL, RequestPayload, RequestResponse } from "..";
 
 export async function postRelatedDataQueue(payload: RequestPayload): Promise<RequestResponse> {
   return await axios.post(apiURL('fetch-related'), payload)

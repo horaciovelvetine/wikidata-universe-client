@@ -1,5 +1,5 @@
 import axios from "axios";
-import { apiURL, RequestResponse } from "../";
+import { apiURL, RequestResponse } from "..";
 
 export async function getApiStatus(): Promise<RequestResponse> {
   return await axios

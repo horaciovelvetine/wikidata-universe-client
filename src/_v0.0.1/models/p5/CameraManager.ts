@@ -1,6 +1,6 @@
 import { P5CanvasInstance } from "@p5-wrapper/react";
 import { Camera, Vector } from "p5";
-import { Point3D } from "../";
+import { Point3D } from "..";
 
 /**
  * Manages the camera in a p5.js environment, allowing for smooth transitions and animations.

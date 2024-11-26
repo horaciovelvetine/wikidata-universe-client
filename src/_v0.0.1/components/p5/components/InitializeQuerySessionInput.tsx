@@ -5,7 +5,7 @@ import { Search } from '../../../assets/icons'
 import { ChangeEvent, createRef, Dispatch, FC, FormEvent, SetStateAction, useEffect, useState } from 'react';
 
 import { getQueryData, RequestResponse } from '../../../api';
-import { errorShakeInvalidElement, toggleElementOpacity, fadeElementAndRemoveDisplay } from '../../';
+import { errorShakeInvalidElement, toggleElementOpacity, fadeElementAndRemoveDisplay } from '../..';
 import { MainAppLayoutState } from '../../../app/MainAppLayoutState';
 
 const wikidataHomepage = 'https://www.wikidata.org/wiki/Wikidata:Main_Page';
