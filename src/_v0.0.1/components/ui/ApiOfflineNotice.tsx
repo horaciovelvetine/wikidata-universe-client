@@ -1,5 +1,5 @@
 import './ApiOfflineNotice.css'
-import { Exclaims, Question } from "../../assets/icons";
+import { Exclaims, Question } from "../../../assets/icons";
 import GlobeLogo from '../../assets/imgs/globe-outline-no-bg-white.svg'
 
 import { createRef, useEffect } from "react";

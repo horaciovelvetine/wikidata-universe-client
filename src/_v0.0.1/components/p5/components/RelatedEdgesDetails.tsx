@@ -1,5 +1,5 @@
 import './RelatedEdgesDetails.css'
-import { VertexSel, Vertex as VertIcon } from '../../../assets/icons';
+import { VertexSel, Vertex as VertIcon } from '../../../../assets/icons';
 import { createRef, FC, useEffect, useState } from 'react';
 
 import { Edge, EDGE_DIR, SketchManager, Vertex } from '../../../models';

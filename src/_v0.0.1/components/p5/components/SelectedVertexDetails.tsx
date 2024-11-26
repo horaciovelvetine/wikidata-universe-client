@@ -1,5 +1,5 @@
 import './SelectedVertexDetails.css'
-import { VertexSel } from '../../../assets/icons'
+import { VertexSel } from '../../../../assets/icons'
 
 import { createRef, FC, useEffect } from 'react';
 import { Vertex } from '../../../models';

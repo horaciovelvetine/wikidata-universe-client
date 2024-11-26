@@ -1,5 +1,5 @@
 import './HoveredVertexDetails.css'
-import { Vertex as VertIcon } from '../../../assets/icons';
+import { Vertex as VertIcon } from '../../../../assets/icons';
 
 import React, { createRef, useEffect } from 'react';
 

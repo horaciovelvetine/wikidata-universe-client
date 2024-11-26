@@ -1,5 +1,5 @@
 import './SessionSettingsMenu.css'
-import { Settings as SettingsIcon, Fetch, Search } from '../../../assets/icons';
+import { Settings as SettingsIcon, Fetch, Search } from '../../../../assets/icons';
 
 import { ChangeEvent, createRef, Dispatch, FC, FormEvent, MouseEvent, SetStateAction, useEffect, useState } from 'react';
 

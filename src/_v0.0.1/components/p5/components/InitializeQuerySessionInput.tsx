@@ -1,6 +1,6 @@
 import './InitializeQuerySessionInput.css'
 import GlobeLogo from '../../../assets/imgs/globe-outline-no-bg-white.svg'
-import { Search } from '../../../assets/icons'
+import { Search } from '../../../../assets/icons'
 
 import { ChangeEvent, createRef, Dispatch, FC, FormEvent, SetStateAction, useEffect, useState } from 'react';
 

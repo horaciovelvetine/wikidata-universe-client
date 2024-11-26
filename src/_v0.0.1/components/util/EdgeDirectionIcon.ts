@@ -1,4 +1,4 @@
-import { ArrowBoth, ArrowFrom, ArrowTo } from "../../assets/icons";
+import { ArrowBoth, ArrowFrom, ArrowTo } from "../../../assets/icons";
 import { EDGE_DIR } from "../../models";
 
 export function edgeDirectionIcon(direction: EDGE_DIR) {
