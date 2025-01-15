@@ -18,20 +18,37 @@
 
 <h4>This branch uses the action defined @ 'github/workflows/main_wikiverse_azure_deploy.yml' to build, stage and deploy this project. Any commits/changes made to the main branch will be pushed live on sync. </h4>
 
-- The action runs `npm install` prior to building, including the package-lock.json will prevent the VM from installing the needed dependencies, which fill fail the build step (< 2min. typically), ensure any local lock files are not committed. The node.js convention is added to the .gitignore for this purpose.
+- The action runs `npm install` prior to building, including the package-lock.json will prevent the VM from installing the needed dependencies, which fill fail the build step (< 2min. typically), ensure any local lock files are not committed to main. The node.js convention is added to the .gitignore for this purpose.
 
-- The `src/api/util/ApiUrl.ts` function includes a boolean to use either a locally running version of the API or the Azure Deployed endpoint. For any development ensure you are using a locally running version of the API. 
+- The `src/app/contexts/wikiverse-service-provider.ts` includes a prop boolean to use either a locally running version of the API or the Azure Deployed endpoint. For any development ensure you are using a locally running version of the API. 
 
   - Clone and Run <a href='https://github.com/horaciovelvetine/wikidata-universe-api'>this companion API</a>
-  - Ensure the `apiURL()` call is correctly setup to make requests to the local deployment of the API, and that the local API url matches the default port used by Tomcat.
+  - Ensure the `useLocalAPI()` variable is correctly (true) passed to make requests to the local deployment of the API, and that the local API url matches the default port used by Tomcat.
 
 ## `staging` Integration & Prep
 
 <h4>The `staging` branch is intended to finalize which commits will be pulled into main, and is used to test changes against the actively deployed api to ensure frontend changes gel with the API and will not cause issues.</h4>
 
-- Ensure changes inside the `src/api/util/ApiUrl.ts` are restored/discared in favor of the current commit of this method deployed on the `main` branch.
+- Ensure props passed to the `src/app/contexts/wikiverse-service-provider.ts` are restored/discared before committs are made to the `main` branch.
 
-## `v0.0.1` (Current) Alpha
+## `v0.0.2` (current) Alpha
+
+<img align=center src=.github/readme_assets/kb_ver0.0.2_demo.png>
+
+<h3>Goal: Refactor app from ground up to make the UI resizeable and iron out code orginization and clarity.</h3>
+
+- **Resizeable UI & Layout:** Components are now better suited for a multitude of screen sizes and include a minimum screen cutoff and message when a client's device is of a particularly small. These changes effect the entire application including movnig the secondary search input and Sketch Summary up to the Navbar to maximize effective screen size.
+- **React & Refactor:** Considerable time was spent reading and learning from a variety of sources to try to better understand, leverage, and follow conventions and tools in the react Ecosystem. Additional state tools were considered ([TanStack](https://tanstack.com/) & [ZuStand](https://github.com/pmndrs/zustand)) but for now the Context API and React state have been coupled with the [Managed State]('src/types/sketch/managed-state.ts') class to maintain the state-us quo. 
+  - [React Docs](https://react.dev/)
+  - [first: React Handbook Fundamentals](https://reacthandbook.dev/fundamentals)
+  - [then: React Handbook](https://reacthandbook.dev/)
+  - [Bullet Proof React](https://github.com/alan2207/bulletproof-react)
+  - [FCC: React Context API](https://www.freecodecamp.org/news/react-context-api-explained-with-examples/)
+
+- **Animate Position Updating:** using the update positions button in the settings menu now animates all the topics in the scene to allow them to 'fly' to their new position in the sketch in a pleasing way which isn't so visually suddent and disjarring.
+-  **Additional Settings:** added mouse sensitvity 
+
+## `v0.0.1` Alpha
 
 <img align=center src=.github/readme_assets/kb_ver0.0.1_demo.png>
 

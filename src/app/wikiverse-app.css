@@ -1,0 +1,191 @@
+@font-face {
+  font-family: 'CharisSIL-Regular';
+  src: url('../assets/font/CharisSIL-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'CharisSIL-Bold';
+  src: url('../assets/font/CharisSIL-Bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'CharisSIL-Italic';
+  src: url('../assets/font/CharisSIL-Italic.ttf') format('truetype');
+}
+
+* {
+  box-sizing: border-box;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  padding: 0;
+  color: rgb(var(--font))
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  overflow: clip;
+  background-color: rgb(var(--body-bg));
+}
+
+#root {
+  width: 100vw;
+  height: 100vh;
+  overflow: clip;
+}
+
+:root {
+  /* e.x. rgb(var(--font),1.0) */
+
+  /* rgb(245,245,245) */
+  --font: 245, 245, 245;
+  /* rgb(15,15,25) */
+  --body-bg: 15, 15, 25;
+  /* rgb(1,1,14) */
+  --sketch-bg: 1, 1, 14;
+  /* rgb(0,122,255) */
+  --hyperlink: 0, 122, 255;
+  --load3: 0, 122, 255;
+  /* rgb(39,76,119) */
+  --primary: 39, 76, 119;
+  /* rgb(229,56,59) */
+  --danger: 229, 56, 59;
+  /* rgb(30,0,255) */
+  --edge-in: 30, 0, 255;
+  /* rgb(60, 80, 255) */
+  --edge-in-text: 60, 80, 255;
+  /* rgb(255,45,80) */
+  --edge-out: 255, 45, 80;
+  /* rgb(255, 80, 100) */
+  --edge-out-text: 255, 90, 105;
+  --load6: 255, 45, 80;
+  /* rgb(135,20,255) */
+  --edge-para: 135, 20, 255;
+  /* rgb(140, 70, 255) */
+  --edge-para-text: 140, 70, 255;
+
+  /* rgb(252,220,18) */
+  --light-gold: 253, 236, 78;
+  --gold: 252, 220, 18;
+  --dark-gold: 202, 182, 2;
+  /* rgb(76, 217, 100) */
+  --green: 76, 217, 100;
+  --load1: 76, 217, 100;
+  /* rgb(90,200,250) */
+  --light-blue: 90, 200, 250;
+  --load2: 90, 200, 250;
+  /* rgb(52, 170,220) */
+  --med-blue: 52, 170, 220;
+  --load4: 52, 170, 220;
+  /* rgb(88, 86, 214) */
+  --purple-ish: 88, 86, 214;
+  --load5: 88, 86, 214;
+
+  --def-transit: 350ms;
+  --brdr-radius: 0.25rem;
+}
+
+#wikiverse-app-main-cont {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 0.85fr 8.3fr 0.85fr;
+  grid-template-rows: 0.75fr 8.5fr 0.75fr;
+}
+
+@media(max-width: 795px) {
+  #wikiverse-app-main-cont {
+    padding: 0 0.4rem 0 0.4rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  #wikiverse-app-main-cont {
+    grid-template-columns: 1fr;
+    padding: 0 1.5rem 0 1.5rem;
+  }
+
+  /* removes bumper containers from sides on smaller screens */
+  #wikiverse-app-main-cont>*:nth-child(1),
+  #wikiverse-app-main-cont>*:nth-child(3),
+  #wikiverse-app-main-cont>*:nth-child(4),
+  #wikiverse-app-main-cont>*:nth-child(6),
+  #wikiverse-app-main-cont>*:nth-child(7),
+  #wikiverse-app-main-cont>*:nth-child(9) {
+    display: none;
+  }
+}
+
+
+@media (min-width: 1025px) and (max-width: 1440px) {
+  #wikiverse-app-main-cont {
+    grid-template-columns: 1fr;
+    padding: 0 4rem 0 4rem;
+  }
+
+  /* removes bumper containers from sides on smaller screens */
+  #wikiverse-app-main-cont>*:nth-child(1),
+  #wikiverse-app-main-cont>*:nth-child(3),
+  #wikiverse-app-main-cont>*:nth-child(4),
+  #wikiverse-app-main-cont>*:nth-child(6),
+  #wikiverse-app-main-cont>*:nth-child(7),
+  #wikiverse-app-main-cont>*:nth-child(9) {
+    display: none;
+  }
+}
+
+@media (min-width: 1441px) and (max-width: 1650px) {
+  #wikiverse-app-main-cont {
+    grid-template-columns: 1fr;
+    padding: 0 6.35rem 0 6.35rem;
+  }
+
+  /* removes bumper containers from sides on smaller screens */
+  #wikiverse-app-main-cont>*:nth-child(1),
+  #wikiverse-app-main-cont>*:nth-child(3),
+  #wikiverse-app-main-cont>*:nth-child(4),
+  #wikiverse-app-main-cont>*:nth-child(6),
+  #wikiverse-app-main-cont>*:nth-child(7),
+  #wikiverse-app-main-cont>*:nth-child(9) {
+    display: none;
+  }
+}
+
+#main-display {
+  z-index: 5;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(var(--sketch-bg));
+  box-shadow: 0rem 0rem 2rem 1rem rgba(0, 0, 0, 0.22);
+  display: block;
+  overflow: hidden;
+  position: relative;
+}
+
+@keyframes horizontal-shake {
+
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%,
+  80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%,
+  60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}

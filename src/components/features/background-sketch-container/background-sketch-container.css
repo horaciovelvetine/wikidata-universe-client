@@ -1,0 +1,8 @@
+#background-sketch-container {
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 100%;
+  transition: opacity var(--def-transit) ease-in-out;
+}
