@@ -24,7 +24,7 @@ export const WikiverseApp: FC = () => {
   return (
     <DeviceCompatabilityProvider>
       <ConstantsProvider>
-        <WikiverseServiceProvider useLocalAPI>
+        <WikiverseServiceProvider>
 
           <div id={ID('main-cont')}>
             {/* 1::EMPTY */}
