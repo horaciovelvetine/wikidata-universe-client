@@ -1,0 +1,77 @@
+#cur-selected-info-container {
+  grid-row: 2;
+  grid-column: 1;
+  align-self: flex-end;
+  height: fit-content;
+  max-height: 12vh;
+  display: flex;
+  user-select: none;
+}
+
+#cur-selected-info-layout {
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+#cur-selected-info-icon-container {
+  display: flex;
+  align-items: center;
+}
+
+#cur-selected-info-vertex-icon {
+  position: absolute;
+  transition: opacity var(--def-transit) ease-in-out;
+}
+
+#cur-selected-info-selected-icon {
+  transition: opacity var(--def-transit) ease-in-out;
+}
+
+#cur-selected-info-text-container {
+  padding: 0.25rem;
+}
+
+#cur-selected-info-title-span {
+  display: inline-flex;
+  align-items: baseline;
+}
+
+#cur-selected-info-cur-sel-coords {
+  color: rgb(var(--font), 0.5);
+  font-size: clamp(1rem, 0.8vw, 3rem);
+  margin-left: 0.5rem;
+  white-space: nowrap;
+}
+
+#cur-selected-info-label-link {
+  color: rgb(var(--font));
+  font-size: clamp(1rem, 1.6vw, 3rem);
+  transition: font-size var(--def-transit) ease-in-out, text-decoration var(--def-transit) ease-in-out;
+  text-decoration: none;
+  font-weight: 500;
+  text-shadow: 0 0 1px black;
+  line-height: 1;
+}
+
+#cur-selected-info-label-link:hover {
+  font-size: clamp(1.1rem, 2vw, 3.1rem);
+  text-decoration: underline;
+}
+
+#cur-selected-info-topic-desc {
+  font-size: clamp(0.85rem, 1.1vw, 1.5rem);
+  text-shadow: 0 0 1px black;
+  max-height: 6rem;
+  overflow-y: scroll;
+  scrollbar-color: rgba(var(--font), 25%) transparent;
+  transition: scrollbar-color var(--def-transit) ease-in-out;
+}
+
+#cur-selected-info-topic-desc:not(:hover) {
+  scrollbar-color: rgba(var(--font), 0%) transparent;
+}
+
+#cur-selected-info-selected-link {}
+
+#cur-selected-info-selected-link:hover {}

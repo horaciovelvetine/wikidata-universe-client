@@ -1,0 +1,37 @@
+#on-screen-settings-container {
+  padding: 0.5rem;
+  margin: 0.15rem;
+  border-radius: 0.5rem;
+  border: 2px solid rgb(var(--font), 0.5)
+}
+
+#on-screen-settings-title {
+  color: rgb(var(--font));
+}
+
+#on-screen-settings-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-around;
+}
+
+.on-screen-settings-option-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+}
+
+.on-screen-settings-option-container label {
+  color: rgb(var(--gold));
+  text-shadow: 0 0 1px black;
+}
+
+.on-screen-settings-option-container span {
+  color: rgb(var(--font))
+}
+
+.on-screen-settings-option-container input {
+  accent-color: rgb(var(--gold));
+}
