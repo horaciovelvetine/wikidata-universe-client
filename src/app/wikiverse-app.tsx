@@ -24,7 +24,6 @@ export const WikiverseApp: FC = () => {
   return (
     <DeviceCompatabilityProvider>
       <ConstantsProvider>
-        {/* //! TOGGLE USE LOCAL API */}
         <WikiverseServiceProvider useLocalAPI>
 
           <div id={ID('main-cont')}>

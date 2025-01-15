@@ -41,7 +41,7 @@ export const WikiverseServiceProvider: FC<WikiverseServiceProviderProps> = ({ ch
 
   useEffect(() => { // check API status on mount (assumes offline by default)
     checkServiceAvailability();
-  });
+  }, []);
 
 
   const baseUrl = useLocalAPI ? "http://localhost:8080/api/" : "https://wikiverse-api-main-febfewcbf3avfffh.canadacentral-01.azurewebsites.net/api/";
@@ -74,7 +74,7 @@ export const WikiverseServiceProvider: FC<WikiverseServiceProviderProps> = ({ ch
     const json: WikiverseServiceResponse = await response.json();
     console.log(`getQueryData(${query}) response:`, json);
     return json;
-  }, [baseUrl]);
+  }, []);
 
   /**
    * @method post() - generically access the API for a request (called inside of the p5 sketches mostly)
@@ -93,7 +93,7 @@ export const WikiverseServiceProvider: FC<WikiverseServiceProviderProps> = ({ ch
     const json = await response.json();
     console.log(`post(${tgt}) response:`, json);
     return json;
-  }, [baseUrl]);
+  }, []);
 
   /**
    * @method checkServiceAvailability() - sends a request to the Wikiverse API to check if it's online and updates relevant state
@@ -111,7 +111,7 @@ export const WikiverseServiceProvider: FC<WikiverseServiceProviderProps> = ({ ch
       setIsOnline(true);
       return true;
     }
-  }, [baseUrl]);
+  }, []);
 
   const ctxValue = useMemo(() => ({
     getQueryData, post, isOnline, checkServiceAvailability
