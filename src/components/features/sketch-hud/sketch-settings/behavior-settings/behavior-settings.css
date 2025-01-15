@@ -1,0 +1,39 @@
+#behavior-settings-container {
+  padding: 0.5rem;
+  margin: 0.15rem;
+  border-radius: 0.5rem;
+  border: 2px solid rgb(var(--font), 0.5)
+}
+
+#behavior-settings-title {
+  color: rgb(var(--font));
+}
+
+#behavior-settings-list {
+  list-style: none;
+  padding: 0.25rem;
+}
+
+.behavior-settings-option {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+}
+
+.behavior-settings-option-text {}
+
+.behavior-settings-option-text label {
+  color: rgb(var(--gold));
+  text-shadow: 1px 1px black;
+}
+
+.behavior-settings-option-text p {
+  width: 80%;
+  color: rgb(var(--font));
+  text-shadow: 1px 1px black;
+}
+
+.behavior-settings-option input {
+  outline: none;
+  accent-color: rgb(var(--gold));
+}
