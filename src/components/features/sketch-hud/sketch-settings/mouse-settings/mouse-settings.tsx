@@ -1,6 +1,7 @@
-import { P5Sketch } from "../../../../../types";
 import "./mouse-settings.css";
 import { ChangeEvent, useState } from "react";
+
+import { P5Sketch } from "../../../../../types";
 
 interface MouseSettingsProps {
   sketchRef: P5Sketch;

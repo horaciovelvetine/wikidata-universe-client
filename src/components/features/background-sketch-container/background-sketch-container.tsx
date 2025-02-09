@@ -1,9 +1,10 @@
 import "./background-sketch-container.css";
 import { createRef, useEffect } from "react";
-import { Particle } from "../../../types";
 import { ReactP5Wrapper, Sketch } from "@p5-wrapper/react";
-import { getMainDispDimensions } from "../../../utils/get-main-disp-dimensions";
+
+import { Particle } from "../../../types";
 import { WikiverseServiceResponse } from "../../../contexts";
+import { getMainDispDimensions } from "../../../utils/get-main-disp-dimensions";
 
 interface BackgroundSketchContainerProps {
   initSketchData: WikiverseServiceResponse | null;

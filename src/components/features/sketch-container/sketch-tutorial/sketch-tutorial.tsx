@@ -1,8 +1,8 @@
 import { ReactP5Wrapper, Sketch } from "@p5-wrapper/react";
 
-import { SketchContainerProps } from "..";
 import { TutorialSketch } from "../../../../types";
 import { useWikiverseService } from "../../../../contexts";
+import { SketchContainerProps } from "../sketch-container/sketch-container";
 
 export const SketchTutorial = ({
   initSketchData,

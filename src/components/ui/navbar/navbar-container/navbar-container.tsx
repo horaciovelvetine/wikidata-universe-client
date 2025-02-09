@@ -7,17 +7,18 @@ import {
   useState,
 } from "react";
 
-import {
-  ReSearchInput,
-  SettingsOpenIndicator,
-  SketchDetailsSummary,
-  transitionHeaderTitleText,
-} from "..";
+// TODO - remove animation
+import { transitionHeaderTitleText } from "../animations/transition-header-title-text";
 import { P5Sketch } from "../../../../types";
 import {
   useDeviceCompatabilityCheck,
   WikiverseServiceResponse,
 } from "../../../../contexts";
+
+// Sub-Components
+import { ReSearchInput } from "../re-search-input/re-search-input";
+import { SettingsOpenIndicator } from "../settings-open-indicator/settings-open-indicator";
+import { SketchDetailsSummary } from "../sketch-details-summary/sketch-details.summary";
 
 interface NavbarContainerProps {
   sketchRef: P5Sketch | null;

@@ -4,6 +4,7 @@ import { createRef, useEffect, useState } from "react";
 import { Vertex as NoVertSel, VertexSel } from "../../../../assets/icons";
 import { Vertex, P5Sketch } from "../../../../types";
 
+//TODO - remove animation
 import { swapCurSelectedVertexIcons } from "../../animations/swap-cur-selected-vertex-icons";
 
 interface CurSelectedInfoProps {

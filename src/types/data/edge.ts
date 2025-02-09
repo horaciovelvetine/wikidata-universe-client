@@ -1,4 +1,4 @@
-import { Vertex } from "..";
+import { Vertex } from "./vertex";
 
 export interface iEdge {
   srcId: string;

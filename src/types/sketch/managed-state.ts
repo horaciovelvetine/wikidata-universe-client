@@ -1,6 +1,8 @@
 import { Dispatch, SetStateAction } from "react";
-import { Graphset, LayoutConfig, Vertex } from "..";
 import { WikiverseServiceResponse } from "../../contexts";
+import { Vertex } from "../data/vertex";
+import { LayoutConfig } from "../data/layout-config";
+import { Graphset } from "../data/graphset";
 
 /**
  * Used to synchronize the external update for React's state for on-screen elements which need details emitted from the Sketch itself, and also control elements of the sketch at the same time

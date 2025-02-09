@@ -1,16 +1,17 @@
 import "./sketch-settings.css";
 import { createRef, useEffect, useState } from "react";
-
 import { Settings } from "../../../../../assets/icons";
+
+// TODO - remove animation
 import { showHideSettingsMenu } from "../../../animations/show-hide-settings-menu";
-import {
-  BehaviorSettings,
-  LayoutSettings,
-  MouseSettings,
-  OnScreenSettings,
-} from "..";
 import { P5Sketch } from "../../../../../types";
 import { UnfocusClickToCloseWrapper } from "../hooks/use-unfocus-click-to-close-wrapper";
+
+// Sub-Components
+import { OnScreenSettings } from "../on-screen-settings/on-screen-settings";
+import { MouseSettings } from "../mouse-settings/mouse-settings";
+import { BehaviorSettings } from "../behavior-settings/behavior-settings";
+import { LayoutSettings } from "../layout-settings/layout-settings";
 
 interface SketchSettingsProps {
   sketchRef: P5Sketch;

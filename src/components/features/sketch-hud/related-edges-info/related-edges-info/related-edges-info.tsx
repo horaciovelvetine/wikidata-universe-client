@@ -1,8 +1,12 @@
 import "./related-edges-info.css";
-import { Edge, Vertex, P5Sketch } from "../../../../../types";
 import { createRef, useEffect, useState } from "react";
-import { RelatedEdgeItem } from "..";
+
+// TODO - remove animations
 import { showHideRelatedEdgesContainer } from "../../../animations/show-hide-related-edges-container";
+import { Edge, Vertex, P5Sketch } from "../../../../../types";
+
+// Sub-Component(s)
+import { RelatedEdgeItem } from "../related-edge-item/realted-edge-item";
 
 interface RelatedEdgesInfoProps {
   sketchRef: P5Sketch;

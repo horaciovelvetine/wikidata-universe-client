@@ -1,11 +1,13 @@
+import "./cur-hovered-info.css";
 import { createRef, useState, useEffect } from "react";
 
 import { Vertex as VertIcon } from "../../../../assets/icons";
 import { Vertex, P5Sketch } from "../../../../types";
 import { abridgeString } from "../../../../utils/abridge-string";
 import { getMainDispDimensions } from "../../../../utils/get-main-disp-dimensions";
+
+// TODO - remove animation
 import { showHideCurHovered } from "../../animations/show-hide-cur-hovered";
-import "./cur-hovered-info.css";
 
 const ID = (sufx: string) => `cur-hovered-info-${sufx}`;
 

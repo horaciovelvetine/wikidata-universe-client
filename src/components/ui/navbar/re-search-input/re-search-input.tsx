@@ -9,12 +9,11 @@ import {
   ChangeEvent,
 } from "react";
 
-import {
-  errorShakeReSearchContainer,
-  moveReSearchInputInView,
-  showHideReSearchInput,
-} from "..";
-import { errorToggleIconVisibility } from "../../../features";
+//TODO - remove animations
+import { errorToggleIconVisibility } from "../../../features/animations/error-toggle-icon-visibility";
+import { errorShakeReSearchContainer } from "../animations/error-shake-re-search-container";
+import { moveReSearchInputInView } from "../animations/move-re-search-input-in-view";
+import { showHideReSearchInput } from "../animations/show-hide-re-search-input";
 import { P5Sketch } from "../../../../types";
 import {
   useDeviceCompatabilityCheck,

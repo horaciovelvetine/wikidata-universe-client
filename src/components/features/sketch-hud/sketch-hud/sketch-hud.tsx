@@ -6,16 +6,18 @@ import {
   useDeviceCompatabilityCheck,
   WikiverseServiceResponse,
 } from "../../../../contexts";
+// TODO - remove
 import { showHideSketchHUDRef } from "../../animations/show-hide-sketch-hud-ref";
-import {
-  CurHoveredInfo,
-  SketchSettings,
-  CurSelectedInfo,
-  RelatedEdgesInfo,
-  MainLandingInput,
-  TutorialMessageDisplay,
-} from "..";
 
+// Sub-Components
+import { CurHoveredInfo } from "../cur-hovered-info/cur-hovered-info";
+import { SketchSettings } from "../sketch-settings/";
+import { TutorialMessageDisplay } from "../tutorial-message-display/tutorial-message-display";
+import { MainLandingInput } from "../main-landing-input/main-landing-input";
+import { CurSelectedInfo } from "../cur-selected-info/cur-selected-info";
+import { RelatedEdgesInfo } from "../related-edges-info";
+
+// Props
 interface SketchHUDContainerProps {
   sketchRef: P5Sketch | null;
   setInitSketchData: Dispatch<SetStateAction<WikiverseServiceResponse | null>>;

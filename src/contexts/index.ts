@@ -6,6 +6,7 @@ export {
   WikiverseServiceProvider,
   useWikiverseService,
 } from "./providers/wikiverse-service-provider";
+
 export {
   DeviceCompatabilityProvider,
   useDeviceCompatabilityCheck,

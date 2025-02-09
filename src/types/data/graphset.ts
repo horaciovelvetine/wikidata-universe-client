@@ -1,18 +1,10 @@
-import {
-  Dimensions,
-  Edge,
-  iDimensions,
-  iEdge,
-  iPoint3D,
-  iProperty,
-  iVertex,
-  MinMaxSet,
-  Point3D,
-  Property,
-  Vertex,
-} from "..";
 import { WikiverseServiceResponse } from "../../contexts";
-
+import { Dimensions, iDimensions } from "./dimensions";
+import { Edge, iEdge } from "./edge";
+import { MinMaxSet } from "./min-max-set";
+import { iPoint3D, Point3D } from "./point-3d";
+import { iProperty, Property } from "./property";
+import { iVertex, Vertex } from "./vertex";
 
 export class Graphset {
   vertices: Vertex[] = [];

@@ -8,17 +8,18 @@ import {
 } from "react";
 
 import { Search, SearchDngr } from "../../../../assets/icons";
-import {
-  errorToggleIconVisibility,
-  errorShakeMainLandingButton,
-  errorShakeMainLandingInput,
-  hideMainLandingInput,
-  showHideMainLandingInput,
-} from "../..";
+
 import {
   WikiverseServiceResponse,
   useWikiverseService,
 } from "../../../../contexts";
+
+// TODO - remove animations
+import { errorShakeMainLandingButton } from "../../animations/error-shake-main-landing-button";
+import { errorShakeMainLandingInput } from "../../animations/error-shake-main-landing-input";
+import { errorToggleIconVisibility } from "../../animations/error-toggle-icon-visibility";
+import { hideMainLandingInput } from "../../animations/hide-main-landing-input";
+import { showHideMainLandingInput } from "../../animations/show-hide-main-landing-input";
 
 const ID = (sufx: string) => `main-landing-${sufx}`;
 const WIKIDATA_HOMEPAGE = "https://www.wikidata.org/wiki/Wikidata:Main_Page";

@@ -1,7 +1,8 @@
 import { multiply, inv } from "mathjs";
-import { P5CanvasInstance } from "@p5-wrapper/react";
-import { iPoint3D, Point3D } from "..";
 import { Camera, Font, Vector } from "p5";
+import { P5CanvasInstance } from "@p5-wrapper/react";
+
+import { iPoint3D, Point3D } from "./point-3d";
 
 export interface iVertex {
   id: string;

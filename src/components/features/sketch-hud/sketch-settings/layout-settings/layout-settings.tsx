@@ -1,8 +1,9 @@
-import { Fetch } from "../../../../../assets/icons";
-import { useWikiverseService } from "../../../../../contexts";
-import { P5Sketch } from "../../../../../types";
 import "./layout-settings.css";
 import { ChangeEvent, useState } from "react";
+import { Fetch } from "../../../../../assets/icons";
+
+import { useWikiverseService } from "../../../../../contexts";
+import { P5Sketch } from "../../../../../types";
 
 interface LayoutSettingsProps {
   sketchRef: P5Sketch;

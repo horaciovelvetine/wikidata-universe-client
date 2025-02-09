@@ -1,7 +1,9 @@
 import "./sketch-details-summary.css";
 import { createRef, useEffect, useState } from "react";
+
+// TODO - remove animations
+import { showHideSketchDetailsSummary } from "../animations/show-hide-sketch-details-summary";
 import { Point3D, P5Sketch } from "../../../../types";
-import { showHideSketchDetailsSummary } from "..";
 import { useDeviceCompatabilityCheck } from "../../../../contexts";
 
 interface SketchDetailsSummaryProps {

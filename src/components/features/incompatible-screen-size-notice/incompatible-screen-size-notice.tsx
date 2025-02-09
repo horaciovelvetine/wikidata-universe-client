@@ -1,11 +1,14 @@
 import "./incompatible-screen-size-notice.css";
 import { createRef, useEffect } from "react";
+
+// TODO - remove animation
 import { showHideIncompatibleScreenNotice } from "../animations/show-hide-incompatible-screen-notice";
+
+import { GITHUB_URL, _bl, MAILTO_URL } from "../../../app";
 import {
   useDeviceCompatabilityCheck,
   useWikiverseService,
 } from "../../../contexts";
-import { GITHUB_URL, _bl, MAILTO_URL } from "../../../app";
 
 const ID = (sufx: string) => `incompat-screen-notice-${sufx}`;
 

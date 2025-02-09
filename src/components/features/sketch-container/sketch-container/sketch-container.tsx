@@ -2,8 +2,9 @@ import "./sketch-container.css";
 import { Dispatch, SetStateAction } from "react";
 
 import { P5Sketch } from "../../../../types";
-import { SketchTutorial, WikiverseSketch } from "..";
 import { WikiverseServiceResponse } from "../../../../contexts";
+import { SketchTutorial } from "../sketch-tutorial/sketch-tutorial";
+import { WikiverseSketch } from "../wikiverse-sketch/wikiverse-sketch";
 
 export interface SketchContainerProps {
   initSketchData: WikiverseServiceResponse;

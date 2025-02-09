@@ -1,5 +1,5 @@
-import { P5Sketch } from "../../../../../types";
 import "./behavior-settings.css";
+import { P5Sketch } from "../../../../../types";
 
 import { useEffect, useState } from "react";
 

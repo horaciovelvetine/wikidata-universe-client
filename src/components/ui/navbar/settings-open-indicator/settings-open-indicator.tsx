@@ -1,6 +1,8 @@
 import "./settings-open-indicator.css";
 import { createRef, useEffect, useState } from "react";
-import { showHideSettingsOpenIndicator } from "..";
+
+//TODO - remove animations
+import { showHideSettingsOpenIndicator } from "../animations/show-hide-settings-open-indicator";
 import { P5Sketch } from "../../../../types";
 import { useDeviceCompatabilityCheck } from "../../../../contexts";
 

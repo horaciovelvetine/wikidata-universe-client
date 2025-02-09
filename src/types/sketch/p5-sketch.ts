@@ -3,14 +3,18 @@ import { P5CanvasInstance } from "@p5-wrapper/react";
 import { Camera, Font } from "p5";
 import { Dispatch, SetStateAction } from "react";
 
-import { Edge, Graphset, MinMaxSet, Point3D, Vertex } from "..";
-import { ManagedCamera } from "./managed-camera";
-import { ManagedState } from "./managed-state";
 import { getMainDispDimensions } from "../../utils/get-main-disp-dimensions";
 import {
   WikiverseServiceResponse,
   WikiverseServiceRequestPayload,
 } from "../../contexts";
+import { ManagedCamera } from "./managed-camera";
+import { ManagedState } from "./managed-state";
+import { Graphset } from "../data/graphset";
+import { Point3D } from "../data/point-3d";
+import { Vertex } from "../data/vertex";
+import { MinMaxSet } from "../data/min-max-set";
+import { Edge } from "../data/edge";
 
 export interface SketchProps {
   p5: P5CanvasInstance;
