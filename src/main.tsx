@@ -1,3 +1,4 @@
+import './style.css'
 import ReactDOM from 'react-dom/client'
 import { WikiverseApp } from './app';
 

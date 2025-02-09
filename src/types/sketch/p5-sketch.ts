@@ -1,4 +1,4 @@
-import CharisTTF from '../../assets/font/CharisSIL-Regular.ttf'
+import CharisTTF from '../../assets/fonts/CharisSIL-Regular.ttf'
 import { P5CanvasInstance } from "@p5-wrapper/react";
 import { Camera, Font } from "p5";
 import { Dispatch, SetStateAction } from 'react';

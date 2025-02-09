@@ -11,7 +11,7 @@ interface TutorialMessageDisplayProps {
 
 const ID = (sufx: string) => `tutorial-message-${sufx}`;
 
-export const TutorialMessageDisplayTutorialMessageDisplayProps = ({ sketchRef, setIsTutorialSketch }: TutorialMessageDisplayProps) => {
+export const TutorialMessageDisplay = ({ sketchRef, setIsTutorialSketch }: TutorialMessageDisplayProps) => {
   const tutorialSketchRef = sketchRef as TutorialSketch; // conditional boolean in HUD narrows this
   const { getTutorial } = useWikiverseService();
   const [bodyMsg, setBodyMsg] = useState(tutorialSketchRef.state.tutorialBody());
