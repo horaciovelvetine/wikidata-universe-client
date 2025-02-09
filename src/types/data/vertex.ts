@@ -101,7 +101,7 @@ export class Vertex implements iVertex {
       const drawCoords = this.calcCoordUpdateVectorPosition(p5);
       p5.translate(drawCoords.x, drawCoords.y, drawCoords.z);
       this.coordTransitionKeyFrm += 1;
-      if (this.coordTransitionKeyFrm == COORD_TRANSITION_DURATION) {
+      if (this.coordTransitionKeyFrm === COORD_TRANSITION_DURATION) {
         this.coordTransitionKeyFrm = 1;
         this.prevCoords = null;
       }

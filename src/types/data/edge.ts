@@ -32,22 +32,22 @@ export class Edge implements iEdge {
    * @method getEdgeDirection() - checks the provided Vertex to check which direction an Edge is in relatetion to that Vertex and return the appropriate @enum @DIRECTION
    */
   getEdgeDirection(vert: Vertex) {
-    if (vert.id == this.srcId) {
+    if (vert.id === this.srcId) {
       return DIRECTION.OUTGOING;
     }
     return DIRECTION.INCOMING;
   }
 
   isSource(vert: Vertex) {
-    return this.srcId == vert.id;
+    return this.srcId === vert.id;
   }
 
   isTarget(vert: Vertex) {
-    return this.tgtId == vert.id;
+    return this.tgtId === vert.id;
   }
 
   isLabelMatch(vert: Vertex) {
-    return this.label == vert.label;
+    return this.label === vert.label;
   }
 
   /**

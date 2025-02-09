@@ -128,7 +128,7 @@ export class P5Sketch {
   drawVertices() {
     this.graphset.vertices.forEach(vert => {
       if (vert.fetched) {
-        const isCurSelection = vert.id == this.state.curSelected()?.id;
+        const isCurSelection = vert.id === this.state.curSelected()?.id;
         vert.draw(this.p5, isCurSelection)
       }
     })

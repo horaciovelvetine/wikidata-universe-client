@@ -397,7 +397,7 @@ export class ManagedState {
     const originVertData = initSketchData.vertices.find(v => {
       if (v.origin) return v;
       if (v.label) {
-        return v.label.toLocaleLowerCase() == this.curQuery.toLocaleLowerCase();
+        return v.label.toLocaleLowerCase() === this.curQuery.toLocaleLowerCase();
       }
     }) || null;
 

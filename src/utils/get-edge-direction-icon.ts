@@ -15,5 +15,5 @@ export function getEdgeDirectionIcon(curSelection: Vertex, edge: Edge, relEdges:
     return { dir: DIRECTION.PARALLEL, icon: ArrowBoth }
   }
 
-  return edge.srcId == curSelection.id ? { dir: DIRECTION.OUTGOING, icon: ArrowTo } : { dir: DIRECTION.INCOMING, icon: ArrowFrom };
+  return edge.srcId === curSelection.id ? { dir: DIRECTION.OUTGOING, icon: ArrowTo } : { dir: DIRECTION.INCOMING, icon: ArrowFrom };
 }

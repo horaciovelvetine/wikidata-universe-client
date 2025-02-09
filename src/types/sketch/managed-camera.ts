@@ -38,7 +38,7 @@ export class ManagedCamera {
    * @method  advanceAnimations - Advances each of the animations by one frame and guards against a null sketch Camera.
    */
   advanceAnimations(): void {
-    if (this.cam == null) return;
+    if (this.cam === null) return;
     this.advanceLookAt();
     this.advanceCamMove();
   }
@@ -103,7 +103,7 @@ export class ManagedCamera {
     const curPnt = new Point3D({ x: sX, y: sY, z: sZ });
 
     //skip if already located here
-    if (curPnt.x == point.x && curPnt.y == point.y && curPnt.z == point.z) return;
+    if (curPnt.x === point.x && curPnt.y === point.y && curPnt.z === point.z) return;
 
     this.positionStart = curPnt;
     this.positionTgt = point;
@@ -121,14 +121,14 @@ export class ManagedCamera {
    * @method lookAtAnimFinished() - Check if the current LookAtKeyFrm value is equivalent to the set lookAtDuration maximum
    */
   private lookAtAnimFinished(): boolean {
-    return this.curLookAtKeyFrm == this.lookAtDuration;
+    return this.curLookAtKeyFrm === this.lookAtDuration;
   }
 
   /**
    * @method posAnimFinished() - Check if the current curPosKeyFrm value is equivalent to the set curPosDuration maximum
    */
   private posAnimFinished(): boolean {
-    return this.curPosKeyFrm == this.curPosDuration;
+    return this.curPosKeyFrm === this.curPosDuration;
   }
 
   /**

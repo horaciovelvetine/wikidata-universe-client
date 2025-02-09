@@ -12,7 +12,7 @@ const ID = (sufx: string) => `wikiverse-app-${sufx}`
 const BGSketchMemo = memo(BackgroundSketchContainer);
 
 const SketchMemo = memo(SketchContainer, (prev, next) => {
-  return prev.initSketchData == next.initSketchData;
+  return prev.initSketchData === next.initSketchData;
 });
 
 export const WikiverseApp = () => {
