@@ -31,6 +31,7 @@ interface ServiceProvider {
   post: (tgt: string, data: WikiverseServiceRequestPayload) => Promise<WikiverseServiceResponse>;
   isOnline: boolean;
   checkServiceAvailability: () => Promise<boolean>;
+  getTutorial: (tgt: string) => Promise<WikiverseServiceResponse>;
 }
 
 const WikiverseApiContext = createContext<ServiceProvider | undefined>(undefined);
@@ -44,7 +45,7 @@ export const WikiverseServiceProvider: FC<WikiverseServiceProviderProps> = ({ ch
   }, []);
 
 
-  const baseUrl = useLocalAPI ? "http://localhost:8080/api/" : "https://wikiverse-api-main-febfewcbf3avfffh.canadacentral-01.azurewebsites.net/api/";
+  const baseUrl = useLocalAPI ? "http://localhost:8080/api" : "https://wikiverse-api-main-febfewcbf3avfffh.canadacentral-01.azurewebsites.net/api";
   const INV_STATUS_TXT = (status: number) => `HTTP error, invalid status ${status}`
 
   const postPayload = (data: WikiverseServiceRequestPayload) => {
@@ -57,14 +58,13 @@ export const WikiverseServiceProvider: FC<WikiverseServiceProviderProps> = ({ ch
     }
   }
 
-
   /**
    * @method getQueryData() - makes the initial request to the Wikiverse Service which then initializes a QuerySketch
    */
   const getQueryData = useCallback(async (query: string): Promise<WikiverseServiceResponse> => {
     setIsLoading(true);
 
-    const response = await fetch(`${baseUrl}query-data?${new URLSearchParams({ query }).toString()}`).finally(() => setIsLoading(false))
+    const response = await fetch(`${baseUrl}/query-data?${new URLSearchParams({ query }).toString()}`).finally(() => setIsLoading(false))
 
     if (!response.ok) {
       console.log(INV_STATUS_TXT(response.status), response)
@@ -83,14 +83,14 @@ export const WikiverseServiceProvider: FC<WikiverseServiceProviderProps> = ({ ch
   const post = useCallback(async (tgt: string, data: WikiverseServiceRequestPayload): Promise<WikiverseServiceResponse> => {
     setIsLoading(true);
 
-    const response = await fetch(baseUrl + tgt, postPayload(data)).finally(() => setIsLoading(false));
+    const response = await fetch(`${baseUrl}/${tgt}`, postPayload(data)).finally(() => setIsLoading(false));
+    const json = await response.json();
 
     if (!response.ok) {
       console.log(INV_STATUS_TXT(response.status), response);
       throw new Error(INV_STATUS_TXT(response.status));
     }
 
-    const json = await response.json();
     console.log(`post(${tgt}) response:`, json);
     return json;
   }, []);
@@ -100,22 +100,42 @@ export const WikiverseServiceProvider: FC<WikiverseServiceProviderProps> = ({ ch
    */
   const checkServiceAvailability = useCallback(async (): Promise<boolean> => {
     setIsLoading(true);
-    const response = await fetch(`${baseUrl}current-status`).finally(() => setIsLoading(false));
+    const response = await fetch(`${baseUrl}/current-status`).finally(() => setIsLoading(false));
 
     if (!response.ok) {
       console.log(INV_STATUS_TXT(response.status))
       setIsOnline(false);
       return false;
-    } else {
-      console.log('checkServiceAvailability():', await response.json())
-      setIsOnline(true);
-      return true;
     }
+    console.log('checkServiceAvailability():', await response.json())
+    setIsOnline(true);
+    return true;
+
   }, []);
 
+  /**
+   * @method getTutorial() - sends a request to the Wikiverse API for the needed data for a particular (@var tgt) step in the tutorial
+   */
+  const getTutorial = useCallback(async (target: string): Promise<WikiverseServiceResponse> => {
+    setIsLoading(true);
+
+    const response = await fetch(`${baseUrl}/tutorial?${new URLSearchParams({ target }).toString()}`).finally(() => setIsLoading(false));
+    const json = await response.json();
+
+    if (!response.ok) {
+      console.log(INV_STATUS_TXT(response.status))
+      // TODO :: invalid tutorial responses??
+      debugger;
+    }
+
+    console.log(`getTutorial(${target}) response:`, json);
+    return json;
+  }, [])
+
+  // Memoize Context to prevent loading from updating and re-rendering all
   const ctxValue = useMemo(() => ({
-    getQueryData, post, isOnline, checkServiceAvailability
-  }), [getQueryData, post, isOnline, checkServiceAvailability])
+    getQueryData, post, isOnline, checkServiceAvailability, getTutorial
+  }), [getQueryData, post, isOnline, checkServiceAvailability, getTutorial])
 
   return (
     <WikiverseApiContext.Provider value={ctxValue}>

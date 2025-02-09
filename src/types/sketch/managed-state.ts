@@ -50,6 +50,14 @@ export class ManagedState {
   private showSettings = false;
   private reactShowSettingsSubscribers: Dispatch<SetStateAction<boolean>>[] = [];
 
+  //* Tutorial Related State
+  private tutorialNavMsg = '';
+  private reactTutorialNavMsgSubscribers: Dispatch<SetStateAction<string>>[] = []
+  private tutorialBodyMsg = '';
+  private reactTutorialBodyMsgSubscribers: Dispatch<SetStateAction<string>>[] = []
+  private tutorialInstructionMsg = '';
+  private reactTutorialInstructionMsgSubscribers: Dispatch<SetStateAction<string>>[] = []
+
   //* CONSTRUCTOR START
   //* CONSTRUCTOR START
   //* CONSTRUCTOR START
@@ -317,6 +325,63 @@ export class ManagedState {
   updateCountTotals(graph: Graphset) { //? HELPER ? to call both updates @ once
     this.setTopicCount(graph.vertices.length);
     this.setStatementCount(graph.edges.length);
+  }
+
+  //* TUTORIAL RELATED STATE
+  //* TUTORIAL RELATED STATE
+  //* TUTORIAL RELATED STATE
+
+  /**
+   * @method updateTutorialState() - helper to call and update all of the set methods inside of the tutorial subGroup of managed state, to update them all in parallel.
+   */
+  updateTutorialState(apiResponse: WikiverseServiceResponse | null) {
+    if (!apiResponse) return;
+
+    const subStrings = apiResponse.query.split('::');
+    if (subStrings.length) {
+      this.setTutorialNav(subStrings[0])
+      this.setTutorialBody(subStrings[1])
+      this.setTutorialInstruction(subStrings[2]);
+    }
+  }
+
+  tutorialNav() {
+    return this.tutorialNavMsg;
+  }
+
+  setTutorialNav(navMsg: string) {
+    this.tutorialNavMsg = navMsg;
+    this.reactTutorialNavMsgSubscribers.forEach(subscription => subscription(navMsg));
+  }
+
+  addTutorialNavSubscriber(setter: Dispatch<SetStateAction<string>>) {
+    this.reactTutorialNavMsgSubscribers.push(setter);
+  }
+
+  tutorialBody() {
+    return this.tutorialBodyMsg;
+  }
+
+  setTutorialBody(bodyMsg: string) {
+    this.tutorialBodyMsg = bodyMsg;
+    this.reactTutorialBodyMsgSubscribers.forEach(subscription => subscription(bodyMsg));
+  }
+
+  addTutorialBodySubscriber(setter: Dispatch<SetStateAction<string>>) {
+    this.reactTutorialBodyMsgSubscribers.push(setter);
+  }
+
+  tutorialInstruction() {
+    return this.tutorialInstructionMsg;
+  }
+
+  setTutorialInstruction(instructionMsg: string) {
+    this.tutorialInstructionMsg = instructionMsg;
+    this.reactTutorialInstructionMsgSubscribers.forEach(subscription => subscription(instructionMsg));
+  }
+
+  addTutorialInstructionSubscriber(setter: Dispatch<SetStateAction<string>>) {
+    this.reactTutorialInstructionMsgSubscribers.push(setter);
   }
 
 

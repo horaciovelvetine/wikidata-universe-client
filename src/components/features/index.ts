@@ -4,7 +4,7 @@ export { MainLandingInput } from './sketch-hud/main-landing-input/main-landing-i
 export { IncompatibleScreenSizeNotice } from './incompatible-screen-size-notice/incompatible-screen-size-notice'
 export { BackgroundSketchContainer } from './background-sketch-container/background-sketch-container'
 export { SketchHUD } from './sketch-hud'
-export { SketchContainer } from './sketch-container/sketch-container'
+export { SketchContainer } from './sketch-container/sketch-container/sketch-container'
 
 export { errorShakeMainLandingButton } from './animations/error-shake-main-landing-button'
 export { errorShakeMainLandingInput } from './animations/error-shake-main-landing-input'

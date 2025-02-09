@@ -12,10 +12,10 @@ import { getMainDispDimensions } from '../../utils/get-main-disp-dimensions';
 export interface SketchProps {
   p5: P5CanvasInstance;
   initSketchData: WikiverseServiceResponse | null;
-  setSketchRef: Dispatch<SetStateAction<WikiverseSketch | null>>;
+  setSketchRef: Dispatch<SetStateAction<P5Sketch | null>>;
 }
 
-export class WikiverseSketch {
+export class P5Sketch {
   private p5: P5CanvasInstance;
   private font: Font | undefined;
   private p5cam: Camera | undefined;
@@ -34,10 +34,18 @@ export class WikiverseSketch {
     setSketchRef(this);
   }
 
+  /**
+   * @method P5CAM()
+   * @returns - returns the underlying p5 sketches camera
+   */
   P5CAM() {
     return this.p5cam;
   }
 
+  /**
+   * @method CAM()
+   * @returns - the managed camera instance created for animating the camera gracefully 
+   */
   CAM() {
     return this.cam;
   }

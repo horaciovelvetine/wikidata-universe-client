@@ -5,7 +5,7 @@ import { WikiverseServiceProvider, WikiverseServiceResponse } from './contexts/w
 import { DeviceCompatabilityProvider } from './contexts/device-compatability-provider';
 import { Footer, VerticalTitle } from '../components';
 import { ApiOfflineNotice, BackgroundSketchContainer, IncompatibleScreenSizeNotice, SketchContainer, SketchHUD, } from '../components/features';
-import { WikiverseSketch } from '../types';
+import { P5Sketch } from '../types';
 import { ConstantsProvider } from './contexts/constants-provider';
 import { NavbarContainer } from '../components/ui/navbar';
 
@@ -17,9 +17,10 @@ const SketchMemo = memo(SketchContainer, (prev, next) => {
   return prev.initSketchData == next.initSketchData;
 });
 
-export const WikiverseApp: FC = () => {
-  const [sketchRef, setSketchRef] = useState<WikiverseSketch | null>(null);
+export const WikiverseApp = () => {
+  const [sketchRef, setSketchRef] = useState<P5Sketch | null>(null);
   const [initSketchData, setInitSketchData] = useState<WikiverseServiceResponse | null>(null);
+  const [isTutorialSketch, setIsTutorialSketch] = useState(false);
 
   return (
     <DeviceCompatabilityProvider>
@@ -43,8 +44,8 @@ export const WikiverseApp: FC = () => {
               <ApiOfflineNotice />
               <IncompatibleScreenSizeNotice />
 
-              <SketchHUD {...{ setInitSketchData, sketchRef }} />
-              {initSketchData && <SketchMemo {...{ initSketchData, setSketchRef }} />}
+              <SketchHUD {...{ setInitSketchData, sketchRef, isTutorialSketch, setIsTutorialSketch }} />
+              {initSketchData && <SketchMemo {...{ initSketchData, setSketchRef, isTutorialSketch }} />}
             </div>
 
             {/* 6::EMPTY */}
@@ -53,7 +54,7 @@ export const WikiverseApp: FC = () => {
             {/* 7::EMPTY */}
             <div id={ID('bot-left-fill')}></div>
 
-            <Footer />
+            <Footer {...{ setIsTutorialSketch, setInitSketchData }} />
 
             {/* 9::EMPTY */}
             <div id={ID('bot-right-fill')}></div>

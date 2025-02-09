@@ -1,0 +1,48 @@
+#tutorial-message-container {
+  position: absolute;
+  top: 8vh;
+  left: 17.5vw;
+  width: 55vw;
+}
+
+#tutorial-message-layout {
+  border: 1px solid rgb(var(--font));
+  border-radius: 0.5rem;
+  padding: 0 0.65rem
+}
+
+#tutorial-message-exit-container {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+
+}
+
+#tutorial-message-exit-container p {
+  color: rgb(var(--font), 0.5);
+  text-shadow: 0 0 1px black;
+}
+
+#tutorial-message-close-icon {}
+
+#tutorial-message-forward-back-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#tutorial-message-forward-back-container p {
+  color: rgb(var(--font));
+  text-shadow: 0 0 1px black;
+  font-size: clamp(1rem, 1.25vw, 2.5rem);
+}
+
+#tutorial-message-body {
+  font-size: clamp(1.25rem, 1vw, 2.75rem);
+  color: rgb(var(--font));
+  text-shadow: 0 0 1px black;
+}
+
+#tutorial-message-back-icon {}
+
+#tutorial-message-forward-icon {}

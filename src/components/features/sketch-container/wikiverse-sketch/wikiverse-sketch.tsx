@@ -1,21 +1,15 @@
-import './sketch-container.css'
-import { Dispatch, FC, SetStateAction } from "react";
+import { FC } from "react";
+import { SketchContainerProps } from "../";
 import { ReactP5Wrapper, Sketch } from "@p5-wrapper/react";
+import { P5Sketch } from "../../../../types";
+import { useWikiverseService } from "../../../../app";
 
-import { WikiverseSketch } from "../../../types";
-import { useWikiverseService, WikiverseServiceResponse } from '../../../app';
 
-interface MainSketchContainerProps {
-  initSketchData: WikiverseServiceResponse;
-  setSketchRef: Dispatch<SetStateAction<WikiverseSketch | null>>;
-}
-
-export const SketchContainer: FC<MainSketchContainerProps> = ({ initSketchData, setSketchRef }) => {
+export const WikiverseSketch: FC<SketchContainerProps> = ({ initSketchData, setSketchRef }) => {
   const { post } = useWikiverseService();
 
   const sketch: Sketch = p5 => {
-
-    const SK = new WikiverseSketch({ p5, initSketchData, setSketchRef })
+    const SK = new P5Sketch({ p5, initSketchData, setSketchRef })
 
     //*/==> CONFIG!
     p5.preload = () => { SK.preloadFont() };
@@ -34,7 +28,7 @@ export const SketchContainer: FC<MainSketchContainerProps> = ({ initSketchData, 
 
     //*/==> DRAW!
     p5.draw = () => {
-      SK.drawUI();
+      SK.drawUI(); //
       SK.drawVertices();
       SK.drawSelectedDetails();
       SK.drawHoveredDetails();
@@ -89,7 +83,5 @@ export const SketchContainer: FC<MainSketchContainerProps> = ({ initSketchData, 
 
   }
 
-  return (
-    <ReactP5Wrapper sketch={sketch} />
-  )
+  return (<ReactP5Wrapper sketch={sketch} />)
 }
