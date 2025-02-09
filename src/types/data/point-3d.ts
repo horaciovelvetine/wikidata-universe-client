@@ -13,7 +13,7 @@ export class Point3D implements iPoint3D {
   constructor(point?: iPoint3D);
   constructor(x: number, y: number, z: number);
   constructor(pointOrX?: number | iPoint3D, y?: number, z?: number) {
-    if (typeof pointOrX === 'number') {
+    if (typeof pointOrX === "number") {
       this.x = pointOrX;
       this.y = y!;
       this.z = z!;
@@ -29,7 +29,6 @@ export class Point3D implements iPoint3D {
   }
 
   string(): string {
-    return `[${Math.round(this.x)}, ${Math.round(this.y)}, ${Math.round(this.z)}]`
+    return `[${Math.round(this.x)}, ${Math.round(this.y)}, ${Math.round(this.z)}]`;
   }
-
 }

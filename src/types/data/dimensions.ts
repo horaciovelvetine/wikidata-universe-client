@@ -11,10 +11,10 @@ export class Dimensions implements iDimensions {
   constructor(dims?: iDimensions);
   constructor(width: number, height: number);
   constructor(arg1?: number | iDimensions, arg2?: number) {
-    if (typeof arg1 === 'number') {
+    if (typeof arg1 === "number") {
       this.width = arg1;
       this.height = arg2 ?? 0;
-    } else if (typeof arg1 === 'object') {
+    } else if (typeof arg1 === "object") {
       this.width = arg1.width;
       this.height = arg1.height;
     }

@@ -1,4 +1,4 @@
-import './loading-bar.css'
+import "./loading-bar.css";
 
 interface LoadingBarProps {
   isLoading: boolean;
@@ -10,11 +10,14 @@ interface LoadingBarProps {
  */
 export const LoadingBar = ({ isLoading }: LoadingBarProps) => {
   return (
-    <div id='loading-bar-container'>
-      {isLoading ?
-        <div id='gradient-loading-bar'>
-          <div id='gradient-shadow-progress'></div>
-        </div> : <></>}
+    <div id="loading-bar-container">
+      {isLoading ? (
+        <div id="gradient-loading-bar">
+          <div id="gradient-shadow-progress"></div>
+        </div>
+      ) : (
+        <></>
+      )}
     </div>
-  )
-}
+  );
+};

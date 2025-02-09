@@ -8,7 +8,11 @@ export interface iEdge {
   fetched: boolean;
 }
 
-export enum DIRECTION { INCOMING = 'incoming', OUTGOING = 'outgoing', PARALLEL = 'parallel' }
+export enum DIRECTION {
+  INCOMING = "incoming",
+  OUTGOING = "outgoing",
+  PARALLEL = "parallel",
+}
 
 export class Edge implements iEdge {
   srcId: string;
@@ -17,14 +21,13 @@ export class Edge implements iEdge {
   label: string;
   fetched: boolean;
 
-
   constructor();
   constructor(edge: iEdge);
   constructor(edge?: iEdge) {
-    this.srcId = edge?.srcId || '';
-    this.tgtId = edge?.tgtId || '';
-    this.propertyId = edge?.propertyId || '';
-    this.label = edge?.label || '';
+    this.srcId = edge?.srcId || "";
+    this.tgtId = edge?.tgtId || "";
+    this.propertyId = edge?.propertyId || "";
+    this.label = edge?.label || "";
     this.fetched = edge?.fetched || false;
   }
 
@@ -51,10 +54,12 @@ export class Edge implements iEdge {
   }
 
   /**
- * @method hasExistingParallelEdgeInRelated() - checks the provided list of Edges (which is based either on the currently hovered or selected Vertex) for existing parallel Edges. An Edge is Parallel if two Edges contain matching sources, targets, and (a singular) propertyID.
- */
+   * @method hasExistingParallelEdgeInRelated() - checks the provided list of Edges (which is based either on the currently hovered or selected Vertex) for existing parallel Edges. An Edge is Parallel if two Edges contain matching sources, targets, and (a singular) propertyID.
+   */
   hasExistingParallelEdgeInRelated(relatedEdges: Edge[]) {
-    const matchinPropEdges = relatedEdges.filter(edge => edge.propertyId === this.propertyId);
+    const matchinPropEdges = relatedEdges.filter(
+      edge => edge.propertyId === this.propertyId
+    );
 
     for (const edge of matchinPropEdges) {
       if (edge.srcId === this.tgtId && edge.tgtId === this.srcId) return true;

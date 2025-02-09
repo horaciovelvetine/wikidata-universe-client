@@ -1,6 +1,6 @@
-import { P5Sketch } from '../../../../../types';
-import './mouse-settings.css'
-import { ChangeEvent, useState } from "react"
+import { P5Sketch } from "../../../../../types";
+import "./mouse-settings.css";
+import { ChangeEvent, useState } from "react";
 
 interface MouseSettingsProps {
   sketchRef: P5Sketch;
@@ -9,57 +9,69 @@ interface MouseSettingsProps {
 const ID = (sufx: string) => `mouse-settings-${sufx}`;
 
 export const MouseSettings = ({ sketchRef }: MouseSettingsProps) => {
-  const [xMouseSensRef, setXMouseSensRef] = useState(sketchRef.state.xMouseSens());
-  const [yMouseSensRef, setYMouseSensRef] = useState(sketchRef.state.yMouseSens());
-  const [zMouseSensRef, setZMouseSensRef] = useState(sketchRef.state.zMouseSens());
+  const [xMouseSensRef, setXMouseSensRef] = useState(
+    sketchRef.state.xMouseSens()
+  );
+  const [yMouseSensRef, setYMouseSensRef] = useState(
+    sketchRef.state.yMouseSens()
+  );
+  const [zMouseSensRef, setZMouseSensRef] = useState(
+    sketchRef.state.zMouseSens()
+  );
 
-  const handleMouseSensChange = (e: ChangeEvent<HTMLInputElement>, tgt: string) => {
+  const handleMouseSensChange = (
+    e: ChangeEvent<HTMLInputElement>,
+    tgt: string
+  ) => {
     const val = parseInt(e.target.value);
     switch (tgt) {
-      case 'X-Axis':
+      case "X-Axis":
         setXMouseSensRef(val);
         sketchRef.state.setXMouseSens(val);
         break;
-      case 'Y-Axis':
+      case "Y-Axis":
         setYMouseSensRef(val);
         sketchRef.state.setYMouseSens(val);
         break;
-      case 'Z-Axis':
+      case "Z-Axis":
         setZMouseSensRef(val);
         sketchRef.state.setZMouseSens(val);
         break;
       default:
-        console.error(`invalid update target ${tgt}`)
+        console.error(`invalid update target ${tgt}`);
         break;
     }
-  }
+  };
 
   return (
-    <fieldset id={ID('container')}>
+    <fieldset id={ID("container")}>
       <legend>
-        <h4 id={ID('title')}>mouse sensitivity</h4>
+        <h4 id={ID("title")}>mouse sensitivity</h4>
       </legend>
 
-      <ul id={ID('list')}>
+      <ul id={ID("list")}>
         <MouseSensitivityOption
-          lbl='X-Axis'
-          dsc='[horizontal]'
+          lbl="X-Axis"
+          dsc="[horizontal]"
           senstivityValue={xMouseSensRef}
-          updateHandler={handleMouseSensChange} />
+          updateHandler={handleMouseSensChange}
+        />
         <MouseSensitivityOption
-          lbl='Y-Axis'
-          dsc='[vertical]'
+          lbl="Y-Axis"
+          dsc="[vertical]"
           senstivityValue={yMouseSensRef}
-          updateHandler={handleMouseSensChange} />
+          updateHandler={handleMouseSensChange}
+        />
         <MouseSensitivityOption
-          lbl='Z-Axis'
-          dsc='[zoom]'
+          lbl="Z-Axis"
+          dsc="[zoom]"
           senstivityValue={zMouseSensRef}
-          updateHandler={handleMouseSensChange} />
+          updateHandler={handleMouseSensChange}
+        />
       </ul>
     </fieldset>
-  )
-}
+  );
+};
 
 interface MouseSensitivityOptionProps {
   lbl: string;
@@ -68,32 +80,44 @@ interface MouseSensitivityOptionProps {
   updateHandler: (e: ChangeEvent<HTMLInputElement>, tgt: string) => void;
 }
 
-const MouseSensitivityOption = ({ lbl, dsc, senstivityValue, updateHandler }: MouseSensitivityOptionProps) => {
+const MouseSensitivityOption = ({
+  lbl,
+  dsc,
+  senstivityValue,
+  updateHandler,
+}: MouseSensitivityOptionProps) => {
   return (
-    <li className={ID('input-option')} id={`${lbl}-mouse-sensitivity`}>
-      <label>{lbl} <span>{dsc}</span></label>
+    <li className={ID("input-option")} id={`${lbl}-mouse-sensitivity`}>
+      <label>
+        {lbl} <span>{dsc}</span>
+      </label>
       <MouseSensitivityInput {...{ senstivityValue, updateHandler, lbl }} />
     </li>
-  )
-}
+  );
+};
 
 interface MouseSensitivityInputProps {
   senstivityValue: number | undefined;
   updateHandler: (e: ChangeEvent<HTMLInputElement>, tgt: string) => void;
-  lbl: string
+  lbl: string;
 }
 
-const MouseSensitivityInput = ({ senstivityValue, updateHandler, lbl }: MouseSensitivityInputProps) => {
+const MouseSensitivityInput = ({
+  senstivityValue,
+  updateHandler,
+  lbl,
+}: MouseSensitivityInputProps) => {
   return (
     <>
       <input
-        className='mouse-sens-input'
-        type='number'
+        className="mouse-sens-input"
+        type="number"
         min={1}
         max={10}
         step={1}
         value={senstivityValue}
-        onChange={(e) => updateHandler(e, lbl)}
+        onChange={e => updateHandler(e, lbl)}
       />
-    </>)
-}
+    </>
+  );
+};

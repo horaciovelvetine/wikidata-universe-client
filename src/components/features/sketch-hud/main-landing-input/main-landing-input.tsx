@@ -1,18 +1,35 @@
-import './main-landing-input.css'
-import { createRef, Dispatch, FormEvent, SetStateAction, useEffect } from "react"
+import "./main-landing-input.css";
+import {
+  createRef,
+  Dispatch,
+  FormEvent,
+  SetStateAction,
+  useEffect,
+} from "react";
 
-import { Search, SearchDngr } from '../../../../assets/icons';
-import { errorToggleIconVisibility, errorShakeMainLandingButton, errorShakeMainLandingInput, hideMainLandingInput, showHideMainLandingInput } from '../..';
-import { WikiverseServiceResponse, useWikiverseService } from '../../../../contexts';
+import { Search, SearchDngr } from "../../../../assets/icons";
+import {
+  errorToggleIconVisibility,
+  errorShakeMainLandingButton,
+  errorShakeMainLandingInput,
+  hideMainLandingInput,
+  showHideMainLandingInput,
+} from "../..";
+import {
+  WikiverseServiceResponse,
+  useWikiverseService,
+} from "../../../../contexts";
 
 const ID = (sufx: string) => `main-landing-${sufx}`;
-const WIKIDATA_HOMEPAGE = 'https://www.wikidata.org/wiki/Wikidata:Main_Page';
+const WIKIDATA_HOMEPAGE = "https://www.wikidata.org/wiki/Wikidata:Main_Page";
 
 interface MainLandingInputProps {
   setInitSketchData: Dispatch<SetStateAction<WikiverseServiceResponse | null>>;
 }
 
-export const MainLandingInput = ({ setInitSketchData }: MainLandingInputProps) => {
+export const MainLandingInput = ({
+  setInitSketchData,
+}: MainLandingInputProps) => {
   const { isOnline, getQueryData } = useWikiverseService();
 
   //==> Elements
@@ -24,11 +41,12 @@ export const MainLandingInput = ({ setInitSketchData }: MainLandingInputProps) =
 
   const handleSearchSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    const container = containerRef.current
+    const container = containerRef.current;
     if (!container) return;
     if (!inputRef.current) return;
-    const curInp = inputRef.current
-    if (curInp.value === '') { // no query value provided error shake...
+    const curInp = inputRef.current;
+    if (curInp.value === "") {
+      // no query value provided error shake...
       errorToggleIconVisibility(iconRef, dngrIconRef);
       errorShakeMainLandingButton(buttonRef);
       errorShakeMainLandingInput(inputRef);
@@ -39,27 +57,42 @@ export const MainLandingInput = ({ setInitSketchData }: MainLandingInputProps) =
       .then(res => {
         setInitSketchData(res);
         hideMainLandingInput(container);
-      }).catch(() => { // the new stuff was no good...
+      })
+      .catch(() => {
+        // the new stuff was no good...
         errorToggleIconVisibility(iconRef, dngrIconRef);
         errorShakeMainLandingButton(buttonRef);
         errorShakeMainLandingInput(inputRef);
-      })
-  }
+      });
+  };
 
-  useEffect(() => { // hide if API Service is offline...
+  useEffect(() => {
+    // hide if API Service is offline...
     showHideMainLandingInput(containerRef, isOnline);
-  }, [isOnline, containerRef])
+  }, [isOnline, containerRef]);
 
   return (
-    <div id={ID('container')} ref={containerRef}>
-      <h1 id={ID('title')}>Explore <a id={ID('wikidata-link')} href={WIKIDATA_HOMEPAGE} target='_blank'>Wikipedia</a> in 3D</h1>
-      <form id={ID('form')} onSubmit={handleSearchSubmit}>
-        <input id={ID('input')} type="text" placeholder="Search..." autoFocus={true} ref={inputRef} />
-        <button id={ID('search-submit')} type='submit' ref={buttonRef}>
-          <img id={ID('search-icon-dngr')} src={SearchDngr} ref={dngrIconRef} />
-          <img id={ID('search-icon')} src={Search} ref={iconRef} />
+    <div id={ID("container")} ref={containerRef}>
+      <h1 id={ID("title")}>
+        Explore{" "}
+        <a id={ID("wikidata-link")} href={WIKIDATA_HOMEPAGE} target="_blank">
+          Wikipedia
+        </a>{" "}
+        in 3D
+      </h1>
+      <form id={ID("form")} onSubmit={handleSearchSubmit}>
+        <input
+          id={ID("input")}
+          type="text"
+          placeholder="Search..."
+          autoFocus={true}
+          ref={inputRef}
+        />
+        <button id={ID("search-submit")} type="submit" ref={buttonRef}>
+          <img id={ID("search-icon-dngr")} src={SearchDngr} ref={dngrIconRef} />
+          <img id={ID("search-icon")} src={Search} ref={iconRef} />
         </button>
       </form>
     </div>
-  )
-}
+  );
+};

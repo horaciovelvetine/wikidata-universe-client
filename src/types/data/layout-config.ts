@@ -9,7 +9,7 @@ export class LayoutConfig implements iLayoutConfig {
   attractionMult: number;
   repulsionMult: number;
 
-  constructor()
+  constructor();
   constructor(defaultConfig?: iLayoutConfig) {
     if (defaultConfig) {
       this.dataDensity = defaultConfig.dataDensity;

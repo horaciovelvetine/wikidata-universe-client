@@ -3,7 +3,7 @@ import { Camera, Vector } from "p5";
 import { Point3D } from "..";
 
 export class ManagedCamera {
-  private p5: P5CanvasInstance
+  private p5: P5CanvasInstance;
   private cam: Camera | null = null;
 
   private lookAtTgt: Point3D | null = null; // new lookAt target for the Camera
@@ -71,7 +71,7 @@ export class ManagedCamera {
     const LAZ = this.cam!.centerZ;
 
     const { x, y, z } = this.newPosChangeVec();
-    this.cam!.setPosition(x, y, z)
+    this.cam!.setPosition(x, y, z);
 
     this.cam!.lookAt(LAX, LAY, LAZ);
 
@@ -91,19 +91,19 @@ export class ManagedCamera {
     this.curLookAtKeyFrm = 0;
   }
 
-
   /**
    * @method setPositionTgt - Sets the new position target point for the camera to ultimately move to
    */
   setPositionTgt(point: Point3D): void {
     if (!this.cam) return;
-    const sX = this.cam.eyeX
-    const sY = this.cam.eyeY
-    const sZ = this.cam.eyeZ
+    const sX = this.cam.eyeX;
+    const sY = this.cam.eyeY;
+    const sZ = this.cam.eyeZ;
     const curPnt = new Point3D({ x: sX, y: sY, z: sZ });
 
     //skip if already located here
-    if (curPnt.x === point.x && curPnt.y === point.y && curPnt.z === point.z) return;
+    if (curPnt.x === point.x && curPnt.y === point.y && curPnt.z === point.z)
+      return;
 
     this.positionStart = curPnt;
     this.positionTgt = point;
@@ -136,11 +136,11 @@ export class ManagedCamera {
    * @returns an interpolated lookAt target value Vector.
    */
   private lookAtChangeVec(): Vector {
-    const mult = this.curLookAtKeyFrm * 1.0001 / this.lookAtDuration; // mult prevents rnd bad calcs for whole ints
+    const mult = (this.curLookAtKeyFrm * 1.0001) / this.lookAtDuration; // mult prevents rnd bad calcs for whole ints
     return this.p5.createVector(
       this.p5.lerp(this.cam!.centerX, this.lookAtTgt!.x, mult),
       this.p5.lerp(this.cam!.centerY, this.lookAtTgt!.y, mult),
-      this.p5.lerp(this.cam!.centerZ, this.lookAtTgt!.z, mult),
+      this.p5.lerp(this.cam!.centerZ, this.lookAtTgt!.z, mult)
     );
   }
 
@@ -149,11 +149,11 @@ export class ManagedCamera {
    * @returns an interpolated new position value Vector.
    */
   private newPosChangeVec(): Vector {
-    const mult = this.curPosKeyFrm * 1.0001 / this.curPosDuration;
+    const mult = (this.curPosKeyFrm * 1.0001) / this.curPosDuration;
     return this.p5.createVector(
       this.p5.lerp(this.positionStart!.x, this.positionTgt!.x, mult),
       this.p5.lerp(this.positionStart!.y, this.positionTgt!.y, mult),
-      this.p5.lerp(this.positionStart!.z, this.positionTgt!.z, mult),
+      this.p5.lerp(this.positionStart!.z, this.positionTgt!.z, mult)
     );
   }
 }

@@ -1,36 +1,38 @@
-import './background-sketch-container.css';
+import "./background-sketch-container.css";
 import { createRef, useEffect } from "react";
 import { Particle } from "../../../types";
 import { ReactP5Wrapper, Sketch } from "@p5-wrapper/react";
 import { getMainDispDimensions } from "../../../utils/get-main-disp-dimensions";
-import { WikiverseServiceResponse } from '../../../contexts';
+import { WikiverseServiceResponse } from "../../../contexts";
 
 interface BackgroundSketchContainerProps {
   initSketchData: WikiverseServiceResponse | null;
 }
 
-export const BackgroundSketchContainer = ({ initSketchData }: BackgroundSketchContainerProps) => {
+export const BackgroundSketchContainer = ({
+  initSketchData,
+}: BackgroundSketchContainerProps) => {
   const containerRef = createRef<HTMLDivElement>();
-  const particles: Particle[] = []
+  const particles: Particle[] = [];
 
   useEffect(() => {
-    const container = containerRef.current
+    const container = containerRef.current;
     if (!container) return;
 
     if (initSketchData) {
-      container.style.opacity = '0';
+      container.style.opacity = "0";
       setTimeout(() => {
-        container.style.display = 'none';
-      }, 235)
+        container.style.display = "none";
+      }, 235);
     } else {
-      container.style.display = 'block';
+      container.style.display = "block";
       setTimeout(() => {
-        container.style.opacity = '100';
-      }, 1)
+        container.style.opacity = "100";
+      }, 1);
     }
-  }, [initSketchData, containerRef])
+  }, [initSketchData, containerRef]);
 
-  const sketch: Sketch = (p5) => {
+  const sketch: Sketch = p5 => {
     p5.setup = () => {
       const dimensions = getMainDispDimensions();
 
@@ -40,26 +42,26 @@ export const BackgroundSketchContainer = ({ initSketchData }: BackgroundSketchCo
         const particle = new Particle(p5, dimensions);
         particles.push(particle);
       }
-    }
+    };
 
     p5.draw = () => {
-      p5.background('#01010e');
+      p5.background("#01010e");
       for (let i = 0; i < particles.length; i++) {
         particles[i].draw();
         particles[i].move();
-        particles[i].joinNearby(particles.slice(i))
+        particles[i].joinNearby(particles.slice(i));
       }
-    }
+    };
 
     p5.windowResized = () => {
       const dimensions = getMainDispDimensions();
       p5.resizeCanvas(dimensions.width, dimensions.height);
-    }
-  }
-
+    };
+  };
 
   return (
-    <div id='background-sketch-container' ref={containerRef} >
+    <div id="background-sketch-container" ref={containerRef}>
       <ReactP5Wrapper sketch={sketch} />
-    </div>)
-}
+    </div>
+  );
+};

@@ -1,35 +1,37 @@
-import './settings-open-indicator.css'
+import "./settings-open-indicator.css";
 import { createRef, useEffect, useState } from "react";
-import { showHideSettingsOpenIndicator } from '..';
-import { P5Sketch } from '../../../../types';
-import { useDeviceCompatabilityCheck } from '../../../../contexts';
+import { showHideSettingsOpenIndicator } from "..";
+import { P5Sketch } from "../../../../types";
+import { useDeviceCompatabilityCheck } from "../../../../contexts";
 
-const ID = (sufx: string) => `settings-status-${sufx}`
+const ID = (sufx: string) => `settings-status-${sufx}`;
 
 interface SettingsOpenIndicatorProps {
-  sketchRef: P5Sketch
+  sketchRef: P5Sketch;
 }
 
-export const SettingsOpenIndicator = ({ sketchRef }: SettingsOpenIndicatorProps) => {
+export const SettingsOpenIndicator = ({
+  sketchRef,
+}: SettingsOpenIndicatorProps) => {
   const { meetsMinScreenSizeReq } = useDeviceCompatabilityCheck();
   const [isShowing, setIsShowing] = useState(false);
   const containerRef = createRef<HTMLDivElement>();
 
   useEffect(() => {
     sketchRef.state.addshowSketchsettingsSubscriber(setIsShowing);
-  })
+  });
 
   useEffect(() => {
     if (meetsMinScreenSizeReq) {
-      showHideSettingsOpenIndicator(containerRef, isShowing)
+      showHideSettingsOpenIndicator(containerRef, isShowing);
     } else {
-      showHideSettingsOpenIndicator(containerRef, meetsMinScreenSizeReq)
+      showHideSettingsOpenIndicator(containerRef, meetsMinScreenSizeReq);
     }
-  }, [isShowing, meetsMinScreenSizeReq, containerRef])
+  }, [isShowing, meetsMinScreenSizeReq, containerRef]);
 
   return (
-    <div id={ID('container')} ref={containerRef}>
-      <div id={ID('title')}>
+    <div id={ID("container")} ref={containerRef}>
+      <div id={ID("title")}>
         <span>s</span>
         <span>e</span>
         <span>t</span>
@@ -40,5 +42,5 @@ export const SettingsOpenIndicator = ({ sketchRef }: SettingsOpenIndicatorProps)
         <span>s</span>
       </div>
     </div>
-  )
-}
+  );
+};

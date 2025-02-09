@@ -1,7 +1,6 @@
 import { P5Sketch, SketchProps } from "./p5-sketch";
 
 export class TutorialSketch extends P5Sketch {
-
   private curSlide = 1;
 
   constructor(props: SketchProps) {

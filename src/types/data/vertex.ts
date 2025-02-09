@@ -29,9 +29,16 @@ export class Vertex implements iVertex {
   prevCoords: Point3D | null = null;
   coordTransitionKeyFrm = 1;
 
-
   constructor();
-  constructor(id: string, label: string, description: string, fetched: boolean, origin: boolean, locked: boolean, coords: iPoint3D);
+  constructor(
+    id: string,
+    label: string,
+    description: string,
+    fetched: boolean,
+    origin: boolean,
+    locked: boolean,
+    coords: iPoint3D
+  );
   constructor(vertex: iVertex);
   constructor(
     idOrVertex?: string | iVertex,
@@ -58,7 +65,6 @@ export class Vertex implements iVertex {
       this.origin = idOrVertex.origin;
       this.locked = idOrVertex.locked;
       this.coords = new Point3D(idOrVertex.coords);
-
     } else {
       this.id = "";
       this.label = "";
@@ -73,9 +79,8 @@ export class Vertex implements iVertex {
   mergeResponseData(vert: iVertex) {
     this.label = vert.label;
     this.coords = new Point3D(vert.coords);
-    this.description = vert.description
+    this.description = vert.description;
     this.fetched = true;
-
   }
 
   /**
@@ -83,13 +88,14 @@ export class Vertex implements iVertex {
    * @see URL is a guess, Wikidata Entities do not always have article representations.
    */
   url() {
-    const wdBaseURL = 'https://www.wikidata.org/wiki/';
+    const wdBaseURL = "https://www.wikidata.org/wiki/";
     if (this.id != null) {
-      return /^P/.test(this.id) ?
-        wdBaseURL + `Property:${this.id}` : wdBaseURL + this.id;
+      return /^P/.test(this.id)
+        ? wdBaseURL + `Property:${this.id}`
+        : wdBaseURL + this.id;
     } // falls back to a guess at the default en-wiki url...
-    const enWikiBaseURL = 'https://en.wikipedia.org/wiki/';
-    return enWikiBaseURL + this.label?.replace(" ", "_")
+    const enWikiBaseURL = "https://en.wikipedia.org/wiki/";
+    return enWikiBaseURL + this.label?.replace(" ", "_");
   }
 
   /**
@@ -97,7 +103,8 @@ export class Vertex implements iVertex {
    */
   draw(p5: P5CanvasInstance, isSelected: boolean) {
     p5.push();
-    if (this.prevCoords) { // vertices is currently in motion to a new position
+    if (this.prevCoords) {
+      // vertices is currently in motion to a new position
       const drawCoords = this.calcCoordUpdateVectorPosition(p5);
       p5.translate(drawCoords.x, drawCoords.y, drawCoords.z);
       this.coordTransitionKeyFrm += 1;
@@ -105,8 +112,9 @@ export class Vertex implements iVertex {
         this.coordTransitionKeyFrm = 1;
         this.prevCoords = null;
       }
-    } else { // vertex is stationary
-      p5.translate(this.coords.x, this.coords.y, this.coords.z)
+    } else {
+      // vertex is stationary
+      p5.translate(this.coords.x, this.coords.y, this.coords.z);
     }
 
     p5.strokeWeight(1.2);
@@ -122,10 +130,9 @@ export class Vertex implements iVertex {
   }
 
   /**
- * @method drawLabel() - draws a label hovering facing the (in-sketch) up direction towards the camera
- */
+   * @method drawLabel() - draws a label hovering facing the (in-sketch) up direction towards the camera
+   */
   drawLabel(p5: P5CanvasInstance, cam: Camera, font: Font) {
-
     if (this.fetched) {
       const { x, y, z } = this.coords;
       const labelStr = `${this.label}`;
@@ -134,32 +141,33 @@ export class Vertex implements iVertex {
       p5.translate(x, y, z);
       this.applyLabelPositionTransforms(p5, cam);
       this.applyLabelTextSetup(p5, font);
-      p5.text(labelStr, 0, 0)
+      p5.text(labelStr, 0, 0);
       p5.pop();
     }
   }
 
   /**
- * @method calcCoordUpdateVectorPosition() - provide a coordinate position to move the vertex to if it is currently moving positions
- */
+   * @method calcCoordUpdateVectorPosition() - provide a coordinate position to move the vertex to if it is currently moving positions
+   */
   calcCoordUpdateVectorPosition(p5: P5CanvasInstance): Vector {
-    const mult = this.coordTransitionKeyFrm * 1.0001 / COORD_TRANSITION_DURATION;
+    const mult =
+      (this.coordTransitionKeyFrm * 1.0001) / COORD_TRANSITION_DURATION;
     return p5.createVector(
       p5.lerp(this.prevCoords!.x, this.coords.x, mult),
       p5.lerp(this.prevCoords!.y, this.coords.y, mult),
-      p5.lerp(this.prevCoords!.z, this.coords.z, mult),
-    )
+      p5.lerp(this.prevCoords!.z, this.coords.z, mult)
+    );
   }
 
   /**
- * 
- * @method applyLabelPositionTransforms() - The way that text & p5.js intertact when using WEBGL
- * leaves a bit to be desired. The applied translations face a Vertices label to the camera legibly.
- * Thank you to @camelCaseSensitive on {github} & @morejpeg on {youtube}
- * Excellent tutorial for this approach ==> (https://www.youtube.com/watch?v=kJMx0F7e9QU)
- * 
- * @apiNote - these translations are called deliberately in order, accumulating these in singular calls breaks the positioning.
- */
+   *
+   * @method applyLabelPositionTransforms() - The way that text & p5.js intertact when using WEBGL
+   * leaves a bit to be desired. The applied translations face a Vertices label to the camera legibly.
+   * Thank you to @camelCaseSensitive on {github} & @morejpeg on {youtube}
+   * Excellent tutorial for this approach ==> (https://www.youtube.com/watch?v=kJMx0F7e9QU)
+   *
+   * @apiNote - these translations are called deliberately in order, accumulating these in singular calls breaks the positioning.
+   */
   private applyLabelPositionTransforms(p5: P5CanvasInstance, cam: Camera) {
     const { pan, tilt } = this.calcCamerasAngles(p5, cam);
 
@@ -173,10 +181,10 @@ export class Vertex implements iVertex {
    */
   private applyLabelTextSetup(p5: P5CanvasInstance, font: Font) {
     p5.textSize(8);
-    p5.fill('rgb(245, 245, 245)');
+    p5.fill("rgb(245, 245, 245)");
     p5.textFont(font);
     p5.textAlign(p5.CENTER, p5.CENTER);
-    p5.translate(0, (this.radius * -1.25), 0); // position over vertex
+    p5.translate(0, this.radius * -1.25, 0); // position over vertex
   }
 
   /**
@@ -184,45 +192,47 @@ export class Vertex implements iVertex {
    * @returns - an object containing the pan & tilt {number} values.
    */
   private calcCamerasAngles(p5: P5CanvasInstance, cam: Camera) {
-    const { ex, ey, ez } = { ...{ ex: cam.eyeX, ey: cam.eyeY, ez: cam.eyeZ } }
-    const { fx, fy, fz } = { ... { fx: cam.centerX, fy: cam.centerY, fz: cam.centerZ } }
+    const { ex, ey, ez } = { ...{ ex: cam.eyeX, ey: cam.eyeY, ez: cam.eyeZ } };
+    const { fx, fy, fz } = {
+      ...{ fx: cam.centerX, fy: cam.centerY, fz: cam.centerZ },
+    };
 
-    const pan = p5.atan2(ez - fz, ex - fx)
-    const tilt = p5.atan2(ey - fy, p5.dist(ex, ez, fx, fz))
-    return { pan, tilt }
+    const pan = p5.atan2(ez - fz, ex - fx);
+    const tilt = p5.atan2(ey - fy, p5.dist(ex, ez, fx, fz));
+    return { pan, tilt };
   }
 
   /**
- * Traces a ray from the camera through the mouse position on the canvas and checks if it intersects with a given vertex.
- * 
- * @param p5 - The p5.js canvas instance.
- * @param cam - The camera object from p5.js.
- * @returns An array containing the intersection point [x, y, z] if the ray intersects with the vertex, otherwise false.
- * 
- * @apiNote - This function uses the projection and model-view matrices from the p5.js renderer to transform the mouse 
- * coordinates into world coordinates and then checks if the ray intersects with the given vertex, sometimes the matrices 
- * are empty which throws an error - this is only for a single frame as the Sketch mounts and can be ignored. 
- * 
- * @example
- * ```typescript
- * const intersection = traceRay(p5Instance, camera, vertex);
- * return intersection ? [x, y, z] : false;
- * ```
- * 
- * Credit to @camelCaseSensitive on {github} & @morejpeg on {youtube}
- * For the original code, npm package, and tutorial on so many things p5.js
- * Adapted slightly for React/TS and use outside of a p5.js sketch instance
- * @see {@link https://github.com/camelCaseSensitive/p5-raycast/blob/main/p5-raycast.js} for the original implementation.
- */
+   * Traces a ray from the camera through the mouse position on the canvas and checks if it intersects with a given vertex.
+   *
+   * @param p5 - The p5.js canvas instance.
+   * @param cam - The camera object from p5.js.
+   * @returns An array containing the intersection point [x, y, z] if the ray intersects with the vertex, otherwise false.
+   *
+   * @apiNote - This function uses the projection and model-view matrices from the p5.js renderer to transform the mouse
+   * coordinates into world coordinates and then checks if the ray intersects with the given vertex, sometimes the matrices
+   * are empty which throws an error - this is only for a single frame as the Sketch mounts and can be ignored.
+   *
+   * @example
+   * ```typescript
+   * const intersection = traceRay(p5Instance, camera, vertex);
+   * return intersection ? [x, y, z] : false;
+   * ```
+   *
+   * Credit to @camelCaseSensitive on {github} & @morejpeg on {youtube}
+   * For the original code, npm package, and tutorial on so many things p5.js
+   * Adapted slightly for React/TS and use outside of a p5.js sketch instance
+   * @see {@link https://github.com/camelCaseSensitive/p5-raycast/blob/main/p5-raycast.js} for the original implementation.
+   */
   traceRay(p5: P5CanvasInstance, cam: Camera) {
     if (!this.fetched) return false; // dissalow collision for unfetched vertices...
 
-    const ndcX = (p5.mouseX - p5.width / 2) / p5.width * 2;
-    const ndcY = (p5.mouseY - p5.height / 2) / p5.height * 2;
+    const ndcX = ((p5.mouseX - p5.width / 2) / p5.width) * 2;
+    const ndcY = ((p5.mouseY - p5.height / 2) / p5.height) * 2;
     const ndcVect = [ndcX, -ndcY, 1, 1];
 
     // Dig into the p5.js instance to get the projection matrix && copy it to a new mat4
-    // not a value intended to be accessed in/by p5.js API - a needed workaround here. 
+    // not a value intended to be accessed in/by p5.js API - a needed workaround here.
     const camRenderer = cam as any;
     const p5ProjMat = camRenderer._renderer.uPMatrix.mat4;
 
@@ -230,7 +240,7 @@ export class Vertex implements iVertex {
       [p5ProjMat[0], p5ProjMat[1], p5ProjMat[2], p5ProjMat[3]],
       [p5ProjMat[4], p5ProjMat[5], p5ProjMat[6], p5ProjMat[7]],
       [p5ProjMat[8], p5ProjMat[9], p5ProjMat[10], p5ProjMat[11]],
-      [p5ProjMat[12], p5ProjMat[13], p5ProjMat[14], p5ProjMat[15]]
+      [p5ProjMat[12], p5ProjMat[13], p5ProjMat[14], p5ProjMat[15]],
     ];
     const camVec = multiply(ndcVect, inv(projMat));
 
@@ -240,16 +250,24 @@ export class Vertex implements iVertex {
       [p5ModMat[0], p5ModMat[1], p5ModMat[2], p5ModMat[3]],
       [p5ModMat[4], p5ModMat[5], p5ModMat[6], p5ModMat[7]],
       [p5ModMat[8], p5ModMat[9], p5ModMat[10], p5ModMat[11]],
-      [p5ModMat[12], p5ModMat[13], p5ModMat[14], p5ModMat[15]]
+      [p5ModMat[12], p5ModMat[13], p5ModMat[14], p5ModMat[15]],
     ];
 
     const worldMat = multiply(camVec, inv(modMat));
     const perspDiv = camVec[3];
-    const worldVec = [worldMat[0] / perspDiv, worldMat[1] / perspDiv, worldMat[2] / perspDiv];
-    const { x, y, z } = { ...this.coords }
+    const worldVec = [
+      worldMat[0] / perspDiv,
+      worldMat[1] / perspDiv,
+      worldMat[2] / perspDiv,
+    ];
+    const { x, y, z } = { ...this.coords };
     const rayLength = p5.dist(cam.eyeX, cam.eyeY, cam.eyeZ, x, y, z);
-    const phi = p5.atan2(worldVec[1] - cam.eyeY, p5.dist(worldVec[0], worldVec[2], cam.eyeX, cam.eyeZ));
-    const theta = -p5.atan2(worldVec[0] - cam.eyeX, worldVec[2] - cam.eyeZ) + p5.PI / 2;
+    const phi = p5.atan2(
+      worldVec[1] - cam.eyeY,
+      p5.dist(worldVec[0], worldVec[2], cam.eyeX, cam.eyeZ)
+    );
+    const theta =
+      -p5.atan2(worldVec[0] - cam.eyeX, worldVec[2] - cam.eyeZ) + p5.PI / 2;
     const xVec = cam.eyeX + rayLength * p5.cos(phi) * p5.cos(theta);
     const yVec = cam.eyeY + rayLength * p5.sin(phi);
     const zVec = cam.eyeZ + rayLength * p5.cos(phi) * p5.sin(theta);
@@ -259,5 +277,4 @@ export class Vertex implements iVertex {
     }
     return false;
   }
-
 }
