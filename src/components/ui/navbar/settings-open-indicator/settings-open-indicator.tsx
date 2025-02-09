@@ -1,16 +1,16 @@
 import './settings-open-indicator.css'
-import { createRef, FC, useEffect, useState } from "react";
+import { createRef, useEffect, useState } from "react";
 import { showHideSettingsOpenIndicator } from '..';
-import { WikiverseSketch } from "../../../../types";
-import { useDeviceCompatabilityCheck } from '../../../../app';
+import { P5Sketch } from '../../../../types';
+import { useDeviceCompatabilityCheck } from '../../../../contexts';
 
 const ID = (sufx: string) => `settings-status-${sufx}`
 
 interface SettingsOpenIndicatorProps {
-  sketchRef: WikiverseSketch
+  sketchRef: P5Sketch
 }
 
-export const SettingsOpenIndicator: FC<SettingsOpenIndicatorProps> = ({ sketchRef }) => {
+export const SettingsOpenIndicator = ({ sketchRef }: SettingsOpenIndicatorProps) => {
   const { meetsMinScreenSizeReq } = useDeviceCompatabilityCheck();
   const [isShowing, setIsShowing] = useState(false);
   const containerRef = createRef<HTMLDivElement>();

@@ -1,10 +1,10 @@
-import { FC } from "react";
-import { SketchContainerProps } from "..";
 import { ReactP5Wrapper, Sketch } from "@p5-wrapper/react";
-import { useWikiverseService } from "../../../../app";
-import { TutorialSketch } from "../../../../types";
 
-export const SketchTutorial: FC<SketchContainerProps> = ({ initSketchData, setSketchRef }) => {
+import { SketchContainerProps } from "..";
+import { TutorialSketch } from "../../../../types";
+import { useWikiverseService } from "../../../../contexts";
+
+export const SketchTutorial = ({ initSketchData, setSketchRef }: SketchContainerProps) => {
   const { getTutorial } = useWikiverseService();
 
   const sketch: Sketch = p5 => {

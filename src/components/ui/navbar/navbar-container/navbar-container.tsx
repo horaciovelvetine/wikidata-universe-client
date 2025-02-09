@@ -1,18 +1,18 @@
 import './navbar-container.css'
-import { createRef, Dispatch, FC, SetStateAction, useEffect, useState } from "react"
+import { createRef, Dispatch, SetStateAction, useEffect, useState } from "react"
 
 import { ReSearchInput, SettingsOpenIndicator, SketchDetailsSummary, transitionHeaderTitleText } from '..';
-import { WikiverseSketch } from '../../../../types';
-import { useDeviceCompatabilityCheck, WikiverseServiceResponse } from '../../../../app';
+import { P5Sketch } from '../../../../types';
+import { useDeviceCompatabilityCheck, WikiverseServiceResponse } from '../../../../contexts';
 
 interface NavbarContainerProps {
-  sketchRef: WikiverseSketch | null;
+  sketchRef: P5Sketch | null;
   setInitSketchData: Dispatch<SetStateAction<WikiverseServiceResponse | null>>;
 }
 
 const ID = (sufx: string) => `navbar-${sufx}`
 
-export const NavbarContainer: FC<NavbarContainerProps> = ({ sketchRef, setInitSketchData }) => {
+export const NavbarContainer = ({ sketchRef, setInitSketchData }: NavbarContainerProps) => {
   const { meetsMinScreenSizeReq } = useDeviceCompatabilityCheck();
   const TitleRef = createRef<HTMLHeadingElement>();
   const ExploreRef = createRef<HTMLHeadingElement>();
@@ -31,9 +31,9 @@ export const NavbarContainer: FC<NavbarContainerProps> = ({ sketchRef, setInitSk
           <h1 id={ID('title-text')} ref={TitleRef}>{title}</h1>
           <h1 id={ID('explore-text')} ref={ExploreRef}>explore</h1>
         </header>
-          {sketchRef && <ReSearchInput {...{ sketchRef, setInitSketchData }} />}
-          {sketchRef && <SketchDetailsSummary {...{ sketchRef }} />}
-          {sketchRef && <SettingsOpenIndicator {...{ sketchRef }} />}
+        {sketchRef && <ReSearchInput {...{ sketchRef, setInitSketchData }} />}
+        {sketchRef && <SketchDetailsSummary {...{ sketchRef }} />}
+        {sketchRef && <SettingsOpenIndicator {...{ sketchRef }} />}
       </div>
     </nav>)
 }

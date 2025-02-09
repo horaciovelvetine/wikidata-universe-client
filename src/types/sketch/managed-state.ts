@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
 import { Graphset, LayoutConfig, Vertex } from "..";
-import { WikiverseServiceResponse } from "../../app";
+import { WikiverseServiceResponse } from "../../contexts";
+
 
 /**
  * Used to synchronize the external update for React's state for on-screen elements which need details emitted from the Sketch itself, and also control elements of the sketch at the same time

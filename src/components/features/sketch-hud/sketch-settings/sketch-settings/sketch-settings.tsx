@@ -1,19 +1,19 @@
 import './sketch-settings.css'
-import { createRef, FC, useEffect, useState } from 'react'
+import { createRef, useEffect, useState } from 'react'
 
 import { Settings } from '../../../../../assets/icons'
 import { showHideSettingsMenu } from '../../../animations/show-hide-settings-menu'
 import { BehaviorSettings, LayoutSettings, MouseSettings, OnScreenSettings } from '..'
-import { WikiverseSketch } from '../../../../../types'
+import { P5Sketch } from '../../../../../types'
 import { UnfocusClickToCloseWrapper } from '../hooks/use-unfocus-click-to-close-wrapper';
 
 interface SketchSettingsProps {
-  sketchRef: WikiverseSketch;
+  sketchRef: P5Sketch;
 }
 
 const ID = (sufx: string) => `sketch-settings-${sufx}`
 
-export const SketchSettings: FC<SketchSettingsProps> = ({ sketchRef }) => {
+export const SketchSettings = ({ sketchRef }: SketchSettingsProps) => {
   const [showSettingsMenu, setShowSettingsMenu] = useState(sketchRef.state.showSketchSettings());
 
   const menuDisplayRef = createRef<HTMLDivElement>();

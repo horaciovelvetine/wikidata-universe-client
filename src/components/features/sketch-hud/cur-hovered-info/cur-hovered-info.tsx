@@ -1,18 +1,19 @@
+import { createRef, useState, useEffect } from "react";
+
 import { Vertex as VertIcon } from '../../../../assets/icons';
-import { Vertex, WikiverseSketch } from '../../../../types';
+import { Vertex, P5Sketch } from '../../../../types';
 import { abridgeString } from '../../../../utils/abridge-string';
 import { getMainDispDimensions } from '../../../../utils/get-main-disp-dimensions';
 import { showHideCurHovered } from '../../animations/show-hide-cur-hovered';
 import './cur-hovered-info.css'
-import { createRef, FC, useState, useEffect } from "react";
 
 const ID = (sufx: string) => `cur-hovered-info-${sufx}`
 
 interface CurHoveredInfoProps {
-  sketchRef: WikiverseSketch;
+  sketchRef: P5Sketch;
 }
 
-export const CurHoveredInfo: FC<CurHoveredInfoProps> = ({ sketchRef }) => {
+export const CurHoveredInfo = ({ sketchRef }: CurHoveredInfoProps) => {
   const [curHoveredRef, setCurHoveredRef] = useState<Vertex | null>(null);
 
   const containerRef = createRef<HTMLDivElement>();

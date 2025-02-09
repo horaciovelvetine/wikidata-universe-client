@@ -1,23 +1,20 @@
 import './related-edge-item.css'
 import { Vertex as NoVertSel, VertexSel } from '../../../../../assets/icons';
-import { FC } from "react";
 
-import { Edge, Vertex, WikiverseSketch } from '../../../../../types';
+import { Edge, Vertex, P5Sketch } from '../../../../../types';
 import { getEdgeDirectionIcon } from '../../../../../utils/get-edge-direction-icon';
-import { useConstants } from '../../../../../app';
-
+import { _bl } from '../../../../../app';
 
 interface RelatedEdgeItemProps {
   edge: Edge;
-  sketchRef: WikiverseSketch
+  sketchRef: P5Sketch
   curSelectedRef: Vertex;
   relEdges: Edge[]
 }
 
 const ID = (sufx: string) => `edge-item-${sufx}`
 
-export const RelatedEdgeItem: FC<RelatedEdgeItemProps> = ({ edge, sketchRef, curSelectedRef, relEdges }) => {
-  const { _bl } = useConstants()
+export const RelatedEdgeItem = ({ edge, sketchRef, curSelectedRef, relEdges }: RelatedEdgeItemProps) => {
   const alt = sketchRef.graphset.getAltVertex(edge, curSelectedRef)
   const prop = sketchRef.graphset.getProperty(edge.propertyId)
   const { dir, icon } = getEdgeDirectionIcon(curSelectedRef, edge, relEdges)

@@ -1,8 +1,8 @@
 import './tutorial-message-display.css'
-import { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { P5Sketch, TutorialSketch } from '../../../../types';
 import { ArrowLeft, ArrowRight, Close } from '../../../../assets/icons';
-import { useWikiverseService } from '../../../../app';
+import { useWikiverseService } from '../../../../contexts';
 
 interface TutorialMessageDisplayProps {
   sketchRef: P5Sketch; //==> Extended type of TutorialSketch

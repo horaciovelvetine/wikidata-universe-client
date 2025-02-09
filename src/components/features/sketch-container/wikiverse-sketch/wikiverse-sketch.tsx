@@ -1,11 +1,11 @@
-import { FC } from "react";
-import { SketchContainerProps } from "../";
 import { ReactP5Wrapper, Sketch } from "@p5-wrapper/react";
+
+import { SketchContainerProps } from "../";
 import { P5Sketch } from "../../../../types";
-import { useWikiverseService } from "../../../../app";
+import { useWikiverseService } from "../../../../contexts";
 
 
-export const WikiverseSketch: FC<SketchContainerProps> = ({ initSketchData, setSketchRef }) => {
+export const WikiverseSketch = ({ initSketchData, setSketchRef }: SketchContainerProps) => {
   const { post } = useWikiverseService();
 
   const sketch: Sketch = p5 => {

@@ -1,14 +1,16 @@
 import './on-screen-settings.css'
-import { ChangeEvent, FC, useEffect, useState } from "react"
-import { WikiverseSketch } from '../../../../../types';
+import { ChangeEvent, useEffect, useState } from "react"
+
+import { P5Sketch } from '../../../../../types';
+
 
 interface OnScreenSettingsProps {
-  sketchRef: WikiverseSketch;
+  sketchRef: P5Sketch;
 }
 
 const ID = (sufx: string) => `on-screen-settings-${sufx}`;
 
-export const OnScreenSettings: FC<OnScreenSettingsProps> = ({ sketchRef }) => {
+export const OnScreenSettings = ({ sketchRef }: OnScreenSettingsProps) => {
   const [showSketchSummaryRef, setShowSketchSummaryRef] = useState(sketchRef.state.showSketchDetailsSummary());
   const [showBoundingBoxRef, setShowBoundingBoxRef] = useState(sketchRef.state.showBoundingBox());
   const [showAxisOrientationRef, setShowAxisOrientationRef] = useState(sketchRef.state.showAxisOrientation());
@@ -54,7 +56,7 @@ interface ToggleSettingProps {
   toggleState: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const ToggleSetting: FC<ToggleSettingProps> = ({ shortcut, lbl, checkState, toggleState }) => {
+const ToggleSetting = ({ shortcut, lbl, checkState, toggleState }: ToggleSettingProps) => {
   return (
     <li className={ID('option-container')}>
       <label>{lbl} <span>{shortcut}</span></label>

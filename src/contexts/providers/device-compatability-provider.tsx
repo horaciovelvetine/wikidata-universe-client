@@ -1,4 +1,4 @@
-import { FC, ReactNode, useEffect, useState, createContext, useContext, useMemo } from "react";
+import { ReactNode, useEffect, useState, createContext, useContext, useMemo } from "react";
 import { getDeviceDiemnsions } from "../../utils/get-device-dimensions";
 
 interface DeviceCompatabilityProviderProps {
@@ -11,7 +11,7 @@ interface DeviceCompatabilityProvider {
 
 const DeviceCompatabilityContext = createContext<DeviceCompatabilityProvider | undefined>(undefined);
 
-export const DeviceCompatabilityProvider: FC<DeviceCompatabilityProviderProps> = ({ children }) => {
+export const DeviceCompatabilityProvider = ({ children }: DeviceCompatabilityProviderProps) => {
   const [meetsMinScreenSizeReq, setMeetMinScreenSizeReq] = useState(true);
 
   useEffect(() => { // state for size provider 

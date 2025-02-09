@@ -1,12 +1,12 @@
 import './api-offline-notice.css'
-import { createRef, FC, useEffect } from 'react';
+import { createRef, useEffect } from 'react';
 
 import { Exclaims, Question } from '../../../assets/icons';
-import { useWikiverseService } from '../../../app';
+import { useWikiverseService } from '../../../contexts';
 
 const ID = (sufx: string) => `offline-notice-${sufx}`;
 
-export const ApiOfflineNotice: FC = () => {
+export const ApiOfflineNotice = () => {
   const { isOnline } = useWikiverseService();
   const containerRef = createRef<HTMLDivElement>()
 

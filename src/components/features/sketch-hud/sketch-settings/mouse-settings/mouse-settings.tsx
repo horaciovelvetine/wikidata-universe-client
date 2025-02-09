@@ -1,14 +1,14 @@
+import { P5Sketch } from '../../../../../types';
 import './mouse-settings.css'
-import { ChangeEvent, FC, useState } from "react"
-import { WikiverseSketch } from '../../../../../types';
+import { ChangeEvent, useState } from "react"
 
 interface MouseSettingsProps {
-  sketchRef: WikiverseSketch;
+  sketchRef: P5Sketch;
 }
 
 const ID = (sufx: string) => `mouse-settings-${sufx}`;
 
-export const MouseSettings: FC<MouseSettingsProps> = ({ sketchRef }) => {
+export const MouseSettings = ({ sketchRef }: MouseSettingsProps) => {
   const [xMouseSensRef, setXMouseSensRef] = useState(sketchRef.state.xMouseSens());
   const [yMouseSensRef, setYMouseSensRef] = useState(sketchRef.state.yMouseSens());
   const [zMouseSensRef, setZMouseSensRef] = useState(sketchRef.state.zMouseSens());
@@ -68,7 +68,7 @@ interface MouseSensitivityOptionProps {
   updateHandler: (e: ChangeEvent<HTMLInputElement>, tgt: string) => void;
 }
 
-const MouseSensitivityOption: FC<MouseSensitivityOptionProps> = ({ lbl, dsc, senstivityValue, updateHandler }) => {
+const MouseSensitivityOption = ({ lbl, dsc, senstivityValue, updateHandler }: MouseSensitivityOptionProps) => {
   return (
     <li className={ID('input-option')} id={`${lbl}-mouse-sensitivity`}>
       <label>{lbl} <span>{dsc}</span></label>
@@ -83,7 +83,7 @@ interface MouseSensitivityInputProps {
   lbl: string
 }
 
-const MouseSensitivityInput: FC<MouseSensitivityInputProps> = ({ senstivityValue, updateHandler, lbl }) => {
+const MouseSensitivityInput = ({ senstivityValue, updateHandler, lbl }: MouseSensitivityInputProps) => {
   return (
     <>
       <input

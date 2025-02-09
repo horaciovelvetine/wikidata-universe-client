@@ -1,4 +1,4 @@
-import { FC, ReactNode, RefObject, useEffect, useRef } from "react";
+import { ReactNode, RefObject, useEffect, useRef } from "react";
 
 function useUnfocusClickToCloseListener(ref: RefObject<HTMLDivElement>, handleClickCallback: () => void) {
   useEffect(() => {
@@ -20,7 +20,7 @@ interface UnfocusClickToCloseListenerProps {
   children: ReactNode;
 }
 
-export const UnfocusClickToCloseWrapper: FC<UnfocusClickToCloseListenerProps> = ({ onOutsideClickCallback, children }) => {
+export const UnfocusClickToCloseWrapper = ({ onOutsideClickCallback, children }: UnfocusClickToCloseListenerProps) => {
   const ref = useRef<HTMLDivElement>(null);
   useUnfocusClickToCloseListener(ref, onOutsideClickCallback);
   return <div ref={ref}> {children} </div>;

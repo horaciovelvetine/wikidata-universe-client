@@ -1,18 +1,18 @@
 import './cur-selected-info.css'
-import { createRef, FC, useEffect, useState } from "react";
+import { createRef, useEffect, useState } from "react";
 
 import { Vertex as NoVertSel, VertexSel } from '../../../../assets/icons';
-import { Vertex, WikiverseSketch } from '../../../../types';
+import { Vertex, P5Sketch } from '../../../../types';
 
 import { swapCurSelectedVertexIcons } from '../../animations/swap-cur-selected-vertex-icons';
 
 interface CurSelectedInfoProps {
-  sketchRef: WikiverseSketch;
+  sketchRef: P5Sketch;
 }
 
 const ID = (sufx: string) => `cur-selected-info-${sufx}`
 
-export const CurSelectedInfo: FC<CurSelectedInfoProps> = ({ sketchRef }) => {
+export const CurSelectedInfo = ({ sketchRef }: CurSelectedInfoProps) => {
   const [curSelectedRef, setCurSelectedRef] = useState<Vertex | null>(sketchRef.state.curSelected());
 
   const [label, setLabel] = useState('')

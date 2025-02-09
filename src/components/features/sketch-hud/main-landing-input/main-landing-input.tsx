@@ -1,9 +1,9 @@
 import './main-landing-input.css'
-import { createRef, Dispatch, FC, FormEvent, SetStateAction, useEffect } from "react"
+import { createRef, Dispatch, FormEvent, SetStateAction, useEffect } from "react"
 
 import { Search, SearchDngr } from '../../../../assets/icons';
-import { WikiverseServiceResponse, useWikiverseService } from '../../../../app';
 import { errorToggleIconVisibility, errorShakeMainLandingButton, errorShakeMainLandingInput, hideMainLandingInput, showHideMainLandingInput } from '../..';
+import { WikiverseServiceResponse, useWikiverseService } from '../../../../contexts';
 
 const ID = (sufx: string) => `main-landing-${sufx}`;
 const WIKIDATA_HOMEPAGE = 'https://www.wikidata.org/wiki/Wikidata:Main_Page';
@@ -12,7 +12,7 @@ interface MainLandingInputProps {
   setInitSketchData: Dispatch<SetStateAction<WikiverseServiceResponse | null>>;
 }
 
-export const MainLandingInput: FC<MainLandingInputProps> = ({ setInitSketchData }) => {
+export const MainLandingInput = ({ setInitSketchData }: MainLandingInputProps) => {
   const { isOnline, getQueryData } = useWikiverseService();
 
   //==> Elements

@@ -1,15 +1,14 @@
 import './incompatible-screen-size-notice.css'
-import { createRef, FC, useEffect } from 'react'
-import { useConstants, useWikiverseService } from '../../../app';
-import { useDeviceCompatabilityCheck } from '../../../app/contexts/device-compatability-provider';
+import { createRef, useEffect } from 'react'
 import { showHideIncompatibleScreenNotice } from '../animations/show-hide-incompatible-screen-notice';
+import { useDeviceCompatabilityCheck, useWikiverseService } from '../../../contexts';
+import { GITHUB_URL, _bl, MAILTO_URL } from '../../../app';
 
 const ID = (sufx: string) => `incompat-screen-notice-${sufx}`
 
-export const IncompatibleScreenSizeNotice: FC = () => {
+export const IncompatibleScreenSizeNotice = () => {
   const { isOnline } = useWikiverseService()
   const { meetsMinScreenSizeReq } = useDeviceCompatabilityCheck();
-  const { _bl, GITHUB_URL, MAILTO_URL } = useConstants();
 
   const ContainerRef = createRef<HTMLDivElement>()
 

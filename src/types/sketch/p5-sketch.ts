@@ -4,10 +4,10 @@ import { Camera, Font } from "p5";
 import { Dispatch, SetStateAction } from 'react';
 
 import { Edge, Graphset, MinMaxSet, Point3D, Vertex } from '..';
-import { WikiverseServiceRequestPayload, WikiverseServiceResponse } from '../../app';
 import { ManagedCamera } from './managed-camera';
 import { ManagedState } from './managed-state';
 import { getMainDispDimensions } from '../../utils/get-main-disp-dimensions';
+import { WikiverseServiceResponse, WikiverseServiceRequestPayload } from '../../contexts';
 
 export interface SketchProps {
   p5: P5CanvasInstance;

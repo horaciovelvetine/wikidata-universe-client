@@ -1,15 +1,15 @@
 import './background-sketch-container.css';
-import { createRef, FC, useEffect } from "react";
+import { createRef, useEffect } from "react";
 import { Particle } from "../../../types";
 import { ReactP5Wrapper, Sketch } from "@p5-wrapper/react";
 import { getMainDispDimensions } from "../../../utils/get-main-disp-dimensions";
-import { WikiverseServiceResponse } from '../../../app';
+import { WikiverseServiceResponse } from '../../../contexts';
 
 interface BackgroundSketchContainerProps {
   initSketchData: WikiverseServiceResponse | null;
 }
 
-export const BackgroundSketchContainer: FC<BackgroundSketchContainerProps> = ({ initSketchData }) => {
+export const BackgroundSketchContainer = ({ initSketchData }: BackgroundSketchContainerProps) => {
   const containerRef = createRef<HTMLDivElement>();
   const particles: Particle[] = []
 

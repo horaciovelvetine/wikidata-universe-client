@@ -1,9 +1,10 @@
 import './sketch-hud.css'
-import { createRef, Dispatch, FC, SetStateAction, useEffect } from "react";
-import { useDeviceCompatabilityCheck, WikiverseServiceResponse } from '../../../../app';
-import { CurHoveredInfo, SketchSettings, CurSelectedInfo, RelatedEdgesInfo, MainLandingInput, TutorialMessageDisplay } from '..'
+import { createRef, Dispatch, SetStateAction, useEffect } from "react";
+
 import { P5Sketch } from '../../../../types';
+import { useDeviceCompatabilityCheck, WikiverseServiceResponse } from '../../../../contexts';
 import { showHideSketchHUDRef } from '../../animations/show-hide-sketch-hud-ref';
+import { CurHoveredInfo, SketchSettings, CurSelectedInfo, RelatedEdgesInfo, MainLandingInput, TutorialMessageDisplay } from '..'
 
 interface SketchHUDContainerProps {
   sketchRef: P5Sketch | null;
@@ -14,7 +15,7 @@ interface SketchHUDContainerProps {
 
 const ID = (sufx: string) => `sketch-hud-${sufx}`
 
-export const SketchHUD: FC<SketchHUDContainerProps> = ({ setInitSketchData, sketchRef, isTutorialSketch, setIsTutorialSketch }) => {
+export const SketchHUD = ({ setInitSketchData, sketchRef, isTutorialSketch, setIsTutorialSketch }: SketchHUDContainerProps) => {
   const { meetsMinScreenSizeReq } = useDeviceCompatabilityCheck();
 
   const MainContainer = createRef<HTMLDivElement>();

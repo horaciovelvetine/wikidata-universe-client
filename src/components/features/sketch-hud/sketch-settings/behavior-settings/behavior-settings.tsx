@@ -1,15 +1,15 @@
-import { WikiverseSketch } from '../../../../../types';
+import { P5Sketch } from '../../../../../types';
 import './behavior-settings.css'
 
-import { FC, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 interface BehaviorSettingsProps {
-  sketchRef: WikiverseSketch;
+  sketchRef: P5Sketch;
 }
 
 const ID = (sufx: string) => `behavior-settings-${sufx}`
 
-export const BehaviorSettings: FC<BehaviorSettingsProps> = ({ sketchRef }) => {
+export const BehaviorSettings = ({ sketchRef }: BehaviorSettingsProps) => {
   const [clickToFetchRef, setClickToFetchRef] = useState(sketchRef.state.clickToFetchEnabled())
 
   useEffect(() => {

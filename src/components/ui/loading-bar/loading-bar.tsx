@@ -1,5 +1,4 @@
 import './loading-bar.css'
-import { FC } from "react"
 
 interface LoadingBarProps {
   isLoading: boolean;
@@ -9,7 +8,7 @@ interface LoadingBarProps {
  * @Credit to Marco Biedermann for the codepen: https://codepen.io/marcobiedermann/pen/LExXWW, and fantastic gradient colors & loading bar
  * Find him on @Github - https://github.com/marcobiedermann/ or @marcobiedermann
  */
-export const LoadingBar: FC<LoadingBarProps> = ({ isLoading }) => {
+export const LoadingBar = ({ isLoading }: LoadingBarProps) => {
   return (
     <div id='loading-bar-container'>
       {isLoading ?

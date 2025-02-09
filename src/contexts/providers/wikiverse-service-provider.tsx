@@ -1,4 +1,4 @@
-import { FC, ReactNode, createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import { ReactNode, createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { iDimensions, iEdge, iProperty, iVertex, LayoutConfig } from '../../types';
 import { LoadingBar } from '../../components';
 
@@ -36,7 +36,7 @@ interface ServiceProvider {
 
 const WikiverseApiContext = createContext<ServiceProvider | undefined>(undefined);
 
-export const WikiverseServiceProvider: FC<WikiverseServiceProviderProps> = ({ children, useLocalAPI = false }) => {
+export const WikiverseServiceProvider = ({ children, useLocalAPI = false }: WikiverseServiceProviderProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isOnline, setIsOnline] = useState(false);
 

@@ -1,6 +1,8 @@
 import './footer.css';
-import { Dispatch, FC, SetStateAction } from 'react';
-import { useConstants, useWikiverseService, WikiverseServiceResponse } from '../../../app';
+import { Dispatch, SetStateAction } from 'react';
+
+import { FRONTEND_URL, _bl, BACKEND_URL, GITHUB_URL } from '../../../app';
+import { WikiverseServiceResponse, useWikiverseService } from '../../../contexts';
 
 interface FooterProps {
   setIsTutorialSketch: Dispatch<SetStateAction<boolean>>;
@@ -9,8 +11,7 @@ interface FooterProps {
 
 const ID = (sufx: string) => `footer-${sufx}`
 
-export const Footer: FC<FooterProps> = ({ setIsTutorialSketch, setInitSketchData }) => {
-  const { _bl, GITHUB_URL, FRONTEND_URL, BACKEND_URL } = useConstants();
+export const Footer = ({ setIsTutorialSketch, setInitSketchData }: FooterProps) => {
   const { getTutorial } = useWikiverseService();
 
   const handleTutorialClick = async () => {

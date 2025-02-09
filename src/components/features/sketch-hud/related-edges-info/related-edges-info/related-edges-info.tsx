@@ -1,18 +1,16 @@
 import './related-edges-info.css'
-import { Edge, Vertex, WikiverseSketch } from '../../../../../types';
-import { createRef, FC, useEffect, useState } from "react";
+import { Edge, Vertex, P5Sketch } from '../../../../../types';
+import { createRef, useEffect, useState } from "react";
 import { RelatedEdgeItem } from '..';
 import { showHideRelatedEdgesContainer } from '../../../animations/show-hide-related-edges-container';
 
 interface RelatedEdgesInfoProps {
-  sketchRef: WikiverseSketch;
+  sketchRef: P5Sketch;
 }
 
 const ID = (sufx: string) => `rel-edges-info-${sufx}`
 
-export const EdgeDirectionIcon = () => { };
-
-export const RelatedEdgesInfo: FC<RelatedEdgesInfoProps> = ({ sketchRef }) => {
+export const RelatedEdgesInfo = ({ sketchRef }: RelatedEdgesInfoProps) => {
   const [curSelectedRef, setCurSelectedRef] = useState<Vertex | null>(sketchRef.state.curSelected());
   const [relEdges, setRelEdges] = useState<Edge[]>(sketchRef.graphset.getRelatedEdges(curSelectedRef));
 

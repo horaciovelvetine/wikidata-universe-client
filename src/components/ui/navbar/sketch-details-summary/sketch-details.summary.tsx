@@ -1,16 +1,16 @@
 import './sketch-details-summary.css'
-import { createRef, FC, useEffect, useState } from "react"
-import { Point3D, WikiverseSketch } from "../../../../types"
-import { useDeviceCompatabilityCheck } from '../../../../app';
+import { createRef, useEffect, useState } from "react"
+import { Point3D, P5Sketch } from "../../../../types"
 import { showHideSketchDetailsSummary } from '..';
+import { useDeviceCompatabilityCheck } from '../../../../contexts';
 
 interface SketchDetailsSummaryProps {
-  sketchRef: WikiverseSketch;
+  sketchRef: P5Sketch;
 }
 
 const ID = (sufx: string) => `sketch-details-${sufx}`;
 
-export const SketchDetailsSummary: FC<SketchDetailsSummaryProps> = ({ sketchRef }) => {
+export const SketchDetailsSummary = ({ sketchRef }: SketchDetailsSummaryProps) => {
   const { meetsMinScreenSizeReq } = useDeviceCompatabilityCheck();
   const [showSketchDetailsSummary, setShowSketchDetailsSummary] = useState(sketchRef.state.showSketchDetailsSummary())
   const ContainerRef = createRef<HTMLDivElement>();

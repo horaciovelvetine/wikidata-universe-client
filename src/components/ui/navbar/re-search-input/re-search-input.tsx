@@ -1,20 +1,20 @@
 import './re-search-input.css'
 import { Search, SearchDngr } from "../../../../assets/icons";
-import { FC, createRef, useState, useEffect, Dispatch, SetStateAction, ChangeEvent } from "react";
+import { createRef, useState, useEffect, Dispatch, SetStateAction, ChangeEvent } from "react";
 
-import { WikiverseSketch } from "../../../../types";
-import { useDeviceCompatabilityCheck, useWikiverseService, WikiverseServiceResponse } from "../../../../app";
 import { errorShakeReSearchContainer, moveReSearchInputInView, showHideReSearchInput } from "..";
 import { errorToggleIconVisibility } from '../../../features';
+import { P5Sketch } from '../../../../types';
+import { useDeviceCompatabilityCheck, useWikiverseService, WikiverseServiceResponse } from '../../../../contexts';
 
 interface ReSearchInputProps {
-  sketchRef: WikiverseSketch;
+  sketchRef: P5Sketch;
   setInitSketchData: Dispatch<SetStateAction<WikiverseServiceResponse | null>>;
 }
 
 const ID = (sufx: string) => `re-search-${sufx}`
 
-export const ReSearchInput: FC<ReSearchInputProps> = ({ sketchRef, setInitSketchData }) => {
+export const ReSearchInput = ({ sketchRef, setInitSketchData }: ReSearchInputProps) => {
   const { meetsMinScreenSizeReq } = useDeviceCompatabilityCheck();
   const { getQueryData } = useWikiverseService();
   const [query, setQuery] = useState(sketchRef.state.query());

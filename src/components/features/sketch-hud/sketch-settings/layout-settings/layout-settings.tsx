@@ -1,16 +1,16 @@
-import { useWikiverseService } from '../../../../../app';
 import { Fetch } from '../../../../../assets/icons';
-import { WikiverseSketch } from '../../../../../types';
+import { useWikiverseService } from '../../../../../contexts';
+import { P5Sketch } from '../../../../../types';
 import './layout-settings.css'
-import { ChangeEvent, FC, useState } from "react"
+import { ChangeEvent, useState } from "react"
 
 interface LayoutSettingsProps {
-  sketchRef: WikiverseSketch;
+  sketchRef: P5Sketch;
 }
 
 const ID = (sufx: string) => `layout-settings-${sufx}`;
 
-export const LayoutSettings: FC<LayoutSettingsProps> = ({ sketchRef }) => {
+export const LayoutSettings = ({ sketchRef }: LayoutSettingsProps) => {
   const { post } = useWikiverseService()
   const [attractionMultRef, setAttractionMultRef] = useState(sketchRef.state.attractionMult());
   const [repulsionMultRef, setRepulsionMultRef] = useState(sketchRef.state.repulsionMult());
@@ -104,7 +104,7 @@ interface LayoutSettingOptionProps {
   handler: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const LayoutSettingOption: FC<LayoutSettingOptionProps> = ({ lbl, dsc, val, min, max, step, handler }) => {
+const LayoutSettingOption = ({ lbl, dsc, val, min, max, step, handler }: LayoutSettingOptionProps) => {
   return (
     <li className={ID('option')}>
       <div className={ID('option-text')}>

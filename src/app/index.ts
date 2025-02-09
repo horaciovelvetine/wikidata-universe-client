@@ -1,10 +1,9 @@
-export { WikiverseApp } from "./wikiverse-app";
-// contexts
-// Wikiverse API axis and use context
-export type { WikiverseServiceRequestPayload, WikiverseServiceResponse } from './contexts/wikiverse-service-provider'
-export { WikiverseServiceProvider, useWikiverseService } from './contexts/wikiverse-service-provider'
-// screen-size checking v0.0.1
-export { DeviceCompatabilityProvider, useDeviceCompatabilityCheck } from './contexts/device-compatability-provider'
-// Universal Constants
-export { ConstantsProvider, useConstants } from './contexts/constants-provider.tsx'
+// Main React Application 
+export { WikiverseApp } from "./wikiverse/wikiverse-app";
+// App Constants
+export { _bl } from './wikiverse/wikiverse-constants'
+export { GITHUB_URL } from './wikiverse/wikiverse-constants';
+export { FRONTEND_URL } from './wikiverse/wikiverse-constants';
+export { BACKEND_URL } from './wikiverse/wikiverse-constants';
+export { MAILTO_URL } from './wikiverse/wikiverse-constants'
 
