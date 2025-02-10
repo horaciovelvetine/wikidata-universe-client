@@ -25,6 +25,15 @@ const SketchMemo = memo(SketchContainer, (prev, next) => {
   return prev.initSketchData === next.initSketchData;
 });
 
+/**
+ * The main @component for the Wikiverse application.
+ *
+ * This component sets up the necessary providers and renders the main layout
+ * of the application, including the navbar, background sketch, service notices,
+ * sketch HUD, and footer. It also manages the state for the sketch reference,
+ * initial sketch data, and whether the tutorial sketch is active.
+ */
+
 export const WikiverseApp = () => {
   const { ID } = useComponentID("wikiverse-app");
   const [sketchRef, setSketchRef] = useState<P5Sketch | null>(null);
@@ -35,18 +44,15 @@ export const WikiverseApp = () => {
   return (
     <DeviceCompatabilityProvider>
       <WikiverseServiceProvider useLocalAPI>
-        <div id={ID("main-cont")}>
-          {/* 1::EMPTY */}
+        <div id={ID("main-container")}>
           <div id={ID("top-left-fill")}></div>
 
           <Navbar {...{ sketchRef, setInitSketchData }} />
 
-          {/* 3::EMPTY */}
           <div id={ID("top-right-fill")}></div>
-
           <VerticalTitle />
 
-          <div id={"main-display"} onContextMenu={e => e.preventDefault()}>
+          <div id={ID("main-display")} onContextMenu={e => e.preventDefault()}>
             <BGSketchMemo {...{ initSketchData }} />
 
             <ServiceOfflineNotice />
@@ -67,15 +73,12 @@ export const WikiverseApp = () => {
             )}
           </div>
 
-          {/* 6::EMPTY */}
           <div id={ID("mid-right-fill")}></div>
 
-          {/* 7::EMPTY */}
           <div id={ID("bot-left-fill")}></div>
 
           <Footer {...{ setIsTutorialSketch, setInitSketchData }} />
 
-          {/* 9::EMPTY */}
           <div id={ID("bot-right-fill")}></div>
         </div>
       </WikiverseServiceProvider>
