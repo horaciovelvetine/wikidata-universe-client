@@ -1,1 +1,1 @@
-export { NavbarContainer } from "./navbar-container/navbar-container";
+export { Navbar } from "./navbar/navbar";

@@ -1,7 +1,7 @@
 import "./wikiverse-app.css";
 import { memo, useState } from "react";
 
-import { Footer, VerticalTitle, IncompatibleDeviceNotice } from "../components";
+import { Footer, VerticalTitle, IncompatibleDeviceNotice, Navbar } from "../components";
 import {
   ApiOfflineNotice,
   BackgroundSketchContainer,
@@ -9,7 +9,6 @@ import {
   SketchHUD,
 } from "../features";
 import { P5Sketch } from "../types";
-import { NavbarContainer } from "../components/navbar";
 import {
   WikiverseServiceResponse,
   DeviceCompatabilityProvider,
@@ -37,7 +36,7 @@ export const WikiverseApp = () => {
           {/* 1::EMPTY */}
           <div id={ID("top-left-fill")}></div>
 
-          <NavbarContainer {...{ sketchRef, setInitSketchData }} />
+          <Navbar {...{ sketchRef, setInitSketchData }} />
 
           {/* 3::EMPTY */}
           <div id={ID("top-right-fill")}></div>

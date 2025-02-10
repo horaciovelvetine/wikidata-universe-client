@@ -1,4 +1,4 @@
-import "./navbar-container.css";
+import "./navbar.css";
 import {
   createRef,
   Dispatch,
@@ -20,17 +20,14 @@ import { ReSearchInput } from "../re-search-input/re-search-input";
 import { SettingsOpenIndicator } from "../settings-open-indicator/settings-open-indicator";
 import { SketchDetailsSummary } from "../sketch-details-summary/sketch-details.summary";
 
-interface NavbarContainerProps {
+interface NavbarProps {
   sketchRef: P5Sketch | null;
   setInitSketchData: Dispatch<SetStateAction<WikiverseServiceResponse | null>>;
 }
 
 const ID = (sufx: string) => `navbar-${sufx}`;
 
-export const NavbarContainer = ({
-  sketchRef,
-  setInitSketchData,
-}: NavbarContainerProps) => {
+export const Navbar = ({ sketchRef, setInitSketchData }: NavbarProps) => {
   const { meetsMinScreenSizeReq } = useDeviceCompatabilityCheck();
   const TitleRef = createRef<HTMLHeadingElement>();
   const ExploreRef = createRef<HTMLHeadingElement>();
