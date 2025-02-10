@@ -19,4 +19,3 @@ export function abridgeString(
   if (input.length <= maxLngth) return input;
   return input.substring(0, maxLngth) + "...";
 }
-w

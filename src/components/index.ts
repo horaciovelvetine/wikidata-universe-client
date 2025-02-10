@@ -1,5 +1,6 @@
 // UI COMPONENTS
-export { LoadingBar } from "./ui/loading-bar/loading-bar";
-export { NavbarContainer } from "./ui/navbar";
-export { VerticalTitle } from "./ui/vertical-title/vertical-title";
-export { Footer } from "./ui/footer/footer";
+export { LoadingBar } from "./loading-bar/loading-bar";
+export { NavbarContainer } from "./navbar";
+export { VerticalTitle } from "./vertical-title/vertical-title";
+export { Footer } from "./footer/footer";
+export { IncompatibleDeviceNotice } from "./incompatible-device-notice/incompatible-device-notice";
