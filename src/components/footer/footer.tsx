@@ -1,32 +1,27 @@
 import "./footer.css";
 import { Dispatch, SetStateAction } from "react";
 
-import { FRONTEND_URL, _bl, BACKEND_URL, GITHUB_URL } from "../../app";
 import { WikiverseServiceResponse, useWikiverseService } from "../../contexts";
+import { _bl, BACKEND_URL, FRONTEND_URL, GITHUB_URL } from "../../app";
+import { useComponentID } from "../../hooks";
 
 interface FooterProps {
   setIsTutorialSketch: Dispatch<SetStateAction<boolean>>;
   setInitSketchData: Dispatch<SetStateAction<WikiverseServiceResponse | null>>;
 }
 
-const ID = (sufx: string) => `footer-${sufx}`;
-
 export const Footer = ({
   setIsTutorialSketch,
   setInitSketchData,
 }: FooterProps) => {
+  const { ID } = useComponentID("footer");
   const { getTutorial } = useWikiverseService();
 
   const handleTutorialClick = async () => {
-    /**
-     //TODO: vett parallel updates doesnt cause adverse side effect
-     * @todo - parallel updates of state w/ memoized state possible err source
-     * @check - in search click on tutorial
-     * @check - landing page clicks on tutorial
-     * @check - offline clicks on tutorial
-     */
+    debugger; // stop tutorial execution for now
     setIsTutorialSketch(prev => !prev);
-    setInitSketchData(await getTutorial("1"));
+    const res = await getTutorial("1");
+    setInitSketchData(res);
   };
 
   return (

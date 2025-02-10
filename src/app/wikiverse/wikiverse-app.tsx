@@ -6,22 +6,20 @@ import {
   VerticalTitle,
   IncompatibleDeviceNotice,
   Navbar,
-} from "../components";
-import {
-  ApiOfflineNotice,
-  BackgroundSketchContainer,
+  BackgroundSketch,
   SketchContainer,
   SketchHUD,
-} from "../features";
-import { P5Sketch } from "../types";
+  ServiceOfflineNotice,
+} from "../../components";
+import { P5Sketch } from "../../types";
 import {
   WikiverseServiceResponse,
   DeviceCompatabilityProvider,
   WikiverseServiceProvider,
-} from "../contexts";
-import { useComponentID } from "../hooks/";
+} from "../../contexts";
+import { useComponentID } from "../../hooks";
 
-const BGSketchMemo = memo(BackgroundSketchContainer);
+const BGSketchMemo = memo(BackgroundSketch);
 
 const SketchMemo = memo(SketchContainer, (prev, next) => {
   return prev.initSketchData === next.initSketchData;
@@ -51,7 +49,7 @@ export const WikiverseApp = () => {
           <div id={"main-display"} onContextMenu={e => e.preventDefault()}>
             <BGSketchMemo {...{ initSketchData }} />
 
-            <ApiOfflineNotice />
+            <ServiceOfflineNotice />
             <IncompatibleDeviceNotice />
 
             <SketchHUD

@@ -1,4 +1,4 @@
-export { BackgroundSketchContainer } from "./background-sketch-container/background-sketch-container";
+export { BackgroundSketch } from "./background-sketch/background-sketch";
 export { Footer } from "./footer/footer";
 export { IncompatibleDeviceNotice } from "./incompatible-device-notice/incompatible-device-notice";
 export { LoadingBar } from "./loading-bar/loading-bar";
