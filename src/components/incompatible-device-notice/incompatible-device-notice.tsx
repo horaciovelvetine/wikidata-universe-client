@@ -5,10 +5,26 @@ import {
   useDeviceCompatabilityCheck,
   useWikiverseService,
 } from "../../contexts";
+import { useComponentID } from "../../hooks";
 
-const ID = (sufx: string) => `incompatible-device-notice-${sufx}`;
+/**
+ * Displays a notice when the Wikiverse detects the client is using an  incompatible device.
+ * If the device is incompatible, it displays a message informing the user about the
+ * incompatibility and provides links for more information. It will not render if the
+ * WikiverseService is not online
+ *
+ * @remarks
+ * This component uses the `useComponentID` hook to generate unique IDs for its elements,
+ * the `useWikiverseService` hook to check if the user is online, and the
+ * `useDeviceCompatabilityCheck` hook to check if the device meets the minimum screen size requirements.
+ *
+ * @see {@link useComponentID}
+ * @see {@link useWikiverseService}
+ * @see {@link useDeviceCompatabilityCheck}
+ */
 
-export const IncompatibleDeviceNotice = () => {
+export const IncompatibleDeviceNotice = (): JSX.Element => {
+  const { ID } = useComponentID("incompatible-device-notice");
   const { isOnline } = useWikiverseService();
   const { meetsMinScreenSizeReq } = useDeviceCompatabilityCheck();
 
@@ -37,7 +53,7 @@ export const IncompatibleDeviceNotice = () => {
           </a>
           , or by{" "}
           <a id={ID("email-link")} href={MAILTO_URL} className={ID("link")}>
-            emailing @horaciovelvetine
+            emailing.
           </a>
         </p>
       </div>
