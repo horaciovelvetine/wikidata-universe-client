@@ -1,7 +1,12 @@
 import "./wikiverse-app.css";
 import { memo, useState } from "react";
 
-import { Footer, VerticalTitle, IncompatibleDeviceNotice, Navbar } from "../components";
+import {
+  Footer,
+  VerticalTitle,
+  IncompatibleDeviceNotice,
+  Navbar,
+} from "../components";
 import {
   ApiOfflineNotice,
   BackgroundSketchContainer,
@@ -14,8 +19,7 @@ import {
   DeviceCompatabilityProvider,
   WikiverseServiceProvider,
 } from "../contexts";
-
-const ID = (sufx: string) => `wikiverse-app-${sufx}`;
+import { useComponentID } from "../hooks/";
 
 const BGSketchMemo = memo(BackgroundSketchContainer);
 
@@ -24,6 +28,7 @@ const SketchMemo = memo(SketchContainer, (prev, next) => {
 });
 
 export const WikiverseApp = () => {
+  const { ID } = useComponentID("wikiverse-app");
   const [sketchRef, setSketchRef] = useState<P5Sketch | null>(null);
   const [initSketchData, setInitSketchData] =
     useState<WikiverseServiceResponse | null>(null);

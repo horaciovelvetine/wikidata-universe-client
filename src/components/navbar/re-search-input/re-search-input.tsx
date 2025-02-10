@@ -10,7 +10,7 @@ import {
 } from "react";
 
 //TODO - remove animations
-import { errorToggleIconVisibility } from "../../../features/animations/error-toggle-icon-visibility";
+import { errorToggleIconVisibility } from "../../animations/error-toggle-icon-visibility";
 import { errorShakeReSearchContainer } from "../animations/error-shake-re-search-container";
 import { moveReSearchInputInView } from "../animations/move-re-search-input-in-view";
 import { showHideReSearchInput } from "../animations/show-hide-re-search-input";

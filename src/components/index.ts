@@ -1,6 +1,9 @@
-// UI COMPONENTS
-export { LoadingBar } from "./loading-bar/loading-bar";
-export { Navbar } from "./navbar";
-export { VerticalTitle } from "./vertical-title/vertical-title";
+export { BackgroundSketchContainer } from "./background-sketch-container/background-sketch-container";
 export { Footer } from "./footer/footer";
 export { IncompatibleDeviceNotice } from "./incompatible-device-notice/incompatible-device-notice";
+export { LoadingBar } from "./loading-bar/loading-bar";
+export { Navbar } from "./navbar";
+export { ServiceOfflineNotice } from "./service-offline-notice/service-offline-notice";
+export { SketchContainer } from "./sketch-container/index";
+export { SketchHUD } from "./sketch-hud/index";
+export { VerticalTitle } from "./vertical-title/vertical-title";
