@@ -7,7 +7,7 @@
   -moz-osx-font-smoothing: grayscale;
   margin: 0;
   padding: 0;
-  color: rgb(var(--font))
+  color: rgb(var(--font));
 }
 
 :root {
@@ -57,21 +57,21 @@
   --purple-ish: 88, 86, 214;
   --load5: 88, 86, 214;
 
-  --def-transit: 350ms;
-  --brdr-radius: 0.25rem;
+  --error-transition-dur: 820ms;
+  --default-transition-dur: 350ms;
 }
 
 @font-face {
-  font-family: 'CharisSIL-Regular';
-  src: url('../assets/fonts/CharisSIL-Regular.ttf') format('truetype');
+  font-family: "CharisSIL-Regular";
+  src: url("../assets/fonts/CharisSIL-Regular.ttf") format("truetype");
 }
 
 @font-face {
-  font-family: 'CharisSIL-Bold';
-  src: url('../assets/fonts/CharisSIL-Bold.ttf') format('truetype');
+  font-family: "CharisSIL-Bold";
+  src: url("../assets/fonts/CharisSIL-Bold.ttf") format("truetype");
 }
 
 @font-face {
-  font-family: 'CharisSIL-Italic';
-  src: url('../assets/fonts/CharisSIL-Italic.ttf') format('truetype');
+  font-family: "CharisSIL-Italic";
+  src: url("../assets/fonts/CharisSIL-Italic.ttf") format("truetype");
 }
