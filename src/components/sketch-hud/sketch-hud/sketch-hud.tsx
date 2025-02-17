@@ -1,38 +1,39 @@
 import "./sketch-hud.css";
 import { createRef, Dispatch, SetStateAction, useEffect } from "react";
 
-import { P5Sketch } from "../../../types";
-import {
-  useDeviceCompatabilityCheck,
-  WikiverseServiceResponse,
-} from "../../../contexts";
-// TODO - remove
+// TODO - remove animation
 import { showHideSketchHUDRef } from "../../animations/show-hide-sketch-hud-ref";
+import { P5Sketch } from "../../../types";
+import { useDeviceCompatabilityCheck } from "../../../providers";
 
 // Sub-Components
 import { CurrentlyHoveredInfo } from "../currently-hovered-info/currently-hovered-info";
 import { SketchSettings } from "../sketch-settings";
 import { TutorialMessageDisplay } from "../tutorial-message-display/tutorial-message-display";
-import { MainLandingInput } from "../main-landing-input/main-landing-input";
 import { CurrentlySelectedInfo } from "../currently-selected-info/currently-selected-info";
 import { RelatedEdgesInfo } from "../related-edges-info";
 
 // Props
-interface SketchHUDContainerProps {
+interface SketchHUDProps {
   sketchRef: P5Sketch | null;
-  setInitSketchData: Dispatch<SetStateAction<WikiverseServiceResponse | null>>;
   isTutorialSketch: boolean;
   setIsTutorialSketch: Dispatch<SetStateAction<boolean>>;
 }
 
 const ID = (sufx: string) => `sketch-hud-${sufx}`;
 
+/**
+ * Contains all of the interactable features the client uses when there is a sketch on the main-display.
+ *
+ * @param {sketchRef} props.sketchRef - the @see SketchManager obj. for the currently active sketch
+ * @param {isTutorialSketch} props.isTutorialSketch - determines wether or not to display the @see TutorialMessageDisplay @component
+ * @param {setIsTutorialSketch} props.setIsTutorialSketch - passed to the @see TutorialMessageDisplay @component for exiting the tutorial at will
+ */
 export const SketchHUD = ({
-  setInitSketchData,
   sketchRef,
   isTutorialSketch,
   setIsTutorialSketch,
-}: SketchHUDContainerProps) => {
+}: SketchHUDProps) => {
   const { meetsMinScreenSizeReq } = useDeviceCompatabilityCheck();
 
   const MainContainer = createRef<HTMLDivElement>();
@@ -53,7 +54,6 @@ export const SketchHUD = ({
       {sketchRef && isTutorialSketch && (
         <TutorialMessageDisplay {...{ sketchRef, setIsTutorialSketch }} />
       )}
-      {!sketchRef && <MainLandingInput {...{ setInitSketchData }} />}
 
       <div id={ID("bot-container")} ref={HUDContainer}>
         {sketchRef && <CurrentlySelectedInfo {...{ sketchRef }} />}
