@@ -1,30 +1,30 @@
-import { WikiverseServiceResponse } from "../../contexts";
-import { Dimensions, iDimensions } from "./dimensions";
-import { Edge, iEdge } from "./edge";
+import { defaultDimensions, Dimensions } from "./dimensions";
+import { Edge, EdgeImpl } from "./edge";
 import { MinMaxSet } from "./min-max-set";
-import { iPoint3D, Point3D } from "./point-3d";
-import { iProperty, Property } from "./property";
-import { iVertex, Vertex } from "./vertex";
+import { Point3D, Point3DImpl } from "./point-3d";
+import { Property, PropertyImpl } from "./property";
+import { Vertex, VertexImpl } from "./vertex";
+import { WikiverseServiceResponse } from "./wikiverse-service-response";
 
 export class Graphset {
-  vertices: Vertex[] = [];
-  properties: Property[] = [];
-  edges: Edge[] = [];
-  dimensions: iDimensions = new Dimensions();
+  vertices: VertexImpl[] = [];
+  properties: PropertyImpl[] = [];
+  edges: EdgeImpl[] = [];
+  dimensions: Dimensions = defaultDimensions();
 
   constructor(initSketchData: WikiverseServiceResponse | null) {
     if (initSketchData) {
-      this.vertices = initSketchData.vertices.map(v => new Vertex(v));
-      this.edges = initSketchData.edges.map(e => new Edge(e));
-      this.properties = initSketchData.properties.map(p => new Property(p));
-      this.dimensions = new Dimensions(initSketchData.dimensions);
+      this.vertices = initSketchData.vertices.map(v => new VertexImpl(v));
+      this.edges = initSketchData.edges.map(e => new EdgeImpl(e));
+      this.properties = initSketchData.properties.map(p => new PropertyImpl(p));
+      this.dimensions = initSketchData.dimensions;
     }
   }
 
   /**
    * @method calcVertexSetMean() - find the approximate center coords for the Mean of the Graphset's Vertices
    */
-  calcVertexSetMean(): iPoint3D {
+  calcVertexSetMean(): Point3D {
     let x = 0,
       y = 0,
       z = 0;
@@ -69,7 +69,7 @@ export class Graphset {
   /**
    * @method getRelatedEdges() - returns any Edge in the set which references the provided Vertex
    */
-  getRelatedEdges(vertex: Vertex | null): Edge[] {
+  getRelatedEdges(vertex: Vertex | null): EdgeImpl[] {
     if (!vertex) return [];
     return this.edges.filter(edge => {
       if (!edge.srcId || !edge.propertyId || !edge.tgtId) return false; // check edge has needed values
@@ -98,35 +98,35 @@ export class Graphset {
   /**
    * @method getProperty() - returns a Property with the provided ID value or null
    */
-  getProperty(propertyId: string): Property | null {
+  getProperty(propertyId: string) {
     return this.properties.find(property => property.id === propertyId) || null;
   }
 
   /**
    * @method addProperty() - used in the About Sketch to include new Properties in the set w/o resetting
    */
-  addProperty(newProp: iProperty): void {
-    this.properties.push(new Property(newProp));
+  addProperty(newProp: Property): void {
+    this.properties.push(new PropertyImpl(newProp));
   }
 
   /**
    * @method getVertex() - returns a Vertex with the provided ID value or null
    */
-  getVertex(vertexId: string | null): Vertex | null {
+  getVertex(vertexId: string | null) {
     return this.vertices.find(vertex => vertex.id === vertexId) || null;
   }
 
   /**
    * @method addVertex() - used in the AboutSketch to include new Vertices in the set w/o resetting
    */
-  addVertex(newVert: iVertex): void {
-    this.vertices.push(new Vertex(newVert));
+  addVertex(newVert: Vertex): void {
+    this.vertices.push(new VertexImpl(newVert));
   }
 
   /**
    * @method getEdge() - returns an Edge with the provided srcID & tgtId
    */
-  getEdge(edge: iEdge) {
+  getEdge(edge: Edge) {
     return (
       this.edges.find(e => e.srcId === edge.srcId && e.tgtId === edge.tgtId) ||
       null
@@ -136,8 +136,8 @@ export class Graphset {
   /**
    * @method addEdge() - used in the AboutSketch to include new Edges in the set w/o resetting
    */
-  addEdge(newEdge: iEdge): void {
-    this.edges.push(new Edge(newEdge));
+  addEdge(newEdge: Edge): void {
+    this.edges.push(new EdgeImpl(newEdge));
   }
 
   /**
@@ -149,7 +149,7 @@ export class Graphset {
       if (!exisVert) return;
 
       exisVert.prevCoords = exisVert.coords;
-      exisVert.coords = new Point3D(update.coords);
+      exisVert.coords = new Point3DImpl(update.coords);
     });
   }
 
@@ -160,7 +160,7 @@ export class Graphset {
     this.mergeResponseVertices(response);
     this.mergeResponseEdges(response);
     this.mergeResponseProperties(response);
-    this.dimensions = new Dimensions(response.dimensions); //provides the scaled size behind the scenes for calculated changes in DataDensity...
+    this.dimensions = response.dimensions; //provides the scaled size behind the scenes for calculated changes in DataDensity...
   }
 
   /**
@@ -176,7 +176,7 @@ export class Graphset {
       if (existing) {
         existing.mergeResponseData(vert);
       } else {
-        this.addVertex(new Vertex(vert));
+        this.addVertex(new VertexImpl(vert));
       }
     });
   }
@@ -194,7 +194,7 @@ export class Graphset {
       if (existing) {
         existing.mergeResponseData(prop);
       } else {
-        this.addProperty(new Property(prop));
+        this.addProperty(new PropertyImpl(prop));
       }
     });
   }
@@ -217,7 +217,7 @@ export class Graphset {
       if (existing) {
         existing.mergeResponseData(edge);
       } else {
-        this.addEdge(new Edge(edge));
+        this.addEdge(new EdgeImpl(edge));
       }
     });
   }
@@ -225,7 +225,7 @@ export class Graphset {
   /**
    * @method getAltVertex() - using the provided edge, finds the Vertex which was not provided from the data
    */
-  getAltVertex(edge: Edge, vert1: Vertex): Vertex | null {
+  getAltVertex(edge: Edge, vert1: Vertex) {
     const altID = edge.srcId === vert1.id ? edge.tgtId : edge.srcId;
     return this.vertices.find(v => v.id === altID) || null;
   }

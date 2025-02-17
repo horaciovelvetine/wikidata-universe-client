@@ -2,9 +2,11 @@ import { multiply, inv } from "mathjs";
 import { Camera, Font, Vector } from "p5";
 import { P5CanvasInstance } from "@p5-wrapper/react";
 
-import { iPoint3D, Point3D } from "./point-3d";
+import { Point3D, Point3DImpl } from "./point-3d";
+// Number of frames for any vertex which is currently moving to a new position
+const COORD_TRANSITION_DURATION = 65;
 
-export interface iVertex {
+export interface Vertex {
   id: string;
   label: string;
   description: string;
@@ -12,13 +14,10 @@ export interface iVertex {
   origin: boolean;
   locked: boolean;
   radius: number;
-  coords: iPoint3D;
+  coords: Point3D;
 }
 
-// Number of frames for any vertex which is currently moving to a new position
-const COORD_TRANSITION_DURATION = 65;
-
-export class Vertex implements iVertex {
+export class VertexImpl implements Vertex {
   id: string;
   label: string;
   description: string;
@@ -26,7 +25,7 @@ export class Vertex implements iVertex {
   origin: boolean;
   locked: boolean;
   readonly radius: number = 20;
-  coords: Point3D;
+  coords: Point3DImpl;
   prevCoords: Point3D | null = null;
   coordTransitionKeyFrm = 1;
 
@@ -38,17 +37,17 @@ export class Vertex implements iVertex {
     fetched: boolean,
     origin: boolean,
     locked: boolean,
-    coords: iPoint3D
+    coords: Point3D
   );
-  constructor(vertex: iVertex);
+  constructor(vertex: Vertex);
   constructor(
-    idOrVertex?: string | iVertex,
+    idOrVertex?: string | Vertex,
     label?: string,
     description?: string,
     fetched?: boolean,
     origin?: boolean,
     locked?: boolean,
-    coords?: iPoint3D
+    coords?: Point3D
   ) {
     if (typeof idOrVertex === "string") {
       this.id = idOrVertex;
@@ -57,7 +56,7 @@ export class Vertex implements iVertex {
       this.fetched = fetched || false;
       this.origin = origin || false;
       this.locked = locked || false;
-      this.coords = new Point3D(coords);
+      this.coords = new Point3DImpl(coords);
     } else if (typeof idOrVertex === "object") {
       this.id = idOrVertex.id;
       this.label = idOrVertex.label;
@@ -65,7 +64,7 @@ export class Vertex implements iVertex {
       this.fetched = idOrVertex.fetched;
       this.origin = idOrVertex.origin;
       this.locked = idOrVertex.locked;
-      this.coords = new Point3D(idOrVertex.coords);
+      this.coords = new Point3DImpl(idOrVertex.coords);
     } else {
       this.id = "";
       this.label = "";
@@ -73,13 +72,17 @@ export class Vertex implements iVertex {
       this.fetched = false;
       this.origin = false;
       this.locked = false;
-      this.coords = new Point3D();
+      this.coords = new Point3DImpl();
     }
   }
 
-  mergeResponseData(vert: iVertex) {
+  /**
+   * Update this using data from a(n) @see WikiverseServiceResponse ensuring
+   * @param vert - the Vertex value provided from the WikiverseServiceAPI
+   */
+  mergeResponseData(vert: Vertex) {
     this.label = vert.label;
-    this.coords = new Point3D(vert.coords);
+    this.coords = new Point3DImpl(vert.coords);
     this.description = vert.description;
     this.fetched = true;
   }

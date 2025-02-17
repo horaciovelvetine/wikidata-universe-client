@@ -1,6 +1,6 @@
 import { Vertex } from "./vertex";
 
-export interface iEdge {
+export interface Edge {
   srcId: string;
   tgtId: string;
   propertyId: string;
@@ -14,7 +14,7 @@ export enum DIRECTION {
   PARALLEL = "parallel",
 }
 
-export class Edge implements iEdge {
+export class EdgeImpl implements Edge {
   srcId: string;
   tgtId: string;
   propertyId: string;
@@ -22,8 +22,8 @@ export class Edge implements iEdge {
   fetched: boolean;
 
   constructor();
-  constructor(edge: iEdge);
-  constructor(edge?: iEdge) {
+  constructor(edge: Edge);
+  constructor(edge?: Edge) {
     this.srcId = edge?.srcId || "";
     this.tgtId = edge?.tgtId || "";
     this.propertyId = edge?.propertyId || "";
@@ -70,7 +70,7 @@ export class Edge implements iEdge {
   /**
    * @method mergeResponseData() - update the current edge with data from the WikiverseServiceResponse
    */
-  mergeResponseData(edgeData: iEdge) {
+  mergeResponseData(edgeData: Edge) {
     this.propertyId = edgeData.propertyId;
     this.label = edgeData.label;
     this.fetched = true;

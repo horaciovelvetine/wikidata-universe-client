@@ -1,18 +1,18 @@
-export interface iPoint3D {
+export interface Point3D {
   x: number;
   y: number;
   z: number;
 }
 
-export class Point3D implements iPoint3D {
+export class Point3DImpl implements Point3D {
   x: number;
   y: number;
   z: number;
 
   constructor();
-  constructor(point?: iPoint3D);
+  constructor(point?: Point3D);
   constructor(x: number, y: number, z: number);
-  constructor(pointOrX?: number | iPoint3D, y?: number, z?: number) {
+  constructor(pointOrX?: number | Point3D, y?: number, z?: number) {
     if (typeof pointOrX === "number") {
       this.x = pointOrX;
       this.y = y!;

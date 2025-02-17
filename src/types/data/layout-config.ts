@@ -1,16 +1,16 @@
-export interface iLayoutConfig {
+export interface LayoutConfig {
   dataDensity: number;
   attractionMult: number;
   repulsionMult: number;
 }
 
-export class LayoutConfig implements iLayoutConfig {
+export class LayoutConfigImpl implements LayoutConfig {
   dataDensity: number;
   attractionMult: number;
   repulsionMult: number;
 
   constructor();
-  constructor(defaultConfig?: iLayoutConfig) {
+  constructor(defaultConfig?: LayoutConfig) {
     if (defaultConfig) {
       this.dataDensity = defaultConfig.dataDensity;
       this.attractionMult = defaultConfig.attractionMult;
