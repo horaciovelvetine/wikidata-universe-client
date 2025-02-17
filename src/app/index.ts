@@ -7,4 +7,5 @@ export {
   BACKEND_URL,
   GITHUB_URL,
   MAILTO_URL,
+  WIKIDATA_HOMEPAGE,
 } from "./wikiverse/wikiverse-constants";
