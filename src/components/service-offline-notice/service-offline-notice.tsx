@@ -1,26 +1,20 @@
 import "./service-offline-notice.css";
-import { createRef, useEffect } from "react";
 
 import { Exclaims, Question } from "../../assets/icons";
-import { useWikiverseService } from "../../contexts";
+import { useWikiverseService } from "../../providers";
+import { useComponentID } from "../../hooks";
 
-const ID = (sufx: string) => `offline-notice-${sufx}`;
-
-export const ServiceOfflineNotice = () => {
+/**
+ * Component which subscribes to the WikiverseService's @state isOnline, if this is false the
+ * element takes presedence over all other interactivity in the app and displays a large notice
+ * to the user on-screen
+ */
+export const ServiceOfflineNotice = (): JSX.Element => {
+  const { ID } = useComponentID("offline-notice");
   const { isOnline } = useWikiverseService();
-  const containerRef = createRef<HTMLDivElement>();
-
-  useEffect(() => {
-    if (!containerRef.current) return;
-    if (isOnline) {
-      containerRef.current.style.opacity = "0";
-    } else {
-      containerRef.current.style.opacity = "100";
-    }
-  }, [isOnline, containerRef]);
 
   return (
-    <div id={ID("container")} ref={containerRef}>
+    <div id={ID("container")} className={isOnline ? "" : "on-screen"}>
       <div id={ID("text-container")}>
         <h1>the Wikiverse is offline.</h1>
         <h3>refresh the page or try again later.</h3>

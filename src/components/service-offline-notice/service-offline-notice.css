@@ -5,8 +5,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  pointer-events: none;
   opacity: 0;
-  transition: opacity var(--def-transit) ease-in-out;
+  transition: opacity var(--default-transition-dur) ease-in-out;
+}
+#offline-notice-container.on-screen {
+  transition: opacity var(--default-transition-dur) ease-in-out;
+  opacity: 100%;
+  pointer-events: auto;
 }
 
 #offline-notice-text-container {
@@ -14,13 +20,13 @@
 }
 
 #offline-notice-text-container h1 {
-  font-family: 'CharisSIL-Bold', serif;
+  font-family: "CharisSIL-Bold", serif;
   font-size: clamp(2rem, 5vw, 3.5rem);
   text-shadow: 1px 1px black;
 }
 
 #offline-notice-text-container h3 {
-  font-family: 'CharisSIL-Regular', serif;
+  font-family: "CharisSIL-Regular", serif;
   font-size: clamp(1.25rem, 5vw, 2rem);
   text-shadow: 1px 1px black;
 }
