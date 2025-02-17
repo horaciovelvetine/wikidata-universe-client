@@ -10,7 +10,7 @@
   /* prevent pointer when not on screen */
   pointer-events: none;
   opacity: 0;
-  transition: opacity var(--def-transit) ease-in-out;
+  transition: opacity var(--default-transition-dur) ease-in-out;
 }
 
 /* Class selector appended to show-hide elements using opacity */
@@ -52,8 +52,8 @@
   color: rgb(var(--hyperlink));
   font-size: 1rem;
   transition:
-    font-size var(--def-transit),
-    text-decoration var(--def-transit) ease-in-out;
+    font-size var(--default-transition-dur),
+    text-decoration var(--default-transition-dur) ease-in-out;
   text-decoration: none;
 }
 

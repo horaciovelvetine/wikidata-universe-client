@@ -4,23 +4,12 @@ import { GITHUB_URL, _bl, MAILTO_URL } from "../../app";
 import {
   useDeviceCompatabilityCheck,
   useWikiverseService,
-} from "../../contexts";
+} from "../../providers";
 import { useComponentID } from "../../hooks";
 
 /**
- * Displays a notice when the Wikiverse detects the client is using an  incompatible device.
- * If the device is incompatible, it displays a message informing the user about the
- * incompatibility and provides links for more information. It will not render if the
- * WikiverseService is not online
- *
- * @remarks
- * This component uses the `useComponentID` hook to generate unique IDs for its elements,
- * the `useWikiverseService` hook to check if the user is online, and the
- * `useDeviceCompatabilityCheck` hook to check if the device meets the minimum screen size requirements.
- *
- * @see {@link useComponentID}
- * @see {@link useWikiverseService}
- * @see {@link useDeviceCompatabilityCheck}
+ * Display Notice used when the Wikiverse detects the client is using an incompatible device.
+ * It should (will?) not render if the WikiverseService is not online.
  */
 
 export const IncompatibleDeviceNotice = (): JSX.Element => {
