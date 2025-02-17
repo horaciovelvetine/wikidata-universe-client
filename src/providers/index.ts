@@ -1,9 +1,9 @@
 export {
   WikiverseServiceProvider,
   useWikiverseService,
-} from "./wikiverse-service-provider/wikiverse-service-provider";
+} from "./dir/wikiverse-service-provider";
 
 export {
   DeviceCompatabilityProvider,
   useDeviceCompatabilityCheck,
-} from "./device-compatability-provider/device-compatability-provider";
+} from "./dir/device-compatability-provider";
