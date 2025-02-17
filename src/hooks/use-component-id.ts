@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 /**
  * Custom hook to provides a way for each element inside a React component to share a similarly prefixed ID.
  * @function useComponentID() - 'remembers' an ID prefix for the enclosing component, providing @function ID()
@@ -12,7 +13,6 @@
  * const uniqueID = ID("123"); // "component-123"
  * ```
  */
-import { useCallback } from "react";
 
 export function useComponentID(componentPrefix: string) {
   const ID = useCallback(
