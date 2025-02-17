@@ -1,27 +1,30 @@
 import "./footer.css";
 import { Dispatch, SetStateAction } from "react";
 
-import { WikiverseServiceResponse, useWikiverseService } from "../../contexts";
+import { useWikiverseService } from "../../providers";
 import { _bl, BACKEND_URL, FRONTEND_URL, GITHUB_URL } from "../../app";
 import { useComponentID } from "../../hooks";
+import { WikiverseServiceResponse } from "../../types";
 
 interface FooterProps {
   setIsTutorialSketch: Dispatch<SetStateAction<boolean>>;
-  setInitSketchData: Dispatch<SetStateAction<WikiverseServiceResponse | null>>;
+  setSketchData: Dispatch<SetStateAction<WikiverseServiceResponse | null>>;
 }
-
-export const Footer = ({
-  setIsTutorialSketch,
-  setInitSketchData,
-}: FooterProps) => {
+/**
+ * Contains all content always positioned directly under the @component SketchContainer in Grid position 8 (CSS)
+ *
+ * @param {setIsTutorialSketch} props.setIsTutorialSketch - state setting dispatcher which is used to trigger the tutorial version of the Sketch for the user
+ * @param {setSketchData} props.setSketchData - sketch initializing setter called when starting up a tutorial sketch
+ */
+export const Footer = ({ setIsTutorialSketch, setSketchData }: FooterProps) => {
   const { ID } = useComponentID("footer");
-  const { getTutorial } = useWikiverseService();
+  const { getTutorialStep } = useWikiverseService();
 
   const handleTutorialClick = async () => {
     debugger; // stop tutorial execution for now
     setIsTutorialSketch(prev => !prev);
-    const res = await getTutorial("1");
-    setInitSketchData(res);
+    const res = await getTutorialStep("1");
+    setSketchData(res);
   };
 
   return (
