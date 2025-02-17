@@ -6,7 +6,8 @@ import {
   useContext,
   useMemo,
 } from "react";
-import { getDeviceDiemnsions } from "../../utils/get-device-dimensions";
+import { dimensionsMeetMinimumRequirements } from "../../types";
+import { getDeviceDimensions } from "../../utils/get-device-dimensions";
 
 interface DeviceCompatabilityProviderProps {
   children: ReactNode;
@@ -28,8 +29,7 @@ export const DeviceCompatabilityProvider = ({
   useEffect(() => {
     // state for size provider
     const handleResize = () => {
-      const deviceDimensions = getDeviceDiemnsions();
-      if (deviceDimensions.meetsMinScreenSizeRequirements()) {
+      if (dimensionsMeetMinimumRequirements(getDeviceDimensions())) {
         setMeetMinScreenSizeReq(true);
       } else {
         setMeetMinScreenSizeReq(false);
