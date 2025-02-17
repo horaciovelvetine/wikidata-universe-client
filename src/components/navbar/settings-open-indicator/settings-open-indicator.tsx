@@ -4,7 +4,7 @@ import { createRef, useEffect, useState } from "react";
 //TODO - remove animations
 import { showHideSettingsOpenIndicator } from "../animations/show-hide-settings-open-indicator";
 import { P5Sketch } from "../../../types";
-import { useDeviceCompatabilityCheck } from "../../../contexts";
+import { useDeviceCompatabilityCheck } from "../../../providers";
 
 const ID = (sufx: string) => `settings-status-${sufx}`;
 

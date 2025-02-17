@@ -1,61 +1,54 @@
 import "./navbar.css";
-import {
-  createRef,
-  Dispatch,
-  SetStateAction,
-  useEffect,
-  useState,
-} from "react";
+import { Dispatch, SetStateAction } from "react";
 
-// TODO - remove animation
-import { transitionHeaderTitleText } from "../animations/transition-header-title-text";
-import { P5Sketch } from "../../../types";
-import {
-  useDeviceCompatabilityCheck,
-  WikiverseServiceResponse,
-} from "../../../contexts";
+import { P5Sketch, WikiverseServiceResponse } from "../../../types";
+import { useDeviceCompatabilityCheck } from "../../../providers";
 
 // Sub-Components
 import { ReSearchInput } from "../re-search-input/re-search-input";
 import { SettingsOpenIndicator } from "../settings-open-indicator/settings-open-indicator";
 import { SketchDetailsSummary } from "../sketch-details-summary/sketch-details.summary";
+import { useComponentID } from "../../../hooks";
 
 interface NavbarProps {
   sketchRef: P5Sketch | null;
-  setInitSketchData: Dispatch<SetStateAction<WikiverseServiceResponse | null>>;
+  setSketchData: Dispatch<SetStateAction<WikiverseServiceResponse | null>>;
 }
 
-const ID = (sufx: string) => `navbar-${sufx}`;
+/**
+ * The Navbar is positioned directly above the "main-display" and contains elements for the Site Title, Re-Search-Input (for starting
+ * a new search while one is already active), Sketch Details Summary (statistics about the current search and Graph being displayed),
+ * and a open/close indicator for the Sketch Settings menu.
+ *
+ * @component
+ * @param {P5Sketch | null} props.sketchRef - Reference to the P5 sketch instance.
+ * @param {Dispatch<SetStateAction<WikiverseServiceResponse | null>>} props.setSketchData - Function to set the initial sketch data.
+ */
+export const Navbar = ({ sketchRef, setSketchData }: NavbarProps) => {
+  const { ID } = useComponentID("navbar");
+  const title = sketchRef ? "in 3D" : "the Wikiverse";
 
-export const Navbar = ({ sketchRef, setInitSketchData }: NavbarProps) => {
   const { meetsMinScreenSizeReq } = useDeviceCompatabilityCheck();
-  const TitleRef = createRef<HTMLHeadingElement>();
-  const ExploreRef = createRef<HTMLHeadingElement>();
-
-  const [title, setTitle] = useState("the Wikiverse");
-
-  useEffect(() => {
-    transitionHeaderTitleText(
-      TitleRef,
-      ExploreRef,
-      setTitle,
-      meetsMinScreenSizeReq,
-      sketchRef
-    );
-  }, [sketchRef, meetsMinScreenSizeReq, ExploreRef, TitleRef]);
+  const exploreTextAsPrimaryTitle = sketchRef && meetsMinScreenSizeReq;
 
   return (
     <nav id={ID("container")}>
       <div id={ID("layout")}>
         <header id={ID("header")}>
-          <h1 id={ID("title-text")} ref={TitleRef}>
+          <h1
+            id={ID("title-text")}
+            className={exploreTextAsPrimaryTitle ? "secondary" : "primary"}
+          >
             {title}
           </h1>
-          <h1 id={ID("explore-text")} ref={ExploreRef}>
+          <h1
+            id={ID("explore-text")}
+            className={exploreTextAsPrimaryTitle ? "secondary" : "primary"}
+          >
             explore
           </h1>
         </header>
-        {sketchRef && <ReSearchInput {...{ sketchRef, setInitSketchData }} />}
+        {sketchRef && <ReSearchInput {...{ sketchRef, setSketchData }} />}
         {sketchRef && <SketchDetailsSummary {...{ sketchRef }} />}
         {sketchRef && <SettingsOpenIndicator {...{ sketchRef }} />}
       </div>

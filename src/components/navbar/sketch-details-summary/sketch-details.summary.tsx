@@ -3,8 +3,8 @@ import { createRef, useEffect, useState } from "react";
 
 // TODO - remove animations
 import { showHideSketchDetailsSummary } from "../animations/show-hide-sketch-details-summary";
-import { Point3D, P5Sketch } from "../../../types";
-import { useDeviceCompatabilityCheck } from "../../../contexts";
+import { P5Sketch, Point3DImpl } from "../../../types";
+import { useDeviceCompatabilityCheck } from "../../../providers";
 
 interface SketchDetailsSummaryProps {
   sketchRef: P5Sketch;
@@ -27,8 +27,8 @@ export const SketchDetailsSummary = ({
   const [statementCount, setStatementCount] = useState(
     sketchRef?.state.topicCount() || 0
   );
-  const [camPosition, setCamPosition] = useState(new Point3D());
-  const [camFocus, setCamFocus] = useState(new Point3D());
+  const [camPosition, setCamPosition] = useState(new Point3DImpl());
+  const [camFocus, setCamFocus] = useState(new Point3DImpl());
 
   useEffect(() => {
     // attach interval to update camera position & focus intervals...
@@ -42,9 +42,11 @@ export const SketchDetailsSummary = ({
     const updateCamValues = () => {
       const cam = sketchRef.P5CAM();
       if (!cam) return; // get sketch cam and update state...
-      setCamPosition(new Point3D({ x: cam.eyeX, y: cam.eyeY, z: cam.eyeZ }));
+      setCamPosition(
+        new Point3DImpl({ x: cam.eyeX, y: cam.eyeY, z: cam.eyeZ })
+      );
       setCamFocus(
-        new Point3D({ x: cam.centerX, y: cam.centerY, z: cam.centerZ })
+        new Point3DImpl({ x: cam.centerX, y: cam.centerY, z: cam.centerZ })
       );
     };
 

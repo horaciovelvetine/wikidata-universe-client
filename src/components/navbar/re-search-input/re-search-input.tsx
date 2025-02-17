@@ -10,70 +10,78 @@ import {
 } from "react";
 
 //TODO - remove animations
-import { errorToggleIconVisibility } from "../../animations/error-toggle-icon-visibility";
 import { errorShakeReSearchContainer } from "../animations/error-shake-re-search-container";
 import { moveReSearchInputInView } from "../animations/move-re-search-input-in-view";
 import { showHideReSearchInput } from "../animations/show-hide-re-search-input";
-import { P5Sketch } from "../../../types";
+import { P5Sketch, WikiverseServiceResponse } from "../../../types";
 import {
   useDeviceCompatabilityCheck,
   useWikiverseService,
-  WikiverseServiceResponse,
-} from "../../../contexts";
+} from "../../../providers";
+import { useComponentID } from "../../../hooks";
 
 interface ReSearchInputProps {
   sketchRef: P5Sketch;
-  setInitSketchData: Dispatch<SetStateAction<WikiverseServiceResponse | null>>;
+  setSketchData: Dispatch<SetStateAction<WikiverseServiceResponse | null>>;
 }
-
-const ID = (sufx: string) => `re-search-${sufx}`;
-
+/**
+ * ReSearchInput component allows users to input and submit search queries.
+ * It integrates with a P5 sketch and updates the sketch's query state.
+ * The component also handles device compatibility checks and adjusts its visibility accordingly.
+ *
+ * @param {ReSearchInputProps} props - The properties for the ReSearchInput component:
+ * @prop {P5Sketch} props.sketchRef - Reference to the P5 sketch instance.
+ * @prop {Dispatch<SetStateAction<WikiverseServiceResponse | null>>} props.setSketchData - Function to set the initial sketch data.
+ */
 export const ReSearchInput = ({
   sketchRef,
-  setInitSketchData,
+  setSketchData,
 }: ReSearchInputProps) => {
-  const { meetsMinScreenSizeReq } = useDeviceCompatabilityCheck();
-  const { getQueryData } = useWikiverseService();
+  const { ID } = useComponentID("re-search");
   const [query, setQuery] = useState(sketchRef.state.query());
 
-  const ReSearchCont = createRef<HTMLDivElement>();
-  const InputRef = createRef<HTMLInputElement>();
-  const IconRef = createRef<HTMLImageElement>();
-  const DngrIconRef = createRef<HTMLImageElement>();
+  const { meetsMinScreenSizeReq } = useDeviceCompatabilityCheck();
+  const { getNewQueryData, requestError } = useWikiverseService();
 
   useEffect(() => {
     // tell sketch how to update query...
     sketchRef.state.addQuerySubscriber(setQuery);
-    moveReSearchInputInView(ReSearchCont);
   });
-
-  useEffect(() => {
-    // hide input when screen to small...
-    showHideReSearchInput(ReSearchCont, meetsMinScreenSizeReq);
-  }, [meetsMinScreenSizeReq, ReSearchCont]);
 
   const handleNewSearchSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const data = await getNewQueryData(query);
+    if (requestError) {
+      // todo handle the requst error, or early jump out...
+      debugger;
+    }
 
-    await getQueryData(query)
-      .then(res => {
-        setInitSketchData(res);
-      })
-      .catch(() => {
-        errorShakeReSearchContainer(InputRef, ReSearchCont);
-        errorToggleIconVisibility(IconRef, DngrIconRef);
-      });
+    // todo handle rest of search stuff
   };
 
   const handleSearchInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     sketchRef.state.setQuery(e.target.value);
   };
 
+  const containerClass = !sketchRef
+    ? ""
+    : requestError
+      ? "res-error"
+      : "on-screen";
+
   return (
-    <div id={ID("container")} ref={ReSearchCont}>
+    <div id={ID("container")} className={containerClass}>
       <div id={ID("icon-container")}>
-        <img id={ID("icon")} src={Search} ref={IconRef} />
-        <img id={ID("error-icon")} src={SearchDngr} ref={DngrIconRef} />
+        <img
+          id={ID("icon")}
+          src={Search}
+          className={requestError ? "res-error" : ""}
+        />
+        <img
+          id={ID("error-icon")}
+          src={SearchDngr}
+          className={requestError ? "res-error" : ""}
+        />
       </div>
       <form id={ID("form")} onSubmit={handleNewSearchSubmit}>
         <input
@@ -81,7 +89,7 @@ export const ReSearchInput = ({
           type="text"
           value={query}
           onChange={handleSearchInputChange}
-          ref={InputRef}
+          className={requestError ? "res-error" : ""}
         />
       </form>
     </div>

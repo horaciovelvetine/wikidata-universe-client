@@ -11,18 +11,24 @@
   position: relative;
 }
 
-#navbar-header {}
-
 #navbar-title-text {
   position: absolute;
   font-size: clamp(2rem, 6vw, 3.8rem);
   text-shadow: 1px 1px black;
   text-wrap: nowrap;
   min-width: fit-content;
-  transition: transform var(--def-transit) ease-in-out;
+  /* animates position on top of explore text when a sketch is active */
+  transition: transform var(--default-transition-dur) ease-in-out;
   letter-spacing: -0.15rem;
-  /* animates to new position on top of explore text... */
-  /* transform: scale(35%) translateY(-75%); */
+}
+
+/* .primary class indicates this text is the current title */
+/* .secondary class indicates this text is the sub-title */
+#navbar-title-text.primary {
+  transform: scale(100%) translateY(0%);
+}
+#navbar-title-text.secondary {
+  transform: scale(35%) translateY(-75%);
 }
 
 #navbar-explore-text {
@@ -31,6 +37,12 @@
   text-wrap: nowrap;
   letter-spacing: -0.25rem;
   min-width: fit-content;
-  transition: transform var(--def-transit) ease-in-out;
+  transition: transform var(--default-transition-dur) ease-in-out;
   transform: translateY(150%);
+}
+#navbar-explore-text.primary {
+  transform: translateY(150%);
+}
+#navbar-explore-text.secondary {
+  transform: translateY(0%);
 }

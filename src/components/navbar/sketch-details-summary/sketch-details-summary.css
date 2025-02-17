@@ -1,5 +1,5 @@
 #sketch-details-container {
-  transition: transform var(--def-transit) ease-in-out;
+  transition: transform var(--default-transition-dur) ease-in-out;
   transform: translateY(100%);
   width: 125%;
   justify-items: flex-end;
@@ -13,7 +13,7 @@
 #sketch-details-counts-container {
   display: flex;
   align-items: flex-end;
-  gap: 0.25rem
+  gap: 0.25rem;
 }
 
 /* ! STATS STATS STATS */
@@ -39,7 +39,12 @@
 
 #sketch-details-statements-label {
   background-clip: text;
-  background: linear-gradient(to right, rgb(var(--edge-out)), rgb(var(--edge-para)), rgb(var(--edge-in)));
+  background: linear-gradient(
+    to right,
+    rgb(var(--edge-out)),
+    rgb(var(--edge-para)),
+    rgb(var(--edge-in))
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   position: relative;
@@ -86,14 +91,13 @@
 }
 
 #sketch-details-cam-container-label span {
-  color: rgb(var(--light-blue))
+  color: rgb(var(--light-blue));
 }
-
 
 #sketch-details-cam-data-layout {
   display: flex;
   align-items: flex-end;
-  gap: 0.15rem
+  gap: 0.15rem;
 }
 
 #sketch-details-cam-data-label-container {
@@ -109,11 +113,11 @@
 }
 
 #sketch-details-cam-position-label {
-  color: rgb(var(--light-blue), 0.5)
+  color: rgb(var(--light-blue), 0.5);
 }
 
 #sketch-details-cam-focus-label {
-  color: rgb(var(--light-blue), 0.5)
+  color: rgb(var(--light-blue), 0.5);
 }
 
 #sketch-details-cam-numbers-container {

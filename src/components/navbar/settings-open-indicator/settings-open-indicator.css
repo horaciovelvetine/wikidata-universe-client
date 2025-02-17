@@ -4,7 +4,7 @@
   bottom: -14rem;
   transform: translateX(0%);
   text-shadow: 1px 1px black;
-  transition: transform var(--def-transit) ease-in-out;
+  transition: transform var(--default-transition-dur) ease-in-out;
 }
 
 #settings-status-title {
