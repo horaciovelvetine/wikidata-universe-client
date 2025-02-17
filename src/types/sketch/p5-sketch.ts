@@ -4,21 +4,21 @@ import { Camera, Font } from "p5";
 import { Dispatch, SetStateAction } from "react";
 
 import { getMainDispDimensions } from "../../utils/get-main-disp-dimensions";
-import {
-  WikiverseServiceResponse,
-  WikiverseServiceRequestPayload,
-} from "../../contexts";
+
 import { ManagedCamera } from "./managed-camera";
 import { ManagedState } from "./managed-state";
 import { Graphset } from "../data/graphset";
-import { Point3D } from "../data/point-3d";
-import { Vertex } from "../data/vertex";
+import { Point3DImpl } from "../data/point-3d";
+import { Vertex, VertexImpl } from "../data/vertex";
 import { MinMaxSet } from "../data/min-max-set";
 import { Edge } from "../data/edge";
+import { WikiverseServiceResponse } from "../data/wikiverse-service-response";
+import { WikiverseServiceRequestPayload } from "../data/wikiverse-service-request-payload";
+import { WikiverseService } from "../data/wikiverse-service";
 
 export interface SketchProps {
   p5: P5CanvasInstance;
-  initSketchData: WikiverseServiceResponse | null;
+  sketchData: WikiverseServiceResponse | null;
   setSketchRef: Dispatch<SetStateAction<P5Sketch | null>>;
 }
 
@@ -31,11 +31,11 @@ export class P5Sketch {
   graphset: Graphset;
   state: ManagedState;
 
-  constructor({ p5, initSketchData, setSketchRef }: SketchProps) {
+  constructor({ p5, sketchData, setSketchRef }: SketchProps) {
     this.p5 = p5;
     this.cam = new ManagedCamera(p5);
-    this.state = new ManagedState(initSketchData);
-    this.graphset = new Graphset(initSketchData);
+    this.state = new ManagedState(sketchData);
+    this.graphset = new Graphset(sketchData);
     // tell react about the sketch...
     setSketchRef(this);
   }
@@ -108,7 +108,7 @@ export class P5Sketch {
 
     this.p5cam.setPosition(x, y, z + 200);
     this.p5cam.lookAt(x, y + 300, z); // look below vertex for init 'pan-up' effect
-    this.cam.setLookAtTgt(new Point3D({ x, y, z }));
+    this.cam.setLookAtTgt(new Point3DImpl({ x, y, z }));
   }
 
   /**
@@ -176,9 +176,9 @@ export class P5Sketch {
   /**
    * @method mousePositionedOnVertex() - checks if the mouse is positioned on any of the vertices on based on a ray trace, returning the first (matching) Vertex it finds or null if no Vertex is positoned under the mouse
    */
-  mousePositionedOnVertex(): Vertex | null {
+  mousePositionedOnVertex(): VertexImpl | null {
     if (!this.p5cam) return null;
-    let mouseTgt: Vertex | null = null;
+    let mouseTgt: VertexImpl | null = null;
 
     for (const vert of this.graphset.vertices) {
       if (vert.traceRay(this.p5, this.p5cam)) {
@@ -199,7 +199,7 @@ export class P5Sketch {
   /**
    * @method handleNewSelectionClickTarget() - update the currently hovered global state to null, the currently selected global state to the new target, and adjusts the cameras lookAt target to the clickTarget's position. (This transition wil be animated inside the draw loop... @see ManagedCamera )
    */
-  handleNewSelectionClickTarget(clickTgt: Vertex) {
+  handleNewSelectionClickTarget(clickTgt: VertexImpl) {
     this.state.setCurHovered(null);
     this.state.setCurSelected(clickTgt);
     this.cam.setLookAtTgt(clickTgt.coords);
@@ -211,17 +211,27 @@ export class P5Sketch {
   //*/==> REQUEST HANDLERS <==/*//
   //*/==> REQUEST HANDLERS <==/*//
 
-  private requestPayloader = (
-    subQuery: string
-  ): WikiverseServiceRequestPayload => {
+  /**
+   * @method createPostRequestPayload()
+   * Helper method for the POST requests which require a data payload to be sent to the API for calculation
+   *
+   * @param {string?} altQuery - uses the current this.state.query() @value by default, when present the API fill alter which related data it returns to be relevant to the provided alternate target,
+   */
+  private createPostRequestPayload(
+    altQuery?: string
+  ): WikiverseServiceRequestPayload {
     return {
-      query: subQuery,
+      query: altQuery || this.state.query(),
       ...this.graphset,
       layoutConfig: this.state.layoutConfig(),
     };
-  };
+  }
   /**
-   * @method handleClickToFetchTarget() - on valid selection of a new Vertex makes a request to the API (using the provided request ref) to get and update the data
+   * @method handleClickToFetchTarget()
+   * Use the provided clickTgt to request the information related to it
+   *
+   * @param {Vertex} clickTgt - the vertex to get infomration about
+   * @param {WikiverseService} post - the @method makePostRequest() from the @see WikiverseService
    */
   async handleClickToFetchTarget(
     clickTgt: Vertex,
@@ -230,21 +240,24 @@ export class P5Sketch {
       data: WikiverseServiceRequestPayload
     ) => Promise<WikiverseServiceResponse>
   ) {
+    // skip when clickToFetch is not true...
     if (!this.state.clickToFetchEnabled()) return;
 
-    await post("click-target", this.requestPayloader(clickTgt.id))
-      .then(res => {
-        this.graphset.mergeResponseData(res);
-        this.state.updateCountTotals(this.graphset);
-        this.state.trickCurSelectedUpdate();
-      })
-      .catch(err => {
-        console.error(err);
-      });
+    const res = await post(
+      "click-target",
+      this.createPostRequestPayload(clickTgt.id)
+    );
+
+    this.graphset.mergeResponseData(res);
+    this.state.updateCountTotals(this.graphset);
+    this.state.trickCurSelectedUpdate();
   }
 
   /**
-   * @method getInitialRelatedData() - on initialization of a new Wikiverse Sketch this will grab the related data (Vertices and Edges) for the initial resultant Vertex (the origin)
+   * @method getInitialRelatedData()
+   * A new Wikiverse Sketch call this to grab the related data (Vertices and Edges) for the initial resultant Vertex (the origin)
+   *
+   * @param {WikiverseService} post - the @method makePostRequest() from the @see WikiverseService
    */
   async getInitialRelatedData(
     post: (
@@ -252,37 +265,33 @@ export class P5Sketch {
       data: WikiverseServiceRequestPayload
     ) => Promise<WikiverseServiceResponse>
   ) {
-    await post("fetch-related", this.requestPayloader(this.state.query()))
-      .then(res => {
-        this.graphset.mergeResponseData(res);
-        this.state.updateCountTotals(this.graphset);
-        this.state.trickCurSelectedUpdate();
-      })
-      .catch(err => {
-        console.error(err);
-      });
+    const response = await post(
+      "fetch-related",
+      this.createPostRequestPayload()
+    );
+
+    this.graphset.mergeResponseData(response);
+    this.state.updateCountTotals(this.graphset);
+    this.state.trickCurSelectedUpdate();
   }
 
+  /**
+   * @method refreshLayoutPositions()
+   * Request a re-run of the layout positioning algorithim which unlocks all of the Vertices (@apiNote - excepts the origin) and re-positions them based on the current Graphset.
+   */
   async refreshLayoutPositions(
     post: (
       tgt: string,
       data: WikiverseServiceRequestPayload
     ) => Promise<WikiverseServiceResponse>
   ) {
-    await post("refresh-layout", this.requestPayloader(this.state.query()))
-      .then(res => {
-        this.graphset.updateVertexPositions(res);
-      })
-      .catch(err => {
-        console.error(err);
-      })
-      .finally(() => {
-        // pivot to new location for selected...
-        const selected = this.state.curSelected();
-        if (selected?.coords) {
-          this.CAM().setLookAtTgt(selected.coords);
-        }
-      });
+    const res = await post("refresh-layout", this.createPostRequestPayload());
+    this.graphset.updateVertexPositions(res);
+
+    const curSel = this.state.curSelected();
+    if (curSel) {
+      this.CAM().setLookAtTgt(curSel.coords);
+    }
   }
 
   //*/==> PRIVATE METHODS <==/*//
@@ -348,7 +357,7 @@ export class P5Sketch {
   /**
    * @method drawRelatedEdges() - uses the curVert as a contextual starting point for drawing all the Edges existing which mention that Vertex
    */
-  private drawRelatedEdges(curVert: Vertex) {
+  private drawRelatedEdges(curVert: VertexImpl) {
     const relatedEdges = this.graphset.getRelatedEdges(curVert);
     if (!relatedEdges) return;
 
