@@ -1,8 +1,8 @@
 import { Dispatch, SetStateAction } from "react";
-import { WikiverseServiceResponse } from "../../contexts";
-import { Vertex } from "../data/vertex";
-import { LayoutConfig } from "../data/layout-config";
+import { Vertex, VertexImpl } from "../data/vertex";
+import { LayoutConfigImpl } from "../data/layout-config";
 import { Graphset } from "../data/graphset";
+import { WikiverseServiceResponse } from "../data/wikiverse-service-response";
 
 /**
  * Used to synchronize the external update for React's state for on-screen elements which need details emitted from the Sketch itself, and also control elements of the sketch at the same time
@@ -13,14 +13,16 @@ export class ManagedState {
   private reactCurQuerySubscribers: Dispatch<SetStateAction<string>>[] = [];
 
   //* Currently Hovered
-  private hovered: Vertex | null = null;
-  private reactHoveredSubscribers: Dispatch<SetStateAction<Vertex | null>>[] =
-    [];
+  private hovered: VertexImpl | null = null;
+  private reactHoveredSubscribers: Dispatch<
+    SetStateAction<VertexImpl | null>
+  >[] = [];
 
   //* Currently Selected
-  private selected: Vertex | null = null;
-  private reactSelectedSubscribers: Dispatch<SetStateAction<Vertex | null>>[] =
-    [];
+  private selected: VertexImpl | null = null;
+  private reactSelectedSubscribers: Dispatch<
+    SetStateAction<VertexImpl | null>
+  >[] = [];
 
   //* Boolean/Toggle-able Settings
   private clickToFetch = false;
@@ -108,12 +110,12 @@ export class ManagedState {
     return this.hovered;
   }
 
-  setCurHovered(vert: Vertex | null) {
+  setCurHovered(vert: VertexImpl | null) {
     this.hovered = vert;
     this.reactHoveredSubscribers.forEach(subscription => subscription(vert));
   }
 
-  addCurHoveredSubscriber(setter: Dispatch<SetStateAction<Vertex | null>>) {
+  addCurHoveredSubscriber(setter: Dispatch<SetStateAction<VertexImpl | null>>) {
     this.reactHoveredSubscribers.push(setter);
   }
 
@@ -124,21 +126,24 @@ export class ManagedState {
     return this.selected;
   }
 
-  setCurSelected(vert: Vertex | null) {
+  setCurSelected(vert: VertexImpl | null) {
     this.selected = vert;
     this.reactSelectedSubscribers.forEach(subscription => subscription(vert));
   }
 
-  addCurSelectedSubscriber(setter: Dispatch<SetStateAction<Vertex | null>>) {
+  addCurSelectedSubscriber(
+    setter: Dispatch<SetStateAction<VertexImpl | null>>
+  ) {
     this.reactSelectedSubscribers.push(setter);
   }
 
   /**
-   * @method trickCurSelectedUpdate() - called after service responses containing new data to alert curSelected subscribers which derive state from that w/o deselecting...
+   * @method trickCurSelectedUpdate()
+   * called after service responses containing new data to alert curSelected subscribers which derive state from that w/o deselecting causing flashing animations in the UI in the @see SketchHUD @component
    */
   trickCurSelectedUpdate() {
     const curSelected = this.curSelected();
-    curSelected && this.setCurSelected(new Vertex(curSelected));
+    curSelected && this.setCurSelected(new VertexImpl(curSelected));
   }
 
   //* ON SCREEN DISPLAY SETTINGS TOGGLES
@@ -146,7 +151,8 @@ export class ManagedState {
   //* ON SCREEN DISPLAY SETTINGS TOGGLES
 
   /**
-   * @method CLICK_TO_FETCH() - toggle sending a fetch request for more data when clicking on a Vertex
+   * @method CLICK_TO_FETCH()
+   * toggle sending a fetch request for more data when clicking on a Vertex
    */
   clickToFetchEnabled() {
     return this.clickToFetch;
@@ -165,7 +171,8 @@ export class ManagedState {
   }
 
   /**
-   * @method SHOW_BOUNDING_BOX() - bounding box frame drawn on-screen to locate sketch in space better.
+   * @method SHOW_BOUNDING_BOX()
+   * bounding box frame drawn on-screen to locate sketch in space better.
    */
   showBoundingBox() {
     return this.boundingBox;
@@ -177,7 +184,8 @@ export class ManagedState {
   }
 
   /**
-   * @method SHOW_AXIS_ORIENTATION() - typical R:X G:Y B:Z directional indicator drawn on screen to locate orientation
+   * @method SHOW_AXIS_ORIENTATION()
+   * typical R:X G:Y B:Z directional indicator drawn on screen to locate orientation
    */
   showAxisOrientation() {
     return this.axisOrientation;
@@ -189,7 +197,8 @@ export class ManagedState {
   }
 
   /**
-   * @method SHOW_GRAPH_STATISTICS() - display the on-screen summary of the current Graphset and Camera positions
+   * @method SHOW_GRAPH_STATISTICS()
+   * display the on-screen summary of the current Graphset and Camera positions
    */
   showSketchDetailsSummary() {
     return this.sketchDetailsSummary;
@@ -299,8 +308,8 @@ export class ManagedState {
     this.density = dens;
   }
 
-  layoutConfig(): LayoutConfig {
-    return new LayoutConfig().updateConfigValues(
+  layoutConfig() {
+    return new LayoutConfigImpl().updateConfigValues(
       this.dataDensity(),
       this.attractionMult(),
       this.repulsionMult()
@@ -425,7 +434,7 @@ export class ManagedState {
    */
   private selectOriginOnInit(initSketchData: WikiverseServiceResponse) {
     const originVertData =
-      initSketchData.vertices.find(v => {
+      initSketchData.vertices.find((v: Vertex) => {
         if (v.origin) return v;
         if (v.label) {
           return (
@@ -435,6 +444,6 @@ export class ManagedState {
       }) || null;
 
     if (!originVertData) return;
-    this.setCurSelected(new Vertex(originVertData));
+    this.setCurSelected(new VertexImpl(originVertData));
   }
 }

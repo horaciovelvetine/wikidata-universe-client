@@ -1,6 +1,6 @@
 import { P5CanvasInstance } from "@p5-wrapper/react";
 import { Camera, Vector } from "p5";
-import { Point3D } from "../data/point-3d";
+import { Point3D, Point3DImpl } from "../data/point-3d";
 
 export class ManagedCamera {
   private p5: P5CanvasInstance;
@@ -99,7 +99,7 @@ export class ManagedCamera {
     const sX = this.cam.eyeX;
     const sY = this.cam.eyeY;
     const sZ = this.cam.eyeZ;
-    const curPnt = new Point3D({ x: sX, y: sY, z: sZ });
+    const curPnt = new Point3DImpl({ x: sX, y: sY, z: sZ });
 
     //skip if already located here
     if (curPnt.x === point.x && curPnt.y === point.y && curPnt.z === point.z)
