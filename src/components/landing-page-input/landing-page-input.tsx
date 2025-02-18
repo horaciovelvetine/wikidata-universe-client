@@ -31,14 +31,14 @@ export const LandingPageInput = ({
 }: LPInputProps) => {
   const { ID } = useComponentID("main-landing");
   const { isOnline, requestError, getNewQueryData } = useWikiverseService();
-  const [isErrored, setIsErrored] = useState(requestError);
+  const [isErrored, setIsErrored] = useState(requestError); // false by default
   const inputRef = createRef<HTMLInputElement>();
 
   const handleSearchSubmit = async (e: FormEvent) => {
     e.preventDefault();
     const newQuery = inputRef.current?.value || "";
     if (newQuery === "") {
-      // no input- provided set cycle local err state
+      // no input provided - cycle local err state
       setIsErrored(true);
       setTimeout(() => {
         setIsErrored(false);
@@ -46,8 +46,6 @@ export const LandingPageInput = ({
       return;
     }
     const data = await getNewQueryData(newQuery);
-
-    //TODO: cleanup and setup new sketch
     setSketchData(data);
   };
 
