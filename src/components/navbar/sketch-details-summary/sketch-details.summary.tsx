@@ -1,31 +1,33 @@
 import "./sketch-details-summary.css";
-import { createRef, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
-// TODO - remove animations
-import { showHideSketchDetailsSummary } from "../animations/show-hide-sketch-details-summary";
 import { P5Sketch, Point3DImpl } from "../../../types";
 import { useDeviceCompatabilityCheck } from "../../../providers";
+import { useComponentID } from "../../../hooks";
 
-interface SketchDetailsSummaryProps {
+interface SDSProps {
   sketchRef: P5Sketch;
 }
 
-const ID = (sufx: string) => `sketch-details-${sufx}`;
-
-export const SketchDetailsSummary = ({
-  sketchRef,
-}: SketchDetailsSummaryProps) => {
+/**
+ * A small text display summarizing details about the currently active sketch including counts and camera position. The client can show/hide this display using either the settings menu or the "," (comma) shortcut-key.
+ *
+ * @apiNote - This component relies on synchronus state and continuous updates using data pulled from the active sketch and relies on several @method useEffect() side-effects to keep react state in sync with the @see P5Sketch object.
+ *
+ * @param {P5Sketch} props.sketchRef - the currently active sketch
+ */
+export const SketchDetailsSummary = ({ sketchRef }: SDSProps) => {
+  const { ID } = useComponentID("sketch-details");
   const { meetsMinScreenSizeReq } = useDeviceCompatabilityCheck();
-  const [showSketchDetailsSummary, setShowSketchDetailsSummary] = useState(
+  const [isShown, setIsShown] = useState(
     sketchRef.state.showSketchDetailsSummary()
   );
-  const ContainerRef = createRef<HTMLDivElement>();
 
   const [topicCount, setTopicCount] = useState(
     sketchRef?.state.topicCount() || 0
   );
   const [statementCount, setStatementCount] = useState(
-    sketchRef?.state.topicCount() || 0
+    sketchRef?.state.statementCount() || 0
   );
   const [camPosition, setCamPosition] = useState(new Point3DImpl());
   const [camFocus, setCamFocus] = useState(new Point3DImpl());
@@ -33,11 +35,10 @@ export const SketchDetailsSummary = ({
   useEffect(() => {
     // attach interval to update camera position & focus intervals...
     // setup topics and statements to subscribe to sketch updates through state...
+    // enables the P5Sketch to 'keypress' listen and toggle isShown with ","
     sketchRef.state.addTopicCountSubscriber(setTopicCount);
     sketchRef.state.addStatementCountSubscriber(setStatementCount);
-    sketchRef.state.addShowSketchDetailsSummarySubscriber(
-      setShowSketchDetailsSummary
-    );
+    sketchRef.state.addShowSketchDetailsSummarySubscriber(setIsShown);
 
     const updateCamValues = () => {
       const cam = sketchRef.P5CAM();
@@ -54,16 +55,11 @@ export const SketchDetailsSummary = ({
     return () => clearInterval(camInterval);
   });
 
-  useEffect(() => {
-    if (meetsMinScreenSizeReq) {
-      showHideSketchDetailsSummary(ContainerRef, showSketchDetailsSummary);
-    } else {
-      showHideSketchDetailsSummary(ContainerRef, meetsMinScreenSizeReq);
-    }
-  }, [showSketchDetailsSummary, meetsMinScreenSizeReq, ContainerRef]);
-
   return (
-    <div id={ID("container")} ref={ContainerRef}>
+    <div
+      id={ID("container")}
+      className={meetsMinScreenSizeReq && isShown ? "on-screen" : ""}
+    >
       <div id={ID("layout")}>
         <div id={ID("counts-container")}>
           <div id={ID("counts-labels-container")}>

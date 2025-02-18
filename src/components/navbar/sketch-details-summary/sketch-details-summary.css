@@ -1,8 +1,12 @@
 #sketch-details-container {
   transition: transform var(--default-transition-dur) ease-in-out;
-  transform: translateY(100%);
+  transform: translateY(125%);
   width: 125%;
   justify-items: flex-end;
+}
+
+#sketch-details-container.on-screen {
+  transform: translateY(0%);
 }
 
 #sketch-details-layout {
