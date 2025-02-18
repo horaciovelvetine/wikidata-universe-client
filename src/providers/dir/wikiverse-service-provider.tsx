@@ -92,7 +92,9 @@ export const WikiverseServiceProvider = ({
       const response = await fetch(
         `${BASE_URL}/query-data?${new URLSearchParams({ query }).toString()}`
       ).finally(() => setIsLoading(false));
-      return await response.json();
+      const json = await response.json();
+      console.log("getQueryDataResponse()", json);
+      return json;
     } catch (error) {
       handleBadResponse(error);
     }
@@ -115,7 +117,9 @@ export const WikiverseServiceProvider = ({
         ).finally(() => {
           setIsLoading(false);
         });
-        return await response.json();
+        const json = await response.json();
+        console.log(`makePostRequest(${tgt}):`, json);
+        return json;
       } catch (error) {
         handleBadResponse(error);
       }
@@ -152,7 +156,9 @@ export const WikiverseServiceProvider = ({
       const response = await fetch(
         `${BASE_URL}/tutorial?${new URLSearchParams({ target }).toString()}`
       ).finally(() => setIsLoading(false));
-      return await response.json();
+      const json = await response.json();
+      console.log(`getTutorialStep(${target})`, json);
+      return json;
     } catch (error) {
       handleBadResponse(error);
     }
