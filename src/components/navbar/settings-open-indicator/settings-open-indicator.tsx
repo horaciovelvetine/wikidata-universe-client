@@ -1,38 +1,34 @@
 import "./settings-open-indicator.css";
-import { createRef, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
-//TODO - remove animations
-import { showHideSettingsOpenIndicator } from "../animations/show-hide-settings-open-indicator";
 import { P5Sketch } from "../../../types";
 import { useDeviceCompatabilityCheck } from "../../../providers";
+import { useComponentID } from "../../../hooks";
 
-const ID = (sufx: string) => `settings-status-${sufx}`;
-
-interface SettingsOpenIndicatorProps {
+interface SOIProps {
   sketchRef: P5Sketch;
 }
 
-export const SettingsOpenIndicator = ({
-  sketchRef,
-}: SettingsOpenIndicatorProps) => {
+/**
+ * Settings title text displayed whenever the settings menu is displayed on screen. Text translates on screen when shown and is otherwise visually hidden behind the main-display
+ *
+ * @param {P5Sketch} props.sketchRef - the currently active sketch instance
+ */
+export const SettingsOpenIndicator = ({ sketchRef }: SOIProps) => {
+  const { ID } = useComponentID("settings-status");
   const { meetsMinScreenSizeReq } = useDeviceCompatabilityCheck();
   const [isShowing, setIsShowing] = useState(false);
-  const containerRef = createRef<HTMLDivElement>();
 
   useEffect(() => {
+    // subscribe to the settings open P5Sketch state
     sketchRef.state.addshowSketchsettingsSubscriber(setIsShowing);
   });
 
-  useEffect(() => {
-    if (meetsMinScreenSizeReq) {
-      showHideSettingsOpenIndicator(containerRef, isShowing);
-    } else {
-      showHideSettingsOpenIndicator(containerRef, meetsMinScreenSizeReq);
-    }
-  }, [isShowing, meetsMinScreenSizeReq, containerRef]);
-
   return (
-    <div id={ID("container")} ref={containerRef}>
+    <div
+      id={ID("container")}
+      className={meetsMinScreenSizeReq && isShowing ? "settings-open" : ""}
+    >
       <div id={ID("title")}>
         <span>s</span>
         <span>e</span>

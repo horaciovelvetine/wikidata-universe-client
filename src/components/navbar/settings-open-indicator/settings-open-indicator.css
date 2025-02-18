@@ -4,7 +4,12 @@
   bottom: -14rem;
   transform: translateX(0%);
   text-shadow: 1px 1px black;
+  transform: translateX(0%);
   transition: transform var(--default-transition-dur) ease-in-out;
+}
+
+#settings-status-container.settings-open {
+  transform: translateX(120%);
 }
 
 #settings-status-title {

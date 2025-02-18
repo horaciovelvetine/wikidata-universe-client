@@ -1,19 +1,28 @@
 #re-search-container {
   display: inline-flex;
   align-items: center;
-  transition: all var(--default-transition-dur) ease-in-out;
-  transform: translateY(100%);
+  transition: all var(--error-transition-dur) ease-in-out;
 }
 
-#re-search-input.on-screen {
+#re-search-container.error-animate {
+  animation: horizontal-shake var(--error-transition-dur)
+    cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+/* Used to seperate out the animation of the whole container on-screen to arrive in parallel with the title positioned directly next to it */
+#re-search-layout {
+  display: inline-flex;
+  align-items: center;
+  transition: all var(--error-transition-dur) ease-in-out;
+  transform: translateY(175%);
+}
+
+/* moves from under main-display for transition*/
+#re-search-layout.on-screen {
   transform: translateY(0%);
 }
 
-#re-search-container.res-error {
-  transform: translateY(0%);
-  animation: horizontal-shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
-}
-
+/* Input Element start */
 #re-search-input {
   display: inline-flex;
   background-color: transparent;
@@ -26,13 +35,7 @@
   color: rgb(var(--font));
   border-bottom: 2px solid rgb(var(--font), 0.5);
   padding: 0.25rem 0.15rem;
-  transition: all 0.82s ease-in-out;
-}
-
-#re-search-input.res-error {
-  border-bottom-color: rgb(var(--danger));
-  color: rgb(var(--danger));
-  caret-color: rgb(var(--danger));
+  transition: all var(--error-transition-dur) ease-in-out;
 }
 
 #re-search-input:focus {
@@ -46,6 +49,14 @@
   color: rgba(var(--font), 0.35);
 }
 
+/* Must follow the ::pseudo selected states to modify their behvaior */
+#re-search-input.error-animate {
+  border-bottom: 2px solid rgb(var(--danger), 0.75);
+  color: rgb(var(--danger));
+  caret-color: rgb(var(--danger));
+}
+
+/* Div Container with both img elements */
 #re-search-icon-container {
   display: inline-flex;
 }
@@ -55,7 +66,7 @@
   opacity: 1;
 }
 
-#re-search-icon.res-error {
+#re-search-icon.error-animate {
   opacity: 0;
 }
 
@@ -65,7 +76,7 @@
   transition: opacity 0.82s;
 }
 
-#re-search-error-icon.res-error {
+#re-search-error-icon.error-animate {
   transition: opacity var(--default-transition-dur) ease-in-out;
   opacity: 1;
 }
