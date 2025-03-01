@@ -14,8 +14,6 @@ interface ParticlesSketchProps {
  * around the screen, and joined with nearby particles on every frame. The canvas resizes with the window
  * and fades the canvas when @var initSketchData - is provided and the user initializes a WikiverseSketch.
  *
- * @component
- *
  * @param {ParticlesSketchProps} props - The properties for the BackgroundSketch component.
  * @param {WikiverseServiceResponse | null} props.initSketchData - Initial data for the sketch, if available.
  */

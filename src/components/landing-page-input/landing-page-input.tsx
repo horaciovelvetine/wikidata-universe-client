@@ -20,7 +20,7 @@ interface LPInputProps {
 }
 
 /**
- * The primary landing UI for the application which prompts the user for their search.
+ * The primary landing UI for the application which prompts the user for their search to initialize a new @see P5Sketch
  *
  * @param {WikiverseServiceResponse | null} props.sketchData - used to determine the visibility of this @component
  * @param {setSketchData} props.setSketchData - setter used to initialize a new sketch and begin the apps primary functionality.

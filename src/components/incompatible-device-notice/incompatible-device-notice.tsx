@@ -8,8 +8,9 @@ import {
 import { useComponentID } from "../../hooks";
 
 /**
- * Display Notice used when the Wikiverse detects the client is using an incompatible device.
- * It should (will?) not render if the WikiverseService is not online.
+ * Notice mesage displayed on screen when the application detects the clients device is incompatible.
+ * Message display state is tied to the @see DeviceCompatabilityProvider which maintains the effect looking
+ * for screen resizing. This component will not display when the @see ServiceOfflineNotice is being displayed.
  */
 
 export const IncompatibleDeviceNotice = (): JSX.Element => {

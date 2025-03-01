@@ -25,7 +25,6 @@ interface RSIProps {
  * It integrates with a P5 sketch and updates the sketch's query state.
  * The component also handles device compatibility checks and adjusts its visibility accordingly.
  *
- * @param {RSIProps} props - The properties for the ReSearchInput component:
  * @prop {P5Sketch} props.sketchRef - Reference to the P5 sketch instance.
  * @prop {Dispatch<SetStateAction<WikiverseServiceResponse | null>>} props.setSketchData - Function to set the initial sketch data.
  */

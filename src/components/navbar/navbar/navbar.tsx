@@ -16,11 +16,10 @@ interface NavbarProps {
 }
 
 /**
- * The Navbar is positioned directly above the "main-display" and contains elements for the Site Title, Re-Search-Input (for starting
- * a new search while one is already active), Sketch Details Summary (statistics about the current search and Graph being displayed),
- * and a open/close indicator for the Sketch Settings menu.
+ * The Navbar is positioned directly above the "main-display" and contains the Site Title, @see ReSearchInput (for starting
+ * a new search while one is already active), @see SketchDetailsSummary (statistics about the current search and Graph being displayed),
+ * and a open/close indicator for the Sketch Settings menu @see SettingsOpenIndicator .
  *
- * @component
  * @param {P5Sketch | null} props.sketchRef - Reference to the P5 sketch instance.
  * @param {Dispatch<SetStateAction<WikiverseServiceResponse | null>>} props.setSketchData - Function to set the initial sketch data.
  */

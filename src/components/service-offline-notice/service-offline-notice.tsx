@@ -5,7 +5,7 @@ import { useWikiverseService } from "../../providers";
 import { useComponentID } from "../../hooks";
 
 /**
- * Component which subscribes to the WikiverseService's @state isOnline, if this is false the
+ * Component which subscribes to the WikiverseService's state isOnline, if this is false the
  * element takes presedence over all other interactivity in the app and displays a large notice
  * to the user on-screen
  */
