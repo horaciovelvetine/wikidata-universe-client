@@ -1,8 +1,6 @@
 import "./sketch-hud.css";
-import { createRef, Dispatch, SetStateAction, useEffect } from "react";
+import { Dispatch, SetStateAction } from "react";
 
-// TODO - remove animation
-import { showHideSketchHUDRef } from "../../animations/show-hide-sketch-hud-ref";
 import { P5Sketch } from "../../../types";
 import { useDeviceCompatabilityCheck } from "../../../providers";
 
@@ -12,41 +10,42 @@ import { SketchSettings } from "../sketch-settings";
 import { TutorialMessageDisplay } from "../tutorial-message-display/tutorial-message-display";
 import { CurrentlySelectedInfo } from "../currently-selected-info/currently-selected-info";
 import { RelatedEdgesInfo } from "../related-edges-info";
+import { useComponentID } from "../../../hooks";
 
-// Props
 interface SketchHUDProps {
   sketchRef: P5Sketch | null;
   isTutorialSketch: boolean;
   setIsTutorialSketch: Dispatch<SetStateAction<boolean>>;
 }
 
-const ID = (sufx: string) => `sketch-hud-${sufx}`;
-
 /**
- * Contains all of the interactable features the client uses when there is a sketch on the main-display.
+ * Primary container for all of the  interactable features the client uses when there is an active @see P5Sketch
+ * This component removes all of the HUD elements from the screen when @see meetsMinScreenSizeReq state changes.
  *
- * @param {sketchRef} props.sketchRef - the @see SketchManager obj. for the currently active sketch
- * @param {isTutorialSketch} props.isTutorialSketch - determines wether or not to display the @see TutorialMessageDisplay @component
- * @param {setIsTutorialSketch} props.setIsTutorialSketch - passed to the @see TutorialMessageDisplay @component for exiting the tutorial at will
+ * The HUD consists of two primary containers laid over the (z-index) top of the #main-display-container where the sketch is rendered.
+ * Container 1 at the top includes the @see CurrentlyHoveredInfo & @see SketchSettings components. (left to right)
+ * Container 2 at the bottom includes the @see CurrentlySelectedInfo & @see RelatedEdgesInfo comoonents.
+ *
+ * The @see TutorialMessageDisplay is a special case display used only when the client has initiated the tutorial
+ *
+ * @param {sketchRef} props.sketchRef - the @see SketchManager for the currently active sketch
+ * @param {isTutorialSketch} props.isTutorialSketch - determines wether or not to display the @see TutorialMessageDisplay
+ * @param {setIsTutorialSketch} props.setIsTutorialSketch - passed to the @see TutorialMessageDisplay for exiting the tutorial at will
  */
 export const SketchHUD = ({
   sketchRef,
   isTutorialSketch,
   setIsTutorialSketch,
 }: SketchHUDProps) => {
+  const { ID } = useComponentID("sketch-hud");
   const { meetsMinScreenSizeReq } = useDeviceCompatabilityCheck();
 
-  const MainContainer = createRef<HTMLDivElement>();
-  const HUDContainer = createRef<HTMLDivElement>();
-
-  useEffect(() => {
-    // Hide when screen size to small...
-    showHideSketchHUDRef(MainContainer, meetsMinScreenSizeReq);
-  }, [MainContainer, meetsMinScreenSizeReq]);
-
   return (
-    <div id={ID("container")} ref={MainContainer}>
-      <div id={ID("top-container")} ref={HUDContainer}>
+    <div
+      id={ID("container")}
+      className={sketchRef && meetsMinScreenSizeReq ? "on-screen" : ""}
+    >
+      <div id={ID("top-container")}>
         {sketchRef && <CurrentlyHoveredInfo {...{ sketchRef }} />}
         {sketchRef && <SketchSettings {...{ sketchRef }} />}
       </div>
@@ -55,7 +54,7 @@ export const SketchHUD = ({
         <TutorialMessageDisplay {...{ sketchRef, setIsTutorialSketch }} />
       )}
 
-      <div id={ID("bot-container")} ref={HUDContainer}>
+      <div id={ID("bot-container")}>
         {sketchRef && <CurrentlySelectedInfo {...{ sketchRef }} />}
         {sketchRef && <RelatedEdgesInfo {...{ sketchRef }} />}
       </div>

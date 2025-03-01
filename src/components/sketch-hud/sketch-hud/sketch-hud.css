@@ -6,6 +6,13 @@
   width: 100%;
   height: 100%;
   transition: opacity var(--default-transition-dur) ease-in-out;
+  opacity: 0;
+  pointer-events: none;
+}
+
+#sketch-hud-container.on-screen {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 #sketch-hud-top-container {
