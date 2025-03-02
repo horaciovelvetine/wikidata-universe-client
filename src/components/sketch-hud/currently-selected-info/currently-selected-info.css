@@ -19,13 +19,28 @@
   align-items: center;
 }
 
+/* Plain Vertex Icon in White to indicate none selected */
 #cur-selected-info-vertex-icon {
   position: absolute;
-  transition: opacity var(--def-transit) ease-in-out;
+  transition: opacity var(--default-transition-dur) ease-in-out;
 }
 
+#cur-selected-info-vertex-icon.on-screen {
+  opacity: 1;
+}
+#cur-selected-info-vertex-icon.hidden {
+  opacity: 0;
+}
+
+/* Selected Vertex Icon in Yellow shown on selected */
 #cur-selected-info-selected-icon {
-  transition: opacity var(--def-transit) ease-in-out;
+  transition: opacity var(--default-transition-dur) ease-in-out;
+}
+#cur-selected-info-selected-icon.on-screen {
+  opacity: 1;
+}
+#cur-selected-info-selected-icon.hidden {
+  opacity: 0;
 }
 
 #cur-selected-info-text-container {
@@ -47,7 +62,9 @@
 #cur-selected-info-label-link {
   color: rgb(var(--font));
   font-size: clamp(1rem, 1.6vw, 3rem);
-  transition: font-size var(--def-transit) ease-in-out, text-decoration var(--def-transit) ease-in-out;
+  transition:
+    font-size var(--default-transition-dur) ease-in-out,
+    text-decoration var(--default-transition-dur) ease-in-out;
   text-decoration: none;
   font-weight: 500;
   text-shadow: 0 0 1px black;
@@ -65,13 +82,15 @@
   max-height: 6rem;
   overflow-y: scroll;
   scrollbar-color: rgba(var(--font), 25%) transparent;
-  transition: scrollbar-color var(--def-transit) ease-in-out;
+  transition: scrollbar-color var(--default-transition-dur) ease-in-out;
 }
 
 #cur-selected-info-topic-desc:not(:hover) {
   scrollbar-color: rgba(var(--font), 0%) transparent;
 }
 
-#cur-selected-info-selected-link {}
+#cur-selected-info-selected-link {
+}
 
-#cur-selected-info-selected-link:hover {}
+#cur-selected-info-selected-link:hover {
+}

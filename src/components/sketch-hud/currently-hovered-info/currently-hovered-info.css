@@ -3,7 +3,13 @@
   grid-column: 1;
   user-select: none;
   opacity: 0;
-  transition: opacity calc(var(--def-transit) / 2) ease-in-out;
+  pointer-events: none;
+  transition: opacity calc(var(--default-transition-dur) / 2) ease-in-out;
+}
+
+/* class name modifier added when curHoveredRef is not null */
+#cur-hovered-info-container.on-screen {
+  opacity: 1;
 }
 
 #cur-hovered-info-layout {
@@ -16,7 +22,8 @@
   align-items: center;
 }
 
-#cur-hovered-info-icon {}
+#cur-hovered-info-icon {
+}
 
 #cur-hovered-info-text-container {
   padding: 0.25rem;

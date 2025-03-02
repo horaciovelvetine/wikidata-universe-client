@@ -1,67 +1,42 @@
 import "./currently-hovered-info.css";
-import { createRef, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 import { Vertex as VertIcon } from "../../../assets/icons";
-import { Vertex, P5Sketch } from "../../../types";
-import { abridgeString } from "../../../utils/abridge-string";
-import { getMainDispDimensions } from "../../../utils/get-main-disp-dimensions";
-
-// TODO - remove animation
-import { showHideCurHovered } from "../../animations/show-hide-cur-hovered";
-
-const ID = (sufx: string) => `cur-hovered-info-${sufx}`;
+import { P5Sketch, VertexImpl } from "../../../types";
+import { useComponentID } from "../../../hooks";
 
 interface CHIProps {
   sketchRef: P5Sketch;
 }
 
+/**
+ * Displays text details in the upper left corner of the @see SketchHUD (the enclosing component).
+ * Currently hovered state is derived from the @see ManagedState attached to the @param props.sketchRef
+ * instance.
+ *
+ * @param {P5Sketch} props.sketchRef - reference to the P5Sketch instance
+ */
 export const CurrentlyHoveredInfo = ({ sketchRef }: CHIProps) => {
-  const [curHoveredRef, setCurHoveredRef] = useState<Vertex | null>(null);
-
-  const containerRef = createRef<HTMLDivElement>();
-
-  const [label, setLabel] = useState("");
-  const [desc, setDesc] = useState("");
-  const [coords, setCoords] = useState("");
-
-  useEffect(() => {
-    // resize listen to abridge description for dynamic container width...
-    const handleResize = () => {
-      setDesc(
-        abridgeString(curHoveredRef?.description, getMainDispDimensions())
-      );
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  });
+  const { ID } = useComponentID("cur-hovered-info");
+  const [curHoveredRef, setCurHoveredRef] = useState<VertexImpl | null>(null);
 
   useEffect(() => {
     // lets sketch know to update component on state changes
     sketchRef.state.addCurHoveredSubscriber(setCurHoveredRef);
   });
 
-  useEffect(() => {
-    showHideCurHovered(curHoveredRef, containerRef);
-    setDesc(abridgeString(curHoveredRef?.description, getMainDispDimensions()));
-    setLabel(curHoveredRef?.label || "");
-    setCoords(curHoveredRef?.coords.string() || "");
-  }, [curHoveredRef, containerRef]);
-
   return (
-    <div id={ID("container")} ref={containerRef}>
+    <div id={ID("container")} className={curHoveredRef ? "on-screen" : ""}>
       <div id={ID("layout")}>
         <div id={ID("icon-container")}>
           <img id={ID("icon")} src={VertIcon} />
         </div>
         <div id={ID("text-container")}>
           <div id={ID("title-span")}>
-            <h2 id={ID("title")}>{label}</h2>
-            <p id={ID("cur-hov-coords")}>{coords}</p>
+            <h2 id={ID("title")}>{curHoveredRef?.label}</h2>
+            <p id={ID("cur-hov-coords")}>{curHoveredRef?.coords.string()}</p>
           </div>
-          <p id={ID("desc-abrdg")}>{desc}</p>
+          {/* <p id={ID("desc-abrdg")}>{desc}</p> */}
         </div>
       </div>
     </div>

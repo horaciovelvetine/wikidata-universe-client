@@ -1,47 +1,46 @@
 import "./currently-selected-info.css";
-import { createRef, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Vertex as NoVertSel, VertexSel } from "../../../assets/icons";
-import { Vertex, P5Sketch } from "../../../types";
-
-//TODO - remove animation
-import { swapCurSelectedVertexIcons } from "../../animations/swap-cur-selected-vertex-icons";
+import { P5Sketch } from "../../../types";
+import { useComponentID } from "../../../hooks";
 
 interface CSIProps {
   sketchRef: P5Sketch;
 }
 
-const ID = (sufx: string) => `cur-selected-info-${sufx}`;
-
+/**
+ * Displays text details in the lower left corner of the @see SketchHUD (the enclosing component).
+ * Currently selected state is derived from the @see ManagedState attached to the @param props.sketchRef
+ * instance.
+ *
+ * @param {P5Sketch} props.sketchRef - reference to the P5Sketch instance
+ */
 export const CurrentlySelectedInfo = ({ sketchRef }: CSIProps) => {
-  const [curSelectedRef, setCurSelectedRef] = useState<Vertex | null>(
+  const { ID } = useComponentID("cur-selected-info");
+  const [curSelectedRef, setCurSelectedRef] = useState(
     sketchRef.state.curSelected()
   );
 
-  const [label, setLabel] = useState("");
-  const [desc, setDesc] = useState("");
-  const [coords, setCoords] = useState("");
-
-  const iconRef = createRef<HTMLImageElement>();
-  const selectedIconRef = createRef<HTMLImageElement>();
-
   useEffect(() => {
+    // subscribe to curSlectedRef state from sketch
     sketchRef.state.addCurSelectedSubscriber(setCurSelectedRef);
   });
-
-  useEffect(() => {
-    setLabel(curSelectedRef?.label || "");
-    setDesc(curSelectedRef?.description || "");
-    setCoords(curSelectedRef?.coords.string() || "");
-    swapCurSelectedVertexIcons(iconRef, selectedIconRef, curSelectedRef);
-  }, [curSelectedRef, iconRef, selectedIconRef]);
 
   return (
     <div id={ID("container")}>
       <div id={ID("layout")}>
         <div id={ID("icon-container")}>
-          <img id={ID("vertex-icon")} src={NoVertSel} ref={iconRef} />
-          <img id={ID("selected-icon")} src={VertexSel} ref={selectedIconRef} />
+          <img
+            id={ID("vertex-icon")}
+            src={NoVertSel}
+            className={curSelectedRef ? "hidden" : "on-screen"}
+          />
+          <img
+            id={ID("selected-icon")}
+            src={VertexSel}
+            className={curSelectedRef ? "on-screen" : "hidden"}
+          />
         </div>
         <div id={ID("text-container")}>
           <div id={ID("title-span")}>
@@ -50,11 +49,11 @@ export const CurrentlySelectedInfo = ({ sketchRef }: CSIProps) => {
               href={curSelectedRef?.url()}
               target="_blank"
             >
-              {label}
+              {curSelectedRef?.label}
             </a>
-            <p id={ID("cur-sel-coords")}>{coords}</p>
+            <p id={ID("cur-sel-coords")}>{curSelectedRef?.coords.string()}</p>
           </div>
-          <p id={ID("topic-desc")}>{desc}</p>
+          <p id={ID("topic-desc")}>{curSelectedRef?.description}</p>
         </div>
       </div>
     </div>
