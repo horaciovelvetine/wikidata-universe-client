@@ -1,6 +1,7 @@
-export { BackgroundSketch } from "./background-sketch/background-sketch";
+export { ParticlesSketch } from "./particles-sketch/particles-sketch";
 export { Footer } from "./footer/footer";
 export { IncompatibleDeviceNotice } from "./incompatible-device-notice/incompatible-device-notice";
+export { LandingPageInput } from "./landing-page-input/landing-page-input";
 export { LoadingBar } from "./loading-bar/loading-bar";
 export { Navbar } from "./navbar";
 export { ServiceOfflineNotice } from "./service-offline-notice/service-offline-notice";

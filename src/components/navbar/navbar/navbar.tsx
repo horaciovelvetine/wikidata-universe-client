@@ -16,12 +16,20 @@ interface NavbarProps {
 }
 
 /**
- * The Navbar is positioned directly above the "main-display" and contains the Site Title, @see ReSearchInput (for starting
- * a new search while one is already active), @see SketchDetailsSummary (statistics about the current search and Graph being displayed),
- * and a open/close indicator for the Sketch Settings menu @see SettingsOpenIndicator .
+ * Component positioned directly above the #main-display which provides titles, some space for text details, and additional inputs
+ * when a {@link P5Sketch} is already active.
  *
+ * @component
  * @param {P5Sketch | null} props.sketchRef - Reference to the P5 sketch instance.
  * @param {Dispatch<SetStateAction<WikiverseServiceResponse | null>>} props.setSketchData - Function to set the initial sketch data.
+ *
+ * Subcomponents include:
+ * - {@link ReSearchInput} - input to begin a new search while a sketch is already active
+ * - {@link SketchDetailsSummary} - statistics about the current search and Graph data
+ * - {@link SettingsOpenIndicator} - title for {@link SketchSettings} when it is being displayed
+ *
+ * @hook
+ * - useDeviceCompatabilityCheck() - shows and hides various bits of UI when a breaking screen size is detected
  */
 export const Navbar = ({ sketchRef, setSketchData }: NavbarProps) => {
   const { ID } = useComponentID("navbar");

@@ -14,13 +14,11 @@ interface ParticlesSketchProps {
  * around the screen, and joined with nearby particles on every frame. The canvas resizes with the window
  * and fades the canvas when @var initSketchData - is provided and the user initializes a WikiverseSketch.
  *
- * @param {ParticlesSketchProps} props - The properties for the BackgroundSketch component.
+ * @component
  * @param {WikiverseServiceResponse | null} props.initSketchData - Initial data for the sketch, if available.
  */
 
-export const ParticlesSketch = ({
-  sketchData,
-}: ParticlesSketchProps): JSX.Element => {
+export const ParticlesSketch = ({ sketchData }: ParticlesSketchProps) => {
   const particles: Particle[] = [];
 
   const sketch: Sketch = useCallback(

@@ -6,13 +6,14 @@ import { useWikiverseService } from "../../../providers";
 import { SketchProps } from "../sketch-container/sketch-container";
 
 /**
- * Uses the [p5-wrapper/react](https://github.com/P5-wrapper/react) library @see ReactP5Wrapper and @see Sketch to get details.
+ * Uses the [p5-wrapper/react](https://github.com/P5-wrapper/react) library to provide a P5Sketch wrapper.
  * Thank you to them for making this available, and working for those of us who didnt think to look before starting a project with
  * React and P5.js wrapped up in one... ish - unsightly project.
  *
- * This @component is the primary provider for the visuals on screen in the #wikiverse-app-main-display element and contains the underlying
+ * Primary provider for the visuals on screen in the #wikiverse-app-main-display element and contains the underlying
  * logic and methods which provide interactivity and control.
  *
+ * @component
  * @param {skethData} props.sketchData - the primary data used to initialize a sketch
  * @param {SetStateAction} props.setSketchRef - setter to allow react visibility into the active sketch once it is created
  */

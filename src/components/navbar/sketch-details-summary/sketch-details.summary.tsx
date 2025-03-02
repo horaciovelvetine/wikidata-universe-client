@@ -1,28 +1,33 @@
 import "./sketch-details-summary.css";
 import { useEffect, useState } from "react";
 
-import { P5Sketch, Point3DImpl } from "../../../types";
+import { Point3DImpl, SketchRefProps } from "../../../types";
 import { useDeviceCompatabilityCheck } from "../../../providers";
 import { useComponentID } from "../../../hooks";
 
-interface SDSProps {
-  sketchRef: P5Sketch;
-}
-
 /**
- * A small text display summarizing details about the currently active sketch including counts and camera position. The client can show/hide this display using either the settings menu or the "," (comma) shortcut-key.
+ * A small text display summarizing details about the currently active sketch including counts and camera position.
+ * The client can show/hide this display using either the settings menu or the "," (comma) shortcut-key.
  *
- * @apiNote - This component relies on synchronus state and continuous updates using data pulled from the active sketch and relies on several @method useEffect() side-effects to keep react state in sync with the @see P5Sketch object.
- *
+ * @component
  * @param {P5Sketch} props.sketchRef - the currently active sketch
+ *
+ * @remarks
+ * This component relies on synchronus state and continuous updates using data pulled from the active sketch
+ * this relies on several @method useEffect() side-effects to keep react state in sync with the {@link P5Sketch} object.
+ *
+ * @hooks
+ * - useDeviceCompatabilityCheck() - show/hide state qualifier to prevent breakin on small screens
+ * - useState() - isShown is synced and managed by the {@link ManagedState} class and sketch instance
  */
-export const SketchDetailsSummary = ({ sketchRef }: SDSProps) => {
+export const SketchDetailsSummary = ({ sketchRef }: SketchRefProps) => {
   const { ID } = useComponentID("sketch-details");
   const { meetsMinScreenSizeReq } = useDeviceCompatabilityCheck();
   const [isShown, setIsShown] = useState(
     sketchRef.state.showSketchDetailsSummary()
   );
 
+  // Local data state for counts & other statistics
   const [topicCount, setTopicCount] = useState(
     sketchRef?.state.topicCount() || 0
   );

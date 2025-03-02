@@ -11,10 +11,12 @@ interface FooterProps {
   setSketchData: Dispatch<SetStateAction<WikiverseServiceResponse | null>>;
 }
 /**
- * Contains all content always positioned directly under the @component SketchContainer in Grid position 8 (CSS)
+ * Container positioned directly under the #main-display with links and the ability for the user to initiate the {@link TutorialSketch}
  *
+ * @component
  * @param {setIsTutorialSketch} props.setIsTutorialSketch - state setting dispatcher which is used to trigger the tutorial version of the Sketch for the user
  * @param {setSketchData} props.setSketchData - sketch initializing setter called when starting up a tutorial sketch
+ * 
  */
 export const Footer = ({ setIsTutorialSketch, setSketchData }: FooterProps) => {
   const { ID } = useComponentID("footer");

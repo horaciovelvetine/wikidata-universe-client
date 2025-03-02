@@ -5,6 +5,7 @@ import { P5Sketch, WikiverseServiceResponse } from "../../../types";
 import { SketchTutorial } from "../sketch-tutorial/sketch-tutorial";
 import { WikiverseSketch } from "../wikiverse-sketch/wikiverse-sketch";
 
+// Interface used by sub-type sketch components...
 export interface SketchProps {
   sketchData: WikiverseServiceResponse | null;
   setSketchRef: Dispatch<SetStateAction<P5Sketch | null>>;
@@ -12,12 +13,13 @@ export interface SketchProps {
 }
 
 /**
- * Main container element for the @see P5Sketch which draws the primary visuals for the application. Prevents rendering when there
- * is no data and selectively renders the correct sub-type of Sketch based on what the client selects.
+ * Main container element for the {@link P5Sketch} which draws the primary visuals for the application.
+ * Prevents rendering when there is no data and selectively renders the correct sub-type of Sketch
  *
+ * @component
  * @param {WikiverseServiceResponse | null} props.sketchData - can be null to return empty default element, otherwise initial data used to build a sketch
  * @param {SetStateAction} props.setSketchRef - setter to allow react visibility into the active sketch once it is created
- * @param {boolean} props.isTutorialSketch - used to select the sub-type of @see P5Sketch instead using the @see TutorialSketch
+ * @param {boolean} props.isTutorialSketch - used to select the sub-type of {@link P5Sketch} instead using the {@link TutorialSketch}
  */
 export const SketchContainer = ({
   sketchData,

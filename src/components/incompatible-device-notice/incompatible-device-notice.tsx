@@ -9,11 +9,17 @@ import { useComponentID } from "../../hooks";
 
 /**
  * Notice mesage displayed on screen when the application detects the clients device is incompatible.
- * Message display state is tied to the @see DeviceCompatabilityProvider which maintains the effect looking
- * for screen resizing. This component will not display when the @see ServiceOfflineNotice is being displayed.
+ * Message display state is tied to the {@link DeviceCompatabilityProvider} which maintains the useEffect() looking
+ * for screen resizing.
+ *
+ * @remark
+ * This component will not display when the {@link ServiceOfflineNotice} is being displayed.
+ *
+ * @hook
+ * - useDeviceCompatabilityCheck() - listens for screen resizes to show/hide the notice
  */
 
-export const IncompatibleDeviceNotice = (): JSX.Element => {
+export const IncompatibleDeviceNotice = () => {
   const { ID } = useComponentID("incompatible-device-notice");
   const { isOnline } = useWikiverseService();
   const { meetsMinScreenSizeReq } = useDeviceCompatabilityCheck();

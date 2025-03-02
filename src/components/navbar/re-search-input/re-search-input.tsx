@@ -21,12 +21,15 @@ interface RSIProps {
 }
 
 /**
- * ReSearchInput component allows users to input and submit search queries.
- * It integrates with a P5 sketch and updates the sketch's query state.
- * The component also handles device compatibility checks and adjusts its visibility accordingly.
+ * Component containing a secondary input to allow users to submit another search while a {@link P5Sketch} is already active.
  *
+ * @component
  * @prop {P5Sketch} props.sketchRef - Reference to the P5 sketch instance.
  * @prop {Dispatch<SetStateAction<WikiverseServiceResponse | null>>} props.setSketchData - Function to set the initial sketch data.
+ *
+ * @hook
+ * - useState() manages the query input value, the visibility of the input, and an error state to animate for bad responses.
+ * - useDeviceCompatabilityCheck() - shows and hides the input when there isnt enough room to display it
  */
 export const ReSearchInput = ({ sketchRef, setSketchData }: RSIProps) => {
   const { ID } = useComponentID("re-search");

@@ -9,7 +9,7 @@ import { useComponentID } from "../../hooks";
  * element takes presedence over all other interactivity in the app and displays a large notice
  * to the user on-screen
  */
-export const ServiceOfflineNotice = (): JSX.Element => {
+export const ServiceOfflineNotice = () => {
   const { ID } = useComponentID("offline-notice");
   const { isOnline } = useWikiverseService();
 

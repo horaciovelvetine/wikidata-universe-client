@@ -6,15 +6,19 @@ import { useWikiverseService } from "../../../providers";
 import { SketchProps } from "../sketch-container/sketch-container";
 
 /**
- * Primary wrapper for the @see TutorialSketch (class) whose behavior differs slightly from the primary sketch @see P5Sketch.
- * Uses the [p5-wrapper/react](https://github.com/P5-wrapper/react) library @see ReactP5Wrapper and @see Sketch to get details.
+ * Primary wrapper for the {@link TutorialSketch} (class) whose behavior differs slightly from the primary sketch {@link P5Sketch}.
+ * Uses the [p5-wrapper/react](https://github.com/P5-wrapper/react) library {@link ReactP5Wrapper} and {@link Sketch} to get details.
  * Thank you to them for making this available, and working for those of us who didnt think to look before starting a project with
  * React and P5.js wrapped up in one... ish - unsightly project.
  *
- * This @component is the primary provider for the visuals on screen in the #wikiverse-app-main-display element and contains the underlying
- * logic and methods which provide interactivity and control. @apiNote the @see TutorialSketch (class) behavior differs slightly from the primary
- * @see P5Sketch by progressively introducing and enabling features for the user as they learn and explore.
+ * Primary provider for the visuals on screen in the #wikiverse-app-main-display element and contains the underlying logic and methods
+ * which provide interactivity and control.
  *
+ * @remark
+ * the {@link TutorialSketch} (class) behavior differs slightly from the primary
+ * {@link P5Sketch} by progressively introducing and enabling features for the user as they learn and explore.
+ *
+ * @component
  * @param {skethData} props.sketchData - the primary data used to initialize a sketch
  * @param {SetStateAction} props.setSketchRef - setter to allow react visibility into the active sketch once it is created
  */
