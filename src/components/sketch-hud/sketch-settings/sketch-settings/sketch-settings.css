@@ -1,3 +1,4 @@
+/* remains visible constantly in upper right hand of SketchHUD grid */
 #sketch-settings-container {
   position: relative;
   padding: 0.5rem;
@@ -15,14 +16,24 @@
   transition: opacity var(--default-transition-dur) ease-in-out;
 }
 
+/* MENU DISPLAY: contains all menu and sub-menu's */
+/* opacity transition is for show-hiding on top of an active sketch */
 #sketch-settings-menu-display {
   position: absolute;
   right: 1rem;
-  opacity: 0;
   transition: opacity var(--default-transition-dur) ease-in-out;
   outline: 1px solid rgb(var(--font));
   border-radius: 0.5rem;
   width: fit-content;
+}
+#sketch-settings-menu-display.on-scren {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#sketch-settings-menu-display.hidden {
+  opacity: 0;
+  pointer-events: none;
 }
 
 #sketch-settings-menu-layout-container {
