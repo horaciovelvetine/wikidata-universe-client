@@ -18,20 +18,31 @@ interface SketchHUDProps {
 }
 
 /**
- * Primary container for all of the  interactable features the client uses when there is an active @see P5Sketch
- * This component removes all of the HUD elements from the screen when @see meetsMinScreenSizeReq state changes.
+ * Primary container for all of the  interactable features the client uses when there is an active {@link P5Sketch}
+ * This component removes all of the HUD elements from the screen when meetsMinScreenSizeReq state changes.
  *
+ * @component
+ * @param {P5Sketch | null} props.sketchRef - the {@link P5Sketch} instance for the currently active sketch
+ * @param {boolean} props.isTutorialSketch - determines wether the tutorial message display is visible
+ * @param {setIsTutorialSketch} props.setIsTutorialSketch - allows tutorial to be exited via UI interaction in subcomponent
+ *
+ * @returns {JSX.Element} SketchHUD component.
+ *
+ * @remarks
  * The HUD consists of two primary containers laid over the (z-index) top of the #main-display-container where the sketch is rendered.
- * Container 1 at the top includes the @see CurrentlyHoveredInfo & @see SketchSettings components. (left to right)
- * Container 2 at the bottom includes the @see CurrentlySelectedInfo & @see RelatedEdgesInfo comoonents.
+ * Container 1 At the top sub-components: (left to right)
+ * - {@link CurrentlyHoveredInfo} - display details when the mouse hovers over a vertex
+ * - {@link SketchSettings} - menu display and controls for changing sketch behaviors
  *
- * The @see TutorialMessageDisplay is a special case display used only when the client has initiated the tutorial
+ * Container 2 at the bottom sub-components:
+ * - {@link CurrentlySelectedInfo} - displays details when the user selects a vertex
+ * - {@link RelatedEdgesInfo} - displays statements in a list based on the currently selected vertex
  *
- * @param {sketchRef} props.sketchRef - the @see SketchManager for the currently active sketch
- * @param {isTutorialSketch} props.isTutorialSketch - determines wether or not to display the @see TutorialMessageDisplay
- * @param {setIsTutorialSketch} props.setIsTutorialSketch - passed to the @see TutorialMessageDisplay for exiting the tutorial at will
+ * @hook
+ * - useDeviceCompatabilityCheck() - state used to determine the visibility of the HUD to prevent broken screens on small devices
+ *
  */
-export const SketchHUD = ({ sketchRef }: SketchHUDProps) => {
+export const SketchHUD = ({ sketchRef }: SketchHUDProps): JSX.Element => {
   const { ID } = useComponentID("sketch-hud");
   const { meetsMinScreenSizeReq } = useDeviceCompatabilityCheck();
 
