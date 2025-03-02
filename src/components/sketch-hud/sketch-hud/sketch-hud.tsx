@@ -7,7 +7,6 @@ import { useDeviceCompatabilityCheck } from "../../../providers";
 // Sub-Components
 import { CurrentlyHoveredInfo } from "../currently-hovered-info/currently-hovered-info";
 import { SketchSettings } from "../sketch-settings";
-import { TutorialMessageDisplay } from "../tutorial-message-display/tutorial-message-display";
 import { CurrentlySelectedInfo } from "../currently-selected-info/currently-selected-info";
 import { RelatedEdgesInfo } from "../related-edges-info";
 import { useComponentID } from "../../../hooks";
@@ -32,11 +31,7 @@ interface SketchHUDProps {
  * @param {isTutorialSketch} props.isTutorialSketch - determines wether or not to display the @see TutorialMessageDisplay
  * @param {setIsTutorialSketch} props.setIsTutorialSketch - passed to the @see TutorialMessageDisplay for exiting the tutorial at will
  */
-export const SketchHUD = ({
-  sketchRef,
-  isTutorialSketch,
-  setIsTutorialSketch,
-}: SketchHUDProps) => {
+export const SketchHUD = ({ sketchRef }: SketchHUDProps) => {
   const { ID } = useComponentID("sketch-hud");
   const { meetsMinScreenSizeReq } = useDeviceCompatabilityCheck();
 
@@ -50,9 +45,7 @@ export const SketchHUD = ({
         {sketchRef && <SketchSettings {...{ sketchRef }} />}
       </div>
 
-      {sketchRef && isTutorialSketch && (
-        <TutorialMessageDisplay {...{ sketchRef, setIsTutorialSketch }} />
-      )}
+      {/* TODO: tutorial sketch HUD  */}
 
       <div id={ID("bot-container")}>
         {sketchRef && <CurrentlySelectedInfo {...{ sketchRef }} />}

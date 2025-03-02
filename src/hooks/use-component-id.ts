@@ -10,7 +10,7 @@ import { useCallback } from "react";
  * @example
  * ```typescript
  * const { ID } = useComponentID("component");
- * const uniqueID = ID("123"); // "component-123"
+ * const uniqueID = ID("123"); //=> "component-123"
  * ```
  */
 

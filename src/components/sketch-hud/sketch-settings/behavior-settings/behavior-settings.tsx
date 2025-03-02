@@ -2,14 +2,32 @@ import "./behavior-settings.css";
 import { P5Sketch } from "../../../../types";
 
 import { useEffect, useState } from "react";
+import { useComponentID } from "../../../../hooks";
 
 interface BehaviorSettingsProps {
   sketchRef: P5Sketch;
 }
 
-const ID = (sufx: string) => `behavior-settings-${sufx}`;
-
+/**
+ * Component containing settings UI which directly modifies how the current sketch instance
+ * behaves on targeted user inputs.
+ *
+ * @component
+ * @param {BehaviorSettingsProps} props - The properties for the BehaviorSettings component.
+ * @param {P5Sketch} props.sketchRef - Reference to the P5 sketch instance.
+ *
+ * @returns {JSX.Element} BehaviorSettings component.
+ *
+ * @remarks
+ * This component allows users to toggle the "Click to Fetch" behavior of the sketch.
+ * It subscribes to the sketch's state and updates the checkbox accordingly.
+ *
+ * @hook
+ * - useEffect: Subscribes to the sketch's state changes.
+ * - useState: Manages the state of the "Click to Fetch" checkbox.
+ */
 export const BehaviorSettings = ({ sketchRef }: BehaviorSettingsProps) => {
+  const { ID } = useComponentID("behavior-settings");
   const [clickToFetchRef, setClickToFetchRef] = useState(
     sketchRef.state.clickToFetchEnabled()
   );
