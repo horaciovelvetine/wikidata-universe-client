@@ -1,9 +1,11 @@
 export {
   WikiverseServiceProvider,
   useWikiverseService,
-} from "./dir/wikiverse-service-provider";
+} from "./api/wikiverse-service-provider";
 
 export {
   DeviceCompatabilityProvider,
   useDeviceCompatabilityCheck,
-} from "./dir/device-compatability-provider";
+} from "./hooks/device-compatability-provider";
+
+export { UnfocusedClickBoundaryProvider } from "./hooks/unfocused-click-boundary-provider";
