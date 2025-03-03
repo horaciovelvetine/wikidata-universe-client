@@ -1,17 +1,23 @@
-import CharisTTF from '../../assets/font/CharisSIL-Regular.ttf'
+import CharisTTF from "../../assets/fonts/CharisSIL-Regular.ttf";
 import { P5CanvasInstance } from "@p5-wrapper/react";
 import { Camera, Font } from "p5";
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction } from "react";
 
-import { Edge, Graphset, MinMaxSet, Point3D, Vertex } from '..';
-import { WikiverseServiceRequestPayload, WikiverseServiceResponse } from '../../app';
-import { ManagedCamera } from './managed-camera';
-import { ManagedState } from './managed-state';
-import { getMainDispDimensions } from '../../utils/get-main-disp-dimensions';
+import { getMainDispDimensions } from "../../utils/get-main-disp-dimensions";
+
+import { ManagedCamera } from "./managed-camera";
+import { ManagedState } from "./managed-state";
+import { Graphset } from "../data/graphset";
+import { Point3DImpl } from "../data/point-3d";
+import { Vertex, VertexImpl } from "../data/vertex";
+import { MinMaxSet } from "../data/min-max-set";
+import { Edge } from "../data/edge";
+import { WikiverseServiceResponse } from "../data/wikiverse-service-response";
+import { WikiverseServiceRequestPayload } from "../data/wikiverse-service-request-payload";
 
 export interface SketchProps {
   p5: P5CanvasInstance;
-  initSketchData: WikiverseServiceResponse | null;
+  sketchData: WikiverseServiceResponse | null;
   setSketchRef: Dispatch<SetStateAction<P5Sketch | null>>;
 }
 
@@ -24,12 +30,11 @@ export class P5Sketch {
   graphset: Graphset;
   state: ManagedState;
 
-  constructor({ p5, initSketchData, setSketchRef }: SketchProps) {
-
+  constructor({ p5, sketchData, setSketchRef }: SketchProps) {
     this.p5 = p5;
     this.cam = new ManagedCamera(p5);
-    this.state = new ManagedState(initSketchData);
-    this.graphset = new Graphset(initSketchData)
+    this.state = new ManagedState(sketchData);
+    this.graphset = new Graphset(sketchData);
     // tell react about the sketch...
     setSketchRef(this);
   }
@@ -44,7 +49,7 @@ export class P5Sketch {
 
   /**
    * @method CAM()
-   * @returns - the managed camera instance created for animating the camera gracefully 
+   * @returns - the managed camera instance created for animating the camera gracefully
    */
   CAM() {
     return this.cam;
@@ -54,7 +59,7 @@ export class P5Sketch {
    * @method preloadFont() - required p5 call to load a Font resource for use in the sketch
    */
   preloadFont() {
-    this.font = this.p5.loadFont(CharisTTF)
+    this.font = this.p5.loadFont(CharisTTF);
   }
 
   /**
@@ -65,11 +70,11 @@ export class P5Sketch {
   }
 
   /**
-   * @method createCanvas() - creates the p5 canvas from the computed size of it's container (element) by getting it directly from the DOM using the helper @method getMainDispDimensions(). 
+   * @method createCanvas() - creates the p5 canvas from the computed size of it's container (element) by getting it directly from the DOM using the helper @method getMainDispDimensions().
    */
   createCanvas() {
     const { width, height } = getMainDispDimensions();
-    this.p5.createCanvas(width, height, this.p5.WEBGL)
+    this.p5.createCanvas(width, height, this.p5.WEBGL);
   }
 
   /**
@@ -85,15 +90,15 @@ export class P5Sketch {
    */
   initManagedCamera() {
     this.p5cam = this.p5.createCamera();
-    const aspectRatio = (this.p5.width / this.p5.height);
-    const fovRad = (2 * this.p5.atan(this.p5.height / 2 / 800))
-    this.p5.perspective(fovRad, aspectRatio, 1, 12000)
+    const aspectRatio = this.p5.width / this.p5.height;
+    const fovRad = 2 * this.p5.atan(this.p5.height / 2 / 800);
+    this.p5.perspective(fovRad, aspectRatio, 1, 12000);
     this.cam.setCameraRef(this.p5cam);
   }
 
   /**
- * @method initCameraPositionAtOriginVertex() - Positions the managed camera based on the position of the Vertex marked as the origin, or (0,0,0) if that Vertex could not be found
- */
+   * @method initCameraPositionAtOriginVertex() - Positions the managed camera based on the position of the Vertex marked as the origin, or (0,0,0) if that Vertex could not be found
+   */
   initCameraPositionAtOriginVertex() {
     if (!this.p5cam || !this.graphset) return;
 
@@ -102,23 +107,27 @@ export class P5Sketch {
 
     this.p5cam.setPosition(x, y, z + 200);
     this.p5cam.lookAt(x, y + 300, z); // look below vertex for init 'pan-up' effect
-    this.cam.setLookAtTgt(new Point3D({ x, y, z }));
+    this.cam.setLookAtTgt(new Point3DImpl({ x, y, z }));
   }
 
   /**
-   * Checks which parts of the sketch UI the client currently wants on screen, and calls those draw functions 
+   * Checks which parts of the sketch UI the client currently wants on screen, and calls those draw functions
    */
   drawUI() {
-    this.p5.background(this.UI_BG())
-    this.p5.orbitControl(this.state.xMouseSens(), this.state.yMouseSens(), this.state.zMouseSens())
+    this.p5.background(this.UI_BG());
+    this.p5.orbitControl(
+      this.state.xMouseSens(),
+      this.state.yMouseSens(),
+      this.state.zMouseSens()
+    );
 
     const mp = this.graphset.calcVertexSetMean();
     const minMax = this.graphset.minMaxValuesInSet();
 
     this.p5.push();
-    this.p5.translate(mp.x, mp.y, mp.z)
-    this.drawBoundingBox(minMax)
-    this.drawAxisOrientation(minMax)
+    this.p5.translate(mp.x, mp.y, mp.z);
+    this.drawBoundingBox(minMax);
+    this.drawAxisOrientation(minMax);
     this.p5.pop();
   }
 
@@ -128,10 +137,10 @@ export class P5Sketch {
   drawVertices() {
     this.graphset.vertices.forEach(vert => {
       if (vert.fetched) {
-        const isCurSelection = vert.id == this.state.curSelected()?.id;
-        vert.draw(this.p5, isCurSelection)
+        const isCurSelection = vert.id === this.state.curSelected()?.id;
+        vert.draw(this.p5, isCurSelection);
       }
-    })
+    });
   }
 
   /**
@@ -166,9 +175,9 @@ export class P5Sketch {
   /**
    * @method mousePositionedOnVertex() - checks if the mouse is positioned on any of the vertices on based on a ray trace, returning the first (matching) Vertex it finds or null if no Vertex is positoned under the mouse
    */
-  mousePositionedOnVertex(): Vertex | null {
+  mousePositionedOnVertex(): VertexImpl | null {
     if (!this.p5cam) return null;
-    let mouseTgt: Vertex | null = null;
+    let mouseTgt: VertexImpl | null = null;
 
     for (const vert of this.graphset.vertices) {
       if (vert.traceRay(this.p5, this.p5cam)) {
@@ -189,7 +198,7 @@ export class P5Sketch {
   /**
    * @method handleNewSelectionClickTarget() - update the currently hovered global state to null, the currently selected global state to the new target, and adjusts the cameras lookAt target to the clickTarget's position. (This transition wil be animated inside the draw loop... @see ManagedCamera )
    */
-  handleNewSelectionClickTarget(clickTgt: Vertex) {
+  handleNewSelectionClickTarget(clickTgt: VertexImpl) {
     this.state.setCurHovered(null);
     this.state.setCurSelected(clickTgt);
     this.cam.setLookAtTgt(clickTgt.coords);
@@ -201,54 +210,87 @@ export class P5Sketch {
   //*/==> REQUEST HANDLERS <==/*//
   //*/==> REQUEST HANDLERS <==/*//
 
-  private requestPayloader = (subQuery: string): WikiverseServiceRequestPayload => {
+  /**
+   * @method createPostRequestPayload()
+   * Helper method for the POST requests which require a data payload to be sent to the API for calculation
+   *
+   * @param {string?} altQuery - uses the current this.state.query() @value by default, when present the API fill alter which related data it returns to be relevant to the provided alternate target,
+   */
+  private createPostRequestPayload(
+    altQuery?: string
+  ): WikiverseServiceRequestPayload {
     return {
-      query: subQuery, ...this.graphset, layoutConfig: this.state.layoutConfig(),
-    }
+      query: altQuery || this.state.query(),
+      ...this.graphset,
+      layoutConfig: this.state.layoutConfig(),
+    };
   }
   /**
-   * @method handleClickToFetchTarget() - on valid selection of a new Vertex makes a request to the API (using the provided request ref) to get and update the data
+   * @method handleClickToFetchTarget()
+   * Use the provided clickTgt to request the information related to it
+   *
+   * @param {Vertex} clickTgt - the vertex to get infomration about
+   * @param {WikiverseService} post - the @method makePostRequest() from the @see WikiverseService
    */
-  async handleClickToFetchTarget(clickTgt: Vertex, post: (tgt: string, data: WikiverseServiceRequestPayload) => Promise<WikiverseServiceResponse>) {
+  async handleClickToFetchTarget(
+    clickTgt: Vertex,
+    post: (
+      tgt: string,
+      data: WikiverseServiceRequestPayload
+    ) => Promise<WikiverseServiceResponse>
+  ) {
+    // skip when clickToFetch is not true...
     if (!this.state.clickToFetchEnabled()) return;
 
-    await post('click-target', this.requestPayloader(clickTgt.id))
-      .then(res => {
-        this.graphset.mergeResponseData(res);
-        this.state.updateCountTotals(this.graphset);
-        this.state.trickCurSelectedUpdate();
-      }).catch(err => {
-        console.error(err);
-      })
+    const res = await post(
+      "click-target",
+      this.createPostRequestPayload(clickTgt.id)
+    );
+
+    this.graphset.mergeResponseData(res);
+    this.state.updateCountTotals(this.graphset);
+    this.state.trickCurSelectedUpdate();
   }
 
   /**
-   * @method getInitialRelatedData() - on initialization of a new Wikiverse Sketch this will grab the related data (Vertices and Edges) for the initial resultant Vertex (the origin)
+   * @method getInitialRelatedData()
+   * A new Wikiverse Sketch call this to grab the related data (Vertices and Edges) for the initial resultant Vertex (the origin)
+   *
+   * @param {WikiverseService} post - the @method makePostRequest() from the @see WikiverseService
    */
-  async getInitialRelatedData(post: (tgt: string, data: WikiverseServiceRequestPayload) => Promise<WikiverseServiceResponse>) {
-    await post('fetch-related', this.requestPayloader(this.state.query()))
-      .then(res => {
-        this.graphset.mergeResponseData(res);
-        this.state.updateCountTotals(this.graphset);
-        this.state.trickCurSelectedUpdate();
-      }).catch(err => {
-        console.error(err);
-      })
+  async getInitialRelatedData(
+    post: (
+      tgt: string,
+      data: WikiverseServiceRequestPayload
+    ) => Promise<WikiverseServiceResponse>
+  ) {
+    const response = await post(
+      "fetch-related",
+      this.createPostRequestPayload()
+    );
+
+    this.graphset.mergeResponseData(response);
+    this.state.updateCountTotals(this.graphset);
+    this.state.trickCurSelectedUpdate();
   }
 
-  async refreshLayoutPositions(post: (tgt: string, data: WikiverseServiceRequestPayload) => Promise<WikiverseServiceResponse>) {
-    await post('refresh-layout', this.requestPayloader(this.state.query()))
-      .then(res => {
-        this.graphset.updateVertexPositions(res);
-      })
-      .catch(err => {
-        console.error(err);
-      }).finally(() => { // pivot to new location for selected...
-        const selected = this.state.curSelected();
-        if (selected?.coords) {
-          this.CAM().setLookAtTgt(selected.coords)
-        }
-      })
+  /**
+   * @method refreshLayoutPositions()
+   * Request a re-run of the layout positioning algorithim which unlocks all of the Vertices (@apiNote - excepts the origin) and re-positions them based on the current Graphset.
+   */
+  async refreshLayoutPositions(
+    post: (
+      tgt: string,
+      data: WikiverseServiceRequestPayload
+    ) => Promise<WikiverseServiceResponse>
+  ) {
+    const res = await post("refresh-layout", this.createPostRequestPayload());
+    this.graphset.updateVertexPositions(res);
+
+    const curSel = this.state.curSelected();
+    if (curSel) {
+      this.CAM().setLookAtTgt(curSel.coords);
+    }
   }
 
   //*/==> PRIVATE METHODS <==/*//
@@ -258,44 +300,44 @@ export class P5Sketch {
   //*/==> PRIVATE METHODS <==/*//
 
   /**
-   * @default UI_BG() rgba(1,1,14) color helper; 
+   * @default UI_BG() rgba(1,1,14) color helper;
    */
-  private UI_BG = (opac: number = 1) => `rgba(1, 1, 14, ${opac})`
+  private UI_BG = (opac: number = 1) => `rgba(1, 1, 14, ${opac})`;
 
   /**
-   * @default UI_FONT() rgba(245,245,245) color helper; 
+   * @default UI_FONT() rgba(245,245,245) color helper;
    */
-  private UI_FONT = (opac: number = 1) => `rgba(245, 245, 245, ${opac})`
+  private UI_FONT = (opac: number = 1) => `rgba(245, 245, 245, ${opac})`;
 
   /**
    * @default IN_EDGE() rgba(30,0,255)
    */
-  private IN_EDGE = (opac: number = 1) => `rgba(3, 0, 255, ${opac})`
+  private IN_EDGE = (opac: number = 1) => `rgba(3, 0, 255, ${opac})`;
 
   /**
    * @default OUT_EDGE() rgba(255,45,80)
    */
-  private OUT_EDGE = (opac: number = 1) => `rgba(255, 45, 80, ${opac})`
+  private OUT_EDGE = (opac: number = 1) => `rgba(255, 45, 80, ${opac})`;
 
   /**
    * @default PARA_EDGE() rgba(135,20,255)
    */
-  private PARA_EDGE = (opac: number = 1) => `rgba(135, 20, 255, ${opac})`
+  private PARA_EDGE = (opac: number = 1) => `rgba(135, 20, 255, ${opac})`;
 
   /**
-* @method drawBoundingBox - Draws a Bounding Box using the MinMax values provided 
-*/
+   * @method drawBoundingBox - Draws a Bounding Box using the MinMax values provided
+   */
   private drawBoundingBox(minMax: MinMaxSet) {
     if (!this.state.showBoundingBox()) return;
     this.p5.noFill();
     this.p5.strokeWeight(5);
-    this.p5.stroke(this.UI_FONT(0.3))
-    this.p5.box(minMax.x.diff, minMax.y.diff, minMax.z.diff)
+    this.p5.stroke(this.UI_FONT(0.3));
+    this.p5.box(minMax.x.diff, minMax.y.diff, minMax.z.diff);
   }
 
   /**
- * @method drawMedianOrientaxis - Draws the 3 axis positioned at the center 
- */
+   * @method drawMedianOrientaxis - Draws the 3 axis positioned at the center
+   */
   private drawAxisOrientation(minMax: MinMaxSet) {
     if (!this.state.showAxisOrientation()) return;
     const xLen = minMax.x.diff / 2;
@@ -314,7 +356,7 @@ export class P5Sketch {
   /**
    * @method drawRelatedEdges() - uses the curVert as a contextual starting point for drawing all the Edges existing which mention that Vertex
    */
-  private drawRelatedEdges(curVert: Vertex) {
+  private drawRelatedEdges(curVert: VertexImpl) {
     const relatedEdges = this.graphset.getRelatedEdges(curVert);
     if (!relatedEdges) return;
 
@@ -323,14 +365,18 @@ export class P5Sketch {
       if (!altVert) continue;
 
       const isParallel = edge.hasExistingParallelEdgeInRelated(relatedEdges);
-      const curVertCoords = curVert.prevCoords ? curVert.calcCoordUpdateVectorPosition(this.p5) : curVert.coords;
-      const altVertCoords = altVert.prevCoords ? altVert.calcCoordUpdateVectorPosition(this.p5) : altVert.coords;
+      const curVertCoords = curVert.prevCoords
+        ? curVert.calcCoordUpdateVectorPosition(this.p5)
+        : curVert.coords;
+      const altVertCoords = altVert.prevCoords
+        ? altVert.calcCoordUpdateVectorPosition(this.p5)
+        : altVert.coords;
 
       const { x: x1, y: y1, z: z1 } = curVertCoords;
       const { x: x2, y: y2, z: z2 } = altVertCoords;
 
       this.p5.push();
-      this.setEdgeStrokeColor(curVert, edge, isParallel)
+      this.setEdgeStrokeColor(curVert, edge, isParallel);
       this.p5.line(x1, y1, z1, x2, y2, z2);
       this.p5.pop();
     }
@@ -341,15 +387,15 @@ export class P5Sketch {
    */
   private setEdgeStrokeColor(curVert: Vertex, edge: Edge, isParallel: boolean) {
     if (isParallel) {
-      this.p5.stroke(this.PARA_EDGE())
+      this.p5.stroke(this.PARA_EDGE());
     } else if (curVert.id === edge.srcId) {
-      this.p5.stroke(this.OUT_EDGE())
+      this.p5.stroke(this.OUT_EDGE());
     } else if (curVert.id === edge.tgtId) {
-      this.p5.stroke(this.IN_EDGE())
-    } else { // to catch those nasty weird edges (otherwise should probably just default? parallel)
+      this.p5.stroke(this.IN_EDGE());
+    } else {
+      // to catch those nasty weird edges (otherwise should probably just default? parallel)
       // todo - should be removed from any production
-      this.p5.stroke('green');
+      this.p5.stroke("green");
     }
   }
-
 }

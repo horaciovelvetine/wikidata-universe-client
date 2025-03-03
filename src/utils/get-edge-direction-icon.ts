@@ -10,10 +10,16 @@ interface DirectionIndicator {
 /**
  * @method getEdgeDirectionIcon() - uses the provided edge to determine the apprpriate directional icon to display inside the RelatedEdgesInfo component. Parallel edges are determined by having the edge check itself against each of the curRelEdges sub-array.
  */
-export function getEdgeDirectionIcon(curSelection: Vertex, edge: Edge, relEdges: Edge[]): DirectionIndicator {
+export function getEdgeDirectionIcon(
+  curSelection: Vertex,
+  edge: Edge,
+  relEdges: Edge[]
+): DirectionIndicator {
   if (edge.hasExistingParallelEdgeInRelated(relEdges)) {
-    return { dir: DIRECTION.PARALLEL, icon: ArrowBoth }
+    return { dir: DIRECTION.PARALLEL, icon: ArrowBoth };
   }
 
-  return edge.srcId == curSelection.id ? { dir: DIRECTION.OUTGOING, icon: ArrowTo } : { dir: DIRECTION.INCOMING, icon: ArrowFrom };
+  return edge.srcId === curSelection.id
+    ? { dir: DIRECTION.OUTGOING, icon: ArrowTo }
+    : { dir: DIRECTION.INCOMING, icon: ArrowFrom };
 }

@@ -1,9 +1,9 @@
 import { P5CanvasInstance } from "@p5-wrapper/react";
 import { Camera, Vector } from "p5";
-import { Point3D } from "..";
+import { Point3D, Point3DImpl } from "../data/point-3d";
 
 export class ManagedCamera {
-  private p5: P5CanvasInstance
+  private p5: P5CanvasInstance;
   private cam: Camera | null = null;
 
   private lookAtTgt: Point3D | null = null; // new lookAt target for the Camera
@@ -38,7 +38,7 @@ export class ManagedCamera {
    * @method  advanceAnimations - Advances each of the animations by one frame and guards against a null sketch Camera.
    */
   advanceAnimations(): void {
-    if (this.cam == null) return;
+    if (this.cam === null) return;
     this.advanceLookAt();
     this.advanceCamMove();
   }
@@ -71,7 +71,7 @@ export class ManagedCamera {
     const LAZ = this.cam!.centerZ;
 
     const { x, y, z } = this.newPosChangeVec();
-    this.cam!.setPosition(x, y, z)
+    this.cam!.setPosition(x, y, z);
 
     this.cam!.lookAt(LAX, LAY, LAZ);
 
@@ -91,19 +91,19 @@ export class ManagedCamera {
     this.curLookAtKeyFrm = 0;
   }
 
-
   /**
    * @method setPositionTgt - Sets the new position target point for the camera to ultimately move to
    */
   setPositionTgt(point: Point3D): void {
     if (!this.cam) return;
-    const sX = this.cam.eyeX
-    const sY = this.cam.eyeY
-    const sZ = this.cam.eyeZ
-    const curPnt = new Point3D({ x: sX, y: sY, z: sZ });
+    const sX = this.cam.eyeX;
+    const sY = this.cam.eyeY;
+    const sZ = this.cam.eyeZ;
+    const curPnt = new Point3DImpl({ x: sX, y: sY, z: sZ });
 
     //skip if already located here
-    if (curPnt.x == point.x && curPnt.y == point.y && curPnt.z == point.z) return;
+    if (curPnt.x === point.x && curPnt.y === point.y && curPnt.z === point.z)
+      return;
 
     this.positionStart = curPnt;
     this.positionTgt = point;
@@ -121,14 +121,14 @@ export class ManagedCamera {
    * @method lookAtAnimFinished() - Check if the current LookAtKeyFrm value is equivalent to the set lookAtDuration maximum
    */
   private lookAtAnimFinished(): boolean {
-    return this.curLookAtKeyFrm == this.lookAtDuration;
+    return this.curLookAtKeyFrm === this.lookAtDuration;
   }
 
   /**
    * @method posAnimFinished() - Check if the current curPosKeyFrm value is equivalent to the set curPosDuration maximum
    */
   private posAnimFinished(): boolean {
-    return this.curPosKeyFrm == this.curPosDuration;
+    return this.curPosKeyFrm === this.curPosDuration;
   }
 
   /**
@@ -136,11 +136,11 @@ export class ManagedCamera {
    * @returns an interpolated lookAt target value Vector.
    */
   private lookAtChangeVec(): Vector {
-    const mult = this.curLookAtKeyFrm * 1.0001 / this.lookAtDuration; // mult prevents rnd bad calcs for whole ints
+    const mult = (this.curLookAtKeyFrm * 1.0001) / this.lookAtDuration; // mult prevents rnd bad calcs for whole ints
     return this.p5.createVector(
       this.p5.lerp(this.cam!.centerX, this.lookAtTgt!.x, mult),
       this.p5.lerp(this.cam!.centerY, this.lookAtTgt!.y, mult),
-      this.p5.lerp(this.cam!.centerZ, this.lookAtTgt!.z, mult),
+      this.p5.lerp(this.cam!.centerZ, this.lookAtTgt!.z, mult)
     );
   }
 
@@ -149,11 +149,11 @@ export class ManagedCamera {
    * @returns an interpolated new position value Vector.
    */
   private newPosChangeVec(): Vector {
-    const mult = this.curPosKeyFrm * 1.0001 / this.curPosDuration;
+    const mult = (this.curPosKeyFrm * 1.0001) / this.curPosDuration;
     return this.p5.createVector(
       this.p5.lerp(this.positionStart!.x, this.positionTgt!.x, mult),
       this.p5.lerp(this.positionStart!.y, this.positionTgt!.y, mult),
-      this.p5.lerp(this.positionStart!.z, this.positionTgt!.z, mult),
+      this.p5.lerp(this.positionStart!.z, this.positionTgt!.z, mult)
     );
   }
 }
