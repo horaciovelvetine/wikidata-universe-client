@@ -15,7 +15,6 @@ export function useUnfocusedClickListener(
     // checks if the click is inside the provided element ref to fire callback...
     const handleFocusClickCheck = (e: MouseEvent) => {
       const tgt = e.target as Node;
-      console.log("FocusClickTgt", tgt);
       if (ref.current && !ref.current.contains(tgt)) {
         handleClickCallback();
       }
