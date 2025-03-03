@@ -13,7 +13,7 @@
   display: inline-block;
   align-items: center;
   text-decoration: none;
-  padding: 0 0.25rem
+  padding: 0 0.25rem;
 }
 
 .edge-item-property-source-link p {
@@ -23,7 +23,9 @@
 
 .edge-item-property-label-incoming {
   color: rgb(var(--edge-in-text));
-  transition: text-decoraction var(--def-transit) ease-in-out, transform var(--def-transit) ease-in-out;
+  transition:
+    text-decoraction var(--default-transition-dur) ease-in-out,
+    transform var(--default-transition-dur) ease-in-out;
 }
 
 .edge-item-property-label-incoming:hover {
@@ -34,7 +36,9 @@
 
 .edge-item-property-label-outgoing {
   color: rgb(var(--edge-out-text));
-  transition: text-decoraction var(--def-transit) ease-in-out, transform var(--def-transit) ease-in-out;
+  transition:
+    text-decoraction var(--default-transition-dur) ease-in-out,
+    transform var(--default-transition-dur) ease-in-out;
 }
 
 .edge-item-property-label-outgoing:hover {
@@ -45,7 +49,9 @@
 
 .edge-item-property-label-parallel {
   color: rgb(var(--edge-para-text));
-  transition: text-decoraction var(--def-transit) ease-in-out, transform var(--def-transit) ease-in-out;
+  transition:
+    text-decoraction var(--default-transition-dur) ease-in-out,
+    transform var(--default-transition-dur) ease-in-out;
 }
 
 .edge-item-property-label-parallel:hover {
@@ -53,7 +59,6 @@
   text-decoration: underline;
   transform: scale(105%);
 }
-
 
 .edge-item-alt-topic-span {
   display: flex;

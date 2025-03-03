@@ -1,28 +1,32 @@
 import "./related-edges-info.css";
-import { createRef, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
-// TODO - remove animations
-import { showHideRelatedEdgesContainer } from "../../../animations/show-hide-related-edges-container";
-import { Edge, Vertex, P5Sketch } from "../../../../types";
-
+import { Edge, SketchRefProps, VertexImpl } from "../../../../types";
 // Sub-Component(s)
-import { RelatedEdgeItem } from "../related-edge-item/realted-edge-item";
+import { RelatedEdgeItem } from "../related-edge-item/related-edge-item";
+import { useComponentID } from "../../../../hooks";
 
-interface RelatedEdgesInfoProps {
-  sketchRef: P5Sketch;
-}
-
-const ID = (sufx: string) => `rel-edges-info-${sufx}`;
-
-export const RelatedEdgesInfo = ({ sketchRef }: RelatedEdgesInfoProps) => {
-  const [curSelectedRef, setCurSelectedRef] = useState<Vertex | null>(
+/**
+ * Displays a list of {@link EdgeImpl} objects in the lower right hand corner of the {@link SketchHUD}
+ * (the enclosing component). Currently selected state is derived from the {@link ManagedState} attached
+ * to the sketch instance.
+ *
+ * @component
+ * @param {P5Sketch} sketchRef - reference to the currently active sketch instance
+ *
+ * @hooks
+ * - useState() - currently selected state is derived from the {@link ManagedState} attached to the sketch
+ * - useEffect() - used to synchronize a derivative state from externally managed and changed currently
+ * selected state.
+ */
+export const RelatedEdgesInfo = ({ sketchRef }: SketchRefProps) => {
+  const { ID } = useComponentID("rel-edges-info");
+  const [curSelectedRef, setCurSelectedRef] = useState<VertexImpl | null>(
     sketchRef.state.curSelected()
   );
   const [relEdges, setRelEdges] = useState<Edge[]>(
     sketchRef.graphset.getRelatedEdges(curSelectedRef)
   );
-
-  const containerRef = createRef<HTMLDivElement>();
 
   useEffect(() => {
     // Let sketch know about curSelected subscriber
@@ -30,16 +34,15 @@ export const RelatedEdgesInfo = ({ sketchRef }: RelatedEdgesInfoProps) => {
   });
 
   useEffect(() => {
-    // setup related edges, followup effect places rel-edges on-screen
+    // setup related edges, follow up effect places rel-edges on-screen
     setRelEdges(sketchRef.graphset.getRelatedEdges(curSelectedRef));
   }, [curSelectedRef, sketchRef.graphset]);
 
-  useEffect(() => {
-    showHideRelatedEdgesContainer(containerRef, relEdges);
-  }, [relEdges, containerRef]);
-
   return (
-    <div id={ID("container")} ref={containerRef}>
+    <div
+      id={ID("container")}
+      className={relEdges.length > 0 ? "on-screen" : "hidden"}
+    >
       <h3 id={ID("title")}>related statments</h3>
       <div id={ID("details-container")} onWheel={e => e.stopPropagation()}>
         <ul id={ID("list")}>
