@@ -26,8 +26,8 @@ const WikiverseApiContext: React.Context<WikiverseService | undefined> =
 /**
  * Props for the WikiverseServiceProvider component
  * @interface ServiceProviderProps
- * @property {boolean} [useLocalAPI=false] - Flag to use local API endpoint instead of production
- * @property {ReactNode} children - Child components to render
+ * @param {boolean} [useLocalAPI=false] - Flag to use local API endpoint instead of production
+ * @param {ReactNode} children - Child components to render
  */
 interface ServiceProviderProps {
   useLocalAPI?: boolean;

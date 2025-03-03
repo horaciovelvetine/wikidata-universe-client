@@ -12,7 +12,7 @@ import { getDeviceDimensions } from "../../utils/get-device-dimensions";
 /**
  * Props for the DeviceCompatabilityProvider component
  * @interface DeviceCompatabilityProviderProps
- * @property {ReactNode} children - Child components to render
+ * @param {ReactNode} children - Child components to render
  */
 interface DeviceCompatabilityProviderProps {
   children: ReactNode;
@@ -21,7 +21,7 @@ interface DeviceCompatabilityProviderProps {
 /**
  * Context value interface for device compatibility information
  * @interface DeviceCompatabilityContext
- * @property {boolean} meetsMinScreenSizeReq - Whether the device meets minimum screen size requirements
+ * @param {boolean} meetsMinScreenSizeReq - Whether the device meets minimum screen size requirements
  */
 interface DeviceCompatabilityContext {
   meetsMinScreenSizeReq: boolean;

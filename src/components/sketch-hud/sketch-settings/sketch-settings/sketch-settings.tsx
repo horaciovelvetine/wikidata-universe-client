@@ -19,8 +19,6 @@ import { LayoutSettings } from "../layout-settings/layout-settings";
  * @component
  * @param {SketchRefProps} props - a reference to the current sketch instance
  *
- * @returns {JSX.Element} SketchSettings component.
- *
  * @remarks
  * Serves as a larger container for both the <img/> icon and #sketch-settings-menu-display <div/>.
  * The icon is always visible in the upper right hand corner of the {@link SketchHUD} (enclosing container),
@@ -32,11 +30,11 @@ import { LayoutSettings } from "../layout-settings/layout-settings";
  * - {@link MouseSettings} - modify user mouse sensitivity
  * - {@link OnScreenSettings} - modify how or what is displaying inside the sketch
  *
- * @hook
+ * @hooks
  * - UnfocusClickToClose - provider wraps settings to allow clicks outside the display to close the menu
  * - useState - manage visibility state of the #sketch-settings-menu-display
  */
-export const SketchSettings = ({ sketchRef }: SketchRefProps): JSX.Element => {
+export const SketchSettings = ({ sketchRef }: SketchRefProps) => {
   const { ID } = useComponentID("sketch-settings");
   const [showSettingsMenu, setShowSettingsMenu] = useState(
     sketchRef.state.showSketchSettings()

@@ -4,8 +4,8 @@ import { useUnfocusedClickListener } from "../../hooks";
 /**
  * Props for the UnfocusClickToCloseWrapper component.
  *
- * @property onOutsideClickCallback - A callback function to execute when a click outside the wrapped element is detected.
- * @property children - The child elements to be wrapped by the component.
+ * @param onOutsideClickCallback - A callback function to execute when a click outside the wrapped element is detected.
+ * @param children - The child elements to be wrapped by the component.
  */
 interface UnfocusedClickBoundaryProviderProps {
   unfocusedClickCallback: () => void;

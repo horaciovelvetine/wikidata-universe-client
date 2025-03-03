@@ -16,8 +16,6 @@ interface BehaviorSettingsProps {
  * @param {BehaviorSettingsProps} props - The properties for the BehaviorSettings component.
  * @param {P5Sketch} props.sketchRef - Reference to the P5 sketch instance.
  *
- * @returns {JSX.Element} BehaviorSettings component.
- *
  * @remarks
  * This component allows users to toggle the "Click to Fetch" behavior of the sketch.
  * It subscribes to the sketch's state and updates the checkbox accordingly.

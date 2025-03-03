@@ -20,6 +20,7 @@ export type { MinMaxSet } from "./data/min-max-set";
 export { LayoutConfigImpl } from "./data/layout-config";
 export type { LayoutConfig } from "./data/layout-config";
 
+export type { SketchRefProps } from "./sketch/sketch-ref-props";
 export type { SketchProps } from "./sketch/p5-sketch";
 export { P5Sketch } from "./sketch/p5-sketch";
 export { TutorialSketch } from "./sketch/tutorial-sketch";

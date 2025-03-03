@@ -24,8 +24,8 @@ interface RSIProps {
  * Component containing a secondary input to allow users to submit another search while a {@link P5Sketch} is already active.
  *
  * @component
- * @prop {P5Sketch} props.sketchRef - Reference to the P5 sketch instance.
- * @prop {Dispatch<SetStateAction<WikiverseServiceResponse | null>>} props.setSketchData - Function to set the initial sketch data.
+ * @param {P5Sketch} props.sketchRef - Reference to the P5 sketch instance.
+ * @param {Dispatch<SetStateAction<WikiverseServiceResponse | null>>} props.setSketchData - Function to set the initial sketch data.
  *
  * @hook
  * - useState() manages the query input value, the visibility of the input, and an error state to animate for bad responses.

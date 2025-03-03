@@ -1,15 +1,24 @@
 import "./mouse-settings.css";
 import { ChangeEvent, useState } from "react";
 
-import { P5Sketch } from "../../../../types";
+import { SketchRefProps } from "../../../../types";
+import { useComponentID } from "../../../../hooks";
 
-interface MouseSettingsProps {
-  sketchRef: P5Sketch;
-}
-
-const ID = (sufx: string) => `mouse-settings-${sufx}`;
-
-export const MouseSettings = ({ sketchRef }: MouseSettingsProps) => {
+/**
+ * Contains settings UI which modifies how sensitive the mouse is to input on the 3 priamry axis [X,Y,Z(oom)]
+ *
+ * @component
+ * @param {SketchRefProps} sketchRef - reference to the currently active sketch object
+ *
+ * @remark
+ * This component uses react elements to modify state effecting how the {@link P5Sketch} instance behaves.
+ * Control only flows into the sketch instance so state is set twice each time its modified (locally and in the sketch)
+ *
+ * @hooks
+ * - useState() - tracks X, Y, & Z(oom) sensitivity state
+ */
+export const MouseSettings = ({ sketchRef }: SketchRefProps) => {
+  const { ID } = useComponentID("mouse-settings");
   const [xMouseSensRef, setXMouseSensRef] = useState(
     sketchRef.state.xMouseSens()
   );
@@ -56,18 +65,21 @@ export const MouseSettings = ({ sketchRef }: MouseSettingsProps) => {
           dsc="[horizontal]"
           senstivityValue={xMouseSensRef}
           updateHandler={handleMouseSensChange}
+          ID={ID}
         />
         <MouseSensitivityOption
           lbl="Y-Axis"
           dsc="[vertical]"
           senstivityValue={yMouseSensRef}
           updateHandler={handleMouseSensChange}
+          ID={ID}
         />
         <MouseSensitivityOption
           lbl="Z-Axis"
           dsc="[zoom]"
           senstivityValue={zMouseSensRef}
           updateHandler={handleMouseSensChange}
+          ID={ID}
         />
       </ul>
     </fieldset>
@@ -79,13 +91,20 @@ interface MouseSensitivityOptionProps {
   dsc: string;
   senstivityValue: number | undefined;
   updateHandler: (e: ChangeEvent<HTMLInputElement>, tgt: string) => void;
+  ID: (sufx: string) => string;
 }
 
+/**
+ * Sub - @component
+ * @remark
+ * Builds out the actual number input container for each of the 3 axis...
+ */
 const MouseSensitivityOption = ({
   lbl,
   dsc,
   senstivityValue,
   updateHandler,
+  ID,
 }: MouseSensitivityOptionProps) => {
   return (
     <li className={ID("input-option")} id={`${lbl}-mouse-sensitivity`}>
@@ -103,6 +122,11 @@ interface MouseSensitivityInputProps {
   lbl: string;
 }
 
+/**
+ * Sub-Sub - @component
+ * @remark
+ * The wrapper for the input element itself
+ */
 const MouseSensitivityInput = ({
   senstivityValue,
   updateHandler,

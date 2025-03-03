@@ -20,7 +20,7 @@ import {
 import { useComponentID } from "../../hooks";
 
 /**
- * The main @component for the Wikiverse application.
+ * @component the Wikiverse application.
  *
  * This component sets up the necessary providers and renders the main layout
  * of the application, including the navbar, background sketch, service notices,

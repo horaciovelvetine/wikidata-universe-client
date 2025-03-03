@@ -14,7 +14,6 @@ import { MinMaxSet } from "../data/min-max-set";
 import { Edge } from "../data/edge";
 import { WikiverseServiceResponse } from "../data/wikiverse-service-response";
 import { WikiverseServiceRequestPayload } from "../data/wikiverse-service-request-payload";
-import { WikiverseService } from "../data/wikiverse-service";
 
 export interface SketchProps {
   p5: P5CanvasInstance;

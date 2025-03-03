@@ -26,8 +26,6 @@ interface SketchHUDProps {
  * @param {boolean} props.isTutorialSketch - determines wether the tutorial message display is visible
  * @param {setIsTutorialSketch} props.setIsTutorialSketch - allows tutorial to be exited via UI interaction in subcomponent
  *
- * @returns {JSX.Element} SketchHUD component.
- *
  * @remarks
  * The HUD consists of two primary containers laid over the (z-index) top of the #main-display-container where the sketch is rendered.
  * Container 1 At the top sub-components: (left to right)
@@ -42,7 +40,7 @@ interface SketchHUDProps {
  * - useDeviceCompatabilityCheck() - state used to determine the visibility of the HUD to prevent broken screens on small devices
  *
  */
-export const SketchHUD = ({ sketchRef }: SketchHUDProps): JSX.Element => {
+export const SketchHUD = ({ sketchRef }: SketchHUDProps) => {
   const { ID } = useComponentID("sketch-hud");
   const { meetsMinScreenSizeReq } = useDeviceCompatabilityCheck();
 

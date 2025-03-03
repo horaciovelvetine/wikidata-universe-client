@@ -2,17 +2,22 @@ import "./layout-settings.css";
 import { ChangeEvent, useState } from "react";
 import { Fetch } from "../../../../assets/icons";
 
-import { useWikiverseService } from "../../../../contexts";
-import { P5Sketch } from "../../../../types";
+import { SketchRefProps } from "../../../../types";
+import { useComponentID } from "../../../../hooks";
 
-interface LayoutSettingsProps {
-  sketchRef: P5Sketch;
-}
-
-const ID = (sufx: string) => `layout-settings-${sufx}`;
-
-export const LayoutSettings = ({ sketchRef }: LayoutSettingsProps) => {
-  const { post } = useWikiverseService();
+/**
+ * Contains settings UI which modifies how the layout algorithm positions vertices in the 'Wikiverse'.
+ * Layout refresh button submits a request to re-run the layout algo and re-position things based
+ * on the current known {@link Graphset} data.
+ *
+ * @component
+ * @param {SketchRefProps} sketchRef - Reference to the sketch object containing the state and methods for layout settings.
+ *
+ * @hooks
+ * - useState() - tracks: attraction, repulsion, and data density values to accompany requests made to the API.
+ */
+export const LayoutSettings = ({ sketchRef }: SketchRefProps) => {
+  const { ID } = useComponentID("layout-settings");
   const [attractionMultRef, setAttractionMultRef] = useState(
     sketchRef.state.attractionMult()
   );
@@ -24,6 +29,7 @@ export const LayoutSettings = ({ sketchRef }: LayoutSettingsProps) => {
   );
 
   const handleDensityChange = (e: ChangeEvent<HTMLInputElement>) => {
+    e.stopPropagation();
     const val = parseFloat(e.target.value);
     if (val >= 0 && val <= 1) {
       setDataDensityRef(val);
@@ -32,6 +38,7 @@ export const LayoutSettings = ({ sketchRef }: LayoutSettingsProps) => {
   };
 
   const handleAttrChange = (e: ChangeEvent<HTMLInputElement>) => {
+    e.stopPropagation();
     const val = parseFloat(e.target.value);
     if (val >= 0 && val <= 5) {
       setAttractionMultRef(val);
@@ -40,6 +47,7 @@ export const LayoutSettings = ({ sketchRef }: LayoutSettingsProps) => {
   };
 
   const handleRepChange = (e: ChangeEvent<HTMLInputElement>) => {
+    e.stopPropagation();
     const val = parseFloat(e.target.value);
     if (val >= 0 && val <= 5) {
       setRepulsionMultRef(val);
@@ -48,7 +56,8 @@ export const LayoutSettings = ({ sketchRef }: LayoutSettingsProps) => {
   };
 
   const handleRefreshLayoutRequest = () => {
-    sketchRef.refreshLayoutPositions(post);
+    // TODO: handle click refresh layout
+    console.log("refresh click unhandled");
   };
 
   return (
@@ -66,6 +75,7 @@ export const LayoutSettings = ({ sketchRef }: LayoutSettingsProps) => {
           max={5}
           step={0.05}
           handler={handleAttrChange}
+          ID={ID}
         />
 
         <LayoutSettingOption
@@ -77,6 +87,7 @@ export const LayoutSettings = ({ sketchRef }: LayoutSettingsProps) => {
           max={5}
           step={0.05}
           handler={handleRepChange}
+          ID={ID}
         />
 
         <LayoutSettingOption
@@ -88,6 +99,7 @@ export const LayoutSettings = ({ sketchRef }: LayoutSettingsProps) => {
           max={1}
           step={0.0001}
           handler={handleDensityChange}
+          ID={ID}
         />
         <hr />
         <li id={"refresh-layout-option"}>
@@ -121,8 +133,14 @@ interface LayoutSettingOptionProps {
   max: number;
   step: number;
   handler: (e: ChangeEvent<HTMLInputElement>) => void;
+  ID: (sufx: string) => string;
 }
 
+/**
+ * Sub - @component
+ * @remark
+ * Builds out the actual number inputs and label for all 3 of the layout options
+ */
 const LayoutSettingOption = ({
   lbl,
   dsc,
@@ -131,6 +149,7 @@ const LayoutSettingOption = ({
   max,
   step,
   handler,
+  ID,
 }: LayoutSettingOptionProps) => {
   return (
     <li className={ID("option")}>

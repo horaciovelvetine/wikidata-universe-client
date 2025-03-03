@@ -1,15 +1,27 @@
 import "./on-screen-settings.css";
 import { ChangeEvent, useEffect, useState } from "react";
 
-import { P5Sketch } from "../../../../types";
+import { SketchRefProps } from "../../../../types";
+import { useComponentID } from "../../../../hooks";
 
-interface OnScreenSettingsProps {
-  sketchRef: P5Sketch;
-}
-
-const ID = (sufx: string) => `on-screen-settings-${sufx}`;
-
-export const OnScreenSettings = ({ sketchRef }: OnScreenSettingsProps) => {
+/**
+ * Contains settings UI which toggles the visibility of a few optional pieces of UI
+ * around and inside the {@link P5Sketch} instance itself
+ *
+ * @component
+ * @param {SketchRefProps} sketchRef - reference to the currently active sketch object
+ *
+ * @remark
+ * This component uses elements/input to modify state effecting what the {@link P5Sketch} instance renders,
+ * and also modifies other components visibility ref: {@link SketchDetailsSummary}. State is modified with
+ * two differnt patterns related to it's use throughout the rest of the application...
+ * @see SketchDetailsSummary for related UI...
+ *
+ * @hooks
+ * - useState() - tracks boolean state for toggle-able informational details the client can use
+ */
+export const OnScreenSettings = ({ sketchRef }: SketchRefProps) => {
+  const { ID } = useComponentID("on-screen-settings");
   const [showSketchSummaryRef, setShowSketchSummaryRef] = useState(
     sketchRef.state.showSketchDetailsSummary()
   );
@@ -53,16 +65,19 @@ export const OnScreenSettings = ({ sketchRef }: OnScreenSettingsProps) => {
           checkState={showSketchSummaryRef}
           toggleState={handleShowHideSketchDetailsSummaryClick}
           shortcut="[,]"
+          ID={ID}
         />
         <ToggleSetting
           lbl="Bounding Box"
           checkState={showBoundingBoxRef}
           toggleState={handleShowHideBoundingBox}
+          ID={ID}
         />
         <ToggleSetting
           lbl="Axis Orientation"
           checkState={showAxisOrientationRef}
           toggleState={handleShowHideAxisOrientation}
+          ID={ID}
         />
       </ul>
     </fieldset>
@@ -74,13 +89,20 @@ interface ToggleSettingProps {
   lbl: string;
   checkState: boolean | undefined;
   toggleState: (e: ChangeEvent<HTMLInputElement>) => void;
+  ID: (sufx: string) => string;
 }
 
+/**
+ * Sub - @component
+ * @remark
+ * Builds the container for each of the boolean input elements
+ */
 const ToggleSetting = ({
   shortcut,
   lbl,
   checkState,
   toggleState,
+  ID,
 }: ToggleSettingProps) => {
   return (
     <li className={ID("option-container")}>
