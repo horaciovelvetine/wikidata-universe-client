@@ -1,0 +1,64 @@
+#incompatible-device-notice-container {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: brightness(0.2);
+  /* prevent pointer when not on screen */
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--default-transition-dur) ease-in-out;
+}
+
+/* Class selector appended to show-hide elements using opacity */
+#incompatible-device-notice-container.on-screen {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#incompatible-device-notice-layout {
+  display: inline-flex;
+  flex-direction: column;
+  width: 80%;
+  text-align: center;
+}
+
+#incompatible-device-notice-title {
+  text-align: center;
+  font-family: "CharisSIL-Bold", serif;
+  font-size: 2rem;
+  color: rgb(var(--font));
+  text-shadow: 1px 1px black;
+}
+
+#incompatible-device-notice-main-text {
+  font-size: 1.3rem;
+  color: rgb(var(--font));
+  line-height: double;
+  text-shadow: 1px 1px black;
+}
+
+#incompatible-device-notice-link-text {
+  font-size: 1rem;
+  color: rgb(var(--font));
+  margin-top: 1rem;
+  text-shadow: 1px 1px black;
+}
+
+.incompat-screen-notice-link {
+  color: rgb(var(--hyperlink));
+  font-size: 1rem;
+  transition:
+    font-size var(--default-transition-dur),
+    text-decoration var(--default-transition-dur) ease-in-out;
+  text-decoration: none;
+}
+
+.incompat-screen-notice-link:hover {
+  color: rgb(var(--hyperlink));
+  font-size: 1.1rem;
+  text-decoration: underline;
+}

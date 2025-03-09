@@ -1,21 +1,25 @@
-export interface iProperty {
+export interface Property {
   id: string;
-  label: string
-  description: string
-  fetched: boolean
+  label: string;
+  description: string;
+  fetched: boolean;
 }
 
-export class Property implements iProperty {
+export class PropertyImpl implements Property {
   id: string;
   label: string;
   description: string;
   fetched: boolean = false;
-  readonly WIKIDATA_URL: string = 'https://www.wikidata.org/wiki/Property:';
+  readonly WIKIDATA_URL: string = "https://www.wikidata.org/wiki/Property:";
 
-  constructor(property: iProperty);
+  constructor(property: Property);
   constructor(id: string, label: string, description: string);
-  constructor(idOrProperty: string | iProperty, label?: string, description?: string) {
-    if (typeof idOrProperty === 'string') {
+  constructor(
+    idOrProperty: string | Property,
+    label?: string,
+    description?: string
+  ) {
+    if (typeof idOrProperty === "string") {
       this.id = idOrProperty;
       this.label = label!;
       this.description = description!;
@@ -30,14 +34,14 @@ export class Property implements iProperty {
   /**
    * @method mergeResponseData() - update the attributes with the provided response iProperty
    */
-  mergeResponseData(prop: iProperty) {
-    this.label = prop.label
+  mergeResponseData(prop: Property) {
+    this.label = prop.label;
     this.description = prop.description;
     this.fetched = true;
   }
 
   /**
-   * @method url() - the URL text linking to the original entry in Wikidata. 
+   * @method url() - the URL text linking to the original entry in Wikidata.
    */
   url() {
     return this.WIKIDATA_URL + this.id;

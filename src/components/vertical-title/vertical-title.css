@@ -1,0 +1,14 @@
+#vertical-title-cont {
+  display: block;
+}
+
+#vertical-title-text {
+  position: fixed;
+  z-index: -1;
+  font-size: calc(0.19 * 100vh);
+  font-weight: 800;
+  text-shadow: 3px 3px 9px black;
+  left: -17.8vw;
+  top: 39vh;
+  transform: rotate(-90deg);
+}

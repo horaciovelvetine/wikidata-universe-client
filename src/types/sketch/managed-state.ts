@@ -1,26 +1,33 @@
 import { Dispatch, SetStateAction } from "react";
-import { Graphset, LayoutConfig, Vertex } from "..";
-import { WikiverseServiceResponse } from "../../app";
+import { Vertex, VertexImpl } from "../data/vertex";
+import { LayoutConfigImpl } from "../data/layout-config";
+import { Graphset } from "../data/graphset";
+import { WikiverseServiceResponse } from "../data/wikiverse-service-response";
 
 /**
  * Used to synchronize the external update for React's state for on-screen elements which need details emitted from the Sketch itself, and also control elements of the sketch at the same time
  */
 export class ManagedState {
   //* Initiating Search
-  private curQuery = '';
+  private curQuery = "";
   private reactCurQuerySubscribers: Dispatch<SetStateAction<string>>[] = [];
 
   //* Currently Hovered
-  private hovered: Vertex | null = null;
-  private reactHoveredSubscribers: Dispatch<SetStateAction<Vertex | null>>[] = [];
+  private hovered: VertexImpl | null = null;
+  private reactHoveredSubscribers: Dispatch<
+    SetStateAction<VertexImpl | null>
+  >[] = [];
 
   //* Currently Selected
-  private selected: Vertex | null = null;
-  private reactSelectedSubscribers: Dispatch<SetStateAction<Vertex | null>>[] = []
+  private selected: VertexImpl | null = null;
+  private reactSelectedSubscribers: Dispatch<
+    SetStateAction<VertexImpl | null>
+  >[] = [];
 
   //* Boolean/Toggle-able Settings
   private clickToFetch = false;
-  private reactClickToFetchSubscribers: Dispatch<SetStateAction<boolean>>[] = []
+  private reactClickToFetchSubscribers: Dispatch<SetStateAction<boolean>>[] =
+    [];
 
   //* Rendered by p5.js => checkbox controlled
   private boundingBox = false;
@@ -28,7 +35,9 @@ export class ManagedState {
 
   //* Rendered by React => checkbox & keyboard [,] controlled
   private sketchDetailsSummary = false;
-  private reactShowSketchSummarySubscribers: Dispatch<SetStateAction<boolean>>[] = [];
+  private reactShowSketchSummarySubscribers: Dispatch<
+    SetStateAction<boolean>
+  >[] = [];
 
   //* Mouse Sensitivity Settings
   private xSens = 2;
@@ -44,11 +53,25 @@ export class ManagedState {
   private topics = 0;
   private reactTopicCountSubscribers: Dispatch<SetStateAction<number>>[] = [];
   private statements = 0;
-  private reactStatementCountSubscribers: Dispatch<SetStateAction<number>>[] = [];
+  private reactStatementCountSubscribers: Dispatch<SetStateAction<number>>[] =
+    [];
 
   //* Boolean ShowHide Settings Activity
   private showSettings = false;
-  private reactShowSettingsSubscribers: Dispatch<SetStateAction<boolean>>[] = [];
+  private reactShowSettingsSubscribers: Dispatch<SetStateAction<boolean>>[] =
+    [];
+
+  //* Tutorial Related State
+  private tutorialNavMsg = "";
+  private reactTutorialNavMsgSubscribers: Dispatch<SetStateAction<string>>[] =
+    [];
+  private tutorialBodyMsg = "";
+  private reactTutorialBodyMsgSubscribers: Dispatch<SetStateAction<string>>[] =
+    [];
+  private tutorialInstructionMsg = "";
+  private reactTutorialInstructionMsgSubscribers: Dispatch<
+    SetStateAction<string>
+  >[] = [];
 
   //* CONSTRUCTOR START
   //* CONSTRUCTOR START
@@ -57,9 +80,9 @@ export class ManagedState {
   constructor(initSketchData: WikiverseServiceResponse | null) {
     if (initSketchData) {
       this.curQuery = initSketchData.query;
-      this.attrMult = initSketchData.layoutConfig.attractionMult
-      this.repMult = initSketchData.layoutConfig.repulsionMult
-      this.density = initSketchData.layoutConfig.dataDensity
+      this.attrMult = initSketchData.layoutConfig.attractionMult;
+      this.repMult = initSketchData.layoutConfig.repulsionMult;
+      this.density = initSketchData.layoutConfig.dataDensity;
       this.selectOriginOnInit(initSketchData);
     }
   }
@@ -68,7 +91,7 @@ export class ManagedState {
    * @method QUERY() - the original search term for the sketch
    */
   query() {
-    return this.curQuery
+    return this.curQuery;
   }
 
   setQuery(query: string) {
@@ -87,12 +110,12 @@ export class ManagedState {
     return this.hovered;
   }
 
-  setCurHovered(vert: Vertex | null) {
+  setCurHovered(vert: VertexImpl | null) {
     this.hovered = vert;
     this.reactHoveredSubscribers.forEach(subscription => subscription(vert));
   }
 
-  addCurHoveredSubscriber(setter: Dispatch<SetStateAction<Vertex | null>>) {
+  addCurHoveredSubscriber(setter: Dispatch<SetStateAction<VertexImpl | null>>) {
     this.reactHoveredSubscribers.push(setter);
   }
 
@@ -103,30 +126,33 @@ export class ManagedState {
     return this.selected;
   }
 
-  setCurSelected(vert: Vertex | null) {
+  setCurSelected(vert: VertexImpl | null) {
     this.selected = vert;
     this.reactSelectedSubscribers.forEach(subscription => subscription(vert));
   }
 
-  addCurSelectedSubscriber(setter: Dispatch<SetStateAction<Vertex | null>>) {
+  addCurSelectedSubscriber(
+    setter: Dispatch<SetStateAction<VertexImpl | null>>
+  ) {
     this.reactSelectedSubscribers.push(setter);
   }
 
   /**
-   * @method trickCurSelectedUpdate() - called after service responses containing new data to alert curSelected subscribers which derive state from that w/o deselecting...
+   * @method trickCurSelectedUpdate()
+   * called after service responses containing new data to alert curSelected subscribers which derive state from that w/o deselecting causing flashing animations in the UI in the @see SketchHUD @component
    */
   trickCurSelectedUpdate() {
     const curSelected = this.curSelected();
-    curSelected && this.setCurSelected(new Vertex(curSelected));
+    curSelected && this.setCurSelected(new VertexImpl(curSelected));
   }
-
 
   //* ON SCREEN DISPLAY SETTINGS TOGGLES
   //* ON SCREEN DISPLAY SETTINGS TOGGLES
   //* ON SCREEN DISPLAY SETTINGS TOGGLES
 
   /**
-   * @method CLICK_TO_FETCH() - toggle sending a fetch request for more data when clicking on a Vertex
+   * @method CLICK_TO_FETCH()
+   * toggle sending a fetch request for more data when clicking on a Vertex
    */
   clickToFetchEnabled() {
     return this.clickToFetch;
@@ -134,8 +160,10 @@ export class ManagedState {
 
   toggleClickToFetch() {
     const orig = this.clickToFetch;
-    this.clickToFetch = !orig
-    this.reactClickToFetchSubscribers.forEach(subscription => subscription(!orig));
+    this.clickToFetch = !orig;
+    this.reactClickToFetchSubscribers.forEach(subscription =>
+      subscription(!orig)
+    );
   }
 
   addClickToFetchSubscriber(setter: Dispatch<SetStateAction<boolean>>) {
@@ -143,7 +171,8 @@ export class ManagedState {
   }
 
   /**
-   * @method SHOW_BOUNDING_BOX() - bounding box frame drawn on-screen to locate sketch in space better.
+   * @method SHOW_BOUNDING_BOX()
+   * bounding box frame drawn on-screen to locate sketch in space better.
    */
   showBoundingBox() {
     return this.boundingBox;
@@ -155,7 +184,8 @@ export class ManagedState {
   }
 
   /**
-   * @method SHOW_AXIS_ORIENTATION() - typical R:X G:Y B:Z directional indicator drawn on screen to locate orientation
+   * @method SHOW_AXIS_ORIENTATION()
+   * typical R:X G:Y B:Z directional indicator drawn on screen to locate orientation
    */
   showAxisOrientation() {
     return this.axisOrientation;
@@ -167,7 +197,8 @@ export class ManagedState {
   }
 
   /**
-   * @method SHOW_GRAPH_STATISTICS() - display the on-screen summary of the current Graphset and Camera positions
+   * @method SHOW_GRAPH_STATISTICS()
+   * display the on-screen summary of the current Graphset and Camera positions
    */
   showSketchDetailsSummary() {
     return this.sketchDetailsSummary;
@@ -176,13 +207,16 @@ export class ManagedState {
   toggleShowSketchDetailsSummary() {
     const orig = this.sketchDetailsSummary;
     this.sketchDetailsSummary = !orig;
-    this.reactShowSketchSummarySubscribers.forEach(subscription => subscription(!orig));
+    this.reactShowSketchSummarySubscribers.forEach(subscription =>
+      subscription(!orig)
+    );
   }
 
-  addShowSketchDetailsSummarySubscriber(setter: Dispatch<SetStateAction<boolean>>) {
+  addShowSketchDetailsSummarySubscriber(
+    setter: Dispatch<SetStateAction<boolean>>
+  ) {
     this.reactShowSketchSummarySubscribers.push(setter);
   }
-
 
   showSketchSettings() {
     return this.showSettings;
@@ -191,16 +225,18 @@ export class ManagedState {
   toggleShowSketchSettings() {
     const orig = this.showSettings;
     this.showSettings = !orig;
-    this.reactShowSettingsSubscribers.forEach(subscription => subscription(!orig));
+    this.reactShowSettingsSubscribers.forEach(subscription =>
+      subscription(!orig)
+    );
   }
 
   addshowSketchsettingsSubscriber(setter: Dispatch<SetStateAction<boolean>>) {
     this.reactShowSettingsSubscribers.push(setter);
   }
 
-  //* MOUSE VALUES SETTINGS 
-  //* MOUSE VALUES SETTINGS 
-  //* MOUSE VALUES SETTINGS 
+  //* MOUSE VALUES SETTINGS
+  //* MOUSE VALUES SETTINGS
+  //* MOUSE VALUES SETTINGS
 
   /**
    * @method X_AXIS
@@ -223,7 +259,6 @@ export class ManagedState {
   setYMouseSens(val: number) {
     this.ySens = val;
   }
-
 
   /**
    * @method Z_AXIS
@@ -262,7 +297,6 @@ export class ManagedState {
     this.repMult = mult;
   }
 
-
   /**
    * @method DENSITY() - overall size allotted for the sketch itself
    */
@@ -274,8 +308,12 @@ export class ManagedState {
     this.density = dens;
   }
 
-  layoutConfig(): LayoutConfig {
-    return new LayoutConfig().updateConfigValues(this.dataDensity(), this.attractionMult(), this.repulsionMult())
+  layoutConfig() {
+    return new LayoutConfigImpl().updateConfigValues(
+      this.dataDensity(),
+      this.attractionMult(),
+      this.repulsionMult()
+    );
   }
 
   //* SKETCH DETSILS SUMMARRY VALUES
@@ -291,7 +329,9 @@ export class ManagedState {
 
   setTopicCount(count: number) {
     this.topics = count;
-    this.reactTopicCountSubscribers.forEach(subscription => subscription(count));
+    this.reactTopicCountSubscribers.forEach(subscription =>
+      subscription(count)
+    );
   }
 
   addTopicCountSubscriber(setter: Dispatch<SetStateAction<number>>) {
@@ -307,35 +347,103 @@ export class ManagedState {
 
   setStatementCount(count: number) {
     this.statements = count;
-    this.reactStatementCountSubscribers.forEach(subscription => subscription(count))
+    this.reactStatementCountSubscribers.forEach(subscription =>
+      subscription(count)
+    );
   }
 
   addStatementCountSubscriber(setter: Dispatch<SetStateAction<number>>) {
     this.reactStatementCountSubscribers.push(setter);
   }
 
-  updateCountTotals(graph: Graphset) { //? HELPER ? to call both updates @ once
+  updateCountTotals(graph: Graphset) {
+    //? HELPER ? to call both updates @ once
     this.setTopicCount(graph.vertices.length);
     this.setStatementCount(graph.edges.length);
   }
 
+  //* TUTORIAL RELATED STATE
+  //* TUTORIAL RELATED STATE
+  //* TUTORIAL RELATED STATE
 
-  //* PRIVATE METHODS 
-  //* PRIVATE METHODS 
-  //* PRIVATE METHODS 
+  /**
+   * @method updateTutorialState() - helper to call and update all of the set methods inside of the tutorial subGroup of managed state, to update them all in parallel.
+   */
+  updateTutorialState(apiResponse: WikiverseServiceResponse | null) {
+    if (!apiResponse) return;
+
+    const subStrings = apiResponse.query.split("::");
+    if (subStrings.length) {
+      this.setTutorialNav(subStrings[0]);
+      this.setTutorialBody(subStrings[1]);
+      this.setTutorialInstruction(subStrings[2]);
+    }
+  }
+
+  tutorialNav() {
+    return this.tutorialNavMsg;
+  }
+
+  setTutorialNav(navMsg: string) {
+    this.tutorialNavMsg = navMsg;
+    this.reactTutorialNavMsgSubscribers.forEach(subscription =>
+      subscription(navMsg)
+    );
+  }
+
+  addTutorialNavSubscriber(setter: Dispatch<SetStateAction<string>>) {
+    this.reactTutorialNavMsgSubscribers.push(setter);
+  }
+
+  tutorialBody() {
+    return this.tutorialBodyMsg;
+  }
+
+  setTutorialBody(bodyMsg: string) {
+    this.tutorialBodyMsg = bodyMsg;
+    this.reactTutorialBodyMsgSubscribers.forEach(subscription =>
+      subscription(bodyMsg)
+    );
+  }
+
+  addTutorialBodySubscriber(setter: Dispatch<SetStateAction<string>>) {
+    this.reactTutorialBodyMsgSubscribers.push(setter);
+  }
+
+  tutorialInstruction() {
+    return this.tutorialInstructionMsg;
+  }
+
+  setTutorialInstruction(instructionMsg: string) {
+    this.tutorialInstructionMsg = instructionMsg;
+    this.reactTutorialInstructionMsgSubscribers.forEach(subscription =>
+      subscription(instructionMsg)
+    );
+  }
+
+  addTutorialInstructionSubscriber(setter: Dispatch<SetStateAction<string>>) {
+    this.reactTutorialInstructionMsgSubscribers.push(setter);
+  }
+
+  //* PRIVATE METHODS
+  //* PRIVATE METHODS
+  //* PRIVATE METHODS
 
   /**
    * @method selectOriginOnInit() - called when data is present on obj initialization to select the origin (Vertex) for the client automatically
    */
   private selectOriginOnInit(initSketchData: WikiverseServiceResponse) {
-    const originVertData = initSketchData.vertices.find(v => {
-      if (v.origin) return v;
-      if (v.label) {
-        return v.label.toLocaleLowerCase() == this.curQuery.toLocaleLowerCase();
-      }
-    }) || null;
+    const originVertData =
+      initSketchData.vertices.find((v: Vertex) => {
+        if (v.origin) return v;
+        if (v.label) {
+          return (
+            v.label.toLocaleLowerCase() === this.curQuery.toLocaleLowerCase()
+          );
+        }
+      }) || null;
 
     if (!originVertData) return;
-    this.setCurSelected(new Vertex(originVertData));
+    this.setCurSelected(new VertexImpl(originVertData));
   }
 }
