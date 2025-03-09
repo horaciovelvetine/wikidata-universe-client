@@ -69,7 +69,7 @@ export const WikiverseApp = () => {
 
           <div id={ID("bot-left-fill")}></div>
 
-          <Footer {...{ setIsTutorialSketch, setSketchData }} />
+          <Footer />
 
           <div id={ID("bot-right-fill")}></div>
         </div>

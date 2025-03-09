@@ -2,7 +2,7 @@ import "./sketch-settings.css";
 import { useEffect, useState } from "react";
 import { Settings } from "../../../../assets/icons";
 
-import { P5Sketch, SketchRefProps } from "../../../../types";
+import { SketchRefProps } from "../../../../types";
 import { useComponentID } from "../../../../hooks";
 import { UnfocusedClickBoundaryProvider } from "../../../../providers";
 

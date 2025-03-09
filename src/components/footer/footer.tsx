@@ -1,7 +1,6 @@
 import "./footer.css";
 import { Dispatch, SetStateAction } from "react";
 
-import { useWikiverseService } from "../../providers";
 import { _bl, BACKEND_URL, FRONTEND_URL, GITHUB_URL } from "../../app";
 import { useComponentID } from "../../hooks";
 import { WikiverseServiceResponse } from "../../types";
@@ -16,18 +15,10 @@ interface FooterProps {
  * @component
  * @param {setIsTutorialSketch} props.setIsTutorialSketch - state setting dispatcher which is used to trigger the tutorial version of the Sketch for the user
  * @param {setSketchData} props.setSketchData - sketch initializing setter called when starting up a tutorial sketch
- * 
+ *
  */
-export const Footer = ({ setIsTutorialSketch, setSketchData }: FooterProps) => {
+export const Footer = () => {
   const { ID } = useComponentID("footer");
-  const { getTutorialStep } = useWikiverseService();
-
-  const handleTutorialClick = async () => {
-    debugger; // stop tutorial execution for now
-    setIsTutorialSketch(prev => !prev);
-    const res = await getTutorialStep("1");
-    setSketchData(res);
-  };
 
   return (
     <footer id={ID("main")}>
@@ -47,12 +38,6 @@ export const Footer = ({ setIsTutorialSketch, setSketchData }: FooterProps) => {
             {" "}
             @horaciovelvetine
           </a>
-        </li>
-        <li className="footer-list-content" id={ID("tutorial-container")}>
-          <a id={ID("tutorial-link")} onClick={handleTutorialClick}>
-            Click
-          </a>{" "}
-          for a tutorial
         </li>
       </ul>
     </footer>
