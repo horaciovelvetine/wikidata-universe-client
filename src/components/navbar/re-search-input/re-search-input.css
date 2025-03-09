@@ -1,0 +1,82 @@
+#re-search-container {
+  display: inline-flex;
+  align-items: center;
+  transition: all var(--error-transition-dur) ease-in-out;
+}
+
+#re-search-container.error-animate {
+  animation: horizontal-shake var(--error-transition-dur)
+    cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+/* Used to seperate out the animation of the whole container on-screen to arrive in parallel with the title positioned directly next to it */
+#re-search-layout {
+  display: inline-flex;
+  align-items: center;
+  transition: all var(--error-transition-dur) ease-in-out;
+  transform: translateY(175%);
+}
+
+/* moves from under main-display for transition*/
+#re-search-layout.on-screen {
+  transform: translateY(0%);
+}
+
+/* Input Element start */
+#re-search-input {
+  display: inline-flex;
+  background-color: transparent;
+  font-weight: 700;
+  text-shadow: 1px 1px black;
+  font-size: clamp(1.65rem, 2.35vw, 3.5rem);
+  border: none;
+  outline: none;
+  width: 22vw;
+  color: rgb(var(--font));
+  border-bottom: 2px solid rgb(var(--font), 0.5);
+  padding: 0.25rem 0.15rem;
+  transition: all var(--error-transition-dur) ease-in-out;
+}
+
+#re-search-input:focus {
+  outline: none;
+  border-bottom: 2px solid rgb(var(--font), 0.75);
+  caret-color: rgb(var(--font));
+  color: rgb(var(--font));
+}
+
+#re-search-input::placeholder {
+  color: rgba(var(--font), 0.35);
+}
+
+/* Must follow the ::pseudo selected states to modify their behvaior */
+#re-search-input.error-animate {
+  border-bottom: 2px solid rgb(var(--danger), 0.75);
+  color: rgb(var(--danger));
+  caret-color: rgb(var(--danger));
+}
+
+/* Div Container with both img elements */
+#re-search-icon-container {
+  display: inline-flex;
+}
+
+#re-search-icon {
+  transition: opacity var(--default-transition-dur) ease-in-out;
+  opacity: 1;
+}
+
+#re-search-icon.error-animate {
+  opacity: 0;
+}
+
+#re-search-error-icon {
+  position: fixed;
+  opacity: 0%;
+  transition: opacity 0.82s;
+}
+
+#re-search-error-icon.error-animate {
+  transition: opacity var(--default-transition-dur) ease-in-out;
+  opacity: 1;
+}

@@ -1,0 +1,131 @@
+#main-landing-container {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  flex-direction: column;
+  transition: opacity var(--default-transition-dur) ease-in-out;
+  backdrop-filter: brightness(0.8);
+}
+
+#main-landing-container.on-screen {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#main-landing-title {
+  font-size: 4rem;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-family: "CharisSIL-Regular", serif;
+  text-shadow: 1px 1px black;
+}
+
+#main-landing-wikidata-link {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-family: "CharisSIL-Regular", serif;
+  text-shadow: 1px 1px black;
+  text-decoration: none;
+  color: rgb(var(--hyperlink));
+  transition: all var(--default-transition-dur) ease-in-out;
+}
+
+#main-landing-wikidata-link:hover {
+  text-decoration: underline;
+  text-shadow: 1px 1px rgb(var(--primary), 0.5);
+  font-size: clamp(2.2rem, 5vw, 4.2rem);
+  cursor: pointer;
+}
+
+/* CONTAINS BOTH THE INPUT AND BUTTON */
+#main-landing-form {
+  display: inline-flex;
+  justify-content: center;
+  width: 35%;
+}
+
+/* MAIN INPUT ELEMENT */
+#main-landing-input {
+  outline: none;
+  min-width: fit-content;
+  flex-grow: 1;
+  display: flex;
+  background-color: transparent;
+  font-size: clamp(1rem, 5vw, 2.5rem);
+  padding: 0.75rem 0.85rem;
+  border: 2px solid rgb(var(--font), 0.75);
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: all var(--error-transition-dur);
+  caret-color: rgb(var(--font));
+}
+
+#main-landing-input::placeholder {
+  color: rgba(var(--font), 0.35);
+}
+
+#main-landing-input:focus {
+  outline: none;
+  border: 2px solid rgb(var(--primary));
+  box-shadow: 0 0 15px rgba(var(--hyperlink), 0.35);
+}
+
+#main-landing-input.error-animated {
+  animation: horizontal-shake var(--error-transition-dur)
+    cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  border-color: rgb(var(--danger));
+  caret-color: rgb(var(--danger));
+  color: rgb(var(--danger));
+  box-shadow: 0 0 15px rgba(var(--danger), 0.5);
+}
+
+/* SUBMIT BUTTON ELEMENT*/
+#main-landing-search-submit {
+  margin-left: 0.5rem;
+  padding: 0.5rem;
+  border: 2px solid rgba(var(--font), 0.75);
+  border-radius: 0.5rem;
+  background-color: transparent;
+  color: rgba(var(--font), 0.75);
+  cursor: pointer;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  transition: all var(--error-transition-dur) ease-in-out;
+}
+
+#main-landing-search-submit:active {
+  border: 2px solid rgb(var(--hyperlink));
+  box-shadow: 0 0 15px rgba(var(--hyperlink), 0.5);
+}
+
+/* horizontally shimmies and changes to danger color */
+#main-landing-search-submit.error-animated {
+  animation: horizontal-shake var(--error-transition-dur)
+    cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  border-color: rgb(var(--danger));
+  box-shadow: 0 0 5px rgba(var(--danger), 0.1);
+}
+
+/* ICON IMG ELEMENT(S)  */
+#main-landing-search-icon {
+  height: 3rem;
+  font-size: clamp(1rem, 5vw, 3rem);
+  transition: opacity var(--error-transition-dur);
+  opacity: 1;
+}
+
+#main-landing-search-icon.error-animated {
+  opacity: 0;
+}
+
+#main-landing-search-icon-danger {
+  position: fixed;
+  opacity: 0;
+  font-size: clamp(1rem, 5vw, 3rem);
+  transition: opacity var(--error-transition-dur);
+}
+#main-landing-search-icon-danger.error-animated {
+  opacity: 1;
+}

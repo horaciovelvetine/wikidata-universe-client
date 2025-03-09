@@ -1,0 +1,54 @@
+/* Opacity transition is set via a class selector to hide and show the container element */
+#rel-edges-info-container {
+  height: fit-content;
+  max-height: 12vh;
+  grid-row: 2;
+  grid-column: 2;
+  align-self: flex-end;
+  display: flex;
+  flex-direction: column;
+  margin: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  outline: 1px solid rgb(var(--font), 0.15);
+  box-shadow: inset 0 0 16rem rgb(var(--font), 0.17);
+  user-select: none;
+  transition: opacity calc(var(--default-transition-dur) / 2) ease-in-out;
+}
+
+#rel-edges-info-container.on-screen {
+  pointer-events: auto;
+  opacity: 1;
+}
+
+#rel-edges-info-container.hidden {
+  pointer-events: none;
+  opacity: 0;
+}
+
+#rel-edges-info-title {
+  position: absolute;
+  color: rgb(var(--font));
+  transform: translateY(-100%) translateX(1%);
+  font-size: clamp(1rem, 1.5vw, 2rem);
+  font-weight: 700;
+  text-shadow: 0 1px 1px black;
+  letter-spacing: -0.05rem;
+}
+
+#rel-edges-info-details-container:not(:hover) {
+  scrollbar-color: rgba(var(--font), 0%) transparent;
+}
+
+#rel-edges-info-details-container {
+  overflow-y: scroll;
+  scrollbar-color: rgba(var(--font), 25%) transparent;
+  transition: scrollbar-color var(--default-transition-dur) ease-in-out;
+}
+
+#rel-edges-info-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  padding: 0 0.25rem;
+}

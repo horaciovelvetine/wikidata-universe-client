@@ -9,7 +9,7 @@ import { Dimensions } from "./dimensions";
 
 const MAX_SPEED = 0.7;
 const MAX_RADIUS = 10;
-const MIN_RADIUS = 2
+const MIN_RADIUS = 2;
 const CONNECTION_DIST_MAX = 100;
 
 export class Particle {
@@ -25,8 +25,8 @@ export class Particle {
     this.xPos = p5.random(0, dimensions.width);
     this.yPos = p5.random(0, dimensions.height);
     this.rad = p5.random(MIN_RADIUS, MAX_RADIUS);
-    this.xSpeed = p5.random(-MAX_SPEED, MAX_SPEED)
-    this.ySpeed = p5.random(-MAX_SPEED, MAX_SPEED)
+    this.xSpeed = p5.random(-MAX_SPEED, MAX_SPEED);
+    this.ySpeed = p5.random(-MAX_SPEED, MAX_SPEED);
   }
 
   /**
@@ -34,7 +34,7 @@ export class Particle {
    */
   draw() {
     this.p5.noStroke();
-    this.p5.fill('rgba(173, 181, 189, 0.2)');
+    this.p5.fill("rgba(173, 181, 189, 0.2)");
     this.p5.circle(this.xPos, this.yPos, this.rad);
   }
 
@@ -43,12 +43,17 @@ export class Particle {
    */
   joinNearby(particlesArr: Particle[]) {
     particlesArr.forEach(particle => {
-      const distance = this.p5.dist(this.xPos, this.yPos, particle.xPos, particle.yPos)
+      const distance = this.p5.dist(
+        this.xPos,
+        this.yPos,
+        particle.xPos,
+        particle.yPos
+      );
       if (distance < CONNECTION_DIST_MAX) {
-        this.p5.stroke('rgba(16, 84, 136, 0.3)');
+        this.p5.stroke("rgba(16, 84, 136, 0.3)");
         this.p5.line(this.xPos, this.yPos, particle.xPos, particle.yPos);
       }
-    })
+    });
   }
 
   /**
