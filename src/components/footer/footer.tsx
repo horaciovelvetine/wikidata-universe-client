@@ -1,14 +1,8 @@
 import "./footer.css";
-import { Dispatch, SetStateAction } from "react";
 
 import { _bl, BACKEND_URL, FRONTEND_URL, GITHUB_URL } from "../../app";
 import { useComponentID } from "../../hooks";
-import { WikiverseServiceResponse } from "../../types";
 
-interface FooterProps {
-  setIsTutorialSketch: Dispatch<SetStateAction<boolean>>;
-  setSketchData: Dispatch<SetStateAction<WikiverseServiceResponse | null>>;
-}
 /**
  * Container positioned directly under the #main-display with links and the ability for the user to initiate the {@link TutorialSketch}
  *
