@@ -1,16 +1,16 @@
 import "./related-edge-item.css";
 import { Vertex as NoVertSel, VertexSel } from "../../../../assets/icons";
 
-import { Edge, Vertex, P5Sketch } from "../../../../types";
+import { Vertex, VertexImpl, P5Sketch, EdgeImpl } from "../../../../types";
 import { getEdgeDirectionIcon } from "../../../../utils/get-edge-direction-icon";
 import { _bl } from "../../../../app";
 import { useComponentID } from "../../../../hooks";
 
 interface RelatedEdgeItemProps {
-  edge: Edge;
+  edge: EdgeImpl;
   sketchRef: P5Sketch;
-  curSelectedRef: Vertex;
-  relEdges: Edge[];
+  curSelectedRef: VertexImpl;
+  relEdges: EdgeImpl[];
 }
 
 /**

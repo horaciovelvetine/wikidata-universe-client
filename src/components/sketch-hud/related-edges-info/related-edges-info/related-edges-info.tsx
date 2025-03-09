@@ -1,7 +1,7 @@
 import "./related-edges-info.css";
 import { useEffect, useState } from "react";
 
-import { Edge, SketchRefProps, VertexImpl } from "../../../../types";
+import { EdgeImpl, SketchRefProps, VertexImpl } from "../../../../types";
 // Sub-Component(s)
 import { RelatedEdgeItem } from "../related-edge-item/related-edge-item";
 import { useComponentID } from "../../../../hooks";
@@ -24,7 +24,7 @@ export const RelatedEdgesInfo = ({ sketchRef }: SketchRefProps) => {
   const [curSelectedRef, setCurSelectedRef] = useState<VertexImpl | null>(
     sketchRef.state.curSelected()
   );
-  const [relEdges, setRelEdges] = useState<Edge[]>(
+  const [relEdges, setRelEdges] = useState<EdgeImpl[]>(
     sketchRef.graphset.getRelatedEdges(curSelectedRef)
   );
 

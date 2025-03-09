@@ -5,7 +5,7 @@ export class TutorialSketch extends P5Sketch {
 
   constructor(props: SketchProps) {
     super(props);
-    this.state.updateTutorialState(props.initSketchData);
+    this.state.updateTutorialState(props.sketchData);
   }
 
   /**
