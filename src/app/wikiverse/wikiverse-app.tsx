@@ -37,7 +37,7 @@ export const WikiverseApp = () => {
 
   return (
     <DeviceCompatabilityProvider>
-      <WikiverseServiceProvider useLocalAPI>
+      <WikiverseServiceProvider>
         <div id={ID("main-container")}>
           <div id={ID("top-left-fill")}></div>
 
